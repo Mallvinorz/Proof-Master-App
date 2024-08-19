@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/theme/text_theme.dart';
+import 'package:proofmaster/widgets/bottom_bar.dart';
 import 'package:proofmaster/widgets/option_item.dart';
 import 'package:proofmaster/widgets/setting_menu_item.dart';
 
@@ -54,12 +55,13 @@ class WidgetPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Widget Preview"),
       ),
       body: Center(child: children),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }
