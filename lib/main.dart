@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:proofmaster/theme/text_theme.dart';
+import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/input.dart';
 
 void main() {
@@ -14,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Proof Master',
       theme: ThemeData(
+        textTheme: proofMasterTextTheme,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -29,6 +33,20 @@ class MyApp extends StatelessWidget {
                 placeholder: "placeholder",
                 inputType: InputType.password,
                 label: "Password",
+              ),
+              Button(
+                onTap: () {},
+                text: "Text",
+                suffixIcon: const Icon(
+                  FontAwesomeIcons.upload,
+                  color: Colors.white,
+                ),
+              ),
+              Button(onTap: () {}, text: "Text"),
+              Button(
+                onTap: () {},
+                text: "Text",
+                onProgress: true,
               ),
             ],
           ),
