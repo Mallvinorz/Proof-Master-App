@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/input.dart';
+import 'package:proofmaster/widgets/option_item.dart';
+import 'package:proofmaster/widgets/search_field.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,26 +29,17 @@ class MyApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Input(placeholder: "placeholder", inputType: InputType.email),
-              Input(placeholder: "placeholder", inputType: InputType.password),
-              Input(
-                placeholder: "placeholder",
-                inputType: InputType.password,
-                label: "Password",
+              OptionItem(
+                selected: false,
+                text: "text",
+                value: "value",
+                onSelected: (value) => print(value),
               ),
-              Button(
-                onTap: () {},
-                text: "Text",
-                suffixIcon: const Icon(
-                  FontAwesomeIcons.upload,
-                  color: Colors.white,
-                ),
-              ),
-              Button(onTap: () {}, text: "Text"),
-              Button(
-                onTap: () {},
-                text: "Text",
-                onProgress: true,
+              OptionItem(
+                selected: true,
+                text: "text",
+                value: true,
+                onSelected: (value) => print(value),
               ),
             ],
           ),
@@ -63,6 +56,7 @@ class WidgetPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Widget Preview"),
