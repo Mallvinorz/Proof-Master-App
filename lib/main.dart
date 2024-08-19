@@ -5,6 +5,7 @@ import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/input.dart';
 import 'package:proofmaster/widgets/option_item.dart';
 import 'package:proofmaster/widgets/search_field.dart';
+import 'package:proofmaster/widgets/setting_menu_item.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
                 value: true,
                 onSelected: (value) => print(value),
               ),
+              SettingMenuItem(text: "text", onTap: () {})
             ],
           ),
         ),
