@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:proofmaster/theme/text_theme.dart';
-import 'package:proofmaster/widgets/button.dart';
-import 'package:proofmaster/widgets/input.dart';
 import 'package:proofmaster/widgets/option_item.dart';
-import 'package:proofmaster/widgets/search_field.dart';
 import 'package:proofmaster/widgets/setting_menu_item.dart';
 
 void main() {
@@ -26,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       home: WidgetPreview(
         children: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -61,7 +57,7 @@ class WidgetPreview extends StatelessWidget {
       backgroundColor: Colors.grey,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Widget Preview"),
+        title: const Text("Widget Preview"),
       ),
       body: Center(child: children),
     );

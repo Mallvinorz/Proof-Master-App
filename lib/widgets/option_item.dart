@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
-import 'package:proofmaster/widgets/input.dart';
 
 class OptionItem<T> extends StatelessWidget {
   final bool selected;
