@@ -20,7 +20,7 @@ class SettingMenuItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(text, style: proofMasterTextTheme.bodyLarge),
+              Text(text, style: CustomTextTheme.proofMasterTextTheme.bodyLarge),
               const Icon(FontAwesomeIcons.chevronRight)
             ],
           ),

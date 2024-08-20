@@ -34,7 +34,8 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     final fullWidth = MediaQuery.of(context).size.width;
-    return SizedBox(
+    return Container(
+      color: Colors.transparent,
       height: 68,
       child: Stack(
         children: [
@@ -54,7 +55,8 @@ class _BottomBarState extends State<BottomBar> {
             alignment: Alignment.bottomCenter,
             child: Container(
                 width: fullWidth * 0.8,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(32)),
                     color: Colors.white),
@@ -75,8 +77,9 @@ class _BottomBarState extends State<BottomBar> {
                                     : Colors.grey,
                               ),
                               Text(item.text,
-                                  style:
-                                      proofMasterTextTheme.labelSmall?.copyWith(
+                                  style: CustomTextTheme
+                                      .proofMasterTextTheme.labelSmall
+                                      ?.copyWith(
                                     color: index == _selectedIndex
                                         ? CustomColorTheme.colorPrimary
                                         : Colors.grey,

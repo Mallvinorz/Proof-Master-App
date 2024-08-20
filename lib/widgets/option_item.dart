@@ -30,8 +30,8 @@ class OptionItem<T> extends StatelessWidget {
               Text(
                 text,
                 style: selected
-                    ? proofMasterTextTheme.bodyLarge
-                    : proofMasterTextTheme.bodyMedium,
+                    ? CustomTextTheme.proofMasterTextTheme.bodyLarge
+                    : CustomTextTheme.proofMasterTextTheme.bodyMedium,
               ),
               Container(
                 width: 24,

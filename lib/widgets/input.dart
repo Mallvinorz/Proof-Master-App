@@ -54,7 +54,7 @@ class _InputState extends State<Input> {
                   : null,
               prefixIcon: Icon(switch (widget.inputType) {
                 InputType.email => Icons.email_rounded,
-                InputType.name => Icons.person_2_outlined,
+                InputType.nim => Icons.person_2_outlined,
                 InputType.fullname => Icons.person_outlined,
                 InputType.password => Icons.lock_outline_rounded,
               }),
@@ -67,4 +67,4 @@ class _InputState extends State<Input> {
   }
 }
 
-enum InputType { name, fullname, email, password }
+enum InputType { nim, fullname, email, password }

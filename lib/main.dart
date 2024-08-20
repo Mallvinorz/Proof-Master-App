@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
-import 'package:proofmaster/widgets/option_item.dart';
-import 'package:proofmaster/widgets/setting_menu_item.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,34 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Proof Master',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: proofMasterTextTheme,
+        textTheme: CustomTextTheme.proofMasterTextTheme,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: WidgetPreview(
-        children: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              OptionItem(
-                selected: false,
-                text: "text",
-                value: "value",
-                onSelected: (value) => print(value),
-              ),
-              OptionItem(
-                selected: true,
-                text: "text",
-                value: true,
-                onSelected: (value) => print(value),
-              ),
-              SettingMenuItem(text: "text", onTap: () {})
-            ],
-          ),
-        ),
-      ),
+      home: StudentDashboardView(),
     );
   }
 }
