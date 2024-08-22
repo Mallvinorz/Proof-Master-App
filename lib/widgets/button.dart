@@ -6,32 +6,42 @@ class Button extends StatelessWidget {
   final String text;
   Widget? suffixIcon;
   bool onProgress;
-  Button(
-      {super.key,
-      required this.onTap,
-      required this.text,
-      this.suffixIcon,
-      this.onProgress = false});
+  bool isOutlined;
+  Button({
+    super.key,
+    required this.onTap,
+    required this.text,
+    this.suffixIcon,
+    this.onProgress = false,
+    this.isOutlined = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: const ButtonStyle(
+      style: ButtonStyle(
         shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12)))),
-        backgroundColor:
-            MaterialStatePropertyAll<Color>(CustomColorTheme.colorPrimary),
+                side: isOutlined
+                    ? const BorderSide(width: 1, color: Colors.black)
+                    : BorderSide.none,
+                borderRadius: const BorderRadius.all(Radius.circular(12)))),
+        foregroundColor: MaterialStatePropertyAll<Color>(
+          isOutlined ? Colors.white : CustomColorTheme.colorPrimary,
+        ),
+        backgroundColor: MaterialStatePropertyAll<Color>(
+          isOutlined ? Colors.white : CustomColorTheme.colorPrimary,
+        ),
       ),
       onPressed: () => onTap(),
       child: onProgress
-          ? const Row(
+          ? Row(
               children: [
                 SizedBox(
                   width: 24,
                   height: 24,
                   child: CircularProgressIndicator(
-                    color: Colors.white,
+                    color: isOutlined ? Colors.black : Colors.white,
                   ),
                 ),
               ],
@@ -41,7 +51,8 @@ class Button extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: isOutlined ? Colors.black : Colors.white),
                 ),
                 if (suffixIcon != null)
                   Padding(
