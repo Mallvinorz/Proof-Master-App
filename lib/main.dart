@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
 import 'package:proofmaster/app/templates/quiz_template.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const QuizTemplate(),
+      home: const OnboardingView(),
     );
   }
 }
