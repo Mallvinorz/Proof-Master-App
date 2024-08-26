@@ -17,11 +17,11 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: const ButtonStyle(
-        shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)))),
         backgroundColor:
-            MaterialStatePropertyAll<Color>(CustomColorTheme.colorPrimary),
+            WidgetStatePropertyAll<Color>(CustomColorTheme.colorPrimary),
       ),
       onPressed: () => onTap(),
       child: onProgress

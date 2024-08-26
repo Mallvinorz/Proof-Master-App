@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
-import 'package:proofmaster/app/presentation/signin/signin_view.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
 
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: OnboardingView(),
+      home: const OnboardingView(),
     );
   }
 }
