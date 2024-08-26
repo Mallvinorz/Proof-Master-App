@@ -38,7 +38,7 @@ class BackgroundPattern extends StatelessWidget {
       backgroundColor: CustomColorTheme.colorPrimary,
       body: Stack(
         children: [
-          const Image(image: AssetImage('assets/images/img_bg.png')),
+          // const Image(image: AssetImage('assets/images/img_bg.png')),
           Column(
             children: [
               if (topChildren != null)
