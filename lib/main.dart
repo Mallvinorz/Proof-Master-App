@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
+import 'package:proofmaster/app/templates/quiz_template.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
 

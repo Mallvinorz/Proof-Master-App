@@ -17,8 +17,13 @@ class OptionItem<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+            color: selected ? CustomColorTheme.colorPrimary : Colors.grey,
+            width: 1),
+      ),
       color: Colors.white,
-      borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () => onSelected(value),
