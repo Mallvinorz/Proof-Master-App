@@ -30,6 +30,7 @@ class BackgroundPattern extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
               ),
               title: Text(
+                maxLines: 2,
                 appBarTitle!,
                 style: const TextStyle(color: Colors.white),
               ),
@@ -48,9 +49,13 @@ class BackgroundPattern extends StatelessWidget {
                 ),
               Expanded(
                 child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
-                      borderRadius: borderRadius, color: Colors.white),
+                      image: const DecorationImage(
+                          image: AssetImage('assets/images/img_bg.png')),
+                      borderRadius: borderRadius,
+                      color: CustomColorTheme.colorBackground),
                   child: mainChildren,
                 ),
               )

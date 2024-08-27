@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/widgets/button.dart';
-import 'package:proofmaster/widgets/pdf_viewer_material.dart';
+import 'package:proofmaster/widgets/pdf_viewer_online_material.dart';
 
 class MaterialViewer extends StatefulWidget {
   final String title;

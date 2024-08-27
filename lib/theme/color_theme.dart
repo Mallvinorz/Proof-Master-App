@@ -6,6 +6,7 @@ class CustomColorTheme {
   static const colorGreenVariant = Color(0xFF38E54D);
   static const colorYellow = Color(0xFFFDFF00);
   static const colorBackground = Color(0xFFF4F4F4);
+  static const colorBackground2 = Color(0xFFF1F4FF);
   static const colorOrange = Color(0xFFE5BF38);
   static const colorBlueLowOpacity = Color(0x334555E5);
 }
