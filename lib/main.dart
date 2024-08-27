@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proofmaster/app/presentation/reports/student/introduction_proof/widgets/item.dart';
-import 'package:proofmaster/app/presentation/success_reset_pass/success_reset_pass.dart';
+import 'package:proofmaster/app/templates/material_viewer.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
 
@@ -15,28 +14,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Proof Master',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: CustomTextTheme.proofMasterTextTheme,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: WidgetPreview(
-            children: Column(
-          children: [
-            IntroductionProofItem(
-                text: "text",
-                finished: true,
-                finishedCount: 10,
-                totalCount: 10),
-            IntroductionProofItem(
-                text: "text",
-                finished: false,
-                finishedCount: 10,
-                totalCount: 10),
-          ],
-        )));
+      title: 'Proof Master',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: CustomTextTheme.proofMasterTextTheme,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: MaterialViewer(
+        onTapFinish: () {},
+        title: "Definition of Term",
+        pdfUrl:
+            'https://ik.imagekit.io/p3pbh4wfn/Septa%20Alfauzan%20ATS%20CV-%20POST%20COLLEGE%20UPDATE_240813_132300.pdf?updatedAt=1724728499048',
+      ),
+    );
   }
 }
 

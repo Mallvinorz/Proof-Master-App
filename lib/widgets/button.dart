@@ -20,16 +20,16 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
             RoundedRectangleBorder(
                 side: isOutlined
                     ? const BorderSide(width: 1, color: Colors.black)
                     : BorderSide.none,
                 borderRadius: const BorderRadius.all(Radius.circular(12)))),
-        foregroundColor: MaterialStatePropertyAll<Color>(
+        foregroundColor: WidgetStatePropertyAll<Color>(
           isOutlined ? Colors.white : CustomColorTheme.colorPrimary,
         ),
-        backgroundColor: MaterialStatePropertyAll<Color>(
+        backgroundColor: WidgetStatePropertyAll<Color>(
           isOutlined ? Colors.white : CustomColorTheme.colorPrimary,
         ),
       ),
@@ -47,6 +47,7 @@ class Button extends StatelessWidget {
               ],
             )
           : Row(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(

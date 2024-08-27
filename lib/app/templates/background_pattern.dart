@@ -48,6 +48,7 @@ class BackgroundPattern extends StatelessWidget {
                 ),
               Expanded(
                 child: Container(
+                  clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                       borderRadius: borderRadius, color: Colors.white),
                   child: mainChildren,
