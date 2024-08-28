@@ -31,7 +31,7 @@ class IntroductionProofReportView extends StatelessWidget {
         //TODO: replace with actual get data function
       },
       child: (IntroProofReportItem data) => Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: const EdgeInsets.only(bottom: 4.0),
         child: IntroductionProofItem(
             text: data.text,
             finished: data.finishedCount == data.totalCount,

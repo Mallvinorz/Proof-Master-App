@@ -19,7 +19,7 @@ views:
 - "setting" screen ✅
 - "diagnostic" test (template was created, WIP)
 - "diagnostic report" test ✅
-- "diagnostic report detail" test
+- "diagnostic report detail" test ✅
 - "quiz" screen ✅
 - "introduction proof" screen (template was created, WIP)
 - "detail (Logika, Teorema, Aksioma, Definition of Terms, Geometric Proof)" screen (template was created, WIP)

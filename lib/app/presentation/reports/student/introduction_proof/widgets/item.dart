@@ -17,28 +17,38 @@ class IntroductionProofItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-              color: finished ? CustomColorTheme.colorGreen : null,
-              shape: BoxShape.circle),
-          child: Icon(
-            finished ? FontAwesomeIcons.check : FontAwesomeIcons.hourglassEnd,
-            color: finished ? CustomColorTheme.colorBackground : Colors.grey,
-          ),
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        color: CustomColorTheme.colorBackground2,
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                  color: finished ? CustomColorTheme.colorGreen : null,
+                  shape: BoxShape.circle),
+              child: Icon(
+                finished
+                    ? FontAwesomeIcons.check
+                    : FontAwesomeIcons.hourglassEnd,
+                color:
+                    finished ? CustomColorTheme.colorBackground : Colors.grey,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Text(
+                text,
+                style: CustomTextTheme.proofMasterTextTheme.bodyLarge,
+              ),
+            ),
+            const Spacer(flex: 1),
+            Text("$finishedCount/$totalCount")
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Text(
-            text,
-            style: CustomTextTheme.proofMasterTextTheme.bodyLarge,
-          ),
-        ),
-        const Spacer(flex: 1),
-        Text("$finishedCount/$totalCount")
-      ],
+      ),
     );
   }
 }
