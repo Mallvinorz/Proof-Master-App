@@ -21,6 +21,7 @@ DashboardItem _$DashboardItemFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DashboardItem {
   bool get isSeparator => throw _privateConstructorUsedError;
+  String? get iconUrl => throw _privateConstructorUsedError;
   String? get separatorText => throw _privateConstructorUsedError;
   LearningMaterial? get learningMaterial => throw _privateConstructorUsedError;
 
@@ -38,6 +39,7 @@ abstract class $DashboardItemCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isSeparator,
+      String? iconUrl,
       String? separatorText,
       LearningMaterial? learningMaterial});
 
@@ -58,6 +60,7 @@ class _$DashboardItemCopyWithImpl<$Res, $Val extends DashboardItem>
   @override
   $Res call({
     Object? isSeparator = null,
+    Object? iconUrl = freezed,
     Object? separatorText = freezed,
     Object? learningMaterial = freezed,
   }) {
@@ -66,6 +69,10 @@ class _$DashboardItemCopyWithImpl<$Res, $Val extends DashboardItem>
           ? _value.isSeparator
           : isSeparator // ignore: cast_nullable_to_non_nullable
               as bool,
+      iconUrl: freezed == iconUrl
+          ? _value.iconUrl
+          : iconUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       separatorText: freezed == separatorText
           ? _value.separatorText
           : separatorText // ignore: cast_nullable_to_non_nullable
@@ -100,6 +107,7 @@ abstract class _$$DashboardItemImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isSeparator,
+      String? iconUrl,
       String? separatorText,
       LearningMaterial? learningMaterial});
 
@@ -119,6 +127,7 @@ class __$$DashboardItemImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isSeparator = null,
+    Object? iconUrl = freezed,
     Object? separatorText = freezed,
     Object? learningMaterial = freezed,
   }) {
@@ -127,6 +136,10 @@ class __$$DashboardItemImplCopyWithImpl<$Res>
           ? _value.isSeparator
           : isSeparator // ignore: cast_nullable_to_non_nullable
               as bool,
+      iconUrl: freezed == iconUrl
+          ? _value.iconUrl
+          : iconUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       separatorText: freezed == separatorText
           ? _value.separatorText
           : separatorText // ignore: cast_nullable_to_non_nullable
@@ -145,7 +158,10 @@ class _$DashboardItemImpl
     with DiagnosticableTreeMixin
     implements _DashboardItem {
   const _$DashboardItemImpl(
-      {required this.isSeparator, this.separatorText, this.learningMaterial});
+      {required this.isSeparator,
+      this.iconUrl,
+      this.separatorText,
+      this.learningMaterial});
 
   factory _$DashboardItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$DashboardItemImplFromJson(json);
@@ -153,13 +169,15 @@ class _$DashboardItemImpl
   @override
   final bool isSeparator;
   @override
+  final String? iconUrl;
+  @override
   final String? separatorText;
   @override
   final LearningMaterial? learningMaterial;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DashboardItem(isSeparator: $isSeparator, separatorText: $separatorText, learningMaterial: $learningMaterial)';
+    return 'DashboardItem(isSeparator: $isSeparator, iconUrl: $iconUrl, separatorText: $separatorText, learningMaterial: $learningMaterial)';
   }
 
   @override
@@ -168,6 +186,7 @@ class _$DashboardItemImpl
     properties
       ..add(DiagnosticsProperty('type', 'DashboardItem'))
       ..add(DiagnosticsProperty('isSeparator', isSeparator))
+      ..add(DiagnosticsProperty('iconUrl', iconUrl))
       ..add(DiagnosticsProperty('separatorText', separatorText))
       ..add(DiagnosticsProperty('learningMaterial', learningMaterial));
   }
@@ -179,6 +198,7 @@ class _$DashboardItemImpl
             other is _$DashboardItemImpl &&
             (identical(other.isSeparator, isSeparator) ||
                 other.isSeparator == isSeparator) &&
+            (identical(other.iconUrl, iconUrl) || other.iconUrl == iconUrl) &&
             (identical(other.separatorText, separatorText) ||
                 other.separatorText == separatorText) &&
             (identical(other.learningMaterial, learningMaterial) ||
@@ -187,8 +207,8 @@ class _$DashboardItemImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isSeparator, separatorText, learningMaterial);
+  int get hashCode => Object.hash(
+      runtimeType, isSeparator, iconUrl, separatorText, learningMaterial);
 
   @JsonKey(ignore: true)
   @override
@@ -207,6 +227,7 @@ class _$DashboardItemImpl
 abstract class _DashboardItem implements DashboardItem {
   const factory _DashboardItem(
       {required final bool isSeparator,
+      final String? iconUrl,
       final String? separatorText,
       final LearningMaterial? learningMaterial}) = _$DashboardItemImpl;
 
@@ -215,6 +236,8 @@ abstract class _DashboardItem implements DashboardItem {
 
   @override
   bool get isSeparator;
+  @override
+  String? get iconUrl;
   @override
   String? get separatorText;
   @override

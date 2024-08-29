@@ -13,6 +13,7 @@ part 'dashboard_item.g.dart';
 class DashboardItem with _$DashboardItem {
   const factory DashboardItem({
     required bool isSeparator,
+    String? iconUrl,
     String? separatorText,
     LearningMaterial? learningMaterial,
   }) = _DashboardItem;

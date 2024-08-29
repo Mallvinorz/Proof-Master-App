@@ -19,7 +19,9 @@ class DashboardContent extends StatelessWidget {
             itemBuilder: (context, index) => items[index].isSeparator
                 ? Text(items[index].separatorText ?? "")
                 : DashboardCardItem(
-                    learningMaterial: items[index].learningMaterial!),
+                    dashboardItem: items[index],
+                    learningMaterial: items[index].learningMaterial!,
+                  ),
           ),
         ),
       ],

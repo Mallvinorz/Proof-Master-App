@@ -9,6 +9,7 @@ part of 'dashboard_item.dart';
 _$DashboardItemImpl _$$DashboardItemImplFromJson(Map<String, dynamic> json) =>
     _$DashboardItemImpl(
       isSeparator: json['isSeparator'] as bool,
+      iconUrl: json['iconUrl'] as String?,
       separatorText: json['separatorText'] as String?,
       learningMaterial: json['learningMaterial'] == null
           ? null
@@ -19,6 +20,7 @@ _$DashboardItemImpl _$$DashboardItemImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$DashboardItemImplToJson(_$DashboardItemImpl instance) =>
     <String, dynamic>{
       'isSeparator': instance.isSeparator,
+      'iconUrl': instance.iconUrl,
       'separatorText': instance.separatorText,
       'learningMaterial': instance.learningMaterial,
     };

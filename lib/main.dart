@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/reports/student/diagnostic_proof/detail/diagnostic_detail_view.dart';
 import 'package:proofmaster/app/presentation/reports/student/introduction_proof/introduction_proof_report_view.dart';
 import 'package:proofmaster/theme/text_theme.dart';
@@ -22,11 +23,14 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const DiagnosticDetailView(
-          type: DiagnosticType.KINESTIC,
-          text:
-              "Siswa yang memilih A untuk lebih dari 15 dari 25 pertanyaan kemungkinan besar adalah pembelajar visual. Mereka lebih suka informasi yang disajikan dalam bentuk visual seperti grafik, gambar, dan diagram.",
-        ));
+        home: StudentDashboardView()
+        // const DiagnosticDetailView(
+        //   type: DiagnosticType.KINESTIC,
+        //   text:
+        //       "Siswa yang memilih A untuk lebih dari 15 dari 25 pertanyaan kemungkinan besar adalah pembelajar visual. Mereka lebih suka informasi yang disajikan dalam bentuk visual seperti grafik, gambar, dan diagram.",
+        // ),
+
+        );
   }
 }
 

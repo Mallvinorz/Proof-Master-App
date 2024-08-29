@@ -13,6 +13,7 @@ class StudentDashboardView extends StatelessWidget {
   final dummyItems = [
     const DashboardItem(isSeparator: true, separatorText: "Pre-Test"),
     DashboardItem(
+        iconUrl: 'assets/icons/diagnostic_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
             name: "Diagnostic Test",
@@ -22,6 +23,7 @@ class StudentDashboardView extends StatelessWidget {
             isLocked: false)),
     const DashboardItem(isSeparator: true, separatorText: "Materi"),
     DashboardItem(
+        iconUrl: 'assets/icons/introduction_proof_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
             name: "Introduction to Proof",
@@ -30,6 +32,7 @@ class StudentDashboardView extends StatelessWidget {
             finishedSubLearningMaterial: 10,
             isLocked: false)),
     DashboardItem(
+        iconUrl: 'assets/icons/geometric_proof_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
             name: "Geometry Proof Format",
@@ -38,6 +41,7 @@ class StudentDashboardView extends StatelessWidget {
             finishedSubLearningMaterial: 10,
             isLocked: false)),
     DashboardItem(
+        iconUrl: 'assets/icons/understanding_proof_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
             name: "Understanding of Proof Structure",
@@ -47,22 +51,7 @@ class StudentDashboardView extends StatelessWidget {
             isLocked: false)),
     const DashboardItem(isSeparator: true, separatorText: "Pre-Test"),
     DashboardItem(
-        isSeparator: false,
-        learningMaterial: LearningMaterial(
-            name: "Proof Competence Test",
-            desc: "Lorem ipsum dolor sit amet consectetur.",
-            totalSubLearningMaterial: 10,
-            finishedSubLearningMaterial: 10,
-            isLocked: false)),
-    DashboardItem(
-        isSeparator: false,
-        learningMaterial: LearningMaterial(
-            name: "Proof Competence Test",
-            desc: "Lorem ipsum dolor sit amet consectetur.",
-            totalSubLearningMaterial: 10,
-            finishedSubLearningMaterial: 10,
-            isLocked: false)),
-    DashboardItem(
+        iconUrl: 'assets/icons/proof_competence_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
             name: "Proof Competence Test",
