@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/widgets/error_handler.dart';

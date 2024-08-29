@@ -4,49 +4,31 @@ import 'package:proofmaster/app/templates/list_item_template.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/widgets/menu_card_item.dart';
 
-class IntroductionToProofView extends StatelessWidget {
-  const IntroductionToProofView({super.key});
+class ProofCompetenceTestView extends StatelessWidget {
+  const ProofCompetenceTestView({super.key});
 
   Future<UIState<List<MenuItem>>> getMenuItems() {
     const data = [
       MenuItem(
-        iconUrl: 'assets/icons/logic_ic.png',
+        iconUrl: 'assets/icons/test_ic.png',
         isSeparator: false,
-        menuText: "Logika",
+        menuText: "Reading Comprehension Test",
         menuDesc: "Lorem ipsum dolor sit amet consectetur.",
       ),
       MenuItem(
-        iconUrl: 'assets/icons/teorema_ic.png',
+        iconUrl: 'assets/icons/test_ic.png',
         isSeparator: false,
-        menuText: "Teorama",
+        menuText: "Geometry Proof Construction Test",
         menuDesc: "Pernyataan matematis yang dapat dibuktikan",
       ),
-      MenuItem(
-        iconUrl: 'assets/icons/axioma_ic.png',
-        isSeparator: false,
-        menuText: "Aksioma",
-        menuDesc: "Pernyataan matematis yang diakui kebenarannya",
-      ),
-      MenuItem(
-        iconUrl: 'assets/icons/terms_ic.png',
-        isSeparator: false,
-        menuText: "Definition of Terms",
-        menuDesc: "Lorem ipsum dolor sit amet consectetur.",
-      ),
-      MenuItem(
-        iconUrl: 'assets/icons/geometric_ic.png',
-        isSeparator: false,
-        menuText: "Geometric Proof",
-        menuDesc: "Lorem ipsum dolor sit amet consectetur.",
-      ),
     ];
-    return Future.value(UISuccess(data));
+    return Future.value(const UISuccess(data));
   }
 
   @override
   Widget build(BuildContext context) {
     return ListItemTemplate<MenuItem>(
-      title: "Introduction to Proof",
+      title: "Proof Competence Test",
       onLoadData: () {
         //TODO: replace with actual onload data
       },

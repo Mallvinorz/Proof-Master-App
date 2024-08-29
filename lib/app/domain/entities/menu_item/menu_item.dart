@@ -15,8 +15,11 @@ class MenuItem with _$MenuItem {
     required bool isSeparator,
     String? iconUrl,
     String? separatorText,
+    String? menuText,
+    String? menuDesc,
+    String? route,
     LearningMaterial? learningMaterial,
-  }) = _DashboardItem;
+  }) = _MenuItem;
 
   factory MenuItem.fromJson(Map<String, Object?> json) =>
       _$MenuItemFromJson(json);

@@ -4,8 +4,8 @@ import 'package:proofmaster/app/templates/list_item_template.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/widgets/clickable_item_with_icon.dart';
 
-class DiagnosticReportView extends StatelessWidget {
-  const DiagnosticReportView({super.key});
+class DiagnosticTestReportView extends StatelessWidget {
+  const DiagnosticTestReportView({super.key});
 
   Future<UIState<List<ListItem>>> getDummyData() {
     final dummy = [

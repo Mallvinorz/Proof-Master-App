@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MenuItem _$MenuItemFromJson(Map<String, dynamic> json) {
-  return _DashboardItem.fromJson(json);
+  return _MenuItem.fromJson(json);
 }
 
 /// @nodoc
@@ -23,6 +23,9 @@ mixin _$MenuItem {
   bool get isSeparator => throw _privateConstructorUsedError;
   String? get iconUrl => throw _privateConstructorUsedError;
   String? get separatorText => throw _privateConstructorUsedError;
+  String? get menuText => throw _privateConstructorUsedError;
+  String? get menuDesc => throw _privateConstructorUsedError;
+  String? get route => throw _privateConstructorUsedError;
   LearningMaterial? get learningMaterial => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,6 +43,9 @@ abstract class $MenuItemCopyWith<$Res> {
       {bool isSeparator,
       String? iconUrl,
       String? separatorText,
+      String? menuText,
+      String? menuDesc,
+      String? route,
       LearningMaterial? learningMaterial});
 
   $LearningMaterialCopyWith<$Res>? get learningMaterial;
@@ -61,6 +67,9 @@ class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
     Object? isSeparator = null,
     Object? iconUrl = freezed,
     Object? separatorText = freezed,
+    Object? menuText = freezed,
+    Object? menuDesc = freezed,
+    Object? route = freezed,
     Object? learningMaterial = freezed,
   }) {
     return _then(_value.copyWith(
@@ -75,6 +84,18 @@ class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
       separatorText: freezed == separatorText
           ? _value.separatorText
           : separatorText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      menuText: freezed == menuText
+          ? _value.menuText
+          : menuText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      menuDesc: freezed == menuDesc
+          ? _value.menuDesc
+          : menuDesc // ignore: cast_nullable_to_non_nullable
+              as String?,
+      route: freezed == route
+          ? _value.route
+          : route // ignore: cast_nullable_to_non_nullable
               as String?,
       learningMaterial: freezed == learningMaterial
           ? _value.learningMaterial
@@ -97,17 +118,20 @@ class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
 }
 
 /// @nodoc
-abstract class _$$DashboardItemImplCopyWith<$Res>
+abstract class _$$MenuItemImplCopyWith<$Res>
     implements $MenuItemCopyWith<$Res> {
-  factory _$$DashboardItemImplCopyWith(
-          _$DashboardItemImpl value, $Res Function(_$DashboardItemImpl) then) =
-      __$$DashboardItemImplCopyWithImpl<$Res>;
+  factory _$$MenuItemImplCopyWith(
+          _$MenuItemImpl value, $Res Function(_$MenuItemImpl) then) =
+      __$$MenuItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {bool isSeparator,
       String? iconUrl,
       String? separatorText,
+      String? menuText,
+      String? menuDesc,
+      String? route,
       LearningMaterial? learningMaterial});
 
   @override
@@ -115,11 +139,11 @@ abstract class _$$DashboardItemImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DashboardItemImplCopyWithImpl<$Res>
-    extends _$MenuItemCopyWithImpl<$Res, _$DashboardItemImpl>
-    implements _$$DashboardItemImplCopyWith<$Res> {
-  __$$DashboardItemImplCopyWithImpl(
-      _$DashboardItemImpl _value, $Res Function(_$DashboardItemImpl) _then)
+class __$$MenuItemImplCopyWithImpl<$Res>
+    extends _$MenuItemCopyWithImpl<$Res, _$MenuItemImpl>
+    implements _$$MenuItemImplCopyWith<$Res> {
+  __$$MenuItemImplCopyWithImpl(
+      _$MenuItemImpl _value, $Res Function(_$MenuItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,9 +152,12 @@ class __$$DashboardItemImplCopyWithImpl<$Res>
     Object? isSeparator = null,
     Object? iconUrl = freezed,
     Object? separatorText = freezed,
+    Object? menuText = freezed,
+    Object? menuDesc = freezed,
+    Object? route = freezed,
     Object? learningMaterial = freezed,
   }) {
-    return _then(_$DashboardItemImpl(
+    return _then(_$MenuItemImpl(
       isSeparator: null == isSeparator
           ? _value.isSeparator
           : isSeparator // ignore: cast_nullable_to_non_nullable
@@ -143,6 +170,18 @@ class __$$DashboardItemImplCopyWithImpl<$Res>
           ? _value.separatorText
           : separatorText // ignore: cast_nullable_to_non_nullable
               as String?,
+      menuText: freezed == menuText
+          ? _value.menuText
+          : menuText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      menuDesc: freezed == menuDesc
+          ? _value.menuDesc
+          : menuDesc // ignore: cast_nullable_to_non_nullable
+              as String?,
+      route: freezed == route
+          ? _value.route
+          : route // ignore: cast_nullable_to_non_nullable
+              as String?,
       learningMaterial: freezed == learningMaterial
           ? _value.learningMaterial
           : learningMaterial // ignore: cast_nullable_to_non_nullable
@@ -153,17 +192,18 @@ class __$$DashboardItemImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DashboardItemImpl
-    with DiagnosticableTreeMixin
-    implements _DashboardItem {
-  const _$DashboardItemImpl(
+class _$MenuItemImpl with DiagnosticableTreeMixin implements _MenuItem {
+  const _$MenuItemImpl(
       {required this.isSeparator,
       this.iconUrl,
       this.separatorText,
+      this.menuText,
+      this.menuDesc,
+      this.route,
       this.learningMaterial});
 
-  factory _$DashboardItemImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DashboardItemImplFromJson(json);
+  factory _$MenuItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MenuItemImplFromJson(json);
 
   @override
   final bool isSeparator;
@@ -172,11 +212,17 @@ class _$DashboardItemImpl
   @override
   final String? separatorText;
   @override
+  final String? menuText;
+  @override
+  final String? menuDesc;
+  @override
+  final String? route;
+  @override
   final LearningMaterial? learningMaterial;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MenuItem(isSeparator: $isSeparator, iconUrl: $iconUrl, separatorText: $separatorText, learningMaterial: $learningMaterial)';
+    return 'MenuItem(isSeparator: $isSeparator, iconUrl: $iconUrl, separatorText: $separatorText, menuText: $menuText, menuDesc: $menuDesc, route: $route, learningMaterial: $learningMaterial)';
   }
 
   @override
@@ -187,6 +233,9 @@ class _$DashboardItemImpl
       ..add(DiagnosticsProperty('isSeparator', isSeparator))
       ..add(DiagnosticsProperty('iconUrl', iconUrl))
       ..add(DiagnosticsProperty('separatorText', separatorText))
+      ..add(DiagnosticsProperty('menuText', menuText))
+      ..add(DiagnosticsProperty('menuDesc', menuDesc))
+      ..add(DiagnosticsProperty('route', route))
       ..add(DiagnosticsProperty('learningMaterial', learningMaterial));
   }
 
@@ -194,44 +243,52 @@ class _$DashboardItemImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DashboardItemImpl &&
+            other is _$MenuItemImpl &&
             (identical(other.isSeparator, isSeparator) ||
                 other.isSeparator == isSeparator) &&
             (identical(other.iconUrl, iconUrl) || other.iconUrl == iconUrl) &&
             (identical(other.separatorText, separatorText) ||
                 other.separatorText == separatorText) &&
+            (identical(other.menuText, menuText) ||
+                other.menuText == menuText) &&
+            (identical(other.menuDesc, menuDesc) ||
+                other.menuDesc == menuDesc) &&
+            (identical(other.route, route) || other.route == route) &&
             (identical(other.learningMaterial, learningMaterial) ||
                 other.learningMaterial == learningMaterial));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isSeparator, iconUrl, separatorText, learningMaterial);
+  int get hashCode => Object.hash(runtimeType, isSeparator, iconUrl,
+      separatorText, menuText, menuDesc, route, learningMaterial);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DashboardItemImplCopyWith<_$DashboardItemImpl> get copyWith =>
-      __$$DashboardItemImplCopyWithImpl<_$DashboardItemImpl>(this, _$identity);
+  _$$MenuItemImplCopyWith<_$MenuItemImpl> get copyWith =>
+      __$$MenuItemImplCopyWithImpl<_$MenuItemImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DashboardItemImplToJson(
+    return _$$MenuItemImplToJson(
       this,
     );
   }
 }
 
-abstract class _DashboardItem implements MenuItem {
-  const factory _DashboardItem(
+abstract class _MenuItem implements MenuItem {
+  const factory _MenuItem(
       {required final bool isSeparator,
       final String? iconUrl,
       final String? separatorText,
-      final LearningMaterial? learningMaterial}) = _$DashboardItemImpl;
+      final String? menuText,
+      final String? menuDesc,
+      final String? route,
+      final LearningMaterial? learningMaterial}) = _$MenuItemImpl;
 
-  factory _DashboardItem.fromJson(Map<String, dynamic> json) =
-      _$DashboardItemImpl.fromJson;
+  factory _MenuItem.fromJson(Map<String, dynamic> json) =
+      _$MenuItemImpl.fromJson;
 
   @override
   bool get isSeparator;
@@ -240,9 +297,15 @@ abstract class _DashboardItem implements MenuItem {
   @override
   String? get separatorText;
   @override
+  String? get menuText;
+  @override
+  String? get menuDesc;
+  @override
+  String? get route;
+  @override
   LearningMaterial? get learningMaterial;
   @override
   @JsonKey(ignore: true)
-  _$$DashboardItemImplCopyWith<_$DashboardItemImpl> get copyWith =>
+  _$$MenuItemImplCopyWith<_$MenuItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
