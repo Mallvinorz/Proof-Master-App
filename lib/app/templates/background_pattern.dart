@@ -47,6 +47,7 @@ class BackgroundPattern extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 12.0),
                   child: topChildren,
                 ),
+              const SizedBox(height: 18),
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),

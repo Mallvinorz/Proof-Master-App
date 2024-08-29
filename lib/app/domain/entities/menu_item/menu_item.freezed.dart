@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'dashboard_item.dart';
+part of 'menu_item.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-DashboardItem _$DashboardItemFromJson(Map<String, dynamic> json) {
+MenuItem _$MenuItemFromJson(Map<String, dynamic> json) {
   return _DashboardItem.fromJson(json);
 }
 
 /// @nodoc
-mixin _$DashboardItem {
+mixin _$MenuItem {
   bool get isSeparator => throw _privateConstructorUsedError;
   String? get iconUrl => throw _privateConstructorUsedError;
   String? get separatorText => throw _privateConstructorUsedError;
@@ -27,15 +27,14 @@ mixin _$DashboardItem {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DashboardItemCopyWith<DashboardItem> get copyWith =>
+  $MenuItemCopyWith<MenuItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DashboardItemCopyWith<$Res> {
-  factory $DashboardItemCopyWith(
-          DashboardItem value, $Res Function(DashboardItem) then) =
-      _$DashboardItemCopyWithImpl<$Res, DashboardItem>;
+abstract class $MenuItemCopyWith<$Res> {
+  factory $MenuItemCopyWith(MenuItem value, $Res Function(MenuItem) then) =
+      _$MenuItemCopyWithImpl<$Res, MenuItem>;
   @useResult
   $Res call(
       {bool isSeparator,
@@ -47,9 +46,9 @@ abstract class $DashboardItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DashboardItemCopyWithImpl<$Res, $Val extends DashboardItem>
-    implements $DashboardItemCopyWith<$Res> {
-  _$DashboardItemCopyWithImpl(this._value, this._then);
+class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
+    implements $MenuItemCopyWith<$Res> {
+  _$MenuItemCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -99,7 +98,7 @@ class _$DashboardItemCopyWithImpl<$Res, $Val extends DashboardItem>
 
 /// @nodoc
 abstract class _$$DashboardItemImplCopyWith<$Res>
-    implements $DashboardItemCopyWith<$Res> {
+    implements $MenuItemCopyWith<$Res> {
   factory _$$DashboardItemImplCopyWith(
           _$DashboardItemImpl value, $Res Function(_$DashboardItemImpl) then) =
       __$$DashboardItemImplCopyWithImpl<$Res>;
@@ -117,7 +116,7 @@ abstract class _$$DashboardItemImplCopyWith<$Res>
 
 /// @nodoc
 class __$$DashboardItemImplCopyWithImpl<$Res>
-    extends _$DashboardItemCopyWithImpl<$Res, _$DashboardItemImpl>
+    extends _$MenuItemCopyWithImpl<$Res, _$DashboardItemImpl>
     implements _$$DashboardItemImplCopyWith<$Res> {
   __$$DashboardItemImplCopyWithImpl(
       _$DashboardItemImpl _value, $Res Function(_$DashboardItemImpl) _then)
@@ -177,14 +176,14 @@ class _$DashboardItemImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DashboardItem(isSeparator: $isSeparator, iconUrl: $iconUrl, separatorText: $separatorText, learningMaterial: $learningMaterial)';
+    return 'MenuItem(isSeparator: $isSeparator, iconUrl: $iconUrl, separatorText: $separatorText, learningMaterial: $learningMaterial)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'DashboardItem'))
+      ..add(DiagnosticsProperty('type', 'MenuItem'))
       ..add(DiagnosticsProperty('isSeparator', isSeparator))
       ..add(DiagnosticsProperty('iconUrl', iconUrl))
       ..add(DiagnosticsProperty('separatorText', separatorText))
@@ -224,7 +223,7 @@ class _$DashboardItemImpl
   }
 }
 
-abstract class _DashboardItem implements DashboardItem {
+abstract class _DashboardItem implements MenuItem {
   const factory _DashboardItem(
       {required final bool isSeparator,
       final String? iconUrl,

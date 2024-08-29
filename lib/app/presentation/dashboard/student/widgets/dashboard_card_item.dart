@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:proofmaster/app/domain/entities/dashboard_item/dashboard_item.dart';
+import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 import '../../../../domain/entities/material/learning_material.dart';
 
 class DashboardCardItem extends StatelessWidget {
-  final DashboardItem dashboardItem;
+  final MenuItem dashboardItem;
   final LearningMaterial learningMaterial;
   const DashboardCardItem(
       {super.key, required this.dashboardItem, required this.learningMaterial});

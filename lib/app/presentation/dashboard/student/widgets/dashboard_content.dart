@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:proofmaster/app/domain/entities/dashboard_item/dashboard_item.dart';
+import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/widgets/dashboard_card_item.dart';
 
 class DashboardContent extends StatelessWidget {
-  final List<DashboardItem> items;
+  final List<MenuItem> items;
   const DashboardContent({super.key, required this.items});
 
   @override

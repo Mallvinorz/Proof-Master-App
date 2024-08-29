@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:proofmaster/app/domain/entities/dashboard_item/dashboard_item.dart';
+import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/domain/entities/material/learning_material.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/widgets/dashboard_content.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/widgets/top_banner.dart';
@@ -11,8 +11,8 @@ class StudentDashboardView extends StatelessWidget {
   StudentDashboardView({super.key});
 
   final dummyItems = [
-    const DashboardItem(isSeparator: true, separatorText: "Pre-Test"),
-    DashboardItem(
+    const MenuItem(isSeparator: true, separatorText: "Pre-Test"),
+    MenuItem(
         iconUrl: 'assets/icons/diagnostic_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
@@ -21,8 +21,8 @@ class StudentDashboardView extends StatelessWidget {
             totalSubLearningMaterial: 10,
             finishedSubLearningMaterial: 10,
             isLocked: false)),
-    const DashboardItem(isSeparator: true, separatorText: "Materi"),
-    DashboardItem(
+    const MenuItem(isSeparator: true, separatorText: "Materi"),
+    MenuItem(
         iconUrl: 'assets/icons/introduction_proof_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
@@ -31,7 +31,7 @@ class StudentDashboardView extends StatelessWidget {
             totalSubLearningMaterial: 10,
             finishedSubLearningMaterial: 10,
             isLocked: false)),
-    DashboardItem(
+    MenuItem(
         iconUrl: 'assets/icons/geometric_proof_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
@@ -40,7 +40,7 @@ class StudentDashboardView extends StatelessWidget {
             totalSubLearningMaterial: 10,
             finishedSubLearningMaterial: 10,
             isLocked: false)),
-    DashboardItem(
+    MenuItem(
         iconUrl: 'assets/icons/understanding_proof_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
@@ -49,8 +49,8 @@ class StudentDashboardView extends StatelessWidget {
             totalSubLearningMaterial: 10,
             finishedSubLearningMaterial: 10,
             isLocked: false)),
-    const DashboardItem(isSeparator: true, separatorText: "Pre-Test"),
-    DashboardItem(
+    const MenuItem(isSeparator: true, separatorText: "Pre-Test"),
+    MenuItem(
         iconUrl: 'assets/icons/proof_competence_ic.png',
         isSeparator: false,
         learningMaterial: LearningMaterial(
