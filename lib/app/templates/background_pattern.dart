@@ -50,6 +50,7 @@ class BackgroundPattern extends StatelessWidget {
               const SizedBox(height: 18),
               Expanded(
                 child: Container(
+                  width: double.infinity,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(

@@ -15,18 +15,18 @@ views:
 - "introduction report" screen ✅
 - "understanding to proof report" screen ✅
 - "understanding to proof detail report" screen
-- "proof competence test report" screen
+- "proof competence test report" screen ✅
 - "setting" screen ✅
-- "diagnostic" test (template was created, WIP)
+- "diagnostic" test ✅
 - "diagnostic report" test ✅
 - "diagnostic report detail" test ✅
 - "quiz" screen ✅
-- "introduction proof" screen (template was created, WIP)
+- "introduction proof" screen ✅
 - "detail (Logika, Teorema, Aksioma, Definition of Terms, Geometric Proof)" screen (template was created, WIP)
 - "geometry proof" screen
 - "understanding to proof" screen ✅
 - "aktivitas" screen
-- "proof competence test" screen
+- "proof competence test" screen ✅
 - "score quiz" screen ✅
 - "reset password" screen ✅
 - "success reset password" screen ✅

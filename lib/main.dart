@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/proof_competence_test/proof_competence_test_view.dart';
+import 'package:proofmaster/app/presentation/reports/student/proof_competence_test/proof_competence_test_report_view.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: ProofCompetenceTestView()
+        home: ProofCompetenceTestReportView()
         // const DiagnosticDetailView(
         //   type: DiagnosticType.KINESTIC,
         //   text:
