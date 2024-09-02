@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/diagnostic_itest_tem/diagnostic_test_item.dart';
+import 'package:proofmaster/app/presentation/success_reset_pass/success_reset_pass.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
+import 'package:proofmaster/router.dart';
 
 class DiagnosticTestView extends StatelessWidget {
   DiagnosticTestView({super.key});
 
   final _diagnosticTestMenus = [
     DiagnosticTestItem(
-      route: "", //TODO: replace with actual route ,
+      id: "learning-modalities",
       text: "Learning Modalities",
       iconUrl: "assets/icons/learning_ic.png",
     ),
     DiagnosticTestItem(
-      route: "", //TODO: replace with actual route ,
+      id: "prior-knowledge",
       text: "Prior Knowledge",
       iconUrl: "assets/icons/prior_ic.png",
     ),
     DiagnosticTestItem(
-      route: "", //TODO: replace with actual route ,
+      id: "proof-format",
       text: "Proof Format Preference",
       iconUrl: "assets/icons/proof_ic.png",
     ),
@@ -36,9 +39,11 @@ class DiagnosticTestView extends StatelessWidget {
         padding: const EdgeInsets.only(top: 24),
         itemCount: _diagnosticTestMenus.length,
         itemBuilder: (ctx, index) => GestureDetector(
-          onTap: () {
-            //TODO: implement onclick to route navigation
-          },
+          onTap: () => context.pushNamed(ProofmasterRoute.diagnosticTestQuiz,
+              pathParameters: {
+                'id': _diagnosticTestMenus[index].id,
+                'title': _diagnosticTestMenus[index].text
+              }),
           child: SizedBox(
             width: 80,
             child: Column(

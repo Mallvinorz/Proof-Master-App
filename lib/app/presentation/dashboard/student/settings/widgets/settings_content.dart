@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/setting_menu_item.dart';
 
@@ -22,7 +24,10 @@ class SettingsContent extends StatelessWidget {
                       ?.copyWith(color: Colors.black),
                 ),
               ),
-              SettingMenuItem(text: "Ubah password", onTap: () {}),
+              SettingMenuItem(
+                text: "Ubah password",
+                onTap: () => context.go('/${ProofmasterRoute.forgotPassword}'),
+              ),
               const SizedBox(
                 height: 16.0,
               ),

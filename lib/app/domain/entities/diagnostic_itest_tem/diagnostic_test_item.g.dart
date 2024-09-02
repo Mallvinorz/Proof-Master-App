@@ -9,7 +9,7 @@ part of 'diagnostic_test_item.dart';
 _$DiagnosticTestItemImpl _$$DiagnosticTestItemImplFromJson(
         Map<String, dynamic> json) =>
     _$DiagnosticTestItemImpl(
-      route: json['route'] as String,
+      id: json['id'] as String,
       text: json['text'] as String,
       iconUrl: json['iconUrl'] as String?,
     );
@@ -17,7 +17,7 @@ _$DiagnosticTestItemImpl _$$DiagnosticTestItemImplFromJson(
 Map<String, dynamic> _$$DiagnosticTestItemImplToJson(
         _$DiagnosticTestItemImpl instance) =>
     <String, dynamic>{
-      'route': instance.route,
+      'id': instance.id,
       'text': instance.text,
       'iconUrl': instance.iconUrl,
     };

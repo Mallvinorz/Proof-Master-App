@@ -6,7 +6,7 @@ part 'diagnostic_test_item.g.dart';
 @freezed
 class DiagnosticTestItem with _$DiagnosticTestItem {
   factory DiagnosticTestItem({
-    required String route,
+    required String id,
     required String text,
     String? iconUrl,
   }) = _DiagnosticTestItem;

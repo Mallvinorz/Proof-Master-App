@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/templates/background_pattern_center_child.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 class SuccessResetPass extends StatelessWidget {
@@ -9,7 +11,10 @@ class SuccessResetPass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundPatternCenterChild(
-        child: _buildCardContent(), onTapBack: () {});
+        child: _buildCardContent(),
+        onTapBack: () {
+          context.replace('/');
+        });
   }
 
   Widget _buildCardContent() {

@@ -7,7 +7,8 @@ import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/option_item.dart';
 
 class QuizTemplate extends StatefulWidget {
-  const QuizTemplate({super.key});
+  final String title;
+  const QuizTemplate({super.key, required this.title});
 
   @override
   State<QuizTemplate> createState() => _QuizTemplateState();
@@ -34,7 +35,7 @@ class _QuizTemplateState extends State<QuizTemplate> {
   @override
   Widget build(BuildContext context) {
     return BackgroundPattern(
-      appBarTitle: "Learning Modalities",
+      appBarTitle: widget.title,
       mainChildren:
           _openNumbers ? _buildQuizNumbersContent() : _buildQuizContent(),
     );

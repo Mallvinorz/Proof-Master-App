@@ -22,7 +22,7 @@ class DashboardContent extends StatelessWidget {
                 : GestureDetector(
                     onTap: () => items[index].learningMaterial?.isLocked == true
                         ? print("Masih terkunci")
-                        : context.go('/${items[index].route}'),
+                        : context.push('/${items[index].route}'),
                     child: DashboardCardItem(
                       dashboardItem: items[index],
                       learningMaterial: items[index].learningMaterial!,

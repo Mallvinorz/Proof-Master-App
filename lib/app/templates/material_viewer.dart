@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:proofmaster/app/helper/toast.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/pdf_viewer_online_material.dart';
@@ -19,6 +21,7 @@ class MaterialViewer extends StatefulWidget {
 
 class _MaterialViewerState extends State<MaterialViewer> {
   bool _reachLastPage = false;
+
   @override
   Widget build(BuildContext context) {
     return BackgroundPattern(
@@ -36,7 +39,13 @@ class _MaterialViewerState extends State<MaterialViewer> {
               bottom: 8,
               right: 16,
               child: Button(
-                onTap: widget.onTapFinish,
+                onTap: () async {
+                  _reachLastPage
+                      ? widget.onTapFinish()
+                      : await showToast(
+                          "Selesaikan membaca materi sampai halaman terakhir terlebih dahulu!",
+                        );
+                },
                 text: "Selesai",
                 isOutlined: !_reachLastPage,
               ))
