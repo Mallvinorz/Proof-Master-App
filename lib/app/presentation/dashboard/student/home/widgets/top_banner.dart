@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
-class TopBanner extends StatelessWidget {
-  const TopBanner({super.key});
+class TopBannerHome extends StatelessWidget {
+  const TopBannerHome({super.key});
 
   @override
   Widget build(BuildContext context) {
