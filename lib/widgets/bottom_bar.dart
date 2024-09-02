@@ -4,7 +4,8 @@ import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({super.key});
+  final Function(int) onTap;
+  const BottomBar({super.key, required this.onTap});
 
   @override
   State<BottomBar> createState() => _BottomBarState();
@@ -28,6 +29,7 @@ class _BottomBarState extends State<BottomBar> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      widget.onTap(index);
     });
   }
 

@@ -4,7 +4,7 @@ import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
-import '../../../../domain/entities/material/learning_material.dart';
+import '../../../../../domain/entities/material/learning_material.dart';
 
 class DashboardCardItem extends StatelessWidget {
   final MenuItem dashboardItem;
