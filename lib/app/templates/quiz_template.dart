@@ -35,6 +35,7 @@ class _QuizTemplateState extends State<QuizTemplate> {
   @override
   Widget build(BuildContext context) {
     return BackgroundPattern(
+      usePatternBg: false,
       appBarTitle: widget.title,
       mainChildren:
           _openNumbers ? _buildQuizNumbersContent() : _buildQuizContent(),
@@ -48,6 +49,7 @@ class _QuizTemplateState extends State<QuizTemplate> {
           Column(
             children: [
               _buildQuizHeader(),
+              const SizedBox(height: 12),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 52.0),
