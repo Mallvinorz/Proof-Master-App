@@ -11,7 +11,6 @@ import 'package:proofmaster/app/presentation/dashboard/student/home/menu/underst
 import 'package:proofmaster/app/presentation/forget_password/forgot_password_view.dart';
 import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
 import 'package:proofmaster/app/presentation/success_reset_pass/success_reset_pass.dart';
-import 'package:proofmaster/app/templates/material_viewer.dart';
 
 class ProofmasterRoute {
   static String onBoarding = 'onboarding';
@@ -34,7 +33,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return StudentDashboardView();
+        return const StudentDashboardView();
       },
       routes: <RouteBase>[
         GoRoute(

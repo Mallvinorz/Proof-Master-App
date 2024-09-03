@@ -11,7 +11,7 @@ import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
 
 class StudentDashboardView extends StatefulWidget {
-  StudentDashboardView({super.key});
+  const StudentDashboardView({super.key});
 
   @override
   State<StudentDashboardView> createState() => _StudentDashboardViewState();

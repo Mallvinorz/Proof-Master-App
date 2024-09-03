@@ -47,7 +47,7 @@ class IntroductionToProofView extends StatelessWidget {
         menuDesc: "Lorem ipsum dolor sit amet consectetur.",
       ),
     ];
-    return Future.value(UISuccess(data));
+    return Future.value(const UISuccess(data));
   }
 
   @override

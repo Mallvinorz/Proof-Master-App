@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/diagnostic_itest_tem/diagnostic_test_item.dart';
-import 'package:proofmaster/app/presentation/success_reset_pass/success_reset_pass.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/router.dart';
 

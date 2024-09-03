@@ -4,7 +4,7 @@ import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/
 import 'package:proofmaster/app/templates/background_pattern.dart';
 
 class SettingsView extends StatelessWidget {
-  SettingsView({super.key});
+  const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {

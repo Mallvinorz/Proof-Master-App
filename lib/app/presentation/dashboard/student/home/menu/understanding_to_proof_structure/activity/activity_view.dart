@@ -1,7 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/activity/widgets/filepicker_pdf.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
+import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/pdf_viewer_online_material.dart';
 
@@ -15,45 +16,63 @@ class ActivityView extends StatefulWidget {
 }
 
 class _ActivityViewState extends State<ActivityView> {
-  String? _fileName;
-
-  Future<FilePickerResult?> handlePickFile() async {
-    return await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'pdf', 'doc'],
-    );
-  }
+  FilePickerResult? _file;
 
   @override
   Widget build(BuildContext context) {
+    final fullHeight = MediaQuery.of(context).size.height;
     return BackgroundPattern(
-      bottomBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        width: double.infinity,
-        child: Column(
-          children: [
-            Text(_fileName ?? "-"),
-            Button(
-              suffixIcon: const Icon(
-                FontAwesomeIcons.solidFilePdf,
-                color: Colors.white,
-              ),
-              onTap: () async {
-                setState(() async {
-                  _fileName = (await handlePickFile())?.files[0].name;
-                });
-              },
-              text: "Unggah Jawaban (Pdf)",
-            ),
-          ],
-        ),
-      ),
+      usePatternBg: false,
       borderRadius: const BorderRadius.only(topRight: Radius.circular(29)),
       appBarTitle: widget.title,
-      mainChildren: PdfViewerOnlineMaterial(
-        reachLastPage: (_) {},
-        path:
-            'https://ik.imagekit.io/q1qexvvey/Android%20Studio%20Application%20Development%20(%20PDFDrive%20).pdf?updatedAt=1725256360219',
+      mainChildren: Container(
+        padding: const EdgeInsets.only(top: 8),
+        height: fullHeight,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Soal",
+              style: CustomTextTheme.proofMasterTextTheme.bodyLarge
+                  ?.copyWith(color: Colors.grey),
+            ),
+            Container(
+              clipBehavior: Clip.hardEdge,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(32))),
+              height: fullHeight / 2,
+              child: PdfViewerOnlineMaterial(
+                reachLastPage: (_) {},
+                path:
+                    'https://ik.imagekit.io/q1qexvvey/Android%20Studio%20Application%20Development%20(%20PDFDrive%20).pdf?updatedAt=1725256360219',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 24.0),
+              child: Text(
+                "Jawaban",
+                style: CustomTextTheme.proofMasterTextTheme.bodyLarge
+                    ?.copyWith(color: Colors.grey),
+              ),
+            ),
+            FilePickerPdf(
+              onPickFile: (file) {
+                setState(() {
+                  _file = file;
+                });
+              },
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: Button(
+                isDisabled: _file == null,
+                onTap: () {},
+                text: "Unggah jawaban",
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

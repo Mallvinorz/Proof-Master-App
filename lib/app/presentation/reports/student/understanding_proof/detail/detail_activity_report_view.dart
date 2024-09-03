@@ -9,7 +9,7 @@ class DetailActivityReportView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BackgroundPattern(
       appBarTitle: "Aktivitas 1",
-      mainChildren: DetailActivityReportContent(),
+      mainChildren: const DetailActivityReportContent(),
       borderRadius: const BorderRadius.only(topRight: Radius.circular(29)),
     );
   }

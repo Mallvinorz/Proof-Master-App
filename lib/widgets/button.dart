@@ -7,6 +7,7 @@ class Button extends StatelessWidget {
   Widget? suffixIcon;
   bool onProgress;
   bool isOutlined;
+  bool isDisabled;
   Button({
     super.key,
     required this.onTap,
@@ -14,6 +15,7 @@ class Button extends StatelessWidget {
     this.suffixIcon,
     this.onProgress = false,
     this.isOutlined = false,
+    this.isDisabled = false,
   });
 
   @override
@@ -27,10 +29,18 @@ class Button extends StatelessWidget {
                     : BorderSide.none,
                 borderRadius: const BorderRadius.all(Radius.circular(12)))),
         foregroundColor: WidgetStatePropertyAll<Color>(
-          isOutlined ? Colors.white : CustomColorTheme.colorPrimary,
+          isDisabled
+              ? Colors.grey
+              : isOutlined
+                  ? Colors.white
+                  : CustomColorTheme.colorPrimary,
         ),
         backgroundColor: WidgetStatePropertyAll<Color>(
-          isOutlined ? Colors.white : CustomColorTheme.colorPrimary,
+          isDisabled
+              ? Colors.grey
+              : isOutlined
+                  ? Colors.white
+                  : CustomColorTheme.colorPrimary,
         ),
       ),
       onPressed: () => onTap(),

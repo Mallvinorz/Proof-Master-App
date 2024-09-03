@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:proofmaster/app/helper/toast.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/widgets/button.dart';

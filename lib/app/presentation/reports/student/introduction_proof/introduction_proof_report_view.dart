@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/app/domain/entities/intro_proof_report_item/intro_proof_report_item.dart';
-import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/presentation/reports/student/introduction_proof/widgets/item.dart';
 import 'package:proofmaster/app/templates/list_item_template.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
-import 'package:proofmaster/widgets/clickable_item_with_icon.dart';
 
 class IntroductionProofReportView extends StatelessWidget {
   const IntroductionProofReportView({super.key});
