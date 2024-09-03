@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';

@@ -28,11 +28,9 @@ class _FilePickerPdfState extends State<FilePickerPdf> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = CustomTextTheme.proofMasterTextTheme.bodyMedium
-        ?.copyWith(
-            color: _filename == null
-                ? CustomColorTheme.colorPrimary
-                : Colors.white);
+    final textColor = CustomTextTheme.proofMasterTextTheme.bodyMedium?.copyWith(
+        color:
+            _filename == null ? CustomColorTheme.colorPrimary : Colors.white);
     return Expanded(
       child: Material(
         shape: const RoundedRectangleBorder(

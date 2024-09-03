@@ -1,5 +1,7 @@
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proofmaster/app/data/repositories/dashboard_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/domain/entities/material/learning_material.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/dashboard_content.dart';
@@ -33,6 +35,16 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
       'mainChildren': const SettingsContent(),
     },
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() async {
+      final client = http.Client();
+      final dashbaordRepo = DashboardRepositoryImpl(client);
+      await dashbaordRepo.getMenus();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
