@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/input.dart';
@@ -33,7 +35,12 @@ class ForgotPasswordView extends StatelessWidget {
                 Input(
                     placeholder: "Masukkan email", inputType: InputType.email),
                 _margin(),
-                Button(onTap: () {}, text: "Kirim email")
+                Button(
+                    onTap: () {
+                      //TODO: for success condition
+                      context.go('/${ProofmasterRoute.successResetPassword}');
+                    },
+                    text: "Kirim email")
               ],
             ),
           ),

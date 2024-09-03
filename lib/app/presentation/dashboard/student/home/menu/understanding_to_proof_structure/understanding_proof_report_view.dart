@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/templates/list_item_template.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/clickable_item_with_icon.dart';
 
 class UnderstandngProofView extends StatelessWidget {
@@ -53,7 +55,8 @@ class UnderstandngProofView extends StatelessWidget {
       },
       child: (ListItem data) => ClickableListItemWithIcon(
         onTap: () {
-          //TODO: replace with actual onclick func
+          context.pushNamed(ProofmasterRoute.understandingProofActivity,
+              pathParameters: {'id': data.id, 'title': data.text});
         },
         iconUrl: data.iconUrl,
         text: data.text,

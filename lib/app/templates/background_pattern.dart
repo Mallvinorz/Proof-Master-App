@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 
 // ignore: must_be_immutable
@@ -9,10 +11,12 @@ class BackgroundPattern extends StatelessWidget {
   final Widget? topChildren;
   final Widget? bottomBar;
   BorderRadius? borderRadius;
+  bool usePatternBg;
   BackgroundPattern(
       {super.key,
       required this.mainChildren,
       this.appBarTitle,
+      this.usePatternBg = true,
       this.borderRadius = const BorderRadius.only(
           topLeft: Radius.circular(29), topRight: Radius.circular(29)),
       this.bottomBar,
@@ -27,7 +31,7 @@ class BackgroundPattern extends StatelessWidget {
               leading: IconButton(
                 icon: const Icon(FontAwesomeIcons.chevronLeft,
                     color: Colors.white),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => context.pop(),
               ),
               title: Text(
                 maxLines: 2,
@@ -54,8 +58,10 @@ class BackgroundPattern extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
-                      image: const DecorationImage(
-                          image: AssetImage('assets/images/img_bg.png')),
+                      image: usePatternBg
+                          ? const DecorationImage(
+                              image: AssetImage('assets/images/img_bg.png'))
+                          : null,
                       borderRadius: borderRadius,
                       color: CustomColorTheme.colorBackground),
                   child: mainChildren,
