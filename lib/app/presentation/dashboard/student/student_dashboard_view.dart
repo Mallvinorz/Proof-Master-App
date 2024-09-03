@@ -6,6 +6,8 @@ import 'package:proofmaster/app/presentation/dashboard/student/home/dashboard_co
 import 'package:proofmaster/app/presentation/dashboard/student/home/widgets/top_banner.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/settings_content.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/top_banner_settings.dart';
+import 'package:proofmaster/app/presentation/reports/student/report_view.dart';
+import 'package:proofmaster/app/presentation/reports/student/widgets/top_banner_report.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
@@ -25,8 +27,8 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
       'mainChildren': DashboardContent(items: dummyItems),
     },
     {
-      'topChildren': const TopBannerHome(),
-      'mainChildren': DashboardContent(items: dummyItems),
+      'topChildren': const TopBannerReport(),
+      'mainChildren': ReportView(),
     },
     {
       'topChildren': const TopBannerSettings(),

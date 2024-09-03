@@ -9,42 +9,41 @@ class RectangleIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color;
 
-    if (progress >= 0 && progress <= 0.24) {
-      color = Colors.grey;
-    }
-    if (progress >= 0.25 && progress <= 0.49) {
+    if (progress >= 0.0 && progress <= 0.24) {
+      color = CustomColorTheme.colorDarkGray;
+    } else if (progress >= 0.25 && progress <= 0.49) {
       color = CustomColorTheme.colorRedIndicator;
-    }
-    if (progress >= 0.5 && progress <= 0.74) {
+    } else if (progress >= 0.5 && progress <= 0.74) {
       color = CustomColorTheme.colorOrangeIndicator;
-    }
-    if (progress >= 0.75 && progress <= 0.99) {
+    } else if (progress >= 0.75 && progress <= 0.99) {
       color = CustomColorTheme.colorYellowIndicator;
-    }
-    if (progress == 1) {
+    } else if (progress == 1.0) {
       color = CustomColorTheme.colorGreenIndicator;
     } else {
-      color = CustomColorTheme.colorSoftGray;
+      color = Colors.grey;
     }
 
     return Stack(
       children: [
         Container(
-          color: CustomColorTheme.colorSoftGray,
-          height: 8,
+          height: 12,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
+            color: CustomColorTheme.colorSoftGray,
           ),
         ),
-        Container(
-          color: color,
-          height: 8,
-          width: double.infinity * progress,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
+        LayoutBuilder(builder: (context, constraints) {
+          double maxWidth = constraints.maxWidth;
+          return Container(
+            height: 12,
+            width: progress * maxWidth,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: color,
+            ),
+          );
+        })
       ],
     );
   }

@@ -7,15 +7,18 @@ class TextIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String text = "";
+    String text = '';
+    var value = progress * 100;
+    var prog = value.toInt();
 
-    if (progress == 0) {
+    if (prog == 0) {
       text = "Belum dikerjakan";
-    }
-    if (progress > 0 && progress <= 99) {
-      text = "Kurang ${100 - (progress * 100)}% lagi";
-    } else {
+    } else if (prog > 0 && prog <= 99) {
+      text = "Kurang ${100 - prog}% lagi";
+    } else if (prog == 100) {
       text = "Selesai 100%";
+    } else {
+      "";
     }
 
     return Text(
