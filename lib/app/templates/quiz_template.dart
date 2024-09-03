@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
@@ -34,12 +33,7 @@ class _QuizTemplateState extends State<QuizTemplate> {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundPattern(
-      usePatternBg: false,
-      appBarTitle: widget.title,
-      mainChildren:
-          _openNumbers ? _buildQuizNumbersContent() : _buildQuizContent(),
-    );
+    return _openNumbers ? _buildQuizNumbersContent() : _buildQuizContent();
   }
 
   Widget _buildQuizContent() {
