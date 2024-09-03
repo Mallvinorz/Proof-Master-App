@@ -5,7 +5,7 @@ import 'package:proofmaster/theme/text_theme.dart';
 class SettingMenuItem extends StatelessWidget {
   final String text;
   final Color textColor;
-  final MaterialColor color;
+  final Color color;
   final Function() onTap;
   const SettingMenuItem(
       {super.key,
