@@ -10,17 +10,17 @@ class DiagnosticTestView extends StatelessWidget {
 
   final _diagnosticTestMenus = [
     DiagnosticTestItem(
-      id: "learning-modalities",
+      endpoint: "learning-modalities",
       text: "Learning Modalities",
       iconUrl: "assets/icons/learning_ic.png",
     ),
     DiagnosticTestItem(
-      id: "prior-knowledge",
+      endpoint: "prior-knowledge",
       text: "Prior Knowledge",
       iconUrl: "assets/icons/prior_ic.png",
     ),
     DiagnosticTestItem(
-      id: "proof-format",
+      endpoint: "proof-format",
       text: "Proof Format Preference",
       iconUrl: "assets/icons/proof_ic.png",
     ),
@@ -38,11 +38,11 @@ class DiagnosticTestView extends StatelessWidget {
         padding: const EdgeInsets.only(top: 24),
         itemCount: _diagnosticTestMenus.length,
         itemBuilder: (ctx, index) => GestureDetector(
-          onTap: () => context.pushNamed(ProofmasterRoute.diagnosticTestQuiz,
-              pathParameters: {
-                'id': _diagnosticTestMenus[index].id,
-                'title': _diagnosticTestMenus[index].text
-              }),
+          onTap: () => context
+              .pushNamed(ProofmasterRoute.diagnosticTestQuiz, pathParameters: {
+            'id': _diagnosticTestMenus[index].endpoint,
+            'title': _diagnosticTestMenus[index].text
+          }),
           child: SizedBox(
             width: 80,
             child: Column(

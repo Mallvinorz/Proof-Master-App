@@ -20,7 +20,7 @@ DiagnosticTestItem _$DiagnosticTestItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DiagnosticTestItem {
-  String get id => throw _privateConstructorUsedError;
+  String get endpoint => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String? get iconUrl => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $DiagnosticTestItemCopyWith<$Res> {
           DiagnosticTestItem value, $Res Function(DiagnosticTestItem) then) =
       _$DiagnosticTestItemCopyWithImpl<$Res, DiagnosticTestItem>;
   @useResult
-  $Res call({String id, String text, String? iconUrl});
+  $Res call({String endpoint, String text, String? iconUrl});
 }
 
 /// @nodoc
@@ -52,14 +52,14 @@ class _$DiagnosticTestItemCopyWithImpl<$Res, $Val extends DiagnosticTestItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? endpoint = null,
     Object? text = null,
     Object? iconUrl = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      endpoint: null == endpoint
+          ? _value.endpoint
+          : endpoint // ignore: cast_nullable_to_non_nullable
               as String,
       text: null == text
           ? _value.text
@@ -81,7 +81,7 @@ abstract class _$$DiagnosticTestItemImplCopyWith<$Res>
       __$$DiagnosticTestItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String text, String? iconUrl});
+  $Res call({String endpoint, String text, String? iconUrl});
 }
 
 /// @nodoc
@@ -95,14 +95,14 @@ class __$$DiagnosticTestItemImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? endpoint = null,
     Object? text = null,
     Object? iconUrl = freezed,
   }) {
     return _then(_$DiagnosticTestItemImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      endpoint: null == endpoint
+          ? _value.endpoint
+          : endpoint // ignore: cast_nullable_to_non_nullable
               as String,
       text: null == text
           ? _value.text
@@ -120,13 +120,13 @@ class __$$DiagnosticTestItemImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DiagnosticTestItemImpl implements _DiagnosticTestItem {
   _$DiagnosticTestItemImpl(
-      {required this.id, required this.text, this.iconUrl});
+      {required this.endpoint, required this.text, this.iconUrl});
 
   factory _$DiagnosticTestItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$DiagnosticTestItemImplFromJson(json);
 
   @override
-  final String id;
+  final String endpoint;
   @override
   final String text;
   @override
@@ -134,7 +134,7 @@ class _$DiagnosticTestItemImpl implements _DiagnosticTestItem {
 
   @override
   String toString() {
-    return 'DiagnosticTestItem(id: $id, text: $text, iconUrl: $iconUrl)';
+    return 'DiagnosticTestItem(endpoint: $endpoint, text: $text, iconUrl: $iconUrl)';
   }
 
   @override
@@ -142,14 +142,15 @@ class _$DiagnosticTestItemImpl implements _DiagnosticTestItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DiagnosticTestItemImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.endpoint, endpoint) ||
+                other.endpoint == endpoint) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.iconUrl, iconUrl) || other.iconUrl == iconUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text, iconUrl);
+  int get hashCode => Object.hash(runtimeType, endpoint, text, iconUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +169,7 @@ class _$DiagnosticTestItemImpl implements _DiagnosticTestItem {
 
 abstract class _DiagnosticTestItem implements DiagnosticTestItem {
   factory _DiagnosticTestItem(
-      {required final String id,
+      {required final String endpoint,
       required final String text,
       final String? iconUrl}) = _$DiagnosticTestItemImpl;
 
@@ -176,7 +177,7 @@ abstract class _DiagnosticTestItem implements DiagnosticTestItem {
       _$DiagnosticTestItemImpl.fromJson;
 
   @override
-  String get id;
+  String get endpoint;
   @override
   String get text;
   @override
