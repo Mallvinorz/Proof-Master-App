@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 class SettingMenuItem extends StatelessWidget {
@@ -18,7 +19,7 @@ class SettingMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 4.0,
-      color: Colors.white,
+      color: CustomColorTheme.colorBackground2,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:proofmaster/app/presentation/dashboard/lecturer/lecturer_settings/lecturer_settings_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/diagnostic_test_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/quiz/diagnostic_test_quiz.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/introduction_to_proof/introduction_to_proof_view.dart';
@@ -33,7 +34,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const StudentDashboardView();
+        // return const StudentDashboardView();
+        return const LecturerSettingsView();
       },
       routes: <RouteBase>[
         GoRoute(

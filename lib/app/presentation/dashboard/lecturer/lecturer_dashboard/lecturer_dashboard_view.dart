@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/app/domain/entities/student_item/student_item.dart';
-import 'package:proofmaster/app/presentation/dashboard/lecturer/widgets/lecturer_dashboard_content.dart';
-import 'package:proofmaster/app/presentation/dashboard/lecturer/widgets/top_banner_lecturer_dashboard.dart';
+import 'package:proofmaster/app/presentation/dashboard/lecturer/lecturer_dashboard/widgets/lecturer_dashboard_content.dart';
+import 'package:proofmaster/app/presentation/dashboard/lecturer/lecturer_dashboard/widgets/top_banner_lecturer_dashboard.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 
 class LecturerDashboardView extends StatelessWidget {
