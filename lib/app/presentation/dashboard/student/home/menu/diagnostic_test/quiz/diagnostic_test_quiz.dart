@@ -36,6 +36,7 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
   @override
   Widget build(BuildContext context) {
     final quizUiState = ref.watch(getQuizQuestionsFromProvider(widget.id));
+
     return BackgroundPattern(
       usePatternBg: false,
       appBarTitle: widget.title,

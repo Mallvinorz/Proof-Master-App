@@ -1,29 +1,39 @@
 {
   "data": [
     {
-      "endpoint": "diagnostic-test",
-      "title": "Diagnostic Test",
-      "progress": 80
+      "id": "logic",
+      "title": "Logika",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/diagnostic_ic.png?updatedAt=1725337675997",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "pdf_url": "https://ik.imagekit.io/q1qexvvey/Android%20Studio%20Application%20Development%20(%20PDFDrive%20).pdf?updatedAt=1725256360219"
     },
     {
-      "endpoint": "introduction-to-proof",
-      "title": "Introduction to Proof",
-      "progress": 50
+      "id": "teorem",
+      "title": "Teorema",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/introduction_proof_ic.png?updatedAt=1725337679695",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "pdf_url": "https://ik.imagekit.io/q1qexvvey/Android%20Studio%20Application%20Development%20(%20PDFDrive%20).pdf?updatedAt=1725256360219"
     },
     {
-      "endpoint": "geometry-proof-format",
-      "title": "Geometry Proof Format",
-      "progress": 20
+      "id": "axiom",
+      "title": "Aksioma",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/geometric_proof_ic.png?updatedAt=1725337679753",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "pdf_url": "https://ik.imagekit.io/q1qexvvey/Android%20Studio%20Application%20Development%20(%20PDFDrive%20).pdf?updatedAt=1725256360219"
     },
     {
-      "endpoint": "understanding-of-proof-structure",
-      "title": "Understanding of Proof Structure",
-      "progress": 100
+      "id": "definition-of-term",
+      "title": "Definition of Terms",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/understanding_proof_ic.png?updatedAt=1725337683061",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "pdf_url": "https://ik.imagekit.io/q1qexvvey/Android%20Studio%20Application%20Development%20(%20PDFDrive%20).pdf?updatedAt=1725256360219"
     },
     {
-      "endpoint": "proof-competence-test",
-      "title": "Proof Competence Test",
-      "progress": 100
+      "id": "geometric-proof",
+      "title": "Geometric Proof",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/proof_competence_ic.png?updatedAt=1725337721837",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "pdf_url": "https://ik.imagekit.io/q1qexvvey/Android%20Studio%20Application%20Development%20(%20PDFDrive%20).pdf?updatedAt=1725256360219"
     }
   ]
 }

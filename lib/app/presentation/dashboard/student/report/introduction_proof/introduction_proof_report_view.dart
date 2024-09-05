@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/app/domain/entities/intro_proof_report_item/intro_proof_report_item.dart';
-import 'package:proofmaster/app/presentation/reports/student/introduction_proof/widgets/item.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/report/introduction_proof/widgets/item.dart';
 import 'package:proofmaster/app/templates/list_item_template.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 

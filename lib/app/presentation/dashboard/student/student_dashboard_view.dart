@@ -1,32 +1,34 @@
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:proofmaster/app/data/repositories/quiz_repository_impl.dart';
-import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proofmaster/app/domain/entities/material/learning_material.dart';
+import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
+import 'package:proofmaster/app/domain/repositories/dashboard_repository.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/dashboard_content.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/widgets/top_banner.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/report/report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/report/widgets/top_banner_report.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/settings_content.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/top_banner_settings.dart';
-import 'package:proofmaster/app/presentation/reports/student/report_view.dart';
-import 'package:proofmaster/app/presentation/reports/student/widgets/top_banner_report.dart';
+import 'package:proofmaster/app/presentation/providers/dashboard_provider/dashboard_provider.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
 
-class StudentDashboardView extends StatefulWidget {
+class StudentDashboardView extends ConsumerStatefulWidget {
   const StudentDashboardView({super.key});
 
   @override
-  State<StudentDashboardView> createState() => _StudentDashboardViewState();
+  ConsumerState<StudentDashboardView> createState() =>
+      _StudentDashboardViewState();
 }
 
-class _StudentDashboardViewState extends State<StudentDashboardView> {
+class _StudentDashboardViewState extends ConsumerState<StudentDashboardView> {
   int _currentPage = 0;
   final List<Map<String, Widget>> dashboardBottomNavDestination = [
     {
       'topChildren': const TopBannerHome(),
-      'mainChildren': DashboardContent(items: dummyItems),
+      'mainChildren': const DashboardContent(),
     },
     {
       'topChildren': const TopBannerReport(),
@@ -38,14 +40,20 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
     },
   ];
 
+  DashboardRepository? dashboardRepository;
   @override
   void initState() {
     super.initState();
-    Future.microtask(() async {
-      final client = http.Client();
-      final dashbaordRepo = QuizRepositoryImpl(client);
-      await dashbaordRepo.getQuizQuestionsFrom("ii");
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dashboardRepository = ref.watch(dashboardRepositoryProvider);
     });
+  }
+
+  @override
+  void dispose() {
+    dashboardRepository?.dispose();
+    dashboardRepository = null;
+    super.dispose();
   }
 
   @override

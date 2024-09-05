@@ -14,6 +14,7 @@ _$MenuItemImpl _$$MenuItemImplFromJson(Map<String, dynamic> json) =>
       menuText: json['menuText'] as String?,
       menuDesc: json['menuDesc'] as String?,
       route: json['route'] as String?,
+      category: json['category'] as String?,
       learningMaterial: json['learningMaterial'] == null
           ? null
           : LearningMaterial.fromJson(
@@ -28,5 +29,6 @@ Map<String, dynamic> _$$MenuItemImplToJson(_$MenuItemImpl instance) =>
       'menuText': instance.menuText,
       'menuDesc': instance.menuDesc,
       'route': instance.route,
+      'category': instance.category,
       'learningMaterial': instance.learningMaterial,
     };

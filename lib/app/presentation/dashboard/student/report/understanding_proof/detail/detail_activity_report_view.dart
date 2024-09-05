@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proofmaster/app/presentation/reports/student/understanding_proof/detail/widgets/detail_activity_report_content.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/report/understanding_proof/detail/widgets/detail_activity_report_content.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 
 class DetailActivityReportView extends StatelessWidget {

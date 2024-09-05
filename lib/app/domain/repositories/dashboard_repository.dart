@@ -1,5 +1,6 @@
-import 'package:proofmaster/app/data/responses/student/get_dashboard_menus_response/get_dashboard_menus_response.dart';
+import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 
 abstract class DashboardRepository {
-  Future<GetDashboardMenusResponse> getMenus();
+  Future<List<MenuItem>> getStudentMenus();
+  void dispose();
 }

@@ -33,7 +33,7 @@ class DashboardCardItem extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: dashboardItem.iconUrl != null
-                        ? Image.asset(
+                        ? Image.network(
                             dashboardItem.iconUrl!,
                             width: 48,
                             height: 48,

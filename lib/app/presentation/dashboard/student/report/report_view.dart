@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/app/domain/entities/report_item/report_item.dart';
-import 'package:proofmaster/app/presentation/reports/student/widgets/rectangle_indicator.dart';
-import 'package:proofmaster/app/presentation/reports/student/widgets/text_indicator.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/report/widgets/rectangle_indicator.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/report/widgets/text_indicator.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 class ReportView extends StatelessWidget {

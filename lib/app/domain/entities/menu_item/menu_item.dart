@@ -18,6 +18,7 @@ class MenuItem with _$MenuItem {
     String? menuText,
     String? menuDesc,
     String? route,
+    String? category,
     LearningMaterial? learningMaterial,
   }) = _MenuItem;
 
