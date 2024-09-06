@@ -9,17 +9,20 @@ class BackgroundPattern extends StatelessWidget {
   final String? appBarTitle;
   final Widget? topChildren;
   final Widget? bottomBar;
+  final Function? onTapNavBack;
   BorderRadius? borderRadius;
   bool usePatternBg;
-  BackgroundPattern(
-      {super.key,
-      required this.mainChildren,
-      this.appBarTitle,
-      this.usePatternBg = true,
-      this.borderRadius = const BorderRadius.only(
-          topLeft: Radius.circular(29), topRight: Radius.circular(29)),
-      this.bottomBar,
-      this.topChildren});
+  BackgroundPattern({
+    super.key,
+    required this.mainChildren,
+    this.appBarTitle,
+    this.usePatternBg = true,
+    this.borderRadius = const BorderRadius.only(
+        topLeft: Radius.circular(29), topRight: Radius.circular(29)),
+    this.bottomBar,
+    this.onTapNavBack,
+    this.topChildren,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,8 @@ class BackgroundPattern extends StatelessWidget {
               leading: IconButton(
                 icon: const Icon(FontAwesomeIcons.chevronLeft,
                     color: Colors.white),
-                onPressed: () => context.pop(),
+                onPressed: () =>
+                    onTapNavBack != null ? onTapNavBack!() : context.pop(),
               ),
               title: Text(
                 maxLines: 2,

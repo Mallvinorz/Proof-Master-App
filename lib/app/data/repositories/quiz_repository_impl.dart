@@ -1,6 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/responses/student/get_quiz_questions_response/get_quiz_questions_response.dart';
+import 'package:proofmaster/app/domain/entities/quiz_option/quiz_option.dart';
+import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
+import 'package:proofmaster/widgets/option_item.dart';
 
 class QuizRepositoryImpl implements QuizRepository {
   final _baseUrl = 'oh-my-api-seven.vercel.app';
@@ -8,19 +11,29 @@ class QuizRepositoryImpl implements QuizRepository {
   final http.Client client;
 
   @override
-  Future<GetQuizQuestionsResponse> getQuizQuestionsFrom(String id) async {
+  Future<List<QuizQuestion>> getQuizQuestionsFrom(String id) async {
     try {
-      final queries = {'id': '3e2ff29f-d31d-414b-8e4e-37a885255b2b'};
+      final queries = {'id': id};
       final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
-      print(uri);
       final response = await client.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer haha',
       });
       final result = GetQuizQuestionsResponse.fromJson(response.body);
-      print(result.data?.length);
-      return result;
+      if (result.data == null) throw Exception("Data is null!");
+
+      return result.data!
+          .map((element) => QuizQuestion(
+                id: element.id ?? "-",
+                text: element.question ?? "",
+                correctAnswerValue: null,
+                options: element.answerOptions!
+                    .map((option) => QuizOption(
+                        text: option.text ?? "-", value: option.value ?? 0))
+                    .toList(),
+              ))
+          .toList();
     } catch (e) {
       rethrow;
     }

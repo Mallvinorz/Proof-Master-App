@@ -23,8 +23,10 @@ mixin _$QuizQuestion {
   String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   List<QuizOption> get options => throw _privateConstructorUsedError;
+  int? get selectedAnsweValue => throw _privateConstructorUsedError;
   int? get correctAnswerValue => throw _privateConstructorUsedError;
   String? get imgUrl => throw _privateConstructorUsedError;
+  bool? get marked => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,8 +44,10 @@ abstract class $QuizQuestionCopyWith<$Res> {
       {String id,
       String text,
       List<QuizOption> options,
+      int? selectedAnsweValue,
       int? correctAnswerValue,
-      String? imgUrl});
+      String? imgUrl,
+      bool? marked});
 }
 
 /// @nodoc
@@ -62,8 +66,10 @@ class _$QuizQuestionCopyWithImpl<$Res, $Val extends QuizQuestion>
     Object? id = null,
     Object? text = null,
     Object? options = null,
+    Object? selectedAnsweValue = freezed,
     Object? correctAnswerValue = freezed,
     Object? imgUrl = freezed,
+    Object? marked = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -78,6 +84,10 @@ class _$QuizQuestionCopyWithImpl<$Res, $Val extends QuizQuestion>
           ? _value.options
           : options // ignore: cast_nullable_to_non_nullable
               as List<QuizOption>,
+      selectedAnsweValue: freezed == selectedAnsweValue
+          ? _value.selectedAnsweValue
+          : selectedAnsweValue // ignore: cast_nullable_to_non_nullable
+              as int?,
       correctAnswerValue: freezed == correctAnswerValue
           ? _value.correctAnswerValue
           : correctAnswerValue // ignore: cast_nullable_to_non_nullable
@@ -86,6 +96,10 @@ class _$QuizQuestionCopyWithImpl<$Res, $Val extends QuizQuestion>
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      marked: freezed == marked
+          ? _value.marked
+          : marked // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -102,8 +116,10 @@ abstract class _$$QuizQuestionImplCopyWith<$Res>
       {String id,
       String text,
       List<QuizOption> options,
+      int? selectedAnsweValue,
       int? correctAnswerValue,
-      String? imgUrl});
+      String? imgUrl,
+      bool? marked});
 }
 
 /// @nodoc
@@ -120,8 +136,10 @@ class __$$QuizQuestionImplCopyWithImpl<$Res>
     Object? id = null,
     Object? text = null,
     Object? options = null,
+    Object? selectedAnsweValue = freezed,
     Object? correctAnswerValue = freezed,
     Object? imgUrl = freezed,
+    Object? marked = freezed,
   }) {
     return _then(_$QuizQuestionImpl(
       id: null == id
@@ -136,6 +154,10 @@ class __$$QuizQuestionImplCopyWithImpl<$Res>
           ? _value._options
           : options // ignore: cast_nullable_to_non_nullable
               as List<QuizOption>,
+      selectedAnsweValue: freezed == selectedAnsweValue
+          ? _value.selectedAnsweValue
+          : selectedAnsweValue // ignore: cast_nullable_to_non_nullable
+              as int?,
       correctAnswerValue: freezed == correctAnswerValue
           ? _value.correctAnswerValue
           : correctAnswerValue // ignore: cast_nullable_to_non_nullable
@@ -144,6 +166,10 @@ class __$$QuizQuestionImplCopyWithImpl<$Res>
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      marked: freezed == marked
+          ? _value.marked
+          : marked // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -155,8 +181,10 @@ class _$QuizQuestionImpl implements _QuizQuestion {
       {required this.id,
       required this.text,
       required final List<QuizOption> options,
+      this.selectedAnsweValue,
       this.correctAnswerValue,
-      this.imgUrl})
+      this.imgUrl,
+      this.marked})
       : _options = options;
 
   factory _$QuizQuestionImpl.fromJson(Map<String, dynamic> json) =>
@@ -175,13 +203,17 @@ class _$QuizQuestionImpl implements _QuizQuestion {
   }
 
   @override
+  final int? selectedAnsweValue;
+  @override
   final int? correctAnswerValue;
   @override
   final String? imgUrl;
+  @override
+  final bool? marked;
 
   @override
   String toString() {
-    return 'QuizQuestion(id: $id, text: $text, options: $options, correctAnswerValue: $correctAnswerValue, imgUrl: $imgUrl)';
+    return 'QuizQuestion(id: $id, text: $text, options: $options, selectedAnsweValue: $selectedAnsweValue, correctAnswerValue: $correctAnswerValue, imgUrl: $imgUrl, marked: $marked)';
   }
 
   @override
@@ -192,9 +224,12 @@ class _$QuizQuestionImpl implements _QuizQuestion {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.text, text) || other.text == text) &&
             const DeepCollectionEquality().equals(other._options, _options) &&
+            (identical(other.selectedAnsweValue, selectedAnsweValue) ||
+                other.selectedAnsweValue == selectedAnsweValue) &&
             (identical(other.correctAnswerValue, correctAnswerValue) ||
                 other.correctAnswerValue == correctAnswerValue) &&
-            (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl));
+            (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
+            (identical(other.marked, marked) || other.marked == marked));
   }
 
   @JsonKey(ignore: true)
@@ -204,8 +239,10 @@ class _$QuizQuestionImpl implements _QuizQuestion {
       id,
       text,
       const DeepCollectionEquality().hash(_options),
+      selectedAnsweValue,
       correctAnswerValue,
-      imgUrl);
+      imgUrl,
+      marked);
 
   @JsonKey(ignore: true)
   @override
@@ -226,8 +263,10 @@ abstract class _QuizQuestion implements QuizQuestion {
       {required final String id,
       required final String text,
       required final List<QuizOption> options,
+      final int? selectedAnsweValue,
       final int? correctAnswerValue,
-      final String? imgUrl}) = _$QuizQuestionImpl;
+      final String? imgUrl,
+      final bool? marked}) = _$QuizQuestionImpl;
 
   factory _QuizQuestion.fromJson(Map<String, dynamic> json) =
       _$QuizQuestionImpl.fromJson;
@@ -239,9 +278,13 @@ abstract class _QuizQuestion implements QuizQuestion {
   @override
   List<QuizOption> get options;
   @override
+  int? get selectedAnsweValue;
+  @override
   int? get correctAnswerValue;
   @override
   String? get imgUrl;
+  @override
+  bool? get marked;
   @override
   @JsonKey(ignore: true)
   _$$QuizQuestionImplCopyWith<_$QuizQuestionImpl> get copyWith =>

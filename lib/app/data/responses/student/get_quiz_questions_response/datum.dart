@@ -7,13 +7,16 @@ import 'answer_option.dart';
 class Datum extends Equatable {
   final String? id;
   final String? question;
+  final int? actualAnswerValue;
   final List<AnswerOption>? answerOptions;
 
-  const Datum({this.id, this.question, this.answerOptions});
+  const Datum(
+      {this.id, this.question, this.answerOptions, this.actualAnswerValue});
 
   factory Datum.fromMap(Map<String, dynamic> data) => Datum(
         id: data['id'] as String?,
         question: data['question'] as String?,
+        actualAnswerValue: data['actual_answer_value'] as int?,
         answerOptions: (data['answer_options'] as List<dynamic>?)
             ?.map((e) => AnswerOption.fromMap(e as Map<String, dynamic>))
             .toList(),
@@ -22,6 +25,7 @@ class Datum extends Equatable {
   Map<String, dynamic> toMap() => {
         'id': id,
         'question': question,
+        'actual_answer_value': actualAnswerValue,
         'answer_options': answerOptions?.map((e) => e.toMap()).toList(),
       };
 
@@ -40,11 +44,13 @@ class Datum extends Equatable {
   Datum copyWith({
     String? id,
     String? question,
+    int? actualAnswerValue,
     List<AnswerOption>? answerOptions,
   }) {
     return Datum(
       id: id ?? this.id,
       question: question ?? this.question,
+      actualAnswerValue: actualAnswerValue ?? this.actualAnswerValue,
       answerOptions: answerOptions ?? this.answerOptions,
     );
   }

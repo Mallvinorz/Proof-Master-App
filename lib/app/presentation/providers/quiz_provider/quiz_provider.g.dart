@@ -22,7 +22,7 @@ final quizRepositoryProvider = AutoDisposeProvider<QuizRepository>.internal(
 
 typedef QuizRepositoryRef = AutoDisposeProviderRef<QuizRepository>;
 String _$getQuizQuestionsFromHash() =>
-    r'ba5a7f979302e99deb4d12cb9f45b33d83441fa1';
+    r'2c27213e2b2a4e185685973eb3dc3e0ce35da500';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,7 +51,7 @@ const getQuizQuestionsFromProvider = GetQuizQuestionsFromFamily();
 
 /// See also [getQuizQuestionsFrom].
 class GetQuizQuestionsFromFamily
-    extends Family<AsyncValue<GetQuizQuestionsResponse>> {
+    extends Family<AsyncValue<List<QuizQuestion>>> {
   /// See also [getQuizQuestionsFrom].
   const GetQuizQuestionsFromFamily();
 
@@ -90,7 +90,7 @@ class GetQuizQuestionsFromFamily
 
 /// See also [getQuizQuestionsFrom].
 class GetQuizQuestionsFromProvider
-    extends AutoDisposeFutureProvider<GetQuizQuestionsResponse> {
+    extends AutoDisposeFutureProvider<List<QuizQuestion>> {
   /// See also [getQuizQuestionsFrom].
   GetQuizQuestionsFromProvider(
     String id,
@@ -125,8 +125,7 @@ class GetQuizQuestionsFromProvider
 
   @override
   Override overrideWith(
-    FutureOr<GetQuizQuestionsResponse> Function(
-            GetQuizQuestionsFromRef provider)
+    FutureOr<List<QuizQuestion>> Function(GetQuizQuestionsFromRef provider)
         create,
   ) {
     return ProviderOverride(
@@ -144,7 +143,7 @@ class GetQuizQuestionsFromProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<GetQuizQuestionsResponse> createElement() {
+  AutoDisposeFutureProviderElement<List<QuizQuestion>> createElement() {
     return _GetQuizQuestionsFromProviderElement(this);
   }
 
@@ -163,13 +162,13 @@ class GetQuizQuestionsFromProvider
 }
 
 mixin GetQuizQuestionsFromRef
-    on AutoDisposeFutureProviderRef<GetQuizQuestionsResponse> {
+    on AutoDisposeFutureProviderRef<List<QuizQuestion>> {
   /// The parameter `id` of this provider.
   String get id;
 }
 
 class _GetQuizQuestionsFromProviderElement
-    extends AutoDisposeFutureProviderElement<GetQuizQuestionsResponse>
+    extends AutoDisposeFutureProviderElement<List<QuizQuestion>>
     with GetQuizQuestionsFromRef {
   _GetQuizQuestionsFromProviderElement(super.provider);
 

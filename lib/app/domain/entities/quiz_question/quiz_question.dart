@@ -10,8 +10,10 @@ class QuizQuestion with _$QuizQuestion {
     required String id,
     required String text,
     required List<QuizOption> options,
+    int? selectedAnsweValue,
     int? correctAnswerValue,
     String? imgUrl,
+    bool? marked,
   }) = _QuizQuestion;
 
   factory QuizQuestion.fromJson(Map<String, dynamic> json) =>
