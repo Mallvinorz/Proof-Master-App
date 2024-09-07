@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/quiz_repository_impl.dart';
-import 'package:proofmaster/app/data/responses/student/get_quiz_questions_response/get_quiz_questions_response.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -51,10 +50,13 @@ class QuizNotifier extends StateNotifier<QuizState> {
 
   void updateSelectedAnswer(int selectedValue, int questionIndex) {
     final updatedQuestions = [...state.questions];
-    print("value $selectedValue $questionIndex");
-    updatedQuestions[questionIndex] = updatedQuestions[questionIndex].copyWith(
-      selectedAnsweValue: selectedValue,
+    final selectedQuestion = updatedQuestions[questionIndex];
+    updatedQuestions[questionIndex] = selectedQuestion.copyWith(
+      selectedAnsweValue: selectedValue == selectedQuestion.selectedAnsweValue
+          ? null
+          : selectedValue,
     );
+
     state = state.copyWith(questions: updatedQuestions);
   }
 
@@ -98,7 +100,6 @@ class QuizNotifier extends StateNotifier<QuizState> {
   void toggleQuizNavigation() {
     state =
         state.copyWith(openQuestionsNavigation: !state.openQuestionsNavigation);
-    print(state.openQuestionsNavigation);
   }
 }
 

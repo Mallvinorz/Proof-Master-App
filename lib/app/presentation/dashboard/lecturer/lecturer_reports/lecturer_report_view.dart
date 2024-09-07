@@ -10,7 +10,7 @@ class LecturerReportView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BackgroundPattern(
       appBarTitle: "Laporan Pembelajaran",
-      topChildren: TopBannerLecturerReport(),
+      topChildren: const TopBannerLecturerReport(),
       mainChildren: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: ReportView(),

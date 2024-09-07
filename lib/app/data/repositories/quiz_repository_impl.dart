@@ -3,7 +3,6 @@ import 'package:proofmaster/app/data/responses/student/get_quiz_questions_respon
 import 'package:proofmaster/app/domain/entities/quiz_option/quiz_option.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
-import 'package:proofmaster/widgets/option_item.dart';
 
 class QuizRepositoryImpl implements QuizRepository {
   final _baseUrl = 'oh-my-api-seven.vercel.app';
