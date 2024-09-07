@@ -8,107 +8,132 @@ import 'package:proofmaster/app/presentation/dashboard/student/home/menu/proof_c
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/activity/activity_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/understanding_proof_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/home/lecturer_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/forget_password/forgot_password_view.dart';
 import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
+import 'package:proofmaster/app/presentation/signin/signin_view.dart';
+import 'package:proofmaster/app/presentation/signup/signup_view.dart';
 import 'package:proofmaster/app/presentation/success_reset_pass/success_reset_pass.dart';
 
 class ProofmasterRoute {
-  static String onBoarding = 'onboarding';
-  static String auth = 'auth';
-  static String score = 'score';
-  static String register = 'register';
-  static String diagnosticTest = 'diagnostic-test';
-  static String diagnosticTestQuiz = 'diagnostic-test-quiz';
-  static String introductionProof = 'introduction-proof';
-  static String introductionProofMaterial = 'introduction-proof-material';
-  static String understandingProof = 'understanding-proof';
-  static String understandingProofActivity = 'understanding-proof-activity';
-  static String proofCompetenceTest = 'proof-competence-test';
-  static String forgotPassword = 'forgot-password';
-  static String successResetPassword = 'success-reset-password';
+  static const String home = '/';
+  static const String lecturerHome = '/lecturer-dashboard';
+  static const String onBoarding = '/onboarding';
+  static const String auth = '/auth';
+  static const String score = '/score';
+  static const String register = '/register';
+  static const String diagnosticTest = '/diagnostic-test';
+  static const String diagnosticTestQuiz = 'diagnostic-test-quiz';
+  static const String introductionProof = '/introduction-proof';
+  static const String introductionProofMaterial = 'introduction-proof-material';
+  static const String understandingProof = '/understanding-proof';
+  static const String understandingProofActivity =
+      'understanding-proof-activity';
+  static const String proofCompetenceTest = '/proof-competence-test';
+  static const String forgotPassword = '/forgot-password';
+  static const String successResetPassword = '/success-reset-password';
 }
 
-final GoRouter router = GoRouter(
-  routes: <RouteBase>[
+List<RouteBase> getRoutes() {
+  return [
     GoRoute(
-      path: '/',
+      path: ProofmasterRoute.home,
       builder: (BuildContext context, GoRouterState state) {
         return const StudentDashboardView();
       },
-      routes: <RouteBase>[
-        GoRoute(
-          path: ProofmasterRoute.onBoarding,
-          builder: (BuildContext context, GoRouterState state) {
-            return const OnboardingView();
-          },
-        ),
-        GoRoute(
-          path: ProofmasterRoute.diagnosticTest,
-          builder: (BuildContext context, GoRouterState state) {
-            return DiagnosticTestView();
-          },
-        ),
-        GoRoute(
-          path: ProofmasterRoute.introductionProof,
-          builder: (BuildContext context, GoRouterState state) {
-            return const IntroductionToProofView();
-          },
-        ),
-        GoRoute(
-          path: ProofmasterRoute.understandingProof,
-          builder: (BuildContext context, GoRouterState state) {
-            return const UnderstandngProofView();
-          },
-        ),
-        GoRoute(
-          path: ProofmasterRoute.proofCompetenceTest,
-          builder: (BuildContext context, GoRouterState state) {
-            return const ProofCompetenceTestView();
-          },
-        ),
-        GoRoute(
-          path: ProofmasterRoute.forgotPassword,
-          builder: (BuildContext context, GoRouterState state) {
-            return const ForgotPasswordView();
-          },
-        ),
-        GoRoute(
-          path: ProofmasterRoute.successResetPassword,
-          builder: (BuildContext context, GoRouterState state) {
-            return const SuccessResetPass();
-          },
-        ),
-        GoRoute(
-          path: '${ProofmasterRoute.diagnosticTestQuiz}/:id/:title',
-          name: ProofmasterRoute.diagnosticTestQuiz,
-          builder: (BuildContext context, GoRouterState state) {
-            return DiagnosticTestQuiz(
-              id: state.pathParameters['id'] ?? "-",
-              title: state.pathParameters['title'] ?? "-",
-            );
-          },
-        ),
-        GoRoute(
-          path: '${ProofmasterRoute.introductionProofMaterial}/:id/:title',
-          name: ProofmasterRoute.introductionProofMaterial,
-          builder: (BuildContext context, GoRouterState state) {
-            return IntroductionToProofMaterial(
-              id: state.pathParameters['id'] ?? "-",
-              title: state.pathParameters['title'] ?? "-",
-            );
-          },
-        ),
-        GoRoute(
-          path: '${ProofmasterRoute.understandingProofActivity}/:id/:title',
-          name: ProofmasterRoute.understandingProofActivity,
-          builder: (BuildContext context, GoRouterState state) {
-            return ActivityView(
-              id: state.pathParameters['id'] ?? "-",
-              title: state.pathParameters['title'] ?? "-",
-            );
-          },
-        ),
-      ],
     ),
-  ],
-);
+    GoRoute(
+      path: ProofmasterRoute.lecturerHome,
+      builder: (BuildContext context, GoRouterState state) {
+        return const LecturerDashboardView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.auth,
+      builder: (BuildContext context, GoRouterState state) {
+        return const SigninView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.register,
+      builder: (BuildContext context, GoRouterState state) {
+        return const SignupView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.onBoarding,
+      builder: (BuildContext context, GoRouterState state) {
+        return const OnBoardingView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.diagnosticTest,
+      builder: (BuildContext context, GoRouterState state) {
+        return DiagnosticTestView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.introductionProof,
+      builder: (BuildContext context, GoRouterState state) {
+        return const IntroductionToProofView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.understandingProof,
+      builder: (BuildContext context, GoRouterState state) {
+        return const UnderstandngProofView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.proofCompetenceTest,
+      builder: (BuildContext context, GoRouterState state) {
+        return const ProofCompetenceTestView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.forgotPassword,
+      builder: (BuildContext context, GoRouterState state) {
+        return const ForgotPasswordView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.successResetPassword,
+      builder: (BuildContext context, GoRouterState state) {
+        return const SuccessResetPass();
+      },
+    ),
+    GoRoute(
+      path:
+          '${ProofmasterRoute.diagnosticTest}/${ProofmasterRoute.diagnosticTestQuiz}/:id/:title',
+      name: ProofmasterRoute.diagnosticTestQuiz,
+      builder: (BuildContext context, GoRouterState state) {
+        return DiagnosticTestQuiz(
+          id: state.pathParameters['id'] ?? "-",
+          title: state.pathParameters['title'] ?? "-",
+        );
+      },
+    ),
+    GoRoute(
+      path:
+          '${ProofmasterRoute.introductionProof}/${ProofmasterRoute.introductionProofMaterial}/:id/:title',
+      name: ProofmasterRoute.introductionProofMaterial,
+      builder: (BuildContext context, GoRouterState state) {
+        return IntroductionToProofMaterial(
+          id: state.pathParameters['id'] ?? "-",
+          title: state.pathParameters['title'] ?? "-",
+        );
+      },
+    ),
+    GoRoute(
+      path:
+          '${ProofmasterRoute.understandingProof}/${ProofmasterRoute.understandingProofActivity}/:id/:title',
+      name: ProofmasterRoute.understandingProofActivity,
+      builder: (BuildContext context, GoRouterState state) {
+        return ActivityView(
+          id: state.pathParameters['id'] ?? "-",
+          title: state.pathParameters['title'] ?? "-",
+        );
+      },
+    ),
+  ];
+}

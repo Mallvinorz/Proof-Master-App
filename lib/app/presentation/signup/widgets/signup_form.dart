@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/input.dart';
@@ -62,16 +65,18 @@ class SignupForm extends StatelessWidget {
             ])),
           ),
           _margin(),
-          Button(onTap: () {}, text: "Masuk"),
+          SizedBox(
+              width: double.infinity,
+              child: Button(onTap: () {}, text: "Daftar")),
           _margin(),
           Align(
             alignment: Alignment.center,
-            child: Text.rich(TextSpan(text: "Belum punya akun? ", children: [
+            child: Text.rich(TextSpan(text: "Sudah punya akun? ", children: [
               TextSpan(
-                  text: "Daftar",
+                  text: "Masuk",
                   style: const TextStyle(color: CustomColorTheme.colorPrimary),
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => print("daftar clicked!"))
+                    ..onTap = () => context.push(ProofmasterRoute.auth))
             ])),
           )
         ],

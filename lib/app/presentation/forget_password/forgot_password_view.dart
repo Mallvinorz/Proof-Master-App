@@ -35,12 +35,15 @@ class ForgotPasswordView extends StatelessWidget {
                 Input(
                     placeholder: "Masukkan email", inputType: InputType.email),
                 _margin(),
-                Button(
-                    onTap: () {
-                      //TODO: for success condition
-                      context.go('/${ProofmasterRoute.successResetPassword}');
-                    },
-                    text: "Kirim email")
+                SizedBox(
+                  width: double.infinity,
+                  child: Button(
+                      onTap: () {
+                        //TODO: for success condition
+                        context.go(ProofmasterRoute.successResetPassword);
+                      },
+                      text: "Kirim email"),
+                )
               ],
             ),
           ),

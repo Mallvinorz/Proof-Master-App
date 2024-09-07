@@ -48,6 +48,7 @@ dependencies:
   json_annotation: ^4.9.0
   material_design_icons_flutter: ^7.0.7296
   riverpod_annotation: ^2.3.5
+  shared_preferences: ^2.3.2
   syncfusion_flutter_pdfviewer: ^26.2.10
 
 dev_dependencies:
