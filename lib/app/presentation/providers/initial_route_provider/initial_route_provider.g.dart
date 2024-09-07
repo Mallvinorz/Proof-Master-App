@@ -23,7 +23,22 @@ final onboardingRepositoryProvider =
 );
 
 typedef OnboardingRepositoryRef = AutoDisposeProviderRef<OnboardingRepository>;
-String _$getInitialRouteHash() => r'22f7ab1a7974abd7e0f33e55f3f9a1e96a175875';
+String _$authRepositoryHash() => r'1c8be288571ca06fe4e803d16111ae2afb53e010';
+
+/// See also [authRepository].
+@ProviderFor(authRepository)
+final authRepositoryProvider = AutoDisposeProvider<AuthRepository>.internal(
+  authRepository,
+  name: r'authRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AuthRepositoryRef = AutoDisposeProviderRef<AuthRepository>;
+String _$getInitialRouteHash() => r'3c79ab8d467dc5e9f11bd24cbe66d7c5e4e99c25';
 
 /// See also [getInitialRoute].
 @ProviderFor(getInitialRoute)

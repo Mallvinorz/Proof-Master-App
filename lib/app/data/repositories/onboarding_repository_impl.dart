@@ -10,7 +10,7 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
       SharedPreferencesWithCache.create(
           cacheOptions: const SharedPreferencesWithCacheOptions(
               // This cache will only accept the key 'counter'.
-              allowList: <String>{'onboard_status'}));
+              allowList: <String>{'onboard_status', 'auth-token', 'role'}));
 
   @override
   Future<bool> getOnboardStatus() async {

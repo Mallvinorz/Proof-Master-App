@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/helper/toast.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/widgets/dashboard_card_item.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/home/widgets/loader_content.dart';
 import 'package:proofmaster/app/presentation/providers/dashboard_provider/dashboard_provider.dart';
 import 'package:proofmaster/widgets/error_handler.dart';
 
@@ -37,7 +38,7 @@ class DashboardContent extends ConsumerWidget {
             error: (error, _) => ErrorHandler(
                 errorMessage: "$error",
                 action: () => ref.refresh(getStudentMenusProvider)),
-            loading: () => const Center(child: CircularProgressIndicator())),
+            loading: () => const LoaderContent()),
       )
     ]);
   }

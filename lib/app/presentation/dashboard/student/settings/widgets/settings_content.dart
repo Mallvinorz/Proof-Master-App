@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/logout_dialog.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/setting_menu_item.dart';
@@ -31,7 +32,15 @@ class SettingsContent extends StatelessWidget {
               const SizedBox(
                 height: 16.0,
               ),
-              SettingMenuItem(text: "Unduh semua materi", onTap: () {}),
+              SettingMenuItem(
+                  text: "Unduh semua materi",
+                  onTap: () async {
+                    await showLogoutDialog(
+                        context: context,
+                        onSubmit: () {
+                          context.push(ProofmasterRoute.auth);
+                        });
+                  }),
               const SizedBox(
                 height: 16.0,
               ),

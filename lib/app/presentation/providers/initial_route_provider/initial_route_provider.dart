@@ -1,4 +1,6 @@
+import 'package:proofmaster/app/data/repositories/auth_repository_impl.dart';
 import 'package:proofmaster/app/data/repositories/onboarding_repository_impl.dart';
+import 'package:proofmaster/app/domain/repositories/auth_repository.dart';
 import 'package:proofmaster/app/domain/repositories/onboarding_repository.dart';
 import 'package:proofmaster/router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,9 +13,29 @@ OnboardingRepository onboardingRepository(OnboardingRepositoryRef ref) {
 }
 
 @riverpod
+AuthRepository authRepository(AuthRepositoryRef ref) {
+  return AuthRepositoryImpl();
+}
+
+@riverpod
 Future<String> getInitialRoute(GetInitialRouteRef ref) async {
   final onBoardingRepository = ref.watch(onboardingRepositoryProvider);
-  final onboardStatus = await onBoardingRepository.getOnboardStatus();
+  final authRepository = ref.watch(authRepositoryProvider);
+  final onboardStatusFinished = await onBoardingRepository.getOnboardStatus();
 
-  return onboardStatus ? ProofmasterRoute.auth : ProofmasterRoute.onBoarding;
+  if (!onboardStatusFinished) {
+    return ProofmasterRoute.onBoarding;
+  } else {
+    if (await authRepository.getAuthToken() != null) {
+      if (await authRepository.getRole() == "STUDENT") {
+        return ProofmasterRoute.home;
+      }
+      if (await authRepository.getRole() == "TEACHER") {
+        return ProofmasterRoute.lecturerHome;
+      }
+      return ProofmasterRoute.auth;
+    } else {
+      return ProofmasterRoute.auth;
+    }
+  }
 }
