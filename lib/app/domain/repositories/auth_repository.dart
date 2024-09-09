@@ -8,4 +8,5 @@ abstract class AuthRepository {
   Future<String?> getRole();
   Future<AuthReponse> signin(AuthDTO authDto, String password);
   Future<RegisterSuccesReponse> signup(RegisterDTO registerDto);
+  Future<void> signout();
 }

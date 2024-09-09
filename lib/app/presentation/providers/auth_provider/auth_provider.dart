@@ -100,6 +100,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
+  Future<void> signout() async {
+    final authRepository = AuthRepositoryImpl(http.Client());
+    await authRepository.signout();
+  }
+
   void resetUiState() {
     state = state.copyWith(uiState: const UIInitial());
   }

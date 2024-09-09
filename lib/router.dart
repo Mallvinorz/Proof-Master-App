@@ -6,15 +6,10 @@ import 'package:proofmaster/app/presentation/dashboard/student/home/menu/introdu
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/introduction_to_proof/material/introduction_to_proof_material.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/proof_competence_test/proof_competence_test_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/activity/activity_view.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/understanding_proof_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/teacher/home/lecturer_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/teacher/reports/lecturer_report_view.dart';
-import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/diagnostic_test/lecturer_diagnostic_test_report_view.dart';
-import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/introduction_proof/lecturer_introduction_proof_report_view.dart';
-import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/proof_competence_test/lecturer_proof_competence_test_report_view.dart';
-import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/understanding_proof/detail/lecturer_detail_activity_report_view.dart';
-import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/understanding_proof/lecturer_understanding_proof_report_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/teacher/settings/lecturer_settings_view.dart';
 import 'package:proofmaster/app/presentation/forget_password/forgot_password_view.dart';
 import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
@@ -48,8 +43,7 @@ List<RouteBase> getRoutes() {
     GoRoute(
       path: ProofmasterRoute.home,
       builder: (BuildContext context, GoRouterState state) {
-        // return const StudentDashboardView();
-        return const LecturerDetailActivityReportView();
+        return const StudentDashboardView();
       },
     ),
     GoRoute(
