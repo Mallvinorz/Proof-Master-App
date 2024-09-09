@@ -13,7 +13,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
   @override
   Future<List<MenuItem>> getStudentMenus() async {
     try {
-      final queries = {'id': '8e2c2d61-d408-4f00-a0cb-b79d523044d8'};
+      final queries = {'id': 'c0c653db-46a7-4f00-bbbf-7c99612b015d'};
       final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
       print(uri);
       final response = await client.get(uri, headers: {

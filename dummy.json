@@ -1,389 +1,54 @@
 {
   "data": [
     {
-      "id": "q1",
-      "question": "Apakah Anda pernah merasa stres?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
+      "category": "pre-test",
+      "endpoint": "diagnostic-test",
+      "title": "Diagnostic Test",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/diagnostic_ic.png?updatedAt=1725337675997",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "finished_materials": 8,
+      "total_materials": 10,
+      "is_locked": false
     },
     {
-      "id": "q2",
-      "question": "Apakah Anda sering merasa bahagia?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
+      "category": "material",
+      "endpoint": "introduction-proof",
+      "title": "Introduction to proof",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/introduction_proof_ic.png?updatedAt=1725337679695",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "finished_materials": 8,
+      "total_materials": 10,
+      "is_locked": false
     },
     {
-      "id": "q3",
-      "question": "Apakah Anda pernah mengalami depresi?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
+      "category": "material",
+      "endpoint": "geometric-proof-format",
+      "title": "Geometric Proof Format",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/geometric_proof_ic.png?updatedAt=1725337679753",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "finished_materials": 8,
+      "total_materials": 10,
+      "is_locked": false
     },
     {
-      "id": "q4",
-      "question": "Apakah Anda sering merasa percaya diri?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
+      "category": "material",
+      "endpoint": "understanding-proof",
+      "title": "Understanding of Proof Structure",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/understanding_proof_ic.png?updatedAt=1725337683061",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "finished_materials": 8,
+      "total_materials": 10,
+      "is_locked": false
     },
     {
-      "id": "q5",
-      "question": "Apakah Anda pernah mengalami kecemasan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q6",
-      "question": "Apakah Anda sering merasa nyaman dalam situasi sosial?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q7",
-      "question": "Apakah Anda pernah mengalami gangguan tidur?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q8",
-      "question": "Apakah Anda sering merasa memiliki kontrol atas kehidupan Anda?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q9",
-      "question": "Apakah Anda pernah mengalami kehilangan minat dalam aktivitas yang biasa Anda lakukan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q10",
-      "question": "Apakah Anda sering merasa memiliki hubungan yang baik dengan orang lain?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q11",
-      "question": "Apakah Anda pernah mengalami rasa bersalah yang berlebihan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q12",
-      "question": "Apakah Anda sering merasa memiliki kekuatan untuk menghadapi tantangan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q13",
-      "question": "Apakah Anda pernah mengalami kecemasan tentang masa depan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q14",
-      "question": "Apakah Anda sering merasa memiliki kepercayaan diri yang tinggi?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q15",
-      "question": "Apakah Anda pernah mengalami gangguan makan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q16",
-      "question": "Apakah Anda sering merasa memiliki hubungan yang sehat dengan orang lain?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q17",
-      "question": "Apakah Anda pernah mengalami kecemasan tentang kesehatan Anda?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q18",
-      "question": "Apakah Anda sering merasa memiliki kontrol atas emosi Anda?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q19",
-      "question": "Apakah Anda pernah mengalami kehilangan minat dalam hobi atau aktivitas yang Anda sukai?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q20",
-      "question": "Apakah Anda sering merasa memiliki kepercayaan diri yang tinggi dalam berinteraksi dengan orang lain?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q21",
-      "question": "Apakah Anda pernah mengalami gangguan tidur yang berkepanjangan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q22",
-      "question": "Apakah Anda sering merasa memiliki kekuatan untuk menghadapi stres?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q23",
-      "question": "Apakah Anda pernah mengalami kecemasan tentang keuangan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q24",
-      "question": "Apakah Anda sering merasa memiliki kepercayaan diri yang tinggi dalam mengambil keputusan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q25",
-      "question": "Apakah Anda pernah mengalami gangguan makan yang berkepanjangan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q26",
-      "question": "Apakah Anda sering merasa memiliki kekuatan untuk menghadapi perubahan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q27",
-      "question": "Apakah Anda pernah mengalami kecemasan tentang hubungan dengan orang lain?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q28",
-      "question": "Apakah Anda sering merasa memiliki kepercayaan diri yang tinggi dalam berinteraksi dengan teman-teman?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q29",
-      "question": "Apakah Anda pernah mengalami gangguan tidur yang berkepanjangan karena stres?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q30",
-      "question": "Apakah Anda sering merasa memiliki kekuatan untuk menghadapi tantangan dalam karir?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q31",
-      "question": "Apakah Anda pernah mengalami kecemasan tentang kesehatan mental?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q32",
-      "question": "Apakah Anda sering merasa memiliki kepercayaan diri yang tinggi dalam menghadapi situasi sulit?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q33",
-      "question": "Apakah Anda pernah mengalami gangguan makan yang disebabkan oleh stres?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q34",
-      "question": "Apakah Anda sering merasa memiliki kekuatan untuk menghadapi perubahan dalam kehidupan sehari-hari?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
-    },
-    {
-      "id": "q35",
-      "question": "Apakah Anda pernah mengalami kecemasan tentang keuangan yang berkepanjangan?",
-      "actual_answer_value": 1,
-      "answer_options": [
-        { "text": "Tidak pernah", "value": 0 },
-        { "text": "Sering", "value": 1 },
-        { "text": "Selalu", "value": 2 },
-        { "text": "Tidak terduga", "value": 3 }
-      ]
+      "category": "material",
+      "endpoint": "proof-competence-test",
+      "title": "Proof Competence Test",
+      "ic_url": "https://ik.imagekit.io/q1qexvvey/proof_competence_ic.png?updatedAt=1725337721837",
+      "desc": "Lorem ipsum dolor sit amet consectetur",
+      "finished_materials": 8,
+      "total_materials": 10,
+      "is_locked": false
     }
   ]
 }

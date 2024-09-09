@@ -81,11 +81,11 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
     String? nim,
     String? password,
     String? passwordConfirm,
-    bool? isSuccess,
   }) {
-    final isPasswordSame = password != null &&
-            passwordConfirm != null &&
-            (password != passwordConfirm)
+    final passwordCheckValue = password ?? state.password.value;
+    final passwordConfirmCheckValue =
+        passwordConfirm ?? state.passwordConfirm.value;
+    final isPasswordSame = (passwordCheckValue != passwordConfirmCheckValue)
         ? "Password tidak sama"
         : null;
 
@@ -104,15 +104,18 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
     final inputPassword = password != null
         ? state.password.copyWith(
             value: password,
+            minLen: 8,
             errorMessage: state.password.validateInput(password))
         : null;
     final inputPasswordConfirm = passwordConfirm != null
         ? state.passwordConfirm.copyWith(
             value: passwordConfirm,
-            errorMessage:
-                state.passwordConfirm.validateInput(passwordConfirm) ??
-                    isPasswordSame)
+            minLen: 8,
+            errorMessage: isPasswordSame ??
+                state.passwordConfirm.validateInput(passwordConfirm))
         : null;
+
+    print(state.passwordConfirm);
 
     state = state.copyWith(
       email: inputEmail,
@@ -147,11 +150,16 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
       state = state.copyWith(uiState: UISuccess(result.message ?? "-"));
     } catch (e) {
       state = state.copyWith(uiState: UIError(e.toString()));
+      rethrow;
     }
+  }
+
+  void resetUiState() {
+    state = state.copyWith(uiState: const UIInitial());
   }
 }
 
 final registerProvider =
-    StateNotifierProvider<RegisterNotifier, RegisterState>((ref) {
+    StateNotifierProvider.autoDispose<RegisterNotifier, RegisterState>((ref) {
   return RegisterNotifier();
 });

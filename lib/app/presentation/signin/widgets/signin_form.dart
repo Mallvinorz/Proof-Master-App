@@ -36,7 +36,8 @@ class SigninForm extends StatelessWidget {
             child: Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                    onTap: () => context.push(ProofmasterRoute.forgotPassword),
+                    onTap: () => context.push(ProofmasterRoute
+                        .home), //TODO: replace with actual reset password route
                     child: const Text(
                       "Lupa password?",
                       style: TextStyle(color: CustomColorTheme.colorPrimary),
