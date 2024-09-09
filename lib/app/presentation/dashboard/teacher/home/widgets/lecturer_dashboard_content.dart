@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/student_item/student_item.dart';
-import 'package:proofmaster/theme/color_theme.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/setting_menu_item.dart';
 
@@ -29,9 +30,11 @@ class LecturerDashboardContent extends StatelessWidget {
                 itemBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: SettingMenuItem(
-                        color: CustomColorTheme.colorBackground2,
                         text: items[index].name,
-                        onTap: () {},
+                        onTap: () {
+                          // TODO: add route correctly
+                          context.push(ProofmasterRoute.lecturerReports);
+                        },
                       ),
                     )),
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proofmaster/app/presentation/dashboard/lecturer/lecturer_reports/widgets/top_banner_lecturer_report.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/reports/widgets/top_banner_lecturer_report.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/report/report_view.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 

@@ -9,6 +9,13 @@ import 'package:proofmaster/app/presentation/dashboard/student/home/menu/underst
 import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/understanding_proof_report_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/teacher/home/lecturer_dashboard_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/reports/lecturer_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/diagnostic_test/lecturer_diagnostic_test_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/introduction_proof/lecturer_introduction_proof_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/proof_competence_test/lecturer_proof_competence_test_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/understanding_proof/detail/lecturer_detail_activity_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/reports/menu/understanding_proof/lecturer_understanding_proof_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/settings/lecturer_settings_view.dart';
 import 'package:proofmaster/app/presentation/forget_password/forgot_password_view.dart';
 import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
 import 'package:proofmaster/app/presentation/signin/signin_view.dart';
@@ -32,6 +39,8 @@ class ProofmasterRoute {
   static const String proofCompetenceTest = '/proof-competence-test';
   static const String forgotPassword = '/forgot-password';
   static const String successResetPassword = '/success-reset-password';
+  static const String lecturerSettings = '/lecturer-settings';
+  static const String lecturerReports = '/lecturer-reports';
 }
 
 List<RouteBase> getRoutes() {
@@ -39,7 +48,8 @@ List<RouteBase> getRoutes() {
     GoRoute(
       path: ProofmasterRoute.home,
       builder: (BuildContext context, GoRouterState state) {
-        return const StudentDashboardView();
+        // return const StudentDashboardView();
+        return const LecturerDetailActivityReportView();
       },
     ),
     GoRoute(
@@ -135,5 +145,16 @@ List<RouteBase> getRoutes() {
         );
       },
     ),
+    GoRoute(
+      path: ProofmasterRoute.lecturerSettings,
+      builder: (BuildContext context, GoRouterState state) {
+        return const LecturerSettingsView();
+      },
+    ),
+    GoRoute(
+        path: ProofmasterRoute.lecturerReports,
+        builder: (BuildContext context, GoRouterState state) {
+          return const LecturerReportView();
+        })
   ];
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/search_field.dart';
 
@@ -23,8 +25,14 @@ class TopBannerLecturerDashboard extends StatelessWidget {
                 style: CustomTextTheme.proofMasterTextTheme.displayLarge
                     ?.copyWith(color: Colors.white),
               ),
-              const CircleAvatar(
-                backgroundImage: AssetImage('assets/images/dumy_avatar.jpeg'),
+              GestureDetector(
+                onTap: () {
+                  // TODO: add route correctly
+                  context.push(ProofmasterRoute.lecturerSettings);
+                },
+                child: const CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/dumy_avatar.jpeg'),
+                ),
               ),
             ],
           ),
