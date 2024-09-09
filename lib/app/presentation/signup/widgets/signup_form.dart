@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/presentation/providers/register_provider/register_provider.dart';
+import 'package:proofmaster/app/presentation/signup/widgets/signup_dialog.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
@@ -24,12 +25,6 @@ class SignupForm extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(switch (registerState.uiState) {
-            UIInitial<String>() => "",
-            UILoading<String>() => "Loading",
-            UISuccess<String>(data: final result) => "success",
-            UIError<String>(message: final errorMessage) => errorMessage,
-          }),
           Input(
               errorText: registerState.nim.errorMessage,
               onChange: (value) => ref
@@ -67,7 +62,7 @@ class SignupForm extends ConsumerWidget {
               inputType: InputType.password),
           _margin(),
           Input(
-              errorText: registerState.password.errorMessage,
+              errorText: registerState.passwordConfirm.errorMessage,
               onChange: (value) => ref
                   .read(registerProvider.notifier)
                   .updateInputState(passwordConfirm: value),
@@ -99,9 +94,28 @@ class SignupForm extends ConsumerWidget {
               width: double.infinity,
               child: Button(
                 onTap: () async {
-                  await ref
-                      .read(registerProvider.notifier)
-                      .performRegisterAccount();
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  //close keyboard
+                  try {
+                    await ref
+                        .read(registerProvider.notifier)
+                        .performRegisterAccount();
+                    // ignore: use_build_context_synchronously
+                    await signupAlertDialog(
+                        message:
+                            "Registrasi akun anda telah berhasil, klik tombol 'Kembali ke halaman login' untuk kembali ke halaman login.",
+                        isSuccess: true,
+                        onClose: () => context.replace(ProofmasterRoute.auth),
+                        // ignore: use_build_context_synchronously
+                        context: context);
+                  } catch (e) {
+                    await signupAlertDialog(
+                        message: e.toString(),
+                        isSuccess: false,
+                        onClose: () {},
+                        // ignore: use_build_context_synchronously
+                        context: context);
+                  }
                 },
                 text: "Daftar",
                 onProgress: registerState.uiState is UILoading ? true : false,

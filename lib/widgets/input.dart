@@ -44,7 +44,8 @@ class _InputState extends State<Input> {
         TextField(
             onChanged: (value) =>
                 widget.onChange != null ? widget.onChange!(value) : null,
-            obscureText: !_peekPassword,
+            obscureText:
+                widget.inputType == InputType.password ? !_peekPassword : false,
             keyboardType: switch (widget.inputType) {
               InputType.password => TextInputType.visiblePassword,
               InputType.email => TextInputType.emailAddress,

@@ -46,6 +46,7 @@ class Button extends StatelessWidget {
       onPressed: () => onTap(),
       child: onProgress
           ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
                   width: 24,
