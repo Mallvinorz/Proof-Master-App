@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:proofmaster/theme/color_theme.dart';
 
 class SearchField extends StatefulWidget {
   final String placeholder;
@@ -37,22 +38,29 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-        controller: _searchController,
-        decoration: InputDecoration(
-          suffixIcon: _searchController.text.isEmpty
-              ? const Icon(FontAwesomeIcons.magnifyingGlass)
-              : GestureDetector(
-                  onTap: () {
-                    _searchController.clear();
-                  },
-                  child: const Icon(FontAwesomeIcons.close),
-                ),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(100),
-            ),
+      controller: _searchController,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: CustomColorTheme.colorBackground,
+        suffixIcon: _searchController.text.isEmpty
+            ? const Icon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: Colors.grey,
+              )
+            : GestureDetector(
+                onTap: () {
+                  _searchController.clear();
+                },
+                child: const Icon(FontAwesomeIcons.close),
+              ),
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(100),
           ),
-          hintText: widget.placeholder,
-        ));
+        ),
+        hintText: widget.placeholder,
+        hintStyle: const TextStyle(color: Colors.grey),
+      ),
+    );
   }
 }
