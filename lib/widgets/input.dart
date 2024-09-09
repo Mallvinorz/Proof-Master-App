@@ -5,11 +5,16 @@ class Input extends StatefulWidget {
   final String placeholder;
   final InputType inputType;
   String? label;
-  Input(
-      {super.key,
-      required this.placeholder,
-      required this.inputType,
-      this.label});
+  String? errorText;
+  final Function(String)? onChange;
+  Input({
+    super.key,
+    required this.placeholder,
+    required this.inputType,
+    this.errorText,
+    this.label,
+    this.onChange,
+  });
 
   @override
   State<Input> createState() => _InputState();
@@ -37,6 +42,8 @@ class _InputState extends State<Input> {
             ),
           ),
         TextField(
+            onChanged: (value) =>
+                widget.onChange != null ? widget.onChange!(value) : null,
             obscureText: !_peekPassword,
             keyboardType: switch (widget.inputType) {
               InputType.password => TextInputType.visiblePassword,
@@ -44,6 +51,7 @@ class _InputState extends State<Input> {
               _ => TextInputType.text
             },
             decoration: InputDecoration(
+              errorText: widget.errorText,
               suffixIcon: widget.inputType == InputType.password
                   ? GestureDetector(
                       onTap: togglePeekPassword,

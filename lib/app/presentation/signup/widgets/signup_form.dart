@@ -1,17 +1,21 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
+import 'package:proofmaster/app/presentation/providers/register_provider/register_provider.dart';
+import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/input.dart';
 
-class SignupForm extends StatelessWidget {
+class SignupForm extends ConsumerWidget {
   const SignupForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final registerState = ref.watch(registerProvider);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
@@ -20,27 +24,53 @@ class SignupForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(switch (registerState.uiState) {
+            UIInitial<String>() => "",
+            UILoading<String>() => "Loading",
+            UISuccess<String>(data: final result) => "success",
+            UIError<String>(message: final errorMessage) => errorMessage,
+          }),
           Input(
+              errorText: registerState.nim.errorMessage,
+              onChange: (value) => ref
+                  .read(registerProvider.notifier)
+                  .updateInputState(nim: value),
               label: "NIM",
               placeholder: "Masukkan nim",
               inputType: InputType.nim),
           _margin(),
           Input(
+              errorText: registerState.email.errorMessage,
+              onChange: (value) => ref
+                  .read(registerProvider.notifier)
+                  .updateInputState(email: value),
               label: "Email",
               placeholder: "Masukkan email",
               inputType: InputType.email),
           _margin(),
           Input(
+              errorText: registerState.name.errorMessage,
+              onChange: (value) => ref
+                  .read(registerProvider.notifier)
+                  .updateInputState(name: value),
               label: "Nama lengkap",
               placeholder: "Masukkan nama lengkap",
               inputType: InputType.fullname),
           _margin(),
           Input(
+              errorText: registerState.password.errorMessage,
+              onChange: (value) => ref
+                  .read(registerProvider.notifier)
+                  .updateInputState(password: value),
               label: "Password",
               placeholder: "Masukkan password",
               inputType: InputType.password),
           _margin(),
           Input(
+              errorText: registerState.password.errorMessage,
+              onChange: (value) => ref
+                  .read(registerProvider.notifier)
+                  .updateInputState(passwordConfirm: value),
               label: "Konfirmasi password",
               placeholder: "Tulis ulang password",
               inputType: InputType.password),
@@ -67,7 +97,15 @@ class SignupForm extends StatelessWidget {
           _margin(),
           SizedBox(
               width: double.infinity,
-              child: Button(onTap: () {}, text: "Daftar")),
+              child: Button(
+                onTap: () async {
+                  await ref
+                      .read(registerProvider.notifier)
+                      .performRegisterAccount();
+                },
+                text: "Daftar",
+                onProgress: registerState.uiState is UILoading ? true : false,
+              )),
           _margin(),
           Align(
             alignment: Alignment.center,
