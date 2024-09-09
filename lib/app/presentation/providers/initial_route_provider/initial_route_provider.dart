@@ -1,3 +1,4 @@
+import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/auth_repository_impl.dart';
 import 'package:proofmaster/app/data/repositories/onboarding_repository_impl.dart';
 import 'package:proofmaster/app/domain/repositories/auth_repository.dart';
@@ -14,7 +15,7 @@ OnboardingRepository onboardingRepository(OnboardingRepositoryRef ref) {
 
 @riverpod
 AuthRepository authRepository(AuthRepositoryRef ref) {
-  return AuthRepositoryImpl();
+  return AuthRepositoryImpl(http.Client());
 }
 
 @riverpod
