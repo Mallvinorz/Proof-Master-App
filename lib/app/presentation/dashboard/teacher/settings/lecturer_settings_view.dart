@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:proofmaster/app/presentation/dashboard/lecturer/lecturer_settings/widgets/lecturer_settings_content.dart';
-import 'package:proofmaster/app/presentation/dashboard/lecturer/lecturer_settings/widgets/top_banner_lecturer_settings.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/settings/widgets/lecturer_settings_content.dart';
+import 'package:proofmaster/app/presentation/dashboard/teacher/settings/widgets/top_banner_lecturer_settings.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 
 class LecturerSettingsView extends StatelessWidget {
