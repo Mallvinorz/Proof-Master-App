@@ -13,23 +13,25 @@ class SigninView extends StatelessWidget {
     return BackgroundOval(
         children: Padding(
       padding: const EdgeInsets.only(top: 72.0, left: 16, right: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: CustomTextTheme.proofMasterTextTheme.displayLarge
-                ?.copyWith(color: Colors.white),
-          ),
-          Text(
-            desc,
-            style: const TextStyle(color: Colors.white),
-          ),
-          const SizedBox(
-            height: 62,
-          ),
-          const SigninForm()
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: CustomTextTheme.proofMasterTextTheme.displayLarge
+                  ?.copyWith(color: Colors.white),
+            ),
+            Text(
+              desc,
+              style: const TextStyle(color: Colors.white),
+            ),
+            const SizedBox(
+              height: 62,
+            ),
+            const SigninForm()
+          ],
+        ),
       ),
     ));
   }

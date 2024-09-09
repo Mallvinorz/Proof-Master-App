@@ -1,17 +1,22 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
+import 'package:proofmaster/app/presentation/providers/auth_provider/auth_provider.dart';
+import 'package:proofmaster/app/presentation/signup/widgets/signup_dialog.dart';
+import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/input.dart';
 
-class SigninForm extends StatelessWidget {
+class SigninForm extends ConsumerWidget {
   const SigninForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authProvider);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
@@ -21,6 +26,10 @@ class SigninForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Input(
+              errorText: authState.email.errorMessage,
+              onChange: (value) => ref
+                  .read(authProvider.notifier)
+                  .updateInputState(email: value),
               label: "Email",
               placeholder: "Masukkan email",
               inputType: InputType.email),
@@ -28,6 +37,10 @@ class SigninForm extends StatelessWidget {
             height: 16,
           ),
           Input(
+              errorText: authState.password.errorMessage,
+              onChange: (value) => ref
+                  .read(authProvider.notifier)
+                  .updateInputState(password: value),
               label: "Password",
               placeholder: "Masukkan password",
               inputType: InputType.password),
@@ -45,7 +58,28 @@ class SigninForm extends StatelessWidget {
           ),
           SizedBox(
               width: double.infinity,
-              child: Button(onTap: () {}, text: "Masuk")),
+              child: Button(
+                onTap: () async {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  try {
+                    final result =
+                        await ref.read(authProvider.notifier).performSignin();
+                    // ignore: use_build_context_synchronously
+                    context.replace(result == "TEACHER"
+                        ? ProofmasterRoute.lecturerHome
+                        : ProofmasterRoute.home);
+                  } catch (e) {
+                    await signupAlertDialog(
+                        message: e.toString(),
+                        isSuccess: false,
+                        onClose: () {},
+                        // ignore: use_build_context_synchronously
+                        context: context);
+                  }
+                },
+                text: "Masuk",
+                onProgress: authState.uiState is UILoading ? true : false,
+              )),
           Align(
             alignment: Alignment.center,
             child: Text.rich(TextSpan(text: "Belum punya akun? ", children: [
