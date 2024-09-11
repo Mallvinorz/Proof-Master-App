@@ -13,6 +13,9 @@ class PdfViewerOnlineMaterial extends StatelessWidget {
     return Container(
       color: CustomColorTheme.colorBackground,
       child: SfPdfViewer.network(
+        enableTextSelection: false,
+        canShowScrollHead: false,
+        pageSpacing: 0,
         path,
         onPageChanged: (PdfPageChangedDetails details) {
           if (details.isLastPage) reachLastPage(true);

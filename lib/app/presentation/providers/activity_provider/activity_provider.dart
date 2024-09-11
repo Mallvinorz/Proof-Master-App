@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:fimber/fimber.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/activity_repository_impl.dart';
@@ -45,7 +46,9 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
       }
 
       final activityRepository = ActivityRepositoryImpl(http.Client());
-      await activityRepository.uploadFile(File(pdfFile!.path!), id);
+      final result = await activityRepository.uploadFile(
+          File(pdfFile!.path!), pdfFile.name, id);
+      Fimber.d("Test message $result");
 
       state = state.copyWith(
           uiState: const UISuccess("Berhasil upload file jawaban"));

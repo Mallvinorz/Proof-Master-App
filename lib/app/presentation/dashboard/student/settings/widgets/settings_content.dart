@@ -35,7 +35,10 @@ class SettingsContent extends ConsumerWidget {
               const SizedBox(
                 height: 16.0,
               ),
-              SettingMenuItem(text: "Unduh semua materi", onTap: () async {}),
+              SettingMenuItem(
+                  text: "Unduh semua materi",
+                  onTap:
+                      () async {}), ////TODO: add action to download all material
               const SizedBox(
                 height: 16.0,
               ),
@@ -44,47 +47,50 @@ class SettingsContent extends ConsumerWidget {
                 textColor: Colors.red,
                 color: Colors.red,
                 onTap: () async {
-                  await alertDialog(
-                    isSuccess: false,
-                    title: 'Apakah anda yakin ingin keluar?',
-                    message:
-                        "Setelah keluar, anda perlu memasukkan email dan password lagi untuk bisa masuk ke akun ini.",
-                    actionWidgets: <Widget>[
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          textStyle: Theme.of(context).textTheme.labelLarge,
-                        ),
-                        child: const Text('Tidak'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          textStyle: Theme.of(context).textTheme.labelLarge,
-                        ),
-                        child: const Text(
-                          'Ya, saya yakin',
-                          style: TextStyle(
-                              color: CustomColorTheme.colorRedIndicator),
-                        ),
-                        onPressed: () async {
-                          await ref.read(authProvider.notifier).signout();
-                          // ignore: use_build_context_synchronously
-                          context.push(ProofmasterRoute.auth);
-                          // ignore: use_build_context_synchronously
-                          context.pop();
-                        },
-                      ),
-                    ],
-                    context: context,
-                  );
+                  await showAlert(context, ref);
                 },
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  Future<bool?> showAlert(BuildContext context, WidgetRef ref) async {
+    return await alertDialog(
+      isSuccess: false,
+      title: 'Apakah anda yakin ingin keluar?',
+      message:
+          "Setelah keluar, anda perlu memasukkan email dan password lagi untuk bisa masuk ke akun ini.",
+      actionWidgets: <Widget>[
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
+          ),
+          child: const Text('Tidak'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
+          ),
+          child: const Text(
+            'Ya, saya yakin',
+            style: TextStyle(color: CustomColorTheme.colorRedIndicator),
+          ),
+          onPressed: () async {
+            await ref.read(authProvider.notifier).signout();
+            // ignore: use_build_context_synchronously
+            context.push(ProofmasterRoute.auth);
+            // ignore: use_build_context_synchronously
+            context.pop();
+          },
+        ),
+      ],
+      context: context,
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:proofmaster/app/presentation/providers/activity_provider/activit
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/theme/text_theme.dart';
+import 'package:proofmaster/widgets/alert_dialog.dart';
 import 'package:proofmaster/widgets/button.dart';
 import 'package:proofmaster/widgets/pdf_viewer_online_material.dart';
 
@@ -78,8 +79,44 @@ class _ActivityViewState extends ConsumerState<ActivityView> {
                     await ref
                         .read(activityProvider.notifier)
                         .performUploadFile(_file, widget.id);
+                    alertDialog(
+                        // ignore: use_build_context_synchronously
+                        context: context,
+                        message: 'File jawaban anda berhasil diupload.',
+                        title: 'Upload jawaban berhasil!',
+                        isSuccess: true,
+                        actionWidgets: [
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              // ignore: use_build_context_synchronously
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            child: const Text('Kembali ke halaman aktivitas'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ]);
                   } catch (e) {
-                    print(e);
+                    alertDialog(
+                        // ignore: use_build_context_synchronously
+                        context: context,
+                        message: "Error: $e",
+                        title: "Gagal upload jawaban!",
+                        isSuccess: false,
+                        actionWidgets: [
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              // ignore: use_build_context_synchronously
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            child: const Text('Tutup'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ]);
                   }
                 },
                 text: "Unggah jawaban",
