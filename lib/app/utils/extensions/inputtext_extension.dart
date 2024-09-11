@@ -10,12 +10,12 @@ extension InputTextExtension on InputText {
       return "Input perlu diisi!";
     }
     if (minLen != null && currentValue.length < minLen!) {
-      print("Input minimal ${minLen} karaketer");
-      return "Input minimal ${minLen} karaketer!";
+      print("Input minimal $minLen karaketer");
+      return "Input minimal $minLen karaketer!";
     }
     if (maxLen != null && currentValue.length > maxLen!) {
-      print("Input minimal ${maxLen} karaketer");
-      return "Input maksimal ${maxLen} karaketer!";
+      print("Input minimal $maxLen karaketer");
+      return "Input maksimal $maxLen karaketer!";
     }
     return null;
   }

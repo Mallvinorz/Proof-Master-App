@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/presentation/providers/register_provider/register_provider.dart';
-import 'package:proofmaster/app/presentation/signup/widgets/signup_dialog.dart';
+import 'package:proofmaster/widgets/alert_dialog.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
@@ -101,18 +101,43 @@ class SignupForm extends ConsumerWidget {
                         .read(registerProvider.notifier)
                         .performRegisterAccount();
                     // ignore: use_build_context_synchronously
-                    await signupAlertDialog(
+                    await alertDialog(
+                        title: 'Registrasi Sukses!',
                         message:
                             "Registrasi akun anda telah berhasil, klik tombol 'Kembali ke halaman login' untuk kembali ke halaman login.",
                         isSuccess: true,
-                        onClose: () => context.replace(ProofmasterRoute.auth),
+                        actionWidgets: [
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              // ignore: use_build_context_synchronously
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            child: const Text('Kembali ke halaman login'),
+                            onPressed: () {
+                              context.pop();
+                              context.replace(ProofmasterRoute.auth);
+                            },
+                          ),
+                        ],
                         // ignore: use_build_context_synchronously
                         context: context);
                   } catch (e) {
-                    await signupAlertDialog(
+                    await alertDialog(
+                        title: 'Register Gagal!',
                         message: e.toString(),
                         isSuccess: false,
-                        onClose: () {},
+                        actionWidgets: [
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              // ignore: use_build_context_synchronously
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            child: const Text('Tutup'),
+                            onPressed: () {
+                              context.pop();
+                            },
+                          ),
+                        ],
                         // ignore: use_build_context_synchronously
                         context: context);
                   }

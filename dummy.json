@@ -1,8 +1,7 @@
 {
   "data": {
-    "role": "STUDENT",
-    "name": "Student",
-    "email": "roni12333@gmail.com",
-    "photo_url": "https://ui-avatars.com/api/?size=128&background=0D8ABC&color=fff&name=Student"
-  }
+    "file": "filename yada yada.pdf",
+    "filesize": "696969Mb"
+  },
+  "message": "Success upload file"
 }

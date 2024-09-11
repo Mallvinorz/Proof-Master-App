@@ -6,7 +6,7 @@ import 'package:proofmaster/app/presentation/dashboard/student/home/menu/introdu
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/introduction_to_proof/material/introduction_to_proof_material.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/proof_competence_test/proof_competence_test_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/activity/activity_view.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/understanding_proof_report_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/understanding_proof_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/teacher/home/lecturer_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/teacher/reports/lecturer_report_view.dart';

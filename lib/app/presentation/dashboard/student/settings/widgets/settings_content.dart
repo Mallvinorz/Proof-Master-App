@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/logout_dialog.dart';
 import 'package:proofmaster/app/presentation/providers/auth_provider/auth_provider.dart';
 import 'package:proofmaster/router.dart';
+import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
+import 'package:proofmaster/widgets/alert_dialog.dart';
 import 'package:proofmaster/widgets/setting_menu_item.dart';
 
 class SettingsContent extends ConsumerWidget {
@@ -43,12 +44,41 @@ class SettingsContent extends ConsumerWidget {
                 textColor: Colors.red,
                 color: Colors.red,
                 onTap: () async {
-                  await showLogoutDialog(
-                      context: context,
-                      onSubmit: () {
-                        ref.read(authProvider.notifier).signout();
-                        context.push(ProofmasterRoute.auth);
-                      });
+                  await alertDialog(
+                    isSuccess: false,
+                    title: 'Apakah anda yakin ingin keluar?',
+                    message:
+                        "Setelah keluar, anda perlu memasukkan email dan password lagi untuk bisa masuk ke akun ini.",
+                    actionWidgets: <Widget>[
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          textStyle: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        child: const Text('Tidak'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          textStyle: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        child: const Text(
+                          'Ya, saya yakin',
+                          style: TextStyle(
+                              color: CustomColorTheme.colorRedIndicator),
+                        ),
+                        onPressed: () async {
+                          await ref.read(authProvider.notifier).signout();
+                          // ignore: use_build_context_synchronously
+                          context.push(ProofmasterRoute.auth);
+                          // ignore: use_build_context_synchronously
+                          context.pop();
+                        },
+                      ),
+                    ],
+                    context: context,
+                  );
                 },
               ),
             ],

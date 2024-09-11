@@ -4,11 +4,11 @@ import 'package:proofmaster/theme/color_theme.dart';
 class Button extends StatelessWidget {
   final Function onTap;
   final String text;
-  Widget? suffixIcon;
-  bool onProgress;
-  bool isOutlined;
-  bool isDisabled;
-  Button({
+  final Widget? suffixIcon;
+  final bool onProgress;
+  final bool isOutlined;
+  final bool isDisabled;
+  const Button({
     super.key,
     required this.onTap,
     required this.text,

@@ -4,10 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Input extends StatefulWidget {
   final String placeholder;
   final InputType inputType;
-  String? label;
-  String? errorText;
+  final String? label;
+  final String? errorText;
   final Function(String)? onChange;
-  Input({
+  const Input({
     super.key,
     required this.placeholder,
     required this.inputType,

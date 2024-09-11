@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:proofmaster/app/domain/entities/input_text/inputtext.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/button.dart';

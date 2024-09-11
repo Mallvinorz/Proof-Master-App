@@ -32,7 +32,7 @@ class ForgotPasswordView extends StatelessWidget {
                 const Text(
                     "Dengan mengklik tombol kirim email, maka akan muncul email untuk mereset password dari akun anda"),
                 _margin(),
-                Input(
+                const Input(
                     placeholder: "Masukkan email", inputType: InputType.email),
                 _margin(),
                 SizedBox(

@@ -8,7 +8,6 @@ import 'package:proofmaster/app/domain/entities/auth_dto/authdto.dart';
 import 'package:proofmaster/app/domain/entities/register_dto/registerdto.dart';
 import 'package:proofmaster/app/domain/repositories/auth_repository.dart';
 import 'package:proofmaster/app/utils/shared_pref.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.client);

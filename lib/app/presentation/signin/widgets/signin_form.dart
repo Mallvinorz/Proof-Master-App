@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/presentation/providers/auth_provider/auth_provider.dart';
-import 'package:proofmaster/app/presentation/signup/widgets/signup_dialog.dart';
+import 'package:proofmaster/widgets/alert_dialog.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
@@ -49,8 +49,7 @@ class SigninForm extends ConsumerWidget {
             child: Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                    onTap: () => context.push(ProofmasterRoute
-                        .home), //TODO: replace with actual reset password route
+                    onTap: () => context.push(ProofmasterRoute.forgotPassword),
                     child: const Text(
                       "Lupa password?",
                       style: TextStyle(color: CustomColorTheme.colorPrimary),
@@ -69,12 +68,25 @@ class SigninForm extends ConsumerWidget {
                         ? ProofmasterRoute.lecturerHome
                         : ProofmasterRoute.home);
                   } catch (e) {
-                    await signupAlertDialog(
-                        message: e.toString(),
-                        isSuccess: false,
-                        onClose: () {},
-                        // ignore: use_build_context_synchronously
-                        context: context);
+                    await alertDialog(
+                      message: e.toString(),
+                      isSuccess: false,
+                      actionWidgets: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            // ignore: use_build_context_synchronously
+                            textStyle: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          child: const Text('Tutup'),
+                          onPressed: () {
+                            context.pop();
+                          },
+                        ),
+                      ],
+                      // ignore: use_build_context_synchronously
+                      context: context,
+                      title: 'Login Gagal!',
+                    );
                   }
                 },
                 text: "Masuk",
@@ -82,13 +94,16 @@ class SigninForm extends ConsumerWidget {
               )),
           Align(
             alignment: Alignment.center,
-            child: Text.rich(TextSpan(text: "Belum punya akun? ", children: [
-              TextSpan(
-                  text: "Daftar",
-                  style: const TextStyle(color: CustomColorTheme.colorPrimary),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => context.push(ProofmasterRoute.register))
-            ])),
+            child: Text.rich(
+              TextSpan(text: "Belum punya akun? ", children: [
+                TextSpan(
+                    text: "Daftar",
+                    style:
+                        const TextStyle(color: CustomColorTheme.colorPrimary),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => context.push(ProofmasterRoute.register))
+              ]),
+            ),
           )
         ],
       ),
