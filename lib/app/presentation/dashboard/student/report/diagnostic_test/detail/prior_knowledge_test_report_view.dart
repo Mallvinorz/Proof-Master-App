@@ -43,23 +43,29 @@ class PriorKnowledgeTestReportView extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SvgPicture.asset(switch (type){
+                  SvgPicture.asset(switch (type) {
                     // TODO: Handle this case.
-                    PriorKnowledgeReportType.ONE => 'assets/icons/one_star_ic.svg',
+                    PriorKnowledgeReportType.ONE =>
+                      'assets/icons/one_star_ic.svg',
                     // TODO: Handle this case.
-                    PriorKnowledgeReportType.TWO => 'assets/icons/two_stars_ic.svg',
+                    PriorKnowledgeReportType.TWO =>
+                      'assets/icons/two_stars_ic.svg',
                     // TODO: Handle this case.
-                    PriorKnowledgeReportType.THREE => 'assets/icons/three_stars_ic.svg',
+                    PriorKnowledgeReportType.THREE =>
+                      'assets/icons/three_stars_ic.svg',
                     // TODO: Handle this case.
-                    PriorKnowledgeReportType.FOUR => 'assets/icons/four_stars_ic.svg',
+                    PriorKnowledgeReportType.FOUR =>
+                      'assets/icons/four_stars_ic.svg',
                     // TODO: Handle this case.
-                    PriorKnowledgeReportType.FIVE => 'assets/icons/five_stars_ic.svg',
+                    PriorKnowledgeReportType.FIVE =>
+                      'assets/icons/five_stars_ic.svg',
                     // TODO: Handle this case.
-                    PriorKnowledgeReportType.SIX => 'assets/icons/six_stars_ic.svg',
+                    PriorKnowledgeReportType.SIX =>
+                      'assets/icons/six_stars_ic.svg',
                   }),
                   _newMargin(),
                   Text(
-                    switch (type){
+                    switch (type) {
                       // TODO: Handle this case.
                       PriorKnowledgeReportType.ONE => "Unsupported Response",
                       // TODO: Handle this case.
@@ -69,7 +75,8 @@ class PriorKnowledgeTestReportView extends StatelessWidget {
                       // TODO: Handle this case.
                       PriorKnowledgeReportType.FOUR => "Skipping Recognizing",
                       // TODO: Handle this case.
-                      PriorKnowledgeReportType.FIVE => "Beyond Recognizing Element",
+                      PriorKnowledgeReportType.FIVE =>
+                        "Beyond Recognizing Element",
                       // TODO: Handle this case.
                       PriorKnowledgeReportType.SIX => "Beyond Chaining Element",
                     },

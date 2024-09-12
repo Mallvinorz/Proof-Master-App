@@ -1,5 +1,6 @@
-import 'package:proofmaster/app/data/responses/student/get_report_progress/get_report_progress.dart';
+import 'package:proofmaster/app/domain/entities/report_item/report_item.dart';
 
 abstract class ReportRepository {
-  Future<GetReportProgress> getReportProgress();
+  Future<List<ReportItem>> getReportProgress();
+  Future<List<ReportItem>> getReportProgressStudent(String studentId);
 }

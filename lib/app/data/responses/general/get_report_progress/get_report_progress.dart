@@ -2,40 +2,39 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'datum.dart';
+import 'data.dart';
 
 class GetReportProgress extends Equatable {
-  final List<Datum>? data;
+  final Data? data;
 
   const GetReportProgress({this.data});
 
-  factory GetReportProgress.fromResponse(Map<String, dynamic> data) {
+  factory GetReportProgress.fromMap(Map<String, dynamic> data) {
     return GetReportProgress(
-      data: (data['data'] as List<dynamic>?)
-          ?.map((e) => Datum.fromResponse(e as Map<String, dynamic>))
-          .toList(),
+      data: data['data'] == null
+          ? null
+          : Data.fromMap(data['data'] as Map<String, dynamic>),
     );
   }
 
-  Map<String, dynamic> toResponse() => {
-        'data': data?.map((e) => e.toResponse()).toList(),
+  Map<String, dynamic> toMap() => {
+        'data': data?.toMap(),
       };
 
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [GetReportProgress].
   factory GetReportProgress.fromJson(String data) {
-    return GetReportProgress.fromResponse(
-        json.decode(data) as Map<String, dynamic>);
+    return GetReportProgress.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
   /// Converts [GetReportProgress] to a JSON string.
-  String toJson() => json.encode(toResponse());
+  String toJson() => json.encode(toMap());
 
   GetReportProgress copyWith({
-    List<Datum>? data,
+    Data? data,
   }) {
     return GetReportProgress(
       data: data ?? this.data,
