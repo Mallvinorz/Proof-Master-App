@@ -1,31 +1,33 @@
 {
   "data": {
-    "student_id": "asdlasdjasd",
-    "reports": [
+    "activities": [
       {
-        "id": "diagnostic-test-report",
-        "title": "Diagnostic Test",
-        "finished_progress": 75
+        "id": "dasdasdsd",
+        "title": "Aktivitas 1"
       },
       {
-        "id": "introduction-proof-report",
-        "title": "Introduction to Proof",
-        "finished_progress": 100
+        "id": "asdgdat",
+        "title": "Aktivitas 2"
       },
       {
-        "id": "geometric-proof-report",
-        "title": "Geometry Proof Format",
-        "finished_progress": 25
+        "id": "asdasdagasd",
+        "title": "Aktivitas 3"
       },
       {
-        "id": "understanding-proof-report",
-        "title": "Understanding of Proof Structure",
-        "finished_progress": 75
+        "id": "asdasdagasd",
+        "title": "Aktivitas 4"
       },
       {
-        "id": "proof-competence-report",
-        "title": "Proof Competence Test",
-        "finished_progress": 75
+        "id": "asdasdagasd",
+        "title": "Aktivitas 5"
+      },
+      {
+        "id": "asdasdagasd",
+        "title": "Aktivitas 6"
+      },
+      {
+        "id": "asdasdagasd",
+        "title": "Aktivitas 7"
       }
     ]
   }
