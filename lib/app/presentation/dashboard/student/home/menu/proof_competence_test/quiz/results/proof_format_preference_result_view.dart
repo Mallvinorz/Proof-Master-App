@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:proofmaster/router.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
 
-class LearningModalititesResultView extends StatelessWidget {
-  final LearningModalitiesType type;
-  const LearningModalititesResultView({
+class ProofFormatPreferenceResultView extends StatelessWidget {
+  final ProofFormatPreferenceType type;
+  final String text;
+  const ProofFormatPreferenceResultView({
     super.key,
     required this.type,
+    required this.text,
   });
 
   @override
@@ -46,7 +46,7 @@ class LearningModalititesResultView extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            "Hasil Learning Modalities Test",
+                            "Hasil Proof Format Preference Test",
                             style: CustomTextTheme
                                 .proofMasterTextTheme.displayMedium
                                 ?.copyWith(
@@ -57,30 +57,23 @@ class LearningModalititesResultView extends StatelessWidget {
                           Text(
                             switch (type) {
                               // TODO: Handle this case.
-                              LearningModalitiesType.VISUAL => "Visual",
+                              ProofFormatPreferenceType.PARAGRAPH =>
+                                "Preferensi Paragraf Bukti",
                               // TODO: Handle this case.
-                              LearningModalitiesType.AUDITORY => "Auditori",
+                              ProofFormatPreferenceType.TWO_COLUMN =>
+                                "Preferensi Dua-Kolom Bukti",
                               // TODO: Handle this case.
-                              LearningModalitiesType.KINESTETIC => "Kinestetik",
+                              ProofFormatPreferenceType.FLOW_CHART =>
+                                "Preferensi Flow_Chart Bukti",
                             },
                             style: CustomTextTheme
                                 .proofMasterTextTheme.displayMedium,
                           ),
                           _newMargin(),
-                          SvgPicture.asset('assets/images/visual.svg'),
+                          SvgPicture.asset('assets/images/Celebration.svg'),
                           _newMargin(),
                           Text(
-                            switch (type) {
-                              // TODO: Handle this case.
-                              LearningModalitiesType.VISUAL =>
-                                "Kamu memiliki modalitas belajar atau gaya belajar secara visual. Kamu lebih suka informasi yang disajikan dalam bentuk visual seperti grafik, gambar, dan diagram.",
-                              // TODO: Handle this case.
-                              LearningModalitiesType.AUDITORY =>
-                                "Kamu memiliki modalitas belajar atau gaya belajar secara auditory. Kamu lebih suka belajar melalui mendengarkan, diskusi, dan berbicara tentang informasi.",
-                              // TODO: Handle this case.
-                              LearningModalitiesType.KINESTETIC =>
-                                "Kamu memiliki modalitas belajar atau gaya belajar secara kinestetik. Kamu lebih suka belajar melalui aktivitas fisik, praktik langsung, dan pengalaman nyata.",
-                            },
+                            text,
                             style:
                                 CustomTextTheme.proofMasterTextTheme.bodyMedium,
                           )
@@ -90,13 +83,11 @@ class LearningModalititesResultView extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  child: Button(
-                      onTap: () {
-                        context.go(ProofmasterRoute.home);
-                      },
-                      text: "Kembali"),
+                Button(
+                  onTap: () {
+                    // TODO: add route
+                  },
+                  text: "Kembali",
                 ),
               ],
             ),
@@ -113,4 +104,4 @@ class LearningModalititesResultView extends StatelessWidget {
   }
 }
 
-enum LearningModalitiesType { VISUAL, AUDITORY, KINESTETIC }
+enum ProofFormatPreferenceType { PARAGRAPH, TWO_COLUMN, FLOW_CHART }

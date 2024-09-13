@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/button.dart';
 
 class PriorKnowledgeResultView extends StatelessWidget {
   final PriorKnowledgeType type;
+  final String text;
   const PriorKnowledgeResultView({
     super.key,
     required this.type,
+    required this.text,
   });
 
   @override
@@ -53,28 +53,40 @@ class PriorKnowledgeResultView extends StatelessWidget {
                           ),
                           _newMargin(),
                           SvgPicture.asset(switch (type) {
+                            // TODO: Handle this case.
                             PriorKnowledgeType.ONE =>
                               'assets/icons/one_star_ic.svg',
+                            // TODO: Handle this case.
                             PriorKnowledgeType.TWO =>
                               'assets/icons/two_stars_ic.svg',
+                            // TODO: Handle this case.
                             PriorKnowledgeType.THREE =>
                               'assets/icons/three_stars_ic.svg',
+                            // TODO: Handle this case.
                             PriorKnowledgeType.FOUR =>
                               'assets/icons/four_stars_ic.svg',
+                            // TODO: Handle this case.
                             PriorKnowledgeType.FIVE =>
                               'assets/icons/five_stars_ic.svg',
+                            // TODO: Handle this case.
                             PriorKnowledgeType.SIX =>
                               'assets/icons/six_stars_ic.svg',
                           }),
                           _newMargin(),
                           Text(
                             switch (type) {
+                              // TODO: Handle this case.
                               PriorKnowledgeType.ONE => "Unsupported Response",
+                              // TODO: Handle this case.
                               PriorKnowledgeType.TWO => "Surface",
+                              // TODO: Handle this case.
                               PriorKnowledgeType.THREE => "Beyond Surface",
+                              // TODO: Handle this case.
                               PriorKnowledgeType.FOUR => "Skipping Recognizing",
+                              // TODO: Handle this case.
                               PriorKnowledgeType.FIVE =>
                                 "Beyond Recognizing Element",
+                              // TODO: Handle this case.
                               PriorKnowledgeType.SIX =>
                                 "Beyond Chaining Element",
                             },
@@ -83,20 +95,7 @@ class PriorKnowledgeResultView extends StatelessWidget {
                           ),
                           _newMargin(),
                           Text(
-                            switch (type) {
-                              PriorKnowledgeType.ONE =>
-                                "Pemahaman Kamu sangat rendah tentang konsep kekongruenan segitiga. Kamu belum mampu menunjukkan pengetahuan dasar atau konsep yang benar.",
-                              PriorKnowledgeType.TWO =>
-                                "Pemahaman Kamu dangkal tentang konsep kekongruenan segitiga. Kamu telah menunjukkan beberapa pengetahuan dasar tetapi belum memiliki pemahaman yang mendalam.",
-                              PriorKnowledgeType.THREE =>
-                                "Pemahaman Kamu lebih baik tentang konsep kekongruenan segitiga. Kamu mampu menunjukkan pengetahuan dasar dengan beberapa pemahaman konsep yang lebih mendalam.",
-                              PriorKnowledgeType.FOUR =>
-                                "Pemahaman Kamu baik tentang konsep kekongruenan segitiga. Kamu menunjukkan kemampuan untuk mengenali elemen-elemen penting tetapi mungkin melewatkan beberapa langkah penting.",
-                              PriorKnowledgeType.FIVE =>
-                                "Pemahaman Kamu sangat baik tentang konsep kekongruenan segitiga. Kamu mampu mengenali dan memahami sebagian besar elemen penting dengan beberapa pemahaman yang lebih mendalam.",
-                              PriorKnowledgeType.SIX =>
-                                "Pemahaman Kamu mendalam tentang konsep kekongruenan segitiga. Kamu mampu mengenali, memahami, dan menghubungkan semua elemen penting dengan baik.",
-                            },
+                            text,
                             style:
                                 CustomTextTheme.proofMasterTextTheme.bodyMedium,
                           ),
@@ -106,14 +105,11 @@ class PriorKnowledgeResultView extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  child: Button(
-                      onTap: () {
-                        context.go(ProofmasterRoute.home);
-                      },
-                      text: "Kembali"),
-                )
+                Button(
+                    onTap: () {
+                      // TODO: add route
+                    },
+                    text: "Kembali")
               ],
             ),
           )

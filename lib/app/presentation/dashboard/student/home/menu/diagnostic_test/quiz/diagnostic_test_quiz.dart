@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/quiz/results/learning_modalitites_result_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/quiz/results/prior_knowledge_result_view.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/quiz/results/proof_format_preference_result_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/quiz/widgets/go_back_quiz_dialog.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/quiz/widgets/submit_quiz_dialog.dart';
 import 'package:proofmaster/app/presentation/providers/quiz_provider/quiz_provider.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/app/templates/quiz_template.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/error_handler.dart';
 
 class DiagnosticTestQuiz extends ConsumerStatefulWidget {
@@ -26,9 +30,16 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       quizRepository = ref.watch(quizRepositoryProvider);
+
+      final quizId = switch (widget.id) {
+        "learning-modalities" => "1cd25bcd-625c-4615-89d8-eedd845e8274",
+        "prior-knowledge" => "7225aec2-5e4a-4802-9131-2d17bb49306c",
+        "proof-format" => "fc7ac1a9-a715-444e-a372-608e21b3b966",
+        _ => "-"
+      };
       ref
-          .read(getQuizQuestionsFromProvider(
-                  "5e532e5c-2c90-410e-b9cb-ee152d8f4a59") //TODO: replace with actual id from api endpoint
+          .read(getDiagnosticQuizQuestionsFromProvider(
+                  quizId) //TODO: replace with actual id from api endpoint
               .future)
           .then((response) {
         if (response.isNotEmpty) {
@@ -48,8 +59,9 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
   @override
   Widget build(BuildContext context) {
     final quizUiState = ref.watch(quizProvider);
-    final quizQuestionsAsyncValue = ref.watch(getQuizQuestionsFromProvider(
-        "5e532e5c-2c90-410e-b9cb-ee152d8f4a59")); //TODO: replace with actual id
+    final quizQuestionsAsyncValue = ref.watch(
+        getDiagnosticQuizQuestionsFromProvider(
+            "5e532e5c-2c90-410e-b9cb-ee152d8f4a59")); //TODO: replace with actual id
 
     return PopScope(
       canPop: false,
@@ -92,7 +104,65 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
                   onSubmitQuiz: () async => {
                     showSubmitQuizDialog(
                       context: context,
-                      onSubmit: () {},
+                      onSubmit: () {
+                        context.pop();
+                        switch (widget.id) {
+                          case "prior-knowledge":
+                            final score = ref
+                                .read(quizProvider.notifier)
+                                .calculateQuizScorePriorKnowledge();
+                            final selectedResult = switch (score) {
+                              > 0 && <= 4 => PriorKnowledgeType.ONE,
+                              > 4 && <= 8 => PriorKnowledgeType.TWO,
+                              > 9 && <= 12 => PriorKnowledgeType.THREE,
+                              > 12 && <= 16 => PriorKnowledgeType.FOUR,
+                              > 16 && <= 19 => PriorKnowledgeType.FIVE,
+                              20 => PriorKnowledgeType.SIX,
+                              _ => PriorKnowledgeType.ONE,
+                            };
+                            context.replaceNamed(
+                                ProofmasterRoute.priorKnowledgeQuiz,
+                                pathParameters: {
+                                  "type": selectedResult.toString()
+                                });
+                            break;
+                          case "learning-modalities":
+                            final score = ref
+                                .read(quizProvider.notifier)
+                                .getMajorityAnswersOption();
+                            print(score);
+                            final selectedResult = switch (score) {
+                              0 => LearningModalitiesType.VISUAL,
+                              1 => LearningModalitiesType.AUDITORY,
+                              2 => LearningModalitiesType.KINESTETIC,
+                              _ => LearningModalitiesType.KINESTETIC,
+                            };
+                            context.replaceNamed(
+                                ProofmasterRoute.learningModalitiesQuiz,
+                                pathParameters: {
+                                  "type": selectedResult.toString()
+                                });
+                            break;
+                          case "proof-format":
+                            final score = ref
+                                .read(quizProvider.notifier)
+                                .getMajorityAnswersOption();
+                            final selectedResult = switch (score) {
+                              0 => ProofFormatPreferenceType.PARAGRAPH,
+                              1 => ProofFormatPreferenceType.TWO_COLUMN,
+                              2 => ProofFormatPreferenceType.FLOW_CHART,
+                              _ => ProofFormatPreferenceType.PARAGRAPH,
+                            };
+                            context.replaceNamed(
+                                ProofmasterRoute.proofFormatQuiz,
+                                pathParameters: {
+                                  "type": selectedResult.toString()
+                                });
+                            break;
+                          default:
+                            break;
+                        }
+                      },
                     )
                   },
                 ),
@@ -100,8 +170,8 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
               padding: const EdgeInsets.only(top: 32),
               child: ErrorHandler(
                 errorMessage: "$error",
-                action: () =>
-                    ref.refresh(getQuizQuestionsFromProvider(widget.id)),
+                action: () => ref
+                    .refresh(getDiagnosticQuizQuestionsFromProvider(widget.id)),
               )),
           loading: () => const Center(
             child: CircularProgressIndicator(),

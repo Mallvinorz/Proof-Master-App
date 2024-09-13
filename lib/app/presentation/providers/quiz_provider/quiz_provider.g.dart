@@ -21,8 +21,8 @@ final quizRepositoryProvider = AutoDisposeProvider<QuizRepository>.internal(
 );
 
 typedef QuizRepositoryRef = AutoDisposeProviderRef<QuizRepository>;
-String _$getQuizQuestionsFromHash() =>
-    r'2c27213e2b2a4e185685973eb3dc3e0ce35da500';
+String _$getDiagnosticQuizQuestionsFromHash() =>
+    r'e8c4a0120570c5b9ccc91927ffb05f307bf462b5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -45,28 +45,29 @@ class _SystemHash {
   }
 }
 
-/// See also [getQuizQuestionsFrom].
-@ProviderFor(getQuizQuestionsFrom)
-const getQuizQuestionsFromProvider = GetQuizQuestionsFromFamily();
+/// See also [getDiagnosticQuizQuestionsFrom].
+@ProviderFor(getDiagnosticQuizQuestionsFrom)
+const getDiagnosticQuizQuestionsFromProvider =
+    GetDiagnosticQuizQuestionsFromFamily();
 
-/// See also [getQuizQuestionsFrom].
-class GetQuizQuestionsFromFamily
+/// See also [getDiagnosticQuizQuestionsFrom].
+class GetDiagnosticQuizQuestionsFromFamily
     extends Family<AsyncValue<List<QuizQuestion>>> {
-  /// See also [getQuizQuestionsFrom].
-  const GetQuizQuestionsFromFamily();
+  /// See also [getDiagnosticQuizQuestionsFrom].
+  const GetDiagnosticQuizQuestionsFromFamily();
 
-  /// See also [getQuizQuestionsFrom].
-  GetQuizQuestionsFromProvider call(
+  /// See also [getDiagnosticQuizQuestionsFrom].
+  GetDiagnosticQuizQuestionsFromProvider call(
     String id,
   ) {
-    return GetQuizQuestionsFromProvider(
+    return GetDiagnosticQuizQuestionsFromProvider(
       id,
     );
   }
 
   @override
-  GetQuizQuestionsFromProvider getProviderOverride(
-    covariant GetQuizQuestionsFromProvider provider,
+  GetDiagnosticQuizQuestionsFromProvider getProviderOverride(
+    covariant GetDiagnosticQuizQuestionsFromProvider provider,
   ) {
     return call(
       provider.id,
@@ -85,33 +86,33 @@ class GetQuizQuestionsFromFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'getQuizQuestionsFromProvider';
+  String? get name => r'getDiagnosticQuizQuestionsFromProvider';
 }
 
-/// See also [getQuizQuestionsFrom].
-class GetQuizQuestionsFromProvider
+/// See also [getDiagnosticQuizQuestionsFrom].
+class GetDiagnosticQuizQuestionsFromProvider
     extends AutoDisposeFutureProvider<List<QuizQuestion>> {
-  /// See also [getQuizQuestionsFrom].
-  GetQuizQuestionsFromProvider(
+  /// See also [getDiagnosticQuizQuestionsFrom].
+  GetDiagnosticQuizQuestionsFromProvider(
     String id,
   ) : this._internal(
-          (ref) => getQuizQuestionsFrom(
-            ref as GetQuizQuestionsFromRef,
+          (ref) => getDiagnosticQuizQuestionsFrom(
+            ref as GetDiagnosticQuizQuestionsFromRef,
             id,
           ),
-          from: getQuizQuestionsFromProvider,
-          name: r'getQuizQuestionsFromProvider',
+          from: getDiagnosticQuizQuestionsFromProvider,
+          name: r'getDiagnosticQuizQuestionsFromProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$getQuizQuestionsFromHash,
-          dependencies: GetQuizQuestionsFromFamily._dependencies,
+                  : _$getDiagnosticQuizQuestionsFromHash,
+          dependencies: GetDiagnosticQuizQuestionsFromFamily._dependencies,
           allTransitiveDependencies:
-              GetQuizQuestionsFromFamily._allTransitiveDependencies,
+              GetDiagnosticQuizQuestionsFromFamily._allTransitiveDependencies,
           id: id,
         );
 
-  GetQuizQuestionsFromProvider._internal(
+  GetDiagnosticQuizQuestionsFromProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -125,13 +126,14 @@ class GetQuizQuestionsFromProvider
 
   @override
   Override overrideWith(
-    FutureOr<List<QuizQuestion>> Function(GetQuizQuestionsFromRef provider)
+    FutureOr<List<QuizQuestion>> Function(
+            GetDiagnosticQuizQuestionsFromRef provider)
         create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: GetQuizQuestionsFromProvider._internal(
-        (ref) => create(ref as GetQuizQuestionsFromRef),
+      override: GetDiagnosticQuizQuestionsFromProvider._internal(
+        (ref) => create(ref as GetDiagnosticQuizQuestionsFromRef),
         from: from,
         name: null,
         dependencies: null,
@@ -144,12 +146,12 @@ class GetQuizQuestionsFromProvider
 
   @override
   AutoDisposeFutureProviderElement<List<QuizQuestion>> createElement() {
-    return _GetQuizQuestionsFromProviderElement(this);
+    return _GetDiagnosticQuizQuestionsFromProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is GetQuizQuestionsFromProvider && other.id == id;
+    return other is GetDiagnosticQuizQuestionsFromProvider && other.id == id;
   }
 
   @override
@@ -161,22 +163,159 @@ class GetQuizQuestionsFromProvider
   }
 }
 
-mixin GetQuizQuestionsFromRef
+mixin GetDiagnosticQuizQuestionsFromRef
     on AutoDisposeFutureProviderRef<List<QuizQuestion>> {
   /// The parameter `id` of this provider.
   String get id;
 }
 
-class _GetQuizQuestionsFromProviderElement
+class _GetDiagnosticQuizQuestionsFromProviderElement
     extends AutoDisposeFutureProviderElement<List<QuizQuestion>>
-    with GetQuizQuestionsFromRef {
-  _GetQuizQuestionsFromProviderElement(super.provider);
+    with GetDiagnosticQuizQuestionsFromRef {
+  _GetDiagnosticQuizQuestionsFromProviderElement(super.provider);
 
   @override
-  String get id => (origin as GetQuizQuestionsFromProvider).id;
+  String get id => (origin as GetDiagnosticQuizQuestionsFromProvider).id;
 }
 
-String _$quizHash() => r'c1ecf83bc1a85a577a2f3ab67ba344260c79a23e';
+String _$getProofCompetenceQuizQuestionsFromHash() =>
+    r'943a8dd83a1dd44e273a1ac17e57e6094a045bdd';
+
+/// See also [getProofCompetenceQuizQuestionsFrom].
+@ProviderFor(getProofCompetenceQuizQuestionsFrom)
+const getProofCompetenceQuizQuestionsFromProvider =
+    GetProofCompetenceQuizQuestionsFromFamily();
+
+/// See also [getProofCompetenceQuizQuestionsFrom].
+class GetProofCompetenceQuizQuestionsFromFamily
+    extends Family<AsyncValue<List<QuizQuestion>>> {
+  /// See also [getProofCompetenceQuizQuestionsFrom].
+  const GetProofCompetenceQuizQuestionsFromFamily();
+
+  /// See also [getProofCompetenceQuizQuestionsFrom].
+  GetProofCompetenceQuizQuestionsFromProvider call(
+    String id,
+  ) {
+    return GetProofCompetenceQuizQuestionsFromProvider(
+      id,
+    );
+  }
+
+  @override
+  GetProofCompetenceQuizQuestionsFromProvider getProviderOverride(
+    covariant GetProofCompetenceQuizQuestionsFromProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getProofCompetenceQuizQuestionsFromProvider';
+}
+
+/// See also [getProofCompetenceQuizQuestionsFrom].
+class GetProofCompetenceQuizQuestionsFromProvider
+    extends AutoDisposeFutureProvider<List<QuizQuestion>> {
+  /// See also [getProofCompetenceQuizQuestionsFrom].
+  GetProofCompetenceQuizQuestionsFromProvider(
+    String id,
+  ) : this._internal(
+          (ref) => getProofCompetenceQuizQuestionsFrom(
+            ref as GetProofCompetenceQuizQuestionsFromRef,
+            id,
+          ),
+          from: getProofCompetenceQuizQuestionsFromProvider,
+          name: r'getProofCompetenceQuizQuestionsFromProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getProofCompetenceQuizQuestionsFromHash,
+          dependencies: GetProofCompetenceQuizQuestionsFromFamily._dependencies,
+          allTransitiveDependencies: GetProofCompetenceQuizQuestionsFromFamily
+              ._allTransitiveDependencies,
+          id: id,
+        );
+
+  GetProofCompetenceQuizQuestionsFromProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+  }) : super.internal();
+
+  final String id;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<QuizQuestion>> Function(
+            GetProofCompetenceQuizQuestionsFromRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetProofCompetenceQuizQuestionsFromProvider._internal(
+        (ref) => create(ref as GetProofCompetenceQuizQuestionsFromRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        id: id,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<QuizQuestion>> createElement() {
+    return _GetProofCompetenceQuizQuestionsFromProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetProofCompetenceQuizQuestionsFromProvider &&
+        other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin GetProofCompetenceQuizQuestionsFromRef
+    on AutoDisposeFutureProviderRef<List<QuizQuestion>> {
+  /// The parameter `id` of this provider.
+  String get id;
+}
+
+class _GetProofCompetenceQuizQuestionsFromProviderElement
+    extends AutoDisposeFutureProviderElement<List<QuizQuestion>>
+    with GetProofCompetenceQuizQuestionsFromRef {
+  _GetProofCompetenceQuizQuestionsFromProviderElement(super.provider);
+
+  @override
+  String get id => (origin as GetProofCompetenceQuizQuestionsFromProvider).id;
+}
+
+String _$quizHash() => r'e343f2bdf05352828793e6778eae26c5936cb612';
 
 /// See also [Quiz].
 @ProviderFor(Quiz)

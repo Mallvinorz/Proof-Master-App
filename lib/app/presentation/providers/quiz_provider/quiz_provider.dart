@@ -12,9 +12,17 @@ QuizRepository quizRepository(QuizRepositoryRef ref) {
 }
 
 @riverpod
-Future<List<QuizQuestion>> getQuizQuestionsFrom(
-    GetQuizQuestionsFromRef ref, String id) {
-  return ref.watch(quizRepositoryProvider).getQuizQuestionsFrom(id);
+Future<List<QuizQuestion>> getDiagnosticQuizQuestionsFrom(
+    GetDiagnosticQuizQuestionsFromRef ref, String id) {
+  return ref.watch(quizRepositoryProvider).getDiagnosticQuizQuestionsFrom(id);
+}
+
+@riverpod
+Future<List<QuizQuestion>> getProofCompetenceQuizQuestionsFrom(
+    GetProofCompetenceQuizQuestionsFromRef ref, String id) {
+  return ref
+      .watch(quizRepositoryProvider)
+      .getProofCompetenceQuizQuestionsFrom(id);
 }
 
 class QuizState {
@@ -100,6 +108,49 @@ class Quiz extends _$Quiz {
         .where((entry) => entry.value.marked ?? false)
         .map((entry) => entry.key)
         .toList();
+  }
+
+  double calculateQuizScore() {
+    final correctAnswer = state.questions
+        .where((question) =>
+            question.selectedAnsweValue == question.correctAnswerValue)
+        .length;
+    final totalQuestion = state.questions.length;
+    return correctAnswer / totalQuestion * 100;
+  }
+
+  int calculateQuizScorePriorKnowledge() {
+    final correctAnswer = state.questions
+        .where((question) =>
+            question.selectedAnsweValue == question.correctAnswerValue)
+        .length;
+    return correctAnswer;
+  }
+
+  int getMajorityAnswersOption() {
+    Map<int, int> frequency = {};
+    state.questions.forEach((question) {
+      if (frequency.containsKey(question.selectedAnsweValue)) {
+        if (question.selectedAnsweValue != null) {
+          frequency[question.selectedAnsweValue ?? -1] =
+              frequency[question.selectedAnsweValue ?? -1]! + 1;
+        }
+      } else {
+        frequency[question.selectedAnsweValue ?? -1] = 1;
+      }
+    });
+
+    int maxFrequency = 0;
+    int mostFrequentOption = -1;
+
+    for (final entry in frequency.entries) {
+      if (entry.value > maxFrequency) {
+        maxFrequency = entry.value;
+        mostFrequentOption = entry.key;
+      }
+    }
+
+    return mostFrequentOption;
   }
 
   void toggleQuizNavigation() {

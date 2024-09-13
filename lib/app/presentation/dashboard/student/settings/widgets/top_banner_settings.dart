@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/home/widgets/top_banner.dart';
 import 'package:proofmaster/app/presentation/providers/user_provider/user_provider.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/error_handler.dart';

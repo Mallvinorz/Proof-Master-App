@@ -32,11 +32,13 @@ class OptionItem<T> extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                text,
-                style: selected
-                    ? CustomTextTheme.proofMasterTextTheme.bodyLarge
-                    : CustomTextTheme.proofMasterTextTheme.bodyMedium,
+              Flexible(
+                child: Text(
+                  text,
+                  style: selected
+                      ? CustomTextTheme.proofMasterTextTheme.bodyLarge
+                      : CustomTextTheme.proofMasterTextTheme.bodyMedium,
+                ),
               ),
               Container(
                 width: 24,

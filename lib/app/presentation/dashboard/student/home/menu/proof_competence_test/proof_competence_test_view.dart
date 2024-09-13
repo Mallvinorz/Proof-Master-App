@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/presentation/providers/proof_competence_provider/proof_competence_provider.dart';
 import 'package:proofmaster/app/templates/list_item_template_asyncvalue.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/menu_card_item.dart';
 
 class ProofCompetenceTestView extends ConsumerWidget {
@@ -21,7 +22,13 @@ class ProofCompetenceTestView extends ConsumerWidget {
           asyncData: isRefreshing ? const AsyncValue.loading() : menusAsync,
           onRefresh: () => ref.read(menusProvider.notifier).refresh(),
           child: (menu) => GestureDetector(
-            onTap: () => menu.route != null ? context.go(menu.route!) : null,
+            onTap: () => menu.route != null
+                ? context.pushNamed(ProofmasterRoute.proofCompetenceTest,
+                    pathParameters: {
+                        'id': menu.route!,
+                        'title': menu.menuText ?? "-"
+                      })
+                : null,
             child: MenuCardItem(menuItem: menu),
           ),
           shimmerLoaderChild: () =>
