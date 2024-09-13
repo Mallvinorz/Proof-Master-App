@@ -1,57 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
-import 'package:proofmaster/app/templates/list_item_template.dart';
-import 'package:proofmaster/app/utils/ui_state.dart';
+import 'package:proofmaster/app/presentation/providers/activity_provider/activity_provider.dart';
+import 'package:proofmaster/app/templates/list_item_template_asyncvalue.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/clickable_item_with_icon.dart';
 
-class UnderstandngProofView extends StatelessWidget {
+class UnderstandngProofView extends ConsumerWidget {
   const UnderstandngProofView({super.key});
 
-  Future<UIState<List<ListItem>>> getDummyData() async {
-    final dummy = [
-      ListItem(
-          id: "aaa", text: "Aktivitas 1", iconUrl: "assets/icons/todo_ic.png"),
-      ListItem(
-          id: "aaabb",
-          text: "Aktivitas 2",
-          iconUrl: "assets/icons/todo_ic.png"),
-      ListItem(
-          id: "aaabbcc",
-          text: "Aktivitas 3",
-          iconUrl: "assets/icons/todo_ic.png"),
-      ListItem(
-          id: "aaabbcc",
-          text: "Aktivitas 4",
-          iconUrl: "assets/icons/todo_ic.png"),
-      ListItem(
-          id: "aaabbcc",
-          text: "Aktivitas 5",
-          iconUrl: "assets/icons/todo_ic.png"),
-      ListItem(
-          id: "aaabbcc",
-          text: "Aktivitas 6",
-          iconUrl: "assets/icons/todo_ic.png"),
-      ListItem(
-          id: "aaabbcc",
-          text: "Aktivitas 7",
-          iconUrl: "assets/icons/todo_ic.png"),
-      ListItem(
-          id: "aaabbcc",
-          text: "Aktivitas 8",
-          iconUrl: "assets/icons/todo_ic.png"),
-    ];
-    return Future.value(UISuccess(dummy));
-  }
-
   @override
-  Widget build(BuildContext context) {
-    return ListItemTemplate<ListItem>(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final proofUnderstandingActivities =
+        ref.watch(proofUnderstadingActivitiesProvider);
+    final isRefreshing = ref.watch(isRefreshingProvider);
+
+    return ListItemTemplateAsyncvalue<ListItem>(
       title: "Understanding to Proof Structure",
-      futureData: getDummyData(),
-      onLoadData: () {
-        //TODO: replace with actual get data function
+      numLoadingChild: 4,
+      asyncData: isRefreshing
+          ? const AsyncValue.loading()
+          : proofUnderstandingActivities,
+      shimmerLoaderChild: () {
+        return ClickableListItemWithIcon(iconUrl: "", text: "", onTap: () {});
+      },
+      onRefresh: () async {
+        await ref.read(proofUnderstadingActivitiesProvider.notifier).refresh();
       },
       child: (ListItem data) => ClickableListItemWithIcon(
         onTap: () {

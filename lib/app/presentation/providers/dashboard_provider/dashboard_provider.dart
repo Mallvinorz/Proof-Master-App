@@ -11,8 +11,30 @@ DashboardRepository dashboardRepository(DashboardRepositoryRef ref) {
   return DashboardRepositoryImpl(http.Client());
 }
 
-// this will generate a fetchWeatherProvider
 @riverpod
-Future<List<MenuItem>> getStudentMenus(GetStudentMenusRef ref) {
-  return ref.watch(dashboardRepositoryProvider).getStudentMenus();
+class IsRefreshing extends _$IsRefreshing {
+  @override
+  bool build() => false;
+
+  void setRefreshing(bool value) => state = value;
+}
+
+@riverpod
+class DashboardStudentMenus extends _$DashboardStudentMenus {
+  @override
+  Future<List<MenuItem>> build() async {
+    return _fetchMenus();
+  }
+
+  Future<List<MenuItem>> _fetchMenus() async {
+    final repository = ref.watch(dashboardRepositoryProvider);
+    return repository.getStudentMenus();
+  }
+
+  Future<void> refresh() async {
+    ref.read(isRefreshingProvider.notifier).setRefreshing(true);
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() => _fetchMenus());
+    ref.read(isRefreshingProvider.notifier).setRefreshing(false);
+  }
 }

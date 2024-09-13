@@ -5,61 +5,112 @@ import 'package:proofmaster/app/presentation/dashboard/student/report/widgets/te
 import 'package:proofmaster/app/presentation/providers/report_provider/report_provider.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/error_handler.dart';
+import 'package:proofmaster/widgets/shimmer_loader.dart';
 
 class ReportView extends ConsumerWidget {
   const ReportView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final reportProgressUiState = ref.watch(getReportProgressProvider);
+    final reportProgressUiState = ref.watch(myReportProgressProvider);
+    final isRefreshing = ref.watch(isRefreshingProvider);
 
-    return reportProgressUiState.when(
-        data: (data) => GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16.0,
-              crossAxisSpacing: 16.0,
-            ),
-            itemCount: data.length,
-            itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    // TODO: Implement on click to route navigation
+    return isRefreshing
+        ? const GridLoaderShimmer(childLength: 5)
+        : reportProgressUiState.when(
+            data: (data) => RefreshIndicator(
+                  onRefresh: () async {
+                    await ref.read(myReportProgressProvider.notifier).refresh();
                   },
-                  child: Card(
-                    elevation: 4.0,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${data[index].textTitle} ${data[index].progress}",
-                            style: CustomTextTheme
-                                .proofMasterTextTheme.displaySmall,
-                            maxLines: 2,
-                          ),
-                          RectangleIndicator(progress: data[index].progress),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextIndicator(progress: data[index].progress)
-                            ],
-                          ),
-                        ],
+                  child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16.0,
+                        crossAxisSpacing: 16.0,
                       ),
-                    ),
+                      itemCount: data.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                            onTap: () async {
+                              // TODO: Implement on click to route navigation
+                            },
+                            child: Card(
+                              elevation: 4.0,
+                              color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${data[index].textTitle} ${data[index].progress}",
+                                      style: CustomTextTheme
+                                          .proofMasterTextTheme.displaySmall,
+                                      maxLines: 2,
+                                    ),
+                                    RectangleIndicator(
+                                        progress: data[index].progress),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        TextIndicator(
+                                            progress: data[index].progress)
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )),
+                ),
+            error: (error, _) => ErrorHandler(
+                errorMessage: "$error",
+                action: () async {
+                  // ignore: unused_result
+                  ref.read(myReportProgressProvider.notifier).refresh();
+                }),
+            loading: () => const GridLoaderShimmer(childLength: 5));
+  }
+}
+
+class GridLoaderShimmer extends StatelessWidget {
+  final int childLength;
+  const GridLoaderShimmer({super.key, required this.childLength});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 16.0,
+          crossAxisSpacing: 16.0,
+        ),
+        itemCount: childLength,
+        itemBuilder: (context, index) => const ShimmerLoader(
+              isLoading: true,
+              child: Card(
+                elevation: 4.0,
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "loading",
+                      ),
+                      RectangleIndicator(progress: 0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [TextIndicator(progress: 0)],
+                      ),
+                    ],
                   ),
-                )),
-        error: (error, _) => ErrorHandler(
-            errorMessage: "$error",
-            action: () async {
-              // ignore: unused_result
-              ref.refresh(getReportProgressProvider);
-            }),
-        loading: () => const Center(
-              child: CircularProgressIndicator(),
+                ),
+              ),
             ));
   }
 }

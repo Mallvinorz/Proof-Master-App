@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/quiz_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
@@ -29,20 +28,26 @@ class QuizState {
     this.openQuestionsNavigation = false,
   });
 
-  QuizState copyWith(
-      {List<QuizQuestion>? questions,
-      int? currentQuestionIndex,
-      bool? openQuestionsNavigation}) {
+  QuizState copyWith({
+    List<QuizQuestion>? questions,
+    int? currentQuestionIndex,
+    bool? openQuestionsNavigation,
+  }) {
     return QuizState(
-        questions: questions ?? this.questions,
-        currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
-        openQuestionsNavigation:
-            openQuestionsNavigation ?? this.openQuestionsNavigation);
+      questions: questions ?? this.questions,
+      currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
+      openQuestionsNavigation:
+          openQuestionsNavigation ?? this.openQuestionsNavigation,
+    );
   }
 }
 
-class QuizNotifier extends StateNotifier<QuizState> {
-  QuizNotifier() : super(QuizState(questions: []));
+@riverpod
+class Quiz extends _$Quiz {
+  @override
+  QuizState build() {
+    return QuizState(questions: []);
+  }
 
   void initQuiz(List<QuizQuestion> questions) {
     state = QuizState(questions: questions);
@@ -102,7 +107,3 @@ class QuizNotifier extends StateNotifier<QuizState> {
         state.copyWith(openQuestionsNavigation: !state.openQuestionsNavigation);
   }
 }
-
-final quizProvider = StateNotifierProvider<QuizNotifier, QuizState>((ref) {
-  return QuizNotifier();
-});

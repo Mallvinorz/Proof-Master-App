@@ -21,24 +21,39 @@ final reportRepositoryProvider = AutoDisposeProvider<ReportRepository>.internal(
 );
 
 typedef ReportRepositoryRef = AutoDisposeProviderRef<ReportRepository>;
-String _$getReportProgressHash() => r'4e1c85d327c7509c91e86d5e601992aac166091b';
+String _$isRefreshingHash() => r'7a65fe8564c8d35a307ba08c0cb720c2a3d06e75';
 
-/// See also [getReportProgress].
-@ProviderFor(getReportProgress)
-final getReportProgressProvider =
-    AutoDisposeFutureProvider<List<ReportItem>>.internal(
-  getReportProgress,
-  name: r'getReportProgressProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$getReportProgressHash,
+/// See also [IsRefreshing].
+@ProviderFor(IsRefreshing)
+final isRefreshingProvider =
+    AutoDisposeNotifierProvider<IsRefreshing, bool>.internal(
+  IsRefreshing.new,
+  name: r'isRefreshingProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$isRefreshingHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef GetReportProgressRef = AutoDisposeFutureProviderRef<List<ReportItem>>;
-String _$getStudentReportProgressHash() =>
-    r'4805d4a7ef95c87cee07f7c557261b1873ec8ac0';
+typedef _$IsRefreshing = AutoDisposeNotifier<bool>;
+String _$myReportProgressHash() => r'6a536d9e5782f290593817a1090b1dd6425c14eb';
+
+/// See also [MyReportProgress].
+@ProviderFor(MyReportProgress)
+final myReportProgressProvider = AutoDisposeAsyncNotifierProvider<
+    MyReportProgress, List<ReportItem>>.internal(
+  MyReportProgress.new,
+  name: r'myReportProgressProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$myReportProgressHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$MyReportProgress = AutoDisposeAsyncNotifier<List<ReportItem>>;
+String _$studentReportProgressHash() =>
+    r'a79dca061c3896d752940507fcb576d44333e0b6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -61,31 +76,39 @@ class _SystemHash {
   }
 }
 
-/// See also [getStudentReportProgress].
-@ProviderFor(getStudentReportProgress)
-const getStudentReportProgressProvider = GetStudentReportProgressFamily();
+abstract class _$StudentReportProgress
+    extends BuildlessAutoDisposeAsyncNotifier<List<ReportItem>> {
+  late final String id;
 
-/// See also [getStudentReportProgress].
-class GetStudentReportProgressFamily
-    extends Family<AsyncValue<List<ReportItem>>> {
-  /// See also [getStudentReportProgress].
-  const GetStudentReportProgressFamily();
+  FutureOr<List<ReportItem>> build(
+    String id,
+  );
+}
 
-  /// See also [getStudentReportProgress].
-  GetStudentReportProgressProvider call(
-    String studentId,
+/// See also [StudentReportProgress].
+@ProviderFor(StudentReportProgress)
+const studentReportProgressProvider = StudentReportProgressFamily();
+
+/// See also [StudentReportProgress].
+class StudentReportProgressFamily extends Family<AsyncValue<List<ReportItem>>> {
+  /// See also [StudentReportProgress].
+  const StudentReportProgressFamily();
+
+  /// See also [StudentReportProgress].
+  StudentReportProgressProvider call(
+    String id,
   ) {
-    return GetStudentReportProgressProvider(
-      studentId,
+    return StudentReportProgressProvider(
+      id,
     );
   }
 
   @override
-  GetStudentReportProgressProvider getProviderOverride(
-    covariant GetStudentReportProgressProvider provider,
+  StudentReportProgressProvider getProviderOverride(
+    covariant StudentReportProgressProvider provider,
   ) {
     return call(
-      provider.studentId,
+      provider.id,
     );
   }
 
@@ -101,97 +124,100 @@ class GetStudentReportProgressFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'getStudentReportProgressProvider';
+  String? get name => r'studentReportProgressProvider';
 }
 
-/// See also [getStudentReportProgress].
-class GetStudentReportProgressProvider
-    extends AutoDisposeFutureProvider<List<ReportItem>> {
-  /// See also [getStudentReportProgress].
-  GetStudentReportProgressProvider(
-    String studentId,
+/// See also [StudentReportProgress].
+class StudentReportProgressProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<StudentReportProgress,
+        List<ReportItem>> {
+  /// See also [StudentReportProgress].
+  StudentReportProgressProvider(
+    String id,
   ) : this._internal(
-          (ref) => getStudentReportProgress(
-            ref as GetStudentReportProgressRef,
-            studentId,
-          ),
-          from: getStudentReportProgressProvider,
-          name: r'getStudentReportProgressProvider',
+          () => StudentReportProgress()..id = id,
+          from: studentReportProgressProvider,
+          name: r'studentReportProgressProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$getStudentReportProgressHash,
-          dependencies: GetStudentReportProgressFamily._dependencies,
+                  : _$studentReportProgressHash,
+          dependencies: StudentReportProgressFamily._dependencies,
           allTransitiveDependencies:
-              GetStudentReportProgressFamily._allTransitiveDependencies,
-          studentId: studentId,
+              StudentReportProgressFamily._allTransitiveDependencies,
+          id: id,
         );
 
-  GetStudentReportProgressProvider._internal(
+  StudentReportProgressProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.studentId,
+    required this.id,
   }) : super.internal();
 
-  final String studentId;
+  final String id;
 
   @override
-  Override overrideWith(
-    FutureOr<List<ReportItem>> Function(GetStudentReportProgressRef provider)
-        create,
+  FutureOr<List<ReportItem>> runNotifierBuild(
+    covariant StudentReportProgress notifier,
   ) {
+    return notifier.build(
+      id,
+    );
+  }
+
+  @override
+  Override overrideWith(StudentReportProgress Function() create) {
     return ProviderOverride(
       origin: this,
-      override: GetStudentReportProgressProvider._internal(
-        (ref) => create(ref as GetStudentReportProgressRef),
+      override: StudentReportProgressProvider._internal(
+        () => create()..id = id,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        studentId: studentId,
+        id: id,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<ReportItem>> createElement() {
-    return _GetStudentReportProgressProviderElement(this);
+  AutoDisposeAsyncNotifierProviderElement<StudentReportProgress,
+      List<ReportItem>> createElement() {
+    return _StudentReportProgressProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is GetStudentReportProgressProvider &&
-        other.studentId == studentId;
+    return other is StudentReportProgressProvider && other.id == id;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, studentId.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin GetStudentReportProgressRef
-    on AutoDisposeFutureProviderRef<List<ReportItem>> {
-  /// The parameter `studentId` of this provider.
-  String get studentId;
+mixin StudentReportProgressRef
+    on AutoDisposeAsyncNotifierProviderRef<List<ReportItem>> {
+  /// The parameter `id` of this provider.
+  String get id;
 }
 
-class _GetStudentReportProgressProviderElement
-    extends AutoDisposeFutureProviderElement<List<ReportItem>>
-    with GetStudentReportProgressRef {
-  _GetStudentReportProgressProviderElement(super.provider);
+class _StudentReportProgressProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<StudentReportProgress,
+        List<ReportItem>> with StudentReportProgressRef {
+  _StudentReportProgressProviderElement(super.provider);
 
   @override
-  String get studentId =>
-      (origin as GetStudentReportProgressProvider).studentId;
+  String get id => (origin as StudentReportProgressProvider).id;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

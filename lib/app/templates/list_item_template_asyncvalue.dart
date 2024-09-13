@@ -11,6 +11,7 @@ class ListItemTemplateAsyncvalue<T> extends ConsumerWidget {
   final Widget? Function(T data) child;
   final bool useContainerBg;
   final Widget Function() shimmerLoaderChild;
+  final int? numLoadingChild;
 
   const ListItemTemplateAsyncvalue({
     super.key,
@@ -20,6 +21,7 @@ class ListItemTemplateAsyncvalue<T> extends ConsumerWidget {
     required this.shimmerLoaderChild,
     required this.onRefresh,
     this.useContainerBg = false,
+    this.numLoadingChild = 2,
   });
 
   @override
@@ -33,7 +35,7 @@ class ListItemTemplateAsyncvalue<T> extends ConsumerWidget {
       mainChildren: asyncData.when(
         loading: () => ListView.builder(
           padding: const EdgeInsets.only(top: 18),
-          itemCount: 2,
+          itemCount: numLoadingChild,
           itemBuilder: (ctx, index) =>
               ShimmerLoader(isLoading: true, child: shimmerLoaderChild()),
         ),
@@ -41,17 +43,22 @@ class ListItemTemplateAsyncvalue<T> extends ConsumerWidget {
           errorMessage: error.toString(),
           action: onRefresh,
         ),
-        data: (items) => Container(
-          padding: useContainerBg ? const EdgeInsets.all(16) : null,
-          decoration: useContainerBg
-              ? const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(12)))
-              : null,
-          child: ListView.builder(
-            padding: const EdgeInsets.only(top: 18),
-            itemCount: items.length,
-            itemBuilder: (ctx, index) => child(items[index]),
+        data: (items) => RefreshIndicator(
+          onRefresh: () async {
+            onRefresh();
+          },
+          child: Container(
+            padding: useContainerBg ? const EdgeInsets.all(16) : null,
+            decoration: useContainerBg
+                ? const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(12)))
+                : null,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 18),
+              itemCount: items.length,
+              itemBuilder: (ctx, index) => child(items[index]),
+            ),
           ),
         ),
       ),

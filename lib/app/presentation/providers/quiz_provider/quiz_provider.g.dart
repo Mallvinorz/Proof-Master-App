@@ -175,5 +175,20 @@ class _GetQuizQuestionsFromProviderElement
   @override
   String get id => (origin as GetQuizQuestionsFromProvider).id;
 }
+
+String _$quizHash() => r'c1ecf83bc1a85a577a2f3ab67ba344260c79a23e';
+
+/// See also [Quiz].
+@ProviderFor(Quiz)
+final quizProvider = AutoDisposeNotifierProvider<Quiz, QuizState>.internal(
+  Quiz.new,
+  name: r'quizProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$quizHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Quiz = AutoDisposeNotifier<QuizState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -32,8 +32,6 @@ class ReportRepositoryImpl implements ReportRepository {
           [];
     } catch (e) {
       rethrow;
-    } finally {
-      client.close();
     }
   }
 
