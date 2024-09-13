@@ -1,42 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
-import 'package:proofmaster/app/templates/list_item_template.dart';
-import 'package:proofmaster/app/utils/ui_state.dart';
+import 'package:proofmaster/app/presentation/providers/proof_competence_provider/proof_competence_provider.dart';
+import 'package:proofmaster/app/templates/list_item_template_asyncvalue.dart';
 import 'package:proofmaster/widgets/menu_card_item.dart';
 
-class ProofCompetenceTestView extends StatelessWidget {
+class ProofCompetenceTestView extends ConsumerWidget {
   const ProofCompetenceTestView({super.key});
 
-  Future<UIState<List<MenuItem>>> getMenuItems() {
-    const data = [
-      MenuItem(
-        iconUrl: 'assets/icons/test_ic.png',
-        isSeparator: false,
-        menuText: "Reading Comprehension Test",
-        menuDesc: "Lorem ipsum dolor sit amet consectetur.",
-      ),
-      MenuItem(
-        iconUrl: 'assets/icons/test_ic.png',
-        isSeparator: false,
-        menuText: "Geometry Proof Construction Test",
-        menuDesc: "Pernyataan matematis yang dapat dibuktikan",
-      ),
-    ];
-    return Future.value(const UISuccess(data));
-  }
-
   @override
-  Widget build(BuildContext context) {
-    return ListItemTemplate<MenuItem>(
-      title: "Proof Competence Test",
-      onLoadData: () {
-        //TODO: replace with actual onload data
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Consumer(
+      builder: (context, ref, child) {
+        final menusAsync = ref.watch(menusProvider);
+        final isRefreshing = ref.watch(isRefreshingProvider);
+
+        return ListItemTemplateAsyncvalue<MenuItem>(
+          title: 'Proof Competence Test',
+          asyncData: isRefreshing ? const AsyncValue.loading() : menusAsync,
+          onRefresh: () => ref.read(menusProvider.notifier).refresh(),
+          child: (menu) => GestureDetector(
+            onTap: () => menu.route != null ? context.go(menu.route!) : null,
+            child: MenuCardItem(menuItem: menu),
+          ),
+          shimmerLoaderChild: () =>
+              const MenuCardItem(menuItem: MenuItem(isSeparator: false)),
+        );
       },
-      futureData: getMenuItems(),
-      child: (data) => GestureDetector(
-        onTap: () {},
-        child: MenuCardItem(menuItem: data),
-      ),
     );
   }
 }

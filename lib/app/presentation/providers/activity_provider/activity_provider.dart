@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:fimber/fimber.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/activity_repository_impl.dart';
 import 'package:proofmaster/app/domain/repositories/activity_repository.dart';
@@ -32,8 +31,12 @@ class ActivityState {
   }
 }
 
-class ActivityNotifier extends StateNotifier<ActivityState> {
-  ActivityNotifier() : super(ActivityState());
+@Riverpod(keepAlive: false)
+class Activity extends _$Activity {
+  @override
+  ActivityState build() {
+    return ActivityState();
+  }
 
   Future<void> performUploadFile(
       FilePickerResult? pickedFile, String id) async {
@@ -45,7 +48,7 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
         throw Exception("File path is invalid! Filepath is null");
       }
 
-      final activityRepository = ActivityRepositoryImpl(http.Client());
+      final activityRepository = ref.read(activityRepositoryProvider);
       final result = await activityRepository.uploadFile(
           File(pdfFile!.path!), pdfFile.name, id);
       Fimber.d("Test message $result");
@@ -62,8 +65,3 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
     state = state.copyWith(uiState: const UIInitial());
   }
 }
-
-final activityProvider =
-    StateNotifierProvider.autoDispose<ActivityNotifier, ActivityState>((ref) {
-  return ActivityNotifier();
-});

@@ -1,33 +1,15 @@
 {
   "data": {
-    "activities": [
+    "items": [
       {
-        "id": "dasdasdsd",
-        "title": "Aktivitas 1"
+        "id": "reading-comprehension-test",
+        "menuText": "Reading Comprehension Test",
+        "menuDesc": "Uji pemahamanmu tentang materi bukti"
       },
       {
-        "id": "asdgdat",
-        "title": "Aktivitas 2"
-      },
-      {
-        "id": "asdasdagasd",
-        "title": "Aktivitas 3"
-      },
-      {
-        "id": "asdasdagasd",
-        "title": "Aktivitas 4"
-      },
-      {
-        "id": "asdasdagasd",
-        "title": "Aktivitas 5"
-      },
-      {
-        "id": "asdasdagasd",
-        "title": "Aktivitas 6"
-      },
-      {
-        "id": "asdasdagasd",
-        "title": "Aktivitas 7"
+        "id": "geometry-proof-construction-test",
+        "menuText": "Geometry Proof Construction Test",
+        "menuDesc": "Pernyataan matematis yang dapat dibuktikan"
       }
     ]
   }
