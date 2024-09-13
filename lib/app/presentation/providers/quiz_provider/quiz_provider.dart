@@ -130,13 +130,13 @@ class Quiz extends _$Quiz {
   int getMajorityAnswersOption() {
     Map<int, int> frequency = {};
     state.questions.forEach((question) {
-      if (frequency.containsKey(question.selectedAnsweValue)) {
-        if (question.selectedAnsweValue != null) {
+      if (question.selectedAnsweValue != null) {
+        if (frequency.containsKey(question.selectedAnsweValue)) {
           frequency[question.selectedAnsweValue ?? -1] =
               frequency[question.selectedAnsweValue ?? -1]! + 1;
+        } else {
+          frequency[question.selectedAnsweValue ?? -1] = 1;
         }
-      } else {
-        frequency[question.selectedAnsweValue ?? -1] = 1;
       }
     });
 
