@@ -4,7 +4,8 @@ import 'package:proofmaster/app/presentation/dashboard/student/report/report_vie
 import 'package:proofmaster/app/templates/background_pattern.dart';
 
 class LecturerReportView extends StatelessWidget {
-  const LecturerReportView({super.key});
+  final String studentId;
+  const LecturerReportView({super.key, required this.studentId});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,9 @@ class LecturerReportView extends StatelessWidget {
       topChildren: const TopBannerLecturerReport(),
       mainChildren: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
-        child: ReportView(),
+        child: ReportView(
+          studentId: studentId,
+        ),
       ),
     );
   }

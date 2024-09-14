@@ -18,7 +18,7 @@ class SettingMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 4.0,
+      elevation: 1.0,
       color: CustomColorTheme.colorBackground2,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(

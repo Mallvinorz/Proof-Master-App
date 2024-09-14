@@ -8,11 +8,14 @@ import 'package:proofmaster/widgets/error_handler.dart';
 import 'package:proofmaster/widgets/shimmer_loader.dart';
 
 class ReportView extends ConsumerWidget {
-  const ReportView({super.key});
+  final String? studentId;
+  const ReportView({super.key, this.studentId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final reportProgressUiState = ref.watch(myReportProgressProvider);
+    final reportProgressUiState = studentId != null
+        ? ref.watch(StudentReportProgressProvider(studentId!))
+        : ref.watch(myReportProgressProvider);
     final isRefreshing = ref.watch(isRefreshingProvider);
 
     return isRefreshing

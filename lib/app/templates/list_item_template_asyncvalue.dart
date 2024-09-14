@@ -11,6 +11,7 @@ class ListItemTemplateAsyncvalue<T> extends ConsumerWidget {
   final Widget? Function(T data) child;
   final bool useContainerBg;
   final Widget Function() shimmerLoaderChild;
+  final Widget? topChild;
   final int? numLoadingChild;
 
   const ListItemTemplateAsyncvalue({
@@ -21,6 +22,7 @@ class ListItemTemplateAsyncvalue<T> extends ConsumerWidget {
     required this.shimmerLoaderChild,
     required this.onRefresh,
     this.useContainerBg = false,
+    this.topChild,
     this.numLoadingChild = 2,
   });
 
@@ -32,6 +34,7 @@ class ListItemTemplateAsyncvalue<T> extends ConsumerWidget {
     return BackgroundPattern(
       borderRadius: containerBorderRadius,
       appBarTitle: title,
+      topChildren: topChild,
       mainChildren: asyncData.when(
         loading: () => ListView.builder(
           padding: const EdgeInsets.only(top: 18),

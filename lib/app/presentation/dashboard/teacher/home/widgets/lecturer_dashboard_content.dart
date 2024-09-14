@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:proofmaster/app/domain/entities/student_item/student_item.dart';
+import 'package:proofmaster/app/presentation/providers/student_provider/student_provider.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
+import 'package:proofmaster/widgets/error_handler.dart';
 import 'package:proofmaster/widgets/setting_menu_item.dart';
+import 'package:proofmaster/widgets/shimmer_loader.dart';
 
-class LecturerDashboardContent extends StatelessWidget {
-  final List<StudentItem> items;
-  const LecturerDashboardContent({super.key, required this.items});
+class LecturerDashboardContent extends ConsumerWidget {
+  const LecturerDashboardContent({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final studentsAsync = ref.watch(studentsProvider);
+    final isRefreshing = ref.watch(isRefreshingStudentProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
@@ -24,22 +28,58 @@ class LecturerDashboardContent extends StatelessWidget {
             ],
           ),
           Expanded(
-            child: ListView.builder(
-                padding: const EdgeInsets.only(top: 16),
-                itemCount: items.length,
-                itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: SettingMenuItem(
-                        text: items[index].name,
-                        onTap: () {
-                          // TODO: add route correctly
-                          context.push(ProofmasterRoute.lecturerReports);
-                        },
-                      ),
-                    )),
+            child: isRefreshing
+                ? const _loader()
+                : studentsAsync.when(
+                    data: (data) => ListView.builder(
+                        padding: const EdgeInsets.only(top: 16),
+                        itemCount: data.length,
+                        itemBuilder: (context, index) => data.isEmpty
+                            ? const Text("Tidak ada siswa")
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: SettingMenuItem(
+                                  text: data[index]?.name ?? "-",
+                                  onTap: () {
+                                    context.pushNamed(
+                                        ProofmasterRoute.lecturerReports,
+                                        pathParameters: {
+                                          "studentId": data[index]?.id ?? "-"
+                                        });
+                                  },
+                                ),
+                              )),
+                    error: (error, _) => ErrorHandler(
+                        errorMessage: "$error",
+                        action: () =>
+                            ref.read(studentsProvider.notifier).refresh()),
+                    loading: () => const _loader(),
+                  ),
           ),
         ],
       ),
     );
+  }
+}
+
+class _loader extends StatelessWidget {
+  const _loader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        padding: const EdgeInsets.only(top: 16),
+        itemCount: 4,
+        itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: ShimmerLoader(
+                isLoading: true,
+                child: SettingMenuItem(
+                  text: "",
+                  onTap: () {},
+                ),
+              ),
+            ));
   }
 }

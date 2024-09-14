@@ -204,9 +204,12 @@ List<RouteBase> getRoutes() {
       },
     ),
     GoRoute(
-        path: ProofmasterRoute.lecturerReports,
+        path: "${ProofmasterRoute.lecturerReports}/:studentId",
+        name: ProofmasterRoute.lecturerReports,
         builder: (BuildContext context, GoRouterState state) {
-          return const LecturerReportView();
+          return LecturerReportView(
+            studentId: state.pathParameters['studentId'] ?? "-",
+          );
         })
   ];
 }
