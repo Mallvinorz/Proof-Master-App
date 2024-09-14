@@ -14,7 +14,7 @@ class ResultView extends StatelessWidget {
     return BackgroundPatternCenterChild(
         child: _buildCardContent(),
         onTapBack: () {
-          context.replace(ProofmasterRoute.home);
+          context.go(ProofmasterRoute.home);
         });
   }
 

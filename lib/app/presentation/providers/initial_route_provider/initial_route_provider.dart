@@ -1,8 +1,6 @@
-import 'package:http/http.dart' as http;
-import 'package:proofmaster/app/data/repositories/auth_repository_impl.dart';
 import 'package:proofmaster/app/data/repositories/onboarding_repository_impl.dart';
-import 'package:proofmaster/app/domain/repositories/auth_repository.dart';
 import 'package:proofmaster/app/domain/repositories/onboarding_repository.dart';
+import 'package:proofmaster/app/presentation/providers/auth_provider/auth_provider.dart';
 import 'package:proofmaster/router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -14,29 +12,35 @@ OnboardingRepository onboardingRepository(OnboardingRepositoryRef ref) {
 }
 
 @riverpod
-AuthRepository authRepository(AuthRepositoryRef ref) {
-  return AuthRepositoryImpl(http.Client());
-}
+class InitialRoute extends _$InitialRoute {
+  @override
+  Future<String> build() async {
+    return getInitialRoute();
+  }
 
-@riverpod
-Future<String> getInitialRoute(GetInitialRouteRef ref) async {
-  final onBoardingRepository = ref.watch(onboardingRepositoryProvider);
-  final authRepository = ref.watch(authRepositoryProvider);
-  final onboardStatusFinished = await onBoardingRepository.getOnboardStatus();
+  Future<String> getInitialRoute() async {
+    final onBoardingRepository = ref.watch(onboardingRepositoryProvider);
+    final authRepository = ref.watch(authRepositoryProvider);
+    final onboardStatusFinished = await onBoardingRepository.getOnboardStatus();
 
-  if (!onboardStatusFinished) {
-    return ProofmasterRoute.onBoarding;
-  } else {
-    if (await authRepository.getAuthToken() != null) {
-      if (await authRepository.getRole() == "STUDENT") {
-        return ProofmasterRoute.home;
-      }
-      if (await authRepository.getRole() == "TEACHER") {
-        return ProofmasterRoute.lecturerHome;
-      }
-      return ProofmasterRoute.auth;
+    if (!onboardStatusFinished) {
+      return ProofmasterRoute.onBoarding;
     } else {
+      final authToken = await authRepository.getAuthToken();
+      if (authToken != null) {
+        final role = await authRepository.getRole();
+        if (role == "STUDENT") {
+          return ProofmasterRoute.home;
+        }
+        if (role == "TEACHER") {
+          return ProofmasterRoute.lecturerHome;
+        }
+      }
       return ProofmasterRoute.auth;
     }
+  }
+
+  Future<void> refresh() async {
+    state = await AsyncValue.guard(() => getInitialRoute());
   }
 }

@@ -63,7 +63,7 @@ class SettingsContent extends ConsumerWidget {
               ),
               SettingMenuItem(
                 text: "Ubah password",
-                onTap: () => context.go(ProofmasterRoute.forgotPassword),
+                onTap: () => context.push(ProofmasterRoute.forgotPassword),
               ),
               const SizedBox(
                 height: 16.0,

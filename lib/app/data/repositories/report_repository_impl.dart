@@ -1,4 +1,3 @@
-import 'package:fimber/fimber.dart';
 import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/responses/general/get_report_progress/get_report_progress.dart';
 import 'package:proofmaster/app/domain/entities/report_item/report_item.dart';
@@ -20,7 +19,6 @@ class ReportRepositoryImpl implements ReportRepository {
         'Accept': 'application/json',
         'Authorization': 'Bearer haha',
       });
-      Fimber.d("${response.body}");
       final result = GetReportProgress.fromJson(response.body);
 
       return result.data?.reports
@@ -40,7 +38,6 @@ class ReportRepositoryImpl implements ReportRepository {
     try {
       final queries = {'id': '3afe4629-8c4c-4f6e-950c-729f0de02c78'};
       final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
-      print(uri);
       final response = await client.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
