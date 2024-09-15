@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:proofmaster/app/presentation/dashboard/student/geometry_proof_report_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/diagnostic_test_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/quiz/diagnostic_test_quiz.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/diagnostic_test/quiz/results/learning_modalitites_result_view.dart';
