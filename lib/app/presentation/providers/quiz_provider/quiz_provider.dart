@@ -128,7 +128,7 @@ class Quiz extends _$Quiz {
 
   int getMajorityAnswersOption() {
     Map<int, int> frequency = {};
-    state.questions.forEach((question) {
+    for (var question in state.questions) {
       if (question.selectedAnsweValue != null) {
         if (frequency.containsKey(question.selectedAnsweValue)) {
           frequency[question.selectedAnsweValue ?? -1] =
@@ -137,7 +137,7 @@ class Quiz extends _$Quiz {
           frequency[question.selectedAnsweValue ?? -1] = 1;
         }
       }
-    });
+    }
 
     int maxFrequency = 0;
     int mostFrequentOption = -1;

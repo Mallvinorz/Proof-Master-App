@@ -11,7 +11,7 @@ Future<String?> getAndroidDownloadDirectory() async {
     Directory? directory = await getExternalStorageDirectory();
     if (directory != null) {
       // Navigate to the Download folder
-      String downloadPath = directory.path.split('Android')[0] + 'Download';
+      String downloadPath = '${directory.path.split('Android')[0]}Download';
       return downloadPath;
     }
   }

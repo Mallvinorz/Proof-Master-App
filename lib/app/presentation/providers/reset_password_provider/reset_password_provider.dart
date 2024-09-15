@@ -51,7 +51,7 @@ class ResetPassword extends _$ResetPassword {
       final response = await authRepository.resetPassword(state.email.value);
 
       state = state.copyWith(
-          uiState: UISuccess("Password reset email sent successfully"));
+          uiState: const UISuccess("Password reset email sent successfully"));
       return response;
     } catch (e) {
       state = state.copyWith(uiState: UIError("$e"));

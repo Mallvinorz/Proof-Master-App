@@ -37,7 +37,7 @@ class TopBannerHome extends ConsumerWidget {
 class _content extends StatelessWidget {
   final String name;
   final String? imageUrl;
-  const _content({super.key, required this.name, required this.imageUrl});
+  const _content({required this.name, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +48,13 @@ class _content extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Halo, $name",
-              style: CustomTextTheme.proofMasterTextTheme.displayLarge
-                  ?.copyWith(color: Colors.white),
+            Flexible(
+              child: Text(
+                "Halo, $name",
+                overflow: TextOverflow.ellipsis,
+                style: CustomTextTheme.proofMasterTextTheme.displayLarge
+                    ?.copyWith(color: Colors.white),
+              ),
             ),
             imageUrl == null
                 ? const CircleAvatar(
@@ -73,7 +76,7 @@ class _content extends StatelessWidget {
 }
 
 class _loaderContent extends StatelessWidget {
-  const _loaderContent({super.key});
+  const _loaderContent();
 
   @override
   Widget build(BuildContext context) {

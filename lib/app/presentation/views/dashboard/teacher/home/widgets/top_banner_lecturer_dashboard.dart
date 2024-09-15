@@ -45,8 +45,7 @@ class _content extends StatelessWidget {
   final String name;
   final String? imgUrl;
   final Function(String) onSearch;
-  const _content(
-      {super.key, required this.name, required this.onSearch, this.imgUrl});
+  const _content({required this.name, required this.onSearch, this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +60,13 @@ class _content extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Halo, $name",
-                style: CustomTextTheme.proofMasterTextTheme.displayLarge
-                    ?.copyWith(color: Colors.white),
+              Flexible(
+                child: Text(
+                  "Halo, $name",
+                  overflow: TextOverflow.ellipsis,
+                  style: CustomTextTheme.proofMasterTextTheme.displayLarge
+                      ?.copyWith(color: Colors.white),
+                ),
               ),
               GestureDetector(
                   onTap: () {
@@ -92,9 +94,7 @@ class _content extends StatelessWidget {
 
 // ignore: camel_case_types
 class _loaderContent extends StatelessWidget {
-  const _loaderContent({
-    super.key,
-  });
+  const _loaderContent();
 
   @override
   Widget build(BuildContext context) {

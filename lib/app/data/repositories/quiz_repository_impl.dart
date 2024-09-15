@@ -3,6 +3,8 @@ import 'package:proofmaster/app/domain/entities/quiz_option/quiz_option.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
+import 'package:proofmaster/app/utils/shared_pref.dart';
+import 'package:proofmaster/constanta.dart';
 
 class QuizRepositoryImpl implements QuizRepository {
   final _baseUrl = 'oh-my-api-seven.vercel.app';
@@ -10,27 +12,32 @@ class QuizRepositoryImpl implements QuizRepository {
   @override
   Future<List<QuizQuestion>> getDiagnosticQuizQuestionsFrom(String id) async {
     try {
-      final queries = {'id': id};
-      final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
+      final uri = Uri.http(BASEURL, "api/quizzes/diagnostics/$id");
+      final authToken = (await pref).getString(AUTH_TOKEN);
       final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer haha',
+        'Authorization': 'Bearer $authToken',
       });
+
       final result = GetQuizQuestionsResponse.fromJson(response.body);
       if (result.data == null) throw Exception("Data is null!");
 
-      return result.data!
-          .map((element) => QuizQuestion(
-                id: element.id ?? "-",
-                text: element.question ?? "",
-                correctAnswerValue: element.actualAnswerValue,
-                options: element.answerOptions!
-                    .map((option) => QuizOption(
-                        text: option.text ?? "-", value: option.value ?? 0))
-                    .toList(),
-              ))
-          .toList();
+      final data = result.data
+              ?.map((element) => QuizQuestion(
+                    id: element.id ?? "-",
+                    text: element.question ?? "",
+                    correctAnswerValue: element.actualAnswerValue,
+                    options: element.answerOptions!
+                        .map((option) => QuizOption(
+                            text: option.text ?? "-", value: option.value ?? 0))
+                        .toList(),
+                  ))
+              .toList() ??
+          [];
+
+      print(data);
+      return data;
     } catch (e) {
       rethrow;
     }

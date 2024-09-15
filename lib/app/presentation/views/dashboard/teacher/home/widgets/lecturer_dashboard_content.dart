@@ -67,7 +67,7 @@ class LecturerDashboardContent extends ConsumerWidget {
 }
 
 class _loader extends StatelessWidget {
-  const _loader({super.key});
+  const _loader();
 
   @override
   Widget build(BuildContext context) {

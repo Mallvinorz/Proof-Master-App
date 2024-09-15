@@ -10,17 +10,17 @@ class DiagnosticTestView extends StatelessWidget {
 
   final _diagnosticTestMenus = [
     DiagnosticTestItem(
-      endpoint: "learning-modalities",
+      endpoint: "learning-modalities-test",
       text: "Learning Modalities",
       iconUrl: "assets/icons/learning_ic.png",
     ),
     DiagnosticTestItem(
-      endpoint: "prior-knowledge",
+      endpoint: "prior-knowledge-test",
       text: "Prior Knowledge",
       iconUrl: "assets/icons/prior_ic.png",
     ),
     DiagnosticTestItem(
-      endpoint: "proof-format",
+      endpoint: "proof-format-test",
       text: "Proof Format Preference",
       iconUrl: "assets/icons/proof_ic.png",
     ),

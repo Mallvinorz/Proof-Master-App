@@ -31,15 +31,15 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       quizRepository = ref.watch(quizRepositoryProvider);
 
-      final quizId = switch (widget.id) {
-        "learning-modalities" => "1cd25bcd-625c-4615-89d8-eedd845e8274",
-        "prior-knowledge" => "7225aec2-5e4a-4802-9131-2d17bb49306c",
-        "proof-format" => "fc7ac1a9-a715-444e-a372-608e21b3b966",
-        _ => "-"
-      };
+      // final quizId = switch (widget.id) {
+      //   "learning-modalities" => "1cd25bcd-625c-4615-89d8-eedd845e8274",
+      //   "prior-knowledge" => "7225aec2-5e4a-4802-9131-2d17bb49306c",
+      //   "proof-format" => "fc7ac1a9-a715-444e-a372-608e21b3b966",
+      //   _ => "-"
+      // };
       ref
           .read(getDiagnosticQuizQuestionsFromProvider(
-                  quizId) //TODO: replace with actual id from api endpoint
+                  widget.id) //TODO: replace with actual id from api endpoint
               .future)
           .then((response) {
         if (response.isNotEmpty) {
@@ -57,10 +57,12 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.id);
+
     final quizUiState = ref.watch(quizProvider);
     final quizQuestionsAsyncValue = ref.watch(
         getDiagnosticQuizQuestionsFromProvider(
-            "5e532e5c-2c90-410e-b9cb-ee152d8f4a59")); //TODO: replace with actual id
+            widget.id)); //TODO: replace with actual id
 
     return PopScope(
       canPop: false,

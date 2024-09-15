@@ -28,9 +28,7 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
       quizRepository = ref.watch(quizRepositoryProvider);
 
       ref
-          .read(getDiagnosticQuizQuestionsFromProvider(
-                  "a5ad1e61-89f2-4fa2-8c27-05751c7ec366") //TODO: replace with actual id from api endpoint
-              .future)
+          .read(getDiagnosticQuizQuestionsFromProvider(widget.id).future)
           .then((response) {
         if (response.isNotEmpty) {
           ref.read(quizProvider.notifier).initQuiz(response);
@@ -48,9 +46,8 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
   @override
   Widget build(BuildContext context) {
     final quizUiState = ref.watch(quizProvider);
-    final quizQuestionsAsyncValue = ref.watch(
-        getDiagnosticQuizQuestionsFromProvider(
-            "5e532e5c-2c90-410e-b9cb-ee152d8f4a59")); //TODO: replace with actual id
+    final quizQuestionsAsyncValue =
+        ref.watch(getDiagnosticQuizQuestionsFromProvider(widget.id));
 
     return PopScope(
       canPop: false,

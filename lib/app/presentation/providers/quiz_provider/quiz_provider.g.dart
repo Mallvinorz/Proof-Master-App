@@ -315,7 +315,7 @@ class _GetProofCompetenceQuizQuestionsFromProviderElement
   String get id => (origin as GetProofCompetenceQuizQuestionsFromProvider).id;
 }
 
-String _$quizHash() => r'168a87932d435447edb36c80cd1c1db91938ca1b';
+String _$quizHash() => r'25e0826f6305cc4cb1ad9ab0a12c95aa459ef098';
 
 /// See also [Quiz].
 @ProviderFor(Quiz)

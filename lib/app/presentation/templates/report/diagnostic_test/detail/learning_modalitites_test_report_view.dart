@@ -13,7 +13,7 @@ class LearningModalititiesReport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final type = LearningModalitiesType.VISUAL;
+    const type = LearningModalitiesType.VISUAL;
     return BackgroundPattern(
       appBarTitle: "Learning Modalities Report",
       mainChildren: Column(

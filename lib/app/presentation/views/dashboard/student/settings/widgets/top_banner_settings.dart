@@ -34,10 +34,7 @@ class _content extends StatelessWidget {
   final String email;
   final String? imageUrl;
   const _content(
-      {super.key,
-      required this.name,
-      required this.email,
-      required this.imageUrl});
+      {required this.name, required this.email, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +59,21 @@ class _content extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                name,
-                style: CustomTextTheme.proofMasterTextTheme.displayMedium
-                    ?.copyWith(color: Colors.white),
+              Flexible(
+                child: Text(
+                  name,
+                  overflow: TextOverflow.ellipsis,
+                  style: CustomTextTheme.proofMasterTextTheme.displayMedium
+                      ?.copyWith(color: Colors.white),
+                ),
               ),
-              Text(
-                email,
-                style: CustomTextTheme.proofMasterTextTheme.displaySmall
-                    ?.copyWith(color: Colors.white),
+              Flexible(
+                child: Text(
+                  email,
+                  overflow: TextOverflow.ellipsis,
+                  style: CustomTextTheme.proofMasterTextTheme.displaySmall
+                      ?.copyWith(color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -81,7 +84,7 @@ class _content extends StatelessWidget {
 }
 
 class _loaderContent extends StatelessWidget {
-  const _loaderContent({super.key});
+  const _loaderContent();
 
   @override
   Widget build(BuildContext context) {

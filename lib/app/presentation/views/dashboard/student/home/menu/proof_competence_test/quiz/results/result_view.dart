@@ -37,7 +37,7 @@ class ResultView extends StatelessWidget {
         ),
         Text(
           "$score",
-          style: TextStyle(fontWeight: FontWeight.w300, fontSize: 32),
+          style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 32),
         ),
       ],
     );
