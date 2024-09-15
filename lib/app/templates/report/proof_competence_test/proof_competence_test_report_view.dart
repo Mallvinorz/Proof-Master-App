@@ -4,7 +4,8 @@ import 'package:proofmaster/app/templates/background_pattern.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 class ProofCompetenceTestReportView extends StatelessWidget {
-  const ProofCompetenceTestReportView({super.key});
+  final String? studentId;
+  const ProofCompetenceTestReportView({super.key, required this.studentId});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +38,13 @@ class ProofCompetenceTestReportView extends StatelessWidget {
                   child: _buildCardContent()),
             ),
             const SizedBox(height: 24),
-            Text(
-              "Lebih giat belajar lagi ya",
-              textAlign: TextAlign.center,
-              style: CustomTextTheme.proofMasterTextTheme.displayMedium,
-            ),
+            studentId == null || studentId!.isEmpty
+                ? Text(
+                    "Lebih giat belajar lagi ya",
+                    textAlign: TextAlign.center,
+                    style: CustomTextTheme.proofMasterTextTheme.displayMedium,
+                  )
+                : const SizedBox.shrink()
           ],
         ),
       ),
@@ -57,9 +60,11 @@ class ProofCompetenceTestReportView extends StatelessWidget {
           width: 240,
           height: 125,
         ),
-        const Text(
-          "Nilai testmu",
-          style: TextStyle(fontWeight: FontWeight.w300, fontSize: 32),
+        Text(
+          studentId == null || studentId!.isEmpty
+              ? "Nilai testmu"
+              : "Nilai siswa",
+          style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 32),
         ),
         Text(
           "100",

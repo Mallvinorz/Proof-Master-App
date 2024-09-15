@@ -12,6 +12,11 @@ import 'package:proofmaster/app/presentation/dashboard/student/home/menu/proof_c
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/proof_competence_test/quiz/results/result_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/activity/activity_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/menu/understanding_to_proof_structure/understanding_proof_view.dart';
+import 'package:proofmaster/app/templates/report/diagnostic_test/detail/learning_modalitites_test_report_view.dart';
+import 'package:proofmaster/app/templates/report/diagnostic_test/detail/prior_knowledge_test_report_view.dart';
+import 'package:proofmaster/app/templates/report/diagnostic_test/detail/proof_format_preference_test_report_view.dart';
+import 'package:proofmaster/app/templates/report/diagnostic_test/diagnostic_test_report_view.dart';
+import 'package:proofmaster/app/templates/report/introduction_proof/introduction_proof_report_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/teacher/home/lecturer_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/dashboard/teacher/reports/lecturer_report_view.dart';
@@ -21,6 +26,9 @@ import 'package:proofmaster/app/presentation/onboarding/onboarding_view.dart';
 import 'package:proofmaster/app/presentation/signin/signin_view.dart';
 import 'package:proofmaster/app/presentation/signup/signup_view.dart';
 import 'package:proofmaster/app/presentation/success_reset_pass/success_reset_pass.dart';
+import 'package:proofmaster/app/templates/report/proof_competence_test/proof_competence_test_report_view.dart';
+import 'package:proofmaster/app/templates/report/understanding_proof/detail/detail_activity_report_view.dart';
+import 'package:proofmaster/app/templates/report/understanding_proof/understanding_proof_report_view.dart';
 
 class ProofmasterRoute {
   static const String home = '/';
@@ -44,6 +52,22 @@ class ProofmasterRoute {
   static const String successResetPassword = '/success-reset-password';
   static const String lecturerSettings = '/lecturer-settings';
   static const String lecturerReports = '/lecturer-reports';
+  //menu reports
+  static const String diagnosticTestReport = '/diagnostic-test-report';
+  static const String introductionTestReport = '/introduction-proof-report';
+  static const String geometricProofReport = '/geometric-proof-report';
+  static const String understandingProofReport = '/understanding-proof-report';
+  static const String proofCompetenceReport = '/proof-competence-report';
+  //menu reports students (diagnostic)
+  static const String reportDiagnosticLearningModalitits =
+      '/report-diagnostic-learning-modalities';
+  static const String reportDiagnosticPriorKnowledge =
+      '/report-diagnostic-prior-knowledge';
+  static const String reportDiagnosticProofFormat =
+      '/report-diagnostic-proof-format';
+  //menu reports students (understading proof activity)
+  static const String understandingProofReportDetail =
+      '/understanding-proof-report-detail';
 }
 
 List<RouteBase> getRoutes() {
@@ -159,8 +183,8 @@ List<RouteBase> getRoutes() {
       name: ProofmasterRoute.proofCompetenceTest,
       builder: (BuildContext context, GoRouterState state) {
         return ProofCompetenceQuiz(
-          id: state.pathParameters['id'] ?? "-",
-          title: state.pathParameters['title'] ?? "-",
+          id: state.pathParameters['id'] ?? "",
+          title: state.pathParameters['title'] ?? "",
         );
       },
     ),
@@ -170,8 +194,8 @@ List<RouteBase> getRoutes() {
       name: ProofmasterRoute.diagnosticTestQuiz,
       builder: (BuildContext context, GoRouterState state) {
         return DiagnosticTestQuiz(
-          id: state.pathParameters['id'] ?? "-",
-          title: state.pathParameters['title'] ?? "-",
+          id: state.pathParameters['id'] ?? "",
+          title: state.pathParameters['title'] ?? "",
         );
       },
     ),
@@ -181,8 +205,8 @@ List<RouteBase> getRoutes() {
       name: ProofmasterRoute.introductionProofMaterial,
       builder: (BuildContext context, GoRouterState state) {
         return IntroductionToProofMaterial(
-          id: state.pathParameters['id'] ?? "-",
-          title: state.pathParameters['title'] ?? "-",
+          id: state.pathParameters['id'] ?? "",
+          title: state.pathParameters['title'] ?? "",
         );
       },
     ),
@@ -192,8 +216,8 @@ List<RouteBase> getRoutes() {
       name: ProofmasterRoute.understandingProofActivity,
       builder: (BuildContext context, GoRouterState state) {
         return ActivityView(
-          id: state.pathParameters['id'] ?? "-",
-          title: state.pathParameters['title'] ?? "-",
+          id: state.pathParameters['id'] ?? "",
+          title: state.pathParameters['title'] ?? "",
         );
       },
     ),
@@ -204,12 +228,90 @@ List<RouteBase> getRoutes() {
       },
     ),
     GoRoute(
-        path: "${ProofmasterRoute.lecturerReports}/:studentId",
-        name: ProofmasterRoute.lecturerReports,
-        builder: (BuildContext context, GoRouterState state) {
-          return LecturerReportView(
-            studentId: state.pathParameters['studentId'] ?? "-",
-          );
-        })
+      path: "${ProofmasterRoute.lecturerReports}/:studentId/:studentName",
+      name: ProofmasterRoute.lecturerReports,
+      builder: (BuildContext context, GoRouterState state) {
+        return LecturerReportView(
+          studentId: state.pathParameters['studentId'] ?? "",
+          studentName: state.pathParameters['studentName'] ?? "",
+        );
+      },
+    ),
+    //report menus
+    GoRoute(
+      path: ProofmasterRoute.diagnosticTestReport,
+      name: ProofmasterRoute.diagnosticTestReport,
+      builder: (BuildContext context, GoRouterState state) {
+        return DiagnosticTestReportView(
+          studentId: state.uri.queryParameters['studentId'],
+        );
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.introductionTestReport,
+      name: ProofmasterRoute.introductionTestReport,
+      builder: (BuildContext context, GoRouterState state) {
+        return IntroductionProofReportView(
+          studentId: state.uri.queryParameters['studentId'],
+        );
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.understandingProofReport,
+      name: ProofmasterRoute.understandingProofReport,
+      builder: (BuildContext context, GoRouterState state) {
+        return UnderstandngProofReportView(
+          studentId: state.uri.queryParameters['studentId'],
+        );
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.proofCompetenceReport,
+      name: ProofmasterRoute.proofCompetenceReport,
+      builder: (BuildContext context, GoRouterState state) {
+        return ProofCompetenceTestReportView(
+          studentId: state.uri.queryParameters['studentId'],
+        );
+      },
+    ),
+    //report result diagnostic
+    GoRoute(
+      path: ProofmasterRoute.reportDiagnosticLearningModalitits,
+      name: ProofmasterRoute.reportDiagnosticLearningModalitits,
+      builder: (BuildContext context, GoRouterState state) {
+        return LearningModalititiesReport(
+          studentId: state.uri.queryParameters['studentId'],
+        );
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.reportDiagnosticPriorKnowledge,
+      name: ProofmasterRoute.reportDiagnosticPriorKnowledge,
+      builder: (BuildContext context, GoRouterState state) {
+        return PriorKnowledgeTestReportView(
+          studentId: state.uri.queryParameters['studentId'],
+        );
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.reportDiagnosticProofFormat,
+      name: ProofmasterRoute.reportDiagnosticProofFormat,
+      builder: (BuildContext context, GoRouterState state) {
+        return ProofFormatPreferenceTestReportView(
+          studentId: state.uri.queryParameters['studentId'],
+        );
+      },
+    ),
+    //report understanding proof
+    GoRoute(
+      path: ProofmasterRoute.understandingProofReportDetail,
+      name: ProofmasterRoute.understandingProofReportDetail,
+      builder: (BuildContext context, GoRouterState state) {
+        return DetailActivityReportView(
+          studentId: state.uri.queryParameters['studentId'],
+          title: state.uri.queryParameters['title'] ?? "Aktivitas",
+        );
+      },
+    ),
   ];
 }

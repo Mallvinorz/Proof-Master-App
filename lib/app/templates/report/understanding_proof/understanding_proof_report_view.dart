@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/templates/list_item_template.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/clickable_item_with_icon.dart';
 
 class UnderstandngProofReportView extends StatelessWidget {
-  const UnderstandngProofReportView({super.key});
+  final String? studentId;
+  const UnderstandngProofReportView({super.key, required this.studentId});
 
   Future<UIState<List<ListItem>>> getDummyData() async {
     final dummy = [
@@ -48,13 +51,11 @@ class UnderstandngProofReportView extends StatelessWidget {
     return ListItemTemplate<ListItem>(
       title: "Understanding to Proof Structure Report",
       futureData: getDummyData(),
-      onLoadData: () {
-        //TODO: replace with actual get data function
-      },
+      onLoadData: () {},
       child: (ListItem data) => ClickableListItemWithIcon(
-        onTap: () {
-          //TODO: replace with actual onclick func
-        },
+        onTap: () => context.pushNamed(
+            ProofmasterRoute.understandingProofReportDetail,
+            queryParameters: {"studentId": studentId, "title": data.text}),
         iconUrl: data.iconUrl,
         text: data.text,
       ),

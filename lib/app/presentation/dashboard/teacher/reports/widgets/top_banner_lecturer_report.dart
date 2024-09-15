@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 class TopBannerLecturerReport extends StatelessWidget {
-  const TopBannerLecturerReport({super.key});
+  final String? studentName;
+  const TopBannerLecturerReport({super.key, required this.studentName});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class TopBannerLecturerReport extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            "Anthonny",
+            studentName ?? "-",
             style: CustomTextTheme.proofMasterTextTheme.displayMedium
                 ?.copyWith(color: Colors.white),
             maxLines: 3,

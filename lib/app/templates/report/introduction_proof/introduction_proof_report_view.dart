@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:proofmaster/app/domain/entities/intro_proof_report_item/intro_proof_report_item.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/report/introduction_proof/widgets/item.dart';
+import 'package:proofmaster/app/templates/report/introduction_proof/widgets/item.dart';
 import 'package:proofmaster/app/templates/list_item_template.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
 
-class LecturerIntroductionProofReportView extends StatelessWidget {
-  const LecturerIntroductionProofReportView({super.key});
+class IntroductionProofReportView extends StatelessWidget {
+  final String? studentId;
+  const IntroductionProofReportView({super.key, this.studentId});
 
   Future<UIState<List<IntroProofReportItem>>> getDummyData() {
     final dummy = [
@@ -25,9 +26,7 @@ class LecturerIntroductionProofReportView extends StatelessWidget {
     return ListItemTemplate<IntroProofReportItem>(
       title: "Introduction to Proof Report",
       futureData: getDummyData(),
-      onLoadData: () {
-        //TODO: replace with actual get data function
-      },
+      onLoadData: () {},
       child: (IntroProofReportItem data) => Padding(
         padding: const EdgeInsets.only(bottom: 4.0),
         child: IntroductionProofItem(

@@ -1,8 +1,10 @@
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/report/widgets/rectangle_indicator.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/report/widgets/text_indicator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/presentation/providers/report_provider/report_provider.dart';
+import 'package:proofmaster/app/templates/report/widgets/rectangle_indicator.dart';
+import 'package:proofmaster/app/templates/report/widgets/text_indicator.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/widgets/error_handler.dart';
 import 'package:proofmaster/widgets/shimmer_loader.dart';
@@ -35,7 +37,10 @@ class ReportView extends ConsumerWidget {
                       itemCount: data.length,
                       itemBuilder: (context, index) => GestureDetector(
                             onTap: () async {
-                              // TODO: Implement on click to route navigation
+                              final route = "/${data[index].route}";
+                              context.pushNamed(route,
+                                  queryParameters: {'studentId': studentId});
+                              return;
                             },
                             child: Card(
                               elevation: 4.0,

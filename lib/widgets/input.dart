@@ -52,6 +52,8 @@ class _InputState extends State<Input> {
               _ => TextInputType.text
             },
             decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
               errorText: widget.errorText,
               suffixIcon: widget.inputType == InputType.password
                   ? GestureDetector(

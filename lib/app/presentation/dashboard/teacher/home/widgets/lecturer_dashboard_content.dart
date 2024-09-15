@@ -42,11 +42,14 @@ class LecturerDashboardContent extends ConsumerWidget {
                                 child: SettingMenuItem(
                                   text: data[index]?.name ?? "-",
                                   onTap: () {
+                                    final student = data[index];
                                     context.pushNamed(
-                                        ProofmasterRoute.lecturerReports,
-                                        pathParameters: {
-                                          "studentId": data[index]?.id ?? "-"
-                                        });
+                                      ProofmasterRoute.lecturerReports,
+                                      pathParameters: {
+                                        "studentId": student?.id ?? "-",
+                                        "studentName": student?.name ?? "-",
+                                      },
+                                    );
                                   },
                                 ),
                               )),

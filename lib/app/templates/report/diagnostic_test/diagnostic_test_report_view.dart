@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/templates/list_item_template.dart';
 import 'package:proofmaster/app/utils/ui_state.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/widgets/clickable_item_with_icon.dart';
 
 class DiagnosticTestReportView extends StatelessWidget {
-  const DiagnosticTestReportView({super.key});
+  final String? studentId;
+  const DiagnosticTestReportView({super.key, this.studentId});
 
   Future<UIState<List<ListItem>>> getDummyData() {
     final dummy = [
       ListItem(
-          id: "aaa",
+          id: ProofmasterRoute.reportDiagnosticLearningModalitits,
           text: "Learning Modalities Test",
           iconUrl: "assets/icons/learning_ic.png"),
       ListItem(
-          id: "aaabb",
+          id: ProofmasterRoute.reportDiagnosticPriorKnowledge,
           text: "Prior Knowledge Test",
           iconUrl: "assets/icons/prior_ic.png"),
       ListItem(
-          id: "aaabbcc",
+          id: ProofmasterRoute.reportDiagnosticProofFormat,
           text: "Proof Format Preference Test",
           iconUrl: "assets/icons/proof_ic.png"),
     ];
@@ -30,12 +33,12 @@ class DiagnosticTestReportView extends StatelessWidget {
     return ListItemTemplate<ListItem>(
       title: "Diagnostic Test Reports",
       futureData: getDummyData(),
-      onLoadData: () {
-        //TODO: replace with actual get data function
-      },
+      onLoadData: () {},
       child: (ListItem data) => ClickableListItemWithIcon(
         onTap: () {
-          //TODO: replace with actual onclick func
+          context.pushNamed(data.id, queryParameters: {
+            "studentId": studentId,
+          });
         },
         iconUrl: data.iconUrl,
         text: data.text,

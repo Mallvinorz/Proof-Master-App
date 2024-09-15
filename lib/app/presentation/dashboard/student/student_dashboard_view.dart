@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proofmaster/app/domain/repositories/dashboard_repository.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/dashboard_content.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/home/widgets/top_banner.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/report/report_view.dart';
-import 'package:proofmaster/app/presentation/dashboard/student/report/widgets/top_banner_report.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/settings_content.dart';
 import 'package:proofmaster/app/presentation/dashboard/student/settings/widgets/top_banner_settings.dart';
 import 'package:proofmaster/app/presentation/providers/dashboard_provider/dashboard_provider.dart';
 import 'package:proofmaster/app/templates/background_pattern.dart';
+import 'package:proofmaster/app/templates/report/report_view.dart';
+import 'package:proofmaster/app/templates/report/widgets/top_banner_report.dart';
 import 'package:proofmaster/widgets/bottom_bar.dart';
 
 class StudentDashboardView extends ConsumerStatefulWidget {
