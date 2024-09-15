@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:fimber/fimber.dart';
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/activity_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/domain/repositories/activity_repository.dart';
@@ -13,7 +12,7 @@ part 'activity_provider.g.dart';
 
 @riverpod
 ActivityRepository activityRepository(ActivityRepositoryRef ref) {
-  return ActivityRepositoryImpl(http.Client());
+  return ActivityRepositoryImpl();
 }
 
 @riverpod

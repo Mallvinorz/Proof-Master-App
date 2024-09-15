@@ -1,20 +1,18 @@
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/responses/student/get_quiz_questions_response/get_quiz_questions_response.dart';
 import 'package:proofmaster/app/domain/entities/quiz_option/quiz_option.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
+import 'package:proofmaster/app/helper/http_client.dart';
 
 class QuizRepositoryImpl implements QuizRepository {
   final _baseUrl = 'oh-my-api-seven.vercel.app';
-  QuizRepositoryImpl(this.client);
-  final http.Client client;
 
   @override
   Future<List<QuizQuestion>> getDiagnosticQuizQuestionsFrom(String id) async {
     try {
       final queries = {'id': id};
       final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
-      final response = await client.get(uri, headers: {
+      final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer haha',
@@ -44,7 +42,7 @@ class QuizRepositoryImpl implements QuizRepository {
     try {
       final queries = {'id': 'a5ad1e61-89f2-4fa2-8c27-05751c7ec366'};
       final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
-      final response = await client.get(uri, headers: {
+      final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer haha',
@@ -70,7 +68,7 @@ class QuizRepositoryImpl implements QuizRepository {
 
   @override
   void dispose() {
-    client.close();
+    httpClientWithInterceptor.close();
   }
 
   @override

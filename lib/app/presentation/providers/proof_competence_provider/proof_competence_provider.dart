@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/proof_competence_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/domain/repositories/proof_competence_repository.dart';
@@ -9,7 +8,7 @@ part 'proof_competence_provider.g.dart';
 @riverpod
 ProofComptenceRepository proofCompetenceRepository(
     ProofCompetenceRepositoryRef ref) {
-  return ProofCompetenceRepositoryImpl(http.Client());
+  return ProofCompetenceRepositoryImpl();
 }
 
 @riverpod

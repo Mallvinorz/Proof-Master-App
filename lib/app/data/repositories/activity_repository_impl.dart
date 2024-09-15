@@ -1,21 +1,25 @@
 import 'dart:io';
 import 'package:fimber/fimber.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:proofmaster/app/data/responses/student/get_activities_understading_proof/get_activities_understading_proof.dart';
 import 'package:proofmaster/app/data/responses/student/post_file_activity_response/upload_file_activity_response/upload_file_activity_response.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/domain/repositories/activity_repository.dart';
+import 'package:proofmaster/app/helper/http_client.dart';
+import 'package:proofmaster/app/helper/interceptor.dart';
 
 class ActivityRepositoryImpl implements ActivityRepository {
   final _baseUrl = 'oh-my-api-seven.vercel.app';
-  ActivityRepositoryImpl(this.client);
-  final http.Client client;
   @override
   Future<UploadFileActivityResponse> uploadFile(
       File pdfFile, String filename, String id) async {
     try {
       final queries = {'id': '8913d132-a776-4742-8adb-1ede7c3095fb'};
       final url = Uri.https(_baseUrl, "api/end-to-end", queries);
+
+      // Create a custom client with our interceptor
+      final client = InterceptedClient.build(interceptors: [AuthInterceptor()]);
 
       final request = http.MultipartRequest('POST', url);
       Map<String, String> requestBody = <String, String>{'id': "value1"};
@@ -29,7 +33,7 @@ class ActivityRepositoryImpl implements ActivityRepository {
       ));
       request.fields.addAll(requestBody);
 
-      final streamedResponse = await request.send();
+      final streamedResponse = await client.send(request);
       var response = await http.Response.fromStream(streamedResponse);
 
       Fimber.d("response from repository $response");
@@ -54,7 +58,7 @@ class ActivityRepositoryImpl implements ActivityRepository {
       final queries = {'id': '8ef65238-3e9f-4e07-8fd7-c6d07954b092'};
       final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
       print(uri);
-      final response = await client.get(uri, headers: {
+      final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer haha',

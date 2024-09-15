@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/report_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/report_item/report_item.dart';
 import 'package:proofmaster/app/domain/repositories/report_repository.dart';
@@ -8,7 +7,7 @@ part 'report_provider.g.dart';
 
 @riverpod
 ReportRepository reportRepository(ReportRepositoryRef ref) {
-  return ReportRepositoryImpl(http.Client());
+  return ReportRepositoryImpl();
 }
 
 @riverpod

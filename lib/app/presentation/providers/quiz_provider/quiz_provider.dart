@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/quiz_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
@@ -8,7 +7,7 @@ part 'quiz_provider.g.dart';
 
 @riverpod
 QuizRepository quizRepository(QuizRepositoryRef ref) {
-  return QuizRepositoryImpl(http.Client());
+  return QuizRepositoryImpl();
 }
 
 @riverpod

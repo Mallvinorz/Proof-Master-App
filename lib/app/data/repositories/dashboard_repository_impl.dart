@@ -1,14 +1,12 @@
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/responses/student/get_dashboard_menus_response/datum.dart';
 import 'package:proofmaster/app/data/responses/student/get_dashboard_menus_response/get_dashboard_menus_response.dart';
 import 'package:proofmaster/app/domain/entities/material/learning_material.dart';
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/domain/repositories/dashboard_repository.dart';
+import 'package:proofmaster/app/helper/http_client.dart';
 
 class DashboardRepositoryImpl implements DashboardRepository {
   final _baseUrl = 'oh-my-api-seven.vercel.app';
-  DashboardRepositoryImpl(this.client);
-  final http.Client client;
 
   @override
   Future<List<MenuItem>> getStudentMenus() async {
@@ -16,7 +14,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
       final queries = {'id': 'c0c653db-46a7-4f00-bbbf-7c99612b015d'};
       final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
       print(uri);
-      final response = await client.get(uri, headers: {
+      final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer haha',
@@ -60,7 +58,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
 
   @override
   void dispose() {
-    client.close();
+    httpClientWithInterceptor.close();
   }
 
   List<MenuItem> convertMapToMenuItems(Map<String, List<Datum>> inputMap) {

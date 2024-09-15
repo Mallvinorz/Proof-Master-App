@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/auth_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/input_text/inputtext.dart';
 import 'package:proofmaster/app/domain/entities/register_dto/registerdto.dart';
@@ -12,7 +11,7 @@ part 'register_provider.g.dart';
 
 @riverpod
 AuthRepository authRepository(AuthRepositoryRef ref) {
-  return AuthRepositoryImpl(http.Client());
+  return AuthRepositoryImpl();
 }
 
 class RegisterState {
@@ -140,11 +139,11 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
         throw Exception("Error saat register, cek kembali form register anda!");
       }
 
-      final authRepository = AuthRepositoryImpl(http.Client());
+      final authRepository = AuthRepositoryImpl();
       final registerDto = RegisterDTO(
           email: state.email.value,
           password: state.password.value,
-          nim: "000",
+          nim: state.nim.value,
           name: state.name.value);
       final result = await authRepository.signup(registerDto);
       state = state.copyWith(uiState: UISuccess(result.message ?? "-"));

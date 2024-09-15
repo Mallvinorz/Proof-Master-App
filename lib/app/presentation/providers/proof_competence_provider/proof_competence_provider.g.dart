@@ -7,7 +7,7 @@ part of 'proof_competence_provider.dart';
 // **************************************************************************
 
 String _$proofCompetenceRepositoryHash() =>
-    r'c8f67ea992db6e8fd6bd6e386ee098ea70c69ae0';
+    r'6014e3c50f86d141ba5d02296fc404672a65fb0a';
 
 /// See also [proofCompetenceRepository].
 @ProviderFor(proofCompetenceRepository)

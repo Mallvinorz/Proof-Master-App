@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/student_repository_impl.dart';
 import 'package:proofmaster/app/data/responses/teacher/get_students_response/student.dart';
 import 'package:proofmaster/app/domain/repositories/student_repository.dart';
@@ -8,7 +7,7 @@ part 'student_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 StudentRepository studentRepository(StudentRepositoryRef ref) {
-  return StudentRepositoryImpl(http.Client());
+  return StudentRepositoryImpl();
 }
 
 @Riverpod(keepAlive: true)

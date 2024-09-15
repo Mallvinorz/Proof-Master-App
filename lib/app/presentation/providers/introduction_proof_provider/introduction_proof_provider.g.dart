@@ -7,7 +7,7 @@ part of 'introduction_proof_provider.dart';
 // **************************************************************************
 
 String _$introductionProofRepositoryHash() =>
-    r'2eebbff6d425d5dd4d9708aea92cdfbbeae2a393';
+    r'7be95908a966ef45e4ddd8d85714fe80f2a6a6b2';
 
 /// See also [introductionProofRepository].
 @ProviderFor(introductionProofRepository)

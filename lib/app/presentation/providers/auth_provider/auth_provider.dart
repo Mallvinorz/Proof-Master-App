@@ -12,7 +12,7 @@ part 'auth_provider.g.dart';
 
 @riverpod
 AuthRepository authRepository(AuthRepositoryRef ref) {
-  return AuthRepositoryImpl(http.Client());
+  return AuthRepositoryImpl();
 }
 
 class AuthState {
@@ -84,10 +84,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
         throw Exception("Error saat register, cek kembali form register anda!");
       }
 
-      final authRepository = AuthRepositoryImpl(http.Client());
+      final authRepository = AuthRepositoryImpl();
       final authDto =
           AuthDTO(email: state.email.value, password: state.password.value);
-      final result = await authRepository.signin(authDto, authDto.password);
+      final result = await authRepository.signin(authDto);
       if (result.data?.role == null) {
         throw Exception("User belum teregistrasi");
       }
@@ -101,7 +101,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   Future<void> signout() async {
-    final authRepository = AuthRepositoryImpl(http.Client());
+    final authRepository = AuthRepositoryImpl();
     await authRepository.signout();
   }
 

@@ -1,4 +1,4 @@
 {
-  "discord.enabled": false,
+  "discord.enabled": true,
   "cmake.sourceDirectory": "D:/codings/flutter/proofmaster/windows"
 }

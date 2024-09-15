@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/repositories/dashboard_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/domain/repositories/dashboard_repository.dart';
@@ -8,7 +7,7 @@ part 'dashboard_provider.g.dart';
 
 @riverpod
 DashboardRepository dashboardRepository(DashboardRepositoryRef ref) {
-  return DashboardRepositoryImpl(http.Client());
+  return DashboardRepositoryImpl();
 }
 
 @riverpod

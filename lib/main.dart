@@ -20,12 +20,23 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @mustCallSuper
+  @protected
+  void dispose() {
+    print('dispose called.............');
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final initialRouteAsync = ref.watch(initialRouteProvider);
 
     return initialRouteAsync.when(
