@@ -25,7 +25,6 @@ class _ShimmerLoaderState extends State<ShimmerLoader>
       ..repeat(min: -0.5, max: 1.5, period: const Duration(milliseconds: 1000));
   }
 
-
   @override
   Widget build(BuildContext context) {
     if (!widget.isLoading) {

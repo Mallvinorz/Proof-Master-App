@@ -57,6 +57,7 @@ class _content extends StatelessWidget {
             width: 16.0,
           ),
           Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(

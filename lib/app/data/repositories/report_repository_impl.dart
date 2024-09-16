@@ -1,4 +1,5 @@
 import 'package:proofmaster/app/data/responses/general/get_report_progress/get_report_progress.dart';
+import 'package:proofmaster/app/data/responses/student/get_introduction_proof_response/get_introduction_proof_response.dart';
 import 'package:proofmaster/app/domain/entities/report_item/report_item.dart';
 import 'package:proofmaster/app/domain/repositories/report_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
@@ -57,5 +58,18 @@ class ReportRepositoryImpl implements ReportRepository {
 
   void dispose() {
     httpClientWithInterceptor.close();
+  }
+
+  @override
+  Future<GetIntroductionProofResponse> getIntroductionProofReportProgress() {
+    // TODO: implement getIntroductionProofReportProgress
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<GetIntroductionProofResponse>
+      getIntroductionProofReportProgressStudent(String studentId) {
+    // TODO: implement getIntroductionProofReportProgressStudent
+    throw UnimplementedError();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:proofmaster/app/data/responses/student/finished_reading_introduction_material_response.dart';
 import 'package:proofmaster/app/data/responses/student/get_introduction_proof_response/get_introduction_proof_response.dart';
 import 'package:proofmaster/app/domain/repositories/introduction_proof_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
@@ -26,5 +27,12 @@ class IntroductionProofRepositoryImpl implements IntroductionProofRepository {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<FinishedReadingIntroductionMaterialResponse> finishedReadingMaterial(
+      String materialId) {
+    // TODO: implement finishedReadingMaterial
+    throw UnimplementedError();
   }
 }

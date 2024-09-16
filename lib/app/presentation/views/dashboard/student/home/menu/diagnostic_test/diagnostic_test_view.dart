@@ -20,7 +20,7 @@ class DiagnosticTestView extends StatelessWidget {
       iconUrl: "assets/icons/prior_ic.png",
     ),
     DiagnosticTestItem(
-      endpoint: "proof-format-test",
+      endpoint: "proof-format-preference-test",
       text: "Proof Format Preference",
       iconUrl: "assets/icons/proof_ic.png",
     ),

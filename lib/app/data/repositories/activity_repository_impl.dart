@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:proofmaster/app/data/responses/student/get_activities_understading_proof/get_activities_understading_proof.dart';
 import 'package:proofmaster/app/data/responses/student/post_file_activity_response/upload_file_activity_response/upload_file_activity_response.dart';
+import 'package:proofmaster/app/data/responses/teacher/post_review_response.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/domain/repositories/activity_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
@@ -75,5 +76,11 @@ class ActivityRepositoryImpl implements ActivityRepository {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<PostReviewResponse> postReviewActivity() {
+    // TODO: implement postReviewActivity
+    throw UnimplementedError();
   }
 }

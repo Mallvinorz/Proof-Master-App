@@ -3,11 +3,10 @@ import 'package:proofmaster/app/data/responses/general/auth_reponse/auth_reponse
 import 'package:proofmaster/app/data/responses/general/reset_password_response.dart';
 import 'package:proofmaster/app/data/responses/student/register_succes_reponse.dart';
 import 'package:proofmaster/app/domain/entities/auth_dto/authdto.dart';
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:proofmaster/app/domain/entities/register_dto/registerdto.dart';
 import 'package:proofmaster/app/domain/entities/resetpassworddto.dart';
 import 'package:proofmaster/app/domain/repositories/auth_repository.dart';
-import 'package:proofmaster/app/helper/http_client.dart';
+// import 'package:proofmaster/app/helper/http_client.dart';
 import 'package:proofmaster/app/utils/shared_pref.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -28,7 +27,7 @@ class AuthRepositoryImpl implements AuthRepository {
       // final url =
       //     Uri.https('oh-my-api-seven.vercel.app', 'api/end-to-end', queries);
       final url = Uri.http('43.228.213.172:3000', 'api/users/login');
-      final response = await httpClientWithInterceptor.post(
+      final response = await http.Client().post(
         url,
         headers: <String, String>{
           'Accept': 'application/json',
@@ -37,9 +36,10 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       final result = AuthReponse.fromJson(response.body);
 
-      print("result $result");
       (await pref).setString(AUTH_TOKEN, result.data?.token ?? "");
       (await pref).setString(ROLE, result.data?.role ?? "");
+      (await pref).setString(SAVED_EMAIL, authDto.email);
+      (await pref).setString(SAVED_PASSWORD, authDto.password);
 
       return result;
     } catch (e) {
@@ -84,7 +84,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final url = Uri.http('43.228.213.172:3000', 'api/users/reset-password');
       final resetPasswordDto = ResetPasswordDto(email: email);
-      final response = await httpClientWithInterceptor.post(
+      final response = await http.Client().post(
         url,
         headers: <String, String>{
           'Accept': 'application/json',

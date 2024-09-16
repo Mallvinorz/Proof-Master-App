@@ -31,28 +31,33 @@ class LecturerDashboardContent extends ConsumerWidget {
             child: isRefreshing
                 ? const _loader()
                 : studentsAsync.when(
-                    data: (data) => ListView.builder(
-                        padding: const EdgeInsets.only(top: 16),
-                        itemCount: data.length,
-                        itemBuilder: (context, index) => data.isEmpty
-                            ? const Text("Tidak ada siswa")
-                            : Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4),
-                                child: SettingMenuItem(
-                                  text: data[index]?.name ?? "-",
-                                  onTap: () {
-                                    final student = data[index];
-                                    context.pushNamed(
-                                      ProofmasterRoute.lecturerReports,
-                                      pathParameters: {
-                                        "studentId": student?.id ?? "-",
-                                        "studentName": student?.name ?? "-",
-                                      },
-                                    );
-                                  },
-                                ),
-                              )),
+                    data: (data) => RefreshIndicator(
+                      onRefresh: () async {
+                        await ref.read(studentsProvider.notifier).refresh();
+                      },
+                      child: ListView.builder(
+                          padding: const EdgeInsets.only(top: 16),
+                          itemCount: data.length,
+                          itemBuilder: (context, index) => data.isEmpty
+                              ? const Text("Tidak ada siswa")
+                              : Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4),
+                                  child: SettingMenuItem(
+                                    text: data[index]?.name ?? "-",
+                                    onTap: () {
+                                      final student = data[index];
+                                      context.pushNamed(
+                                        ProofmasterRoute.lecturerReports,
+                                        pathParameters: {
+                                          "studentId": student?.id ?? "-",
+                                          "studentName": student?.name ?? "-",
+                                        },
+                                      );
+                                    },
+                                  ),
+                                )),
+                    ),
                     error: (error, _) => ErrorHandler(
                         errorMessage: "$error",
                         action: () =>

@@ -103,7 +103,7 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
           error: (error, _) => Padding(
               padding: const EdgeInsets.only(top: 32),
               child: ErrorHandler(
-                errorMessage: "$error",
+                errorMessage: "Quiz masih belum tersedia.",
                 action: () => ref
                     .refresh(getDiagnosticQuizQuestionsFromProvider(widget.id)),
               )),
