@@ -311,7 +311,7 @@ List<RouteBase> getRoutes() {
       name: ProofmasterRoute.understandingProofReportDetail,
       builder: (BuildContext context, GoRouterState state) {
         return DetailActivityReportView(
-          studentId: state.uri.queryParameters['studentId'],
+          activityId: state.uri.queryParameters['activityId'],
           title: state.uri.queryParameters['title'] ?? "Aktivitas",
         );
       },

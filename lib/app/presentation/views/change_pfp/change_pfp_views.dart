@@ -56,6 +56,7 @@ class _ChangePfpViewState extends ConsumerState<ChangePfpView> {
 
     return BackgroundPattern(
       usePatternBg: false,
+      onTapNavBack: () => context.pop(),
       appBarTitle: "Foto profil",
       mainChildren: isRefreshing
           ? const _loader()

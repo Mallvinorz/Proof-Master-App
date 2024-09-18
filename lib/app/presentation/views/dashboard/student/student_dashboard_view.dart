@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proofmaster/app/domain/repositories/dashboard_repository.dart';
+import 'package:proofmaster/app/presentation/providers/user_provider/user_provider.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/dashboard_content.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/widgets/top_banner.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/settings/widgets/settings_content.dart';
@@ -43,6 +44,7 @@ class _StudentDashboardViewState extends ConsumerState<StudentDashboardView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       dashboardRepository = ref.watch(dashboardRepositoryProvider);
+      ref.read(userProvider.notifier).refresh();
     });
   }
 

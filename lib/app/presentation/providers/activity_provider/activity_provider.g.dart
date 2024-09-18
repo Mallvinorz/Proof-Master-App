@@ -39,7 +39,7 @@ final isRefreshingProvider =
 
 typedef _$IsRefreshing = AutoDisposeNotifier<bool>;
 String _$proofUnderstadingActivitiesHash() =>
-    r'b879d9d8d7d64771cd9a28595817227f0c8e11cb';
+    r'd382f2c53dc28b921cc489e3d9b1420c8bdeeb4a';
 
 /// See also [ProofUnderstadingActivities].
 @ProviderFor(ProofUnderstadingActivities)
@@ -56,25 +56,25 @@ final proofUnderstadingActivitiesProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$ProofUnderstadingActivities
     = AutoDisposeAsyncNotifier<List<ListItem>>;
-String _$isRefreshingPdfActivityHash() =>
-    r'cb3a3df14d06fb1977a76fe855d7147ecd4a6115';
+String _$isRefreshingAnsweredHash() =>
+    r'd45b2c9fe5c862d9792a3b846c14a7370e034d24';
 
-/// See also [IsRefreshingPdfActivity].
-@ProviderFor(IsRefreshingPdfActivity)
-final isRefreshingPdfActivityProvider =
-    AutoDisposeNotifierProvider<IsRefreshingPdfActivity, bool>.internal(
-  IsRefreshingPdfActivity.new,
-  name: r'isRefreshingPdfActivityProvider',
+/// See also [IsRefreshingAnswered].
+@ProviderFor(IsRefreshingAnswered)
+final isRefreshingAnsweredProvider =
+    AutoDisposeNotifierProvider<IsRefreshingAnswered, bool>.internal(
+  IsRefreshingAnswered.new,
+  name: r'isRefreshingAnsweredProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$isRefreshingPdfActivityHash,
+      : _$isRefreshingAnsweredHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$IsRefreshingPdfActivity = AutoDisposeNotifier<bool>;
-String _$proofUnderstadingActivityHash() =>
-    r'f0c269f4190537fa1e805acea69b72c3cd71c694';
+typedef _$IsRefreshingAnswered = AutoDisposeNotifier<bool>;
+String _$proofUnderstadingAnsweredActivitiesHash() =>
+    r'19212913a98b059be9cdb82e991e01a3fe30dc74';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -96,6 +96,353 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+abstract class _$ProofUnderstadingAnsweredActivities
+    extends BuildlessAutoDisposeAsyncNotifier<List<ListItem>> {
+  late final String studentId;
+
+  FutureOr<List<ListItem>> build(
+    String studentId,
+  );
+}
+
+/// See also [ProofUnderstadingAnsweredActivities].
+@ProviderFor(ProofUnderstadingAnsweredActivities)
+const proofUnderstadingAnsweredActivitiesProvider =
+    ProofUnderstadingAnsweredActivitiesFamily();
+
+/// See also [ProofUnderstadingAnsweredActivities].
+class ProofUnderstadingAnsweredActivitiesFamily
+    extends Family<AsyncValue<List<ListItem>>> {
+  /// See also [ProofUnderstadingAnsweredActivities].
+  const ProofUnderstadingAnsweredActivitiesFamily();
+
+  /// See also [ProofUnderstadingAnsweredActivities].
+  ProofUnderstadingAnsweredActivitiesProvider call(
+    String studentId,
+  ) {
+    return ProofUnderstadingAnsweredActivitiesProvider(
+      studentId,
+    );
+  }
+
+  @override
+  ProofUnderstadingAnsweredActivitiesProvider getProviderOverride(
+    covariant ProofUnderstadingAnsweredActivitiesProvider provider,
+  ) {
+    return call(
+      provider.studentId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'proofUnderstadingAnsweredActivitiesProvider';
+}
+
+/// See also [ProofUnderstadingAnsweredActivities].
+class ProofUnderstadingAnsweredActivitiesProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<
+        ProofUnderstadingAnsweredActivities, List<ListItem>> {
+  /// See also [ProofUnderstadingAnsweredActivities].
+  ProofUnderstadingAnsweredActivitiesProvider(
+    String studentId,
+  ) : this._internal(
+          () => ProofUnderstadingAnsweredActivities()..studentId = studentId,
+          from: proofUnderstadingAnsweredActivitiesProvider,
+          name: r'proofUnderstadingAnsweredActivitiesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$proofUnderstadingAnsweredActivitiesHash,
+          dependencies: ProofUnderstadingAnsweredActivitiesFamily._dependencies,
+          allTransitiveDependencies: ProofUnderstadingAnsweredActivitiesFamily
+              ._allTransitiveDependencies,
+          studentId: studentId,
+        );
+
+  ProofUnderstadingAnsweredActivitiesProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.studentId,
+  }) : super.internal();
+
+  final String studentId;
+
+  @override
+  FutureOr<List<ListItem>> runNotifierBuild(
+    covariant ProofUnderstadingAnsweredActivities notifier,
+  ) {
+    return notifier.build(
+      studentId,
+    );
+  }
+
+  @override
+  Override overrideWith(ProofUnderstadingAnsweredActivities Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: ProofUnderstadingAnsweredActivitiesProvider._internal(
+        () => create()..studentId = studentId,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        studentId: studentId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<ProofUnderstadingAnsweredActivities,
+      List<ListItem>> createElement() {
+    return _ProofUnderstadingAnsweredActivitiesProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ProofUnderstadingAnsweredActivitiesProvider &&
+        other.studentId == studentId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, studentId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ProofUnderstadingAnsweredActivitiesRef
+    on AutoDisposeAsyncNotifierProviderRef<List<ListItem>> {
+  /// The parameter `studentId` of this provider.
+  String get studentId;
+}
+
+class _ProofUnderstadingAnsweredActivitiesProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<
+        ProofUnderstadingAnsweredActivities,
+        List<ListItem>> with ProofUnderstadingAnsweredActivitiesRef {
+  _ProofUnderstadingAnsweredActivitiesProviderElement(super.provider);
+
+  @override
+  String get studentId =>
+      (origin as ProofUnderstadingAnsweredActivitiesProvider).studentId;
+}
+
+String _$isRefreshingAnsweredDetailHash() =>
+    r'1e09be101f23c5abe74896ba5fbbfd88faa9f87b';
+
+/// See also [IsRefreshingAnsweredDetail].
+@ProviderFor(IsRefreshingAnsweredDetail)
+final isRefreshingAnsweredDetailProvider =
+    AutoDisposeNotifierProvider<IsRefreshingAnsweredDetail, bool>.internal(
+  IsRefreshingAnsweredDetail.new,
+  name: r'isRefreshingAnsweredDetailProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$isRefreshingAnsweredDetailHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$IsRefreshingAnsweredDetail = AutoDisposeNotifier<bool>;
+String _$proofUnderstadingAnsweredDetailActivityHash() =>
+    r'f7885835d16ef3c6bcaed2c5a73eb2286f0fbdb9';
+
+abstract class _$ProofUnderstadingAnsweredDetailActivity
+    extends BuildlessAutoDisposeAsyncNotifier<
+        GetAnsweredActivityFromStudentResponse> {
+  late final String activityId;
+
+  FutureOr<GetAnsweredActivityFromStudentResponse> build(
+    String activityId,
+  );
+}
+
+/// See also [ProofUnderstadingAnsweredDetailActivity].
+@ProviderFor(ProofUnderstadingAnsweredDetailActivity)
+const proofUnderstadingAnsweredDetailActivityProvider =
+    ProofUnderstadingAnsweredDetailActivityFamily();
+
+/// See also [ProofUnderstadingAnsweredDetailActivity].
+class ProofUnderstadingAnsweredDetailActivityFamily
+    extends Family<AsyncValue<GetAnsweredActivityFromStudentResponse>> {
+  /// See also [ProofUnderstadingAnsweredDetailActivity].
+  const ProofUnderstadingAnsweredDetailActivityFamily();
+
+  /// See also [ProofUnderstadingAnsweredDetailActivity].
+  ProofUnderstadingAnsweredDetailActivityProvider call(
+    String activityId,
+  ) {
+    return ProofUnderstadingAnsweredDetailActivityProvider(
+      activityId,
+    );
+  }
+
+  @override
+  ProofUnderstadingAnsweredDetailActivityProvider getProviderOverride(
+    covariant ProofUnderstadingAnsweredDetailActivityProvider provider,
+  ) {
+    return call(
+      provider.activityId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'proofUnderstadingAnsweredDetailActivityProvider';
+}
+
+/// See also [ProofUnderstadingAnsweredDetailActivity].
+class ProofUnderstadingAnsweredDetailActivityProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<
+        ProofUnderstadingAnsweredDetailActivity,
+        GetAnsweredActivityFromStudentResponse> {
+  /// See also [ProofUnderstadingAnsweredDetailActivity].
+  ProofUnderstadingAnsweredDetailActivityProvider(
+    String activityId,
+  ) : this._internal(
+          () => ProofUnderstadingAnsweredDetailActivity()
+            ..activityId = activityId,
+          from: proofUnderstadingAnsweredDetailActivityProvider,
+          name: r'proofUnderstadingAnsweredDetailActivityProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$proofUnderstadingAnsweredDetailActivityHash,
+          dependencies:
+              ProofUnderstadingAnsweredDetailActivityFamily._dependencies,
+          allTransitiveDependencies:
+              ProofUnderstadingAnsweredDetailActivityFamily
+                  ._allTransitiveDependencies,
+          activityId: activityId,
+        );
+
+  ProofUnderstadingAnsweredDetailActivityProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.activityId,
+  }) : super.internal();
+
+  final String activityId;
+
+  @override
+  FutureOr<GetAnsweredActivityFromStudentResponse> runNotifierBuild(
+    covariant ProofUnderstadingAnsweredDetailActivity notifier,
+  ) {
+    return notifier.build(
+      activityId,
+    );
+  }
+
+  @override
+  Override overrideWith(
+      ProofUnderstadingAnsweredDetailActivity Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: ProofUnderstadingAnsweredDetailActivityProvider._internal(
+        () => create()..activityId = activityId,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        activityId: activityId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<
+      ProofUnderstadingAnsweredDetailActivity,
+      GetAnsweredActivityFromStudentResponse> createElement() {
+    return _ProofUnderstadingAnsweredDetailActivityProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ProofUnderstadingAnsweredDetailActivityProvider &&
+        other.activityId == activityId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, activityId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ProofUnderstadingAnsweredDetailActivityRef
+    on AutoDisposeAsyncNotifierProviderRef<
+        GetAnsweredActivityFromStudentResponse> {
+  /// The parameter `activityId` of this provider.
+  String get activityId;
+}
+
+class _ProofUnderstadingAnsweredDetailActivityProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<
+        ProofUnderstadingAnsweredDetailActivity,
+        GetAnsweredActivityFromStudentResponse>
+    with ProofUnderstadingAnsweredDetailActivityRef {
+  _ProofUnderstadingAnsweredDetailActivityProviderElement(super.provider);
+
+  @override
+  String get activityId =>
+      (origin as ProofUnderstadingAnsweredDetailActivityProvider).activityId;
+}
+
+String _$isRefreshingPdfActivityHash() =>
+    r'cb3a3df14d06fb1977a76fe855d7147ecd4a6115';
+
+/// See also [IsRefreshingPdfActivity].
+@ProviderFor(IsRefreshingPdfActivity)
+final isRefreshingPdfActivityProvider =
+    AutoDisposeNotifierProvider<IsRefreshingPdfActivity, bool>.internal(
+  IsRefreshingPdfActivity.new,
+  name: r'isRefreshingPdfActivityProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$isRefreshingPdfActivityHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$IsRefreshingPdfActivity = AutoDisposeNotifier<bool>;
+String _$proofUnderstadingActivityHash() =>
+    r'f0c269f4190537fa1e805acea69b72c3cd71c694';
 
 abstract class _$ProofUnderstadingActivity
     extends BuildlessAutoDisposeAsyncNotifier<

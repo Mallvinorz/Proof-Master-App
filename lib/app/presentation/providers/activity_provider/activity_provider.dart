@@ -1,6 +1,7 @@
 import 'package:fimber/fimber.dart';
 import 'package:proofmaster/app/data/repositories/activity_repository_impl.dart';
 import 'package:proofmaster/app/data/responses/student/get_understanding_proof_activity_response/get_understanding_proof_activity_response.dart';
+import 'package:proofmaster/app/data/responses/teacher/get_answered_activity_from_student_response/get_answered_activity_from_student_response.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
 import 'package:proofmaster/app/domain/entities/post_understanding_proof_answer_dto/postunderstandingproofanswedto.dart';
 import 'package:proofmaster/app/domain/repositories/activity_repository.dart';
@@ -26,10 +27,10 @@ class IsRefreshing extends _$IsRefreshing {
 class ProofUnderstadingActivities extends _$ProofUnderstadingActivities {
   @override
   Future<List<ListItem>> build() async {
-    return _fetchMenus();
+    return _fetchActivities();
   }
 
-  Future<List<ListItem>> _fetchMenus() async {
+  Future<List<ListItem>> _fetchActivities() async {
     final repository = ref.watch(activityRepositoryProvider);
     return repository.getActivities();
   }
@@ -37,7 +38,67 @@ class ProofUnderstadingActivities extends _$ProofUnderstadingActivities {
   Future<void> refresh() async {
     ref.read(isRefreshingProvider.notifier).setRefreshing(true);
     state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() => _fetchMenus());
+    state = await AsyncValue.guard(() => _fetchActivities());
+    ref.read(isRefreshingProvider.notifier).setRefreshing(false);
+  }
+}
+
+@riverpod
+class IsRefreshingAnswered extends _$IsRefreshingAnswered {
+  @override
+  bool build() => false;
+
+  void setRefreshing(bool value) => state = value;
+}
+
+@riverpod
+class ProofUnderstadingAnsweredActivities
+    extends _$ProofUnderstadingAnsweredActivities {
+  @override
+  Future<List<ListItem>> build(String studentId) async {
+    return _fetchActivities(studentId);
+  }
+
+  Future<List<ListItem>> _fetchActivities(String studentId) async {
+    final repository = ref.watch(activityRepositoryProvider);
+    return repository.getStudentAnsweredActivities(studentId);
+  }
+
+  Future<void> refresh(String studentId) async {
+    ref.read(isRefreshingProvider.notifier).setRefreshing(true);
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() => _fetchActivities(studentId));
+    ref.read(isRefreshingProvider.notifier).setRefreshing(false);
+  }
+}
+
+@riverpod
+class IsRefreshingAnsweredDetail extends _$IsRefreshingAnsweredDetail {
+  @override
+  bool build() => false;
+
+  void setRefreshing(bool value) => state = value;
+}
+
+@riverpod
+class ProofUnderstadingAnsweredDetailActivity
+    extends _$ProofUnderstadingAnsweredDetailActivity {
+  @override
+  Future<GetAnsweredActivityFromStudentResponse> build(
+      String activityId) async {
+    return _fetchDetailActivity(activityId);
+  }
+
+  Future<GetAnsweredActivityFromStudentResponse> _fetchDetailActivity(
+      String activityId) async {
+    final repository = ref.watch(activityRepositoryProvider);
+    return repository.getStudentAnsweredActivity(activityId);
+  }
+
+  Future<void> refresh(String activityId) async {
+    ref.read(isRefreshingProvider.notifier).setRefreshing(true);
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() => _fetchDetailActivity(activityId));
     ref.read(isRefreshingProvider.notifier).setRefreshing(false);
   }
 }
