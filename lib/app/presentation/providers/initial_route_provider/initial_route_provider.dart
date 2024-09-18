@@ -1,6 +1,8 @@
+import 'package:fimber/fimber.dart';
 import 'package:proofmaster/app/data/repositories/onboarding_repository_impl.dart';
 import 'package:proofmaster/app/domain/repositories/onboarding_repository.dart';
 import 'package:proofmaster/app/presentation/providers/auth_provider/auth_provider.dart';
+import 'package:proofmaster/app/utils/shared_pref.dart';
 import 'package:proofmaster/router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -22,6 +24,15 @@ class InitialRoute extends _$InitialRoute {
     final onBoardingRepository = ref.watch(onboardingRepositoryProvider);
     final authRepository = ref.watch(authRepositoryProvider);
     final onboardStatusFinished = await onBoardingRepository.getOnboardStatus();
+
+    final savedUsername = (await pref).getString(SAVED_EMAIL);
+    final savedPassword = (await pref).getString(SAVED_PASSWORD);
+
+    Fimber.d("email $savedUsername password $savedPassword");
+    if ((savedPassword == null && savedUsername == null) ||
+        (savedPassword == "" && savedUsername == "")) {
+      return ProofmasterRoute.auth;
+    }
 
     if (!onboardStatusFinished) {
       return ProofmasterRoute.onBoarding;

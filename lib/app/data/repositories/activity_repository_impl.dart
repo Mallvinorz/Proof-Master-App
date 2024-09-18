@@ -1,35 +1,36 @@
-import 'dart:io';
 import 'package:fimber/fimber.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:proofmaster/app/data/responses/student/get_activities_understading_proof/get_activities_understading_proof.dart';
+import 'package:proofmaster/app/data/responses/student/get_understanding_proof_activity_response/get_understanding_proof_activity_response.dart';
 import 'package:proofmaster/app/data/responses/student/post_file_activity_response/upload_file_activity_response/upload_file_activity_response.dart';
 import 'package:proofmaster/app/data/responses/teacher/post_review_response.dart';
 import 'package:proofmaster/app/domain/entities/list_item/list_item.dart';
+import 'package:proofmaster/app/domain/entities/post_understanding_proof_answer_dto/postunderstandingproofanswedto.dart';
 import 'package:proofmaster/app/domain/repositories/activity_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
 import 'package:proofmaster/app/helper/interceptor.dart';
+import 'package:proofmaster/constanta.dart';
 
 class ActivityRepositoryImpl implements ActivityRepository {
-  final _baseUrl = 'oh-my-api-seven.vercel.app';
   @override
   Future<UploadFileActivityResponse> uploadFile(
-      File pdfFile, String filename, String id) async {
+      PostUnderstandingProofAnsweDto dto) async {
     try {
-      final queries = {'id': '8913d132-a776-4742-8adb-1ede7c3095fb'};
-      final url = Uri.https(_baseUrl, "api/end-to-end", queries);
-
+      final url =
+          Uri.http(BASEURL, "api/activities/submission/${dto.activityId}");
       // Create a custom client with our interceptor
       final client = InterceptedClient.build(interceptors: [AuthInterceptor()]);
 
       final request = http.MultipartRequest('POST', url);
-      Map<String, String> requestBody = <String, String>{'id': "value1"};
-      request.headers['Authorization'] = "Bearer change soon";
+      Map<String, String> requestBody = <String, String>{};
 
+      final filename =
+          "student-answer-actvity-${dto.activityId}-${DateTime.now()}.pdf";
       request.files.add(http.MultipartFile(
         'file',
-        pdfFile.readAsBytes().asStream(),
-        pdfFile.lengthSync(),
+        dto.pdfFile.readAsBytes().asStream(),
+        dto.pdfFile.lengthSync(),
         filename: filename,
       ));
       request.fields.addAll(requestBody);
@@ -56,13 +57,11 @@ class ActivityRepositoryImpl implements ActivityRepository {
   @override
   Future<List<ListItem>> getActivities() async {
     try {
-      final queries = {'id': '8ef65238-3e9f-4e07-8fd7-c6d07954b092'};
-      final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
-      print(uri);
+      final uri = Uri.http(BASEURL, "api/activities");
+
       final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer haha',
       });
       final result = GetActivitiesUnderstadingProof.fromJson(response.body);
 
@@ -82,5 +81,24 @@ class ActivityRepositoryImpl implements ActivityRepository {
   Future<PostReviewResponse> postReviewActivity() {
     // TODO: implement postReviewActivity
     throw UnimplementedError();
+  }
+
+  @override
+  Future<GetUnderstandingProofActivityResponse> getActivity(
+      String activityId) async {
+    try {
+      final uri = Uri.http(BASEURL, "api/activities/$activityId");
+
+      final response = await httpClientWithInterceptor.get(uri, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      });
+      final result =
+          GetUnderstandingProofActivityResponse.fromJson(response.body);
+
+      return result;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

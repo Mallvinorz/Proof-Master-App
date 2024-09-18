@@ -5,7 +5,7 @@ import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 class FilePickerPdf extends StatefulWidget {
-  final Function(FilePickerResult?) onPickFile;
+  final Function(PlatformFile?) onPickFile;
   const FilePickerPdf({super.key, required this.onPickFile});
 
   @override
@@ -16,13 +16,11 @@ class _FilePickerPdfState extends State<FilePickerPdf> {
   String? _filename;
   Future<FilePickerResult?> handlePickFile() async {
     final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-    );
+        type: FileType.custom, allowedExtensions: ['pdf'], withData: true);
     setState(() {
       _filename = result?.files[0].name;
     });
-    widget.onPickFile(result);
+    widget.onPickFile(result?.files[0]);
     return result;
   }
 

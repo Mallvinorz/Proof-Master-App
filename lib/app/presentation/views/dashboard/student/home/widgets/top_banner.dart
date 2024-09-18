@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/presentation/providers/user_provider/user_provider.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/app/presentation/widgets/error_handler.dart';
 import 'package:proofmaster/app/presentation/widgets/shimmer_loader.dart';
@@ -60,8 +62,11 @@ class _content extends StatelessWidget {
                 ? const CircleAvatar(
                     backgroundImage:
                         AssetImage('assets/images/dumy_avatar.jpeg'))
-                : CircleAvatar(
-                    backgroundImage: NetworkImage(imageUrl!),
+                : GestureDetector(
+                    onTap: () => context.push(ProofmasterRoute.changePfp),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(imageUrl!),
+                    ),
                   )
           ],
         ),

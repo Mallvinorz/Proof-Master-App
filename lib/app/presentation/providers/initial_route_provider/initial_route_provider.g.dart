@@ -23,7 +23,7 @@ final onboardingRepositoryProvider =
 );
 
 typedef OnboardingRepositoryRef = AutoDisposeProviderRef<OnboardingRepository>;
-String _$initialRouteHash() => r'894456ca3bd3e32f9641dc16df0f21342f842485';
+String _$initialRouteHash() => r'5d18e348b86dd635de0a6738fe708fbec93b91a5';
 
 /// See also [InitialRoute].
 @ProviderFor(InitialRoute)

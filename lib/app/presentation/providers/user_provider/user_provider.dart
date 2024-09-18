@@ -1,5 +1,6 @@
 import 'package:proofmaster/app/data/repositories/user_repository_impl.dart';
 import 'package:proofmaster/app/data/responses/general/get_user/get_user_response/get_user_response.dart';
+import 'package:proofmaster/app/domain/entities/change_pfp_dto/changepfpdto.dart';
 import 'package:proofmaster/app/domain/repositories/user_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,6 +29,11 @@ class User extends _$User {
   Future<GetUserResponse> _fetchUserReponse() async {
     final repository = ref.watch(userRepositoryProvider);
     return repository.getUser();
+  }
+
+  Future<void> updatePfpProfile(ChangePfpDto changePfpDto) async {
+    final repository = ref.watch(userRepositoryProvider);
+    await repository.updatePfp(changePfpDto);
   }
 
   Future<void> refresh() async {

@@ -14,7 +14,7 @@ class ProofCompetenceRepositoryImpl implements ProofComptenceRepository {
       final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer haha',
+        // 'Authorization': 'Bearer haha',
       });
       final result = GetProofCompetenceQuizMenus.fromJson(response.body);
 

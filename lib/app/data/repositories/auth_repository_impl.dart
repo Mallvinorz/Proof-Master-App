@@ -1,13 +1,14 @@
+import 'package:fimber/fimber.dart';
 import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/responses/general/auth_reponse/auth_reponse.dart';
 import 'package:proofmaster/app/data/responses/general/reset_password_response.dart';
 import 'package:proofmaster/app/data/responses/student/register_succes_reponse.dart';
 import 'package:proofmaster/app/domain/entities/auth_dto/authdto.dart';
 import 'package:proofmaster/app/domain/entities/register_dto/registerdto.dart';
-import 'package:proofmaster/app/domain/entities/resetpassworddto.dart';
+import 'package:proofmaster/app/domain/entities/reset_password_dto/resetpassworddto.dart';
 import 'package:proofmaster/app/domain/repositories/auth_repository.dart';
-// import 'package:proofmaster/app/helper/http_client.dart';
 import 'package:proofmaster/app/utils/shared_pref.dart';
+import 'package:proofmaster/constanta.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   @override
@@ -18,15 +19,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<AuthReponse> signin(AuthDTO authDto) async {
     try {
-      // const teacherLoginKey = 'loginteacher';
-      // final queries = {
-      //   'id': (authDto.password == teacherLoginKey
-      //       ? '623303b8-7208-4433-80bb-f26fb0d248d3'
-      //       : 'f63a10e8-585e-4b20-8e8d-0bf67f0439d4')
-      // };
-      // final url =
-      //     Uri.https('oh-my-api-seven.vercel.app', 'api/end-to-end', queries);
-      final url = Uri.http('43.228.213.172:3000', 'api/users/login');
+      final url = Uri.http(BASEURL, 'api/users/login');
       final response = await http.Client().post(
         url,
         headers: <String, String>{
@@ -35,6 +28,9 @@ class AuthRepositoryImpl implements AuthRepository {
         body: authDto.toJson(),
       );
       final result = AuthReponse.fromJson(response.body);
+
+      Fimber.d("email ${authDto.email}");
+      Fimber.d("password ${authDto.password}");
 
       (await pref).setString(AUTH_TOKEN, result.data?.token ?? "");
       (await pref).setString(ROLE, result.data?.role ?? "");
@@ -50,9 +46,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<RegisterSuccesReponse> signup(RegisterDTO registerDto) async {
     try {
-      final url = Uri.http('43.228.213.172:3000', 'api/users');
+      final url = Uri.http(BASEURL, 'api/users');
       print(registerDto.toJson());
-      // throw Exception("ngentod");
       final response = await http.Client().post(
         url,
         headers: <String, String>{
@@ -82,7 +77,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<ResetPasswordResponse> resetPassword(String email) async {
     try {
-      final url = Uri.http('43.228.213.172:3000', 'api/users/reset-password');
+      final url = Uri.http(BASEURL, 'api/users/reset-password');
       final resetPasswordDto = ResetPasswordDto(email: email);
       final response = await http.Client().post(
         url,

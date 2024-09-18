@@ -26,6 +26,12 @@ class _ShimmerLoaderState extends State<ShimmerLoader>
   }
 
   @override
+  void dispose() {
+    _shimmerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (!widget.isLoading) {
       return widget.child;

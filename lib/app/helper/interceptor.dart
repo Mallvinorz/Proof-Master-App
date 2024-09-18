@@ -16,13 +16,21 @@ class AuthInterceptor implements InterceptorContract {
     print('Headers: ${request.headers}');
 
     String? jwtToken = (await pref).getString(AUTH_TOKEN) ?? "";
+    request.headers.addAll({'Authorization': 'Bearer $jwtToken'});
+
     final decodedJwt = JWTDecoder.decodeJwt(jwtToken);
+    Fimber.d("TOKEN $decodedJwt");
+
     final DateTime jwtExpDateTime =
         DateTime.fromMillisecondsSinceEpoch(decodedJwt['exp'] * 1000);
 
     if (DateTime.now().toUtc().isAfter(jwtExpDateTime.toUtc())) {
-      Fimber.d("requesting new access token");
+      Fimber.d("TOKEN INVALID");
       await refreshToken();
+
+      String? newJwtToken = (await pref).getString(AUTH_TOKEN) ?? "";
+      Fimber.d("requesting new access token $newJwtToken");
+      request.headers.addAll({'Authorization': 'Bearer $newJwtToken'});
       return request;
     }
     return request;
@@ -36,9 +44,9 @@ class AuthInterceptor implements InterceptorContract {
       print('Status: ${response.statusCode}');
       print('Headers: ${response.headers}');
 
-      if (response.statusCode == 401) {
-        await refreshToken();
-      }
+      // if (response.statusCode == 401) {
+      //   await refreshToken();
+      // }
       return response;
     } catch (e) {
       rethrow;
@@ -48,6 +56,8 @@ class AuthInterceptor implements InterceptorContract {
   Future<void> refreshToken() async {
     final savedUsername = (await pref).getString(SAVED_EMAIL);
     final savedPassword = (await pref).getString(SAVED_PASSWORD);
+
+    Fimber.d("email $savedUsername password $savedPassword");
     final authRepository = AuthRepositoryImpl();
 
     final authDto =

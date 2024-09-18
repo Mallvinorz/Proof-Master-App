@@ -9,7 +9,6 @@ import 'package:proofmaster/theme/text_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   Fimber.plantTree(DebugTree());
   await FlutterDownloader.initialize(
       debug:

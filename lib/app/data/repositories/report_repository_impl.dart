@@ -16,7 +16,7 @@ class ReportRepositoryImpl implements ReportRepository {
       final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer haha',
+        // 'Authorization': 'Bearer haha',
       });
       final result = GetReportProgress.fromJson(response.body);
 
@@ -40,7 +40,7 @@ class ReportRepositoryImpl implements ReportRepository {
       final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer haha',
+        // 'Authorization': 'Bearer haha',
       });
 
       final result = GetReportProgress.fromJson(response.body);

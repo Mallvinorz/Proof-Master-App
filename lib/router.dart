@@ -8,6 +8,7 @@ import 'package:proofmaster/app/presentation/templates/report/introduction_proof
 import 'package:proofmaster/app/presentation/templates/report/proof_competence_test/proof_competence_test_report_view.dart';
 import 'package:proofmaster/app/presentation/templates/report/understanding_proof/detail/detail_activity_report_view.dart';
 import 'package:proofmaster/app/presentation/templates/report/understanding_proof/understanding_proof_report_view.dart';
+import 'package:proofmaster/app/presentation/views/change_pfp/change_pfp_views.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/diagnostic_test_view.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/diagnostic_test_quiz.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/results/learning_modalitites_result_view.dart';
@@ -46,7 +47,7 @@ class ProofmasterRoute {
   static const String introductionProofMaterial = 'introduction-proof-material';
   static const String understandingProof = '/understanding-proof';
   static const String understandingProofActivity =
-      'understanding-proof-activity';
+      '/understanding-proof-activity';
   static const String proofCompetenceTest = '/proof-competence-test';
   static const String forgotPassword = '/forgot-password';
   static const String successResetPassword = '/success-reset-password';
@@ -68,6 +69,8 @@ class ProofmasterRoute {
   //menu reports students (understading proof activity)
   static const String understandingProofReportDetail =
       '/understanding-proof-report-detail';
+
+  static const String changePfp = '/change-pfp';
 }
 
 List<RouteBase> getRoutes() {
@@ -313,5 +316,11 @@ List<RouteBase> getRoutes() {
         );
       },
     ),
+    // change pfp
+    GoRoute(
+        path: ProofmasterRoute.changePfp,
+        builder: (BuildContext context, GoRouterState state) {
+          return const ChangePfpView();
+        })
   ];
 }
