@@ -7,7 +7,6 @@ import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/data/responses/teacher/get_answered_activity_from_student_response/get_answered_activity_from_student_response.dart';
 import 'package:proofmaster/app/domain/entities/activity_review_dto/activityreviewdto.dart';
 import 'package:proofmaster/app/presentation/providers/activity_provider/activity_provider.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/teacher/home/widgets/lecturer_dashboard_content.dart';
 import 'package:proofmaster/app/presentation/widgets/alert_dialog.dart';
 import 'package:proofmaster/app/presentation/widgets/error_handler.dart';
 import 'package:proofmaster/app/presentation/widgets/shimmer_loader.dart';
@@ -20,7 +19,9 @@ import 'package:proofmaster/app/presentation/widgets/textarea.dart';
 
 class DetailActivityReportContent extends ConsumerStatefulWidget {
   final String? activityId;
-  const DetailActivityReportContent({super.key, this.activityId});
+  final String? studentId;
+  const DetailActivityReportContent(
+      {super.key, this.activityId, this.studentId});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -72,13 +73,15 @@ class _DetailActivityReportContentState
         ? _buildLoader()
         : activities.when(
             data: (data) => _buildContent(data),
-            error: (error, _) => ErrorHandler(
-                errorMessage: "Error: $error",
-                action: () => ref
-                    .read(proofUnderstadingAnsweredDetailActivityProvider(
-                            widget.activityId!)
-                        .notifier)
-                    .refresh(widget.activityId!)),
+            error: (error, _) => SingleChildScrollView(
+              child: ErrorHandler(
+                  errorMessage: "Error: $error",
+                  action: () => ref
+                      .read(proofUnderstadingAnsweredDetailActivityProvider(
+                              widget.activityId!)
+                          .notifier)
+                      .refresh(widget.activityId!)),
+            ),
             loading: () => _buildLoader(),
           );
   }
@@ -126,48 +129,49 @@ class _DetailActivityReportContentState
             height: 16.0,
           ),
           Commentar(
-              isLoadingPost: _isLoadingPostReview,
-              onPostReview: (comment) async {
-                FocusManager.instance.primaryFocus?.unfocus();
-                if (widget.activityId == null) return;
-                try {
-                  setPostReviewLoading(true);
-                  final dto = ActivityReviewDto(
-                      activityId: widget.activityId!, comment: comment);
-                  await ref
-                      .read(activityRepositoryProvider)
-                      .postReviewActivity(dto);
+            isLoadingPost: _isLoadingPostReview,
+            initialValue: data.data?.comment ?? "",
+            readOnly: widget.studentId == "",
+            onPostReview: (comment) async {
+              FocusManager.instance.primaryFocus?.unfocus();
+              if (widget.studentId == null) return;
+              try {
+                setPostReviewLoading(true);
+                final dto = ActivityReviewDto(
+                    activityId: widget.activityId!, comment: comment);
+                await ref
+                    .read(activityRepositoryProvider)
+                    .postReviewActivity(dto);
 
-                  alertDialog(
-                      context: context,
-                      message: "Review jawaban anda telah disimpan ke server!",
-                      title: "Berhasil mengunggah review jawaban!",
-                      isSuccess: true,
-                      actionWidgets: [
-                        TextButton(
-                            onPressed: () {
-                              context.pop();
-                              context.pop();
-                            },
-                            child: const Text("Tutup"))
-                      ]);
-                } catch (e) {
-                  alertDialog(
-                      context: context,
-                      message: "Error: $e",
-                      title: "Gagal mengunggah review jawaban!",
-                      isSuccess: false,
-                      actionWidgets: [
-                        TextButton(
-                            onPressed: () => context.pop(),
-                            child: const Text("Tutup"))
-                      ]);
-                } finally {
-                  setPostReviewLoading(false);
-                }
-              },
-              initialValue: data.data?.comment ?? "",
-              readOnly: widget.activityId == "")
+                alertDialog(
+                    context: context,
+                    message: "Review jawaban anda telah disimpan ke server!",
+                    title: "Berhasil mengunggah review jawaban!",
+                    isSuccess: true,
+                    actionWidgets: [
+                      TextButton(
+                          onPressed: () {
+                            context.pop();
+                            context.pop();
+                          },
+                          child: const Text("Tutup"))
+                    ]);
+              } catch (e) {
+                alertDialog(
+                    context: context,
+                    message: "Error: $e",
+                    title: "Gagal mengunggah review jawaban!",
+                    isSuccess: false,
+                    actionWidgets: [
+                      TextButton(
+                          onPressed: () => context.pop(),
+                          child: const Text("Tutup"))
+                    ]);
+              } finally {
+                setPostReviewLoading(false);
+              }
+            },
+          )
         ],
       ),
     );
@@ -248,7 +252,8 @@ class Commentar extends StatelessWidget {
     final TextEditingController controller =
         TextEditingController(text: initialValue);
     return readOnly
-        ? Expanded(
+        ? SizedBox(
+            height: 100,
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -263,19 +268,9 @@ class Commentar extends StatelessWidget {
                         style: CustomTextTheme.proofMasterTextTheme.bodyLarge
                             ?.copyWith(color: Colors.grey)),
                     Text(
-                      "Lorem ipsum dolor sit amet, consectetur .",
+                      initialValue.isEmpty ? "Belum ada review" : initialValue,
                       style: CustomTextTheme.proofMasterTextTheme.bodyMedium,
                     ),
-                    const SizedBox(height: 12),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Text(
-                        "Dikirim pada: 2/12/2012",
-                        style: CustomTextTheme.proofMasterTextTheme.bodySmall
-                            ?.copyWith(color: Colors.grey),
-                        textAlign: TextAlign.end,
-                      ),
-                    )
                   ],
                 ),
               ),

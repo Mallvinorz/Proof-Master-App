@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/results/learning_modalitites_result_view.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/results/prior_knowledge_result_view.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/results/proof_format_preference_result_view.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/go_back_quiz_dialog.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/submit_quiz_dialog.dart';
 import 'package:proofmaster/app/presentation/providers/quiz_provider/quiz_provider.dart';
 import 'package:proofmaster/app/presentation/templates/background_pattern.dart';
 import 'package:proofmaster/app/presentation/templates/quiz_template.dart';
-import 'package:proofmaster/router.dart';
+import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/diagnostic_test_view.dart';
+import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/results/learning_modalitites_result_view.dart';
+import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/results/proof_format_preference_result_view.dart';
+import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/go_back_quiz_dialog.dart';
+import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/submit_quiz_dialog.dart';
 import 'package:proofmaster/app/presentation/widgets/error_handler.dart';
+import 'package:proofmaster/constanta.dart';
+import 'package:proofmaster/router.dart';
 
 class DiagnosticTestQuiz extends ConsumerStatefulWidget {
   final String title;
@@ -31,16 +32,8 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       quizRepository = ref.watch(quizRepositoryProvider);
 
-      // final quizId = switch (widget.id) {
-      //   "learning-modalities" => "1cd25bcd-625c-4615-89d8-eedd845e8274",
-      //   "prior-knowledge" => "7225aec2-5e4a-4802-9131-2d17bb49306c",
-      //   "proof-format" => "fc7ac1a9-a715-444e-a372-608e21b3b966",
-      //   _ => "-"
-      // };
       ref
-          .read(getDiagnosticQuizQuestionsFromProvider(
-                  widget.id) //TODO: replace with actual id from api endpoint
-              .future)
+          .read(getDiagnosticQuizQuestionsFromProvider(widget.id).future)
           .then((response) {
         if (response.isNotEmpty) {
           ref.read(quizProvider.notifier).initQuiz(response);
@@ -60,10 +53,8 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
     print(widget.id);
 
     final quizUiState = ref.watch(quizProvider);
-    final quizQuestionsAsyncValue = ref.watch(
-        getDiagnosticQuizQuestionsFromProvider(
-            widget.id)); //TODO: replace with actual id
-
+    final quizQuestionsAsyncValue =
+        ref.watch(getDiagnosticQuizQuestionsFromProvider(widget.id));
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
@@ -71,8 +62,7 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
         final shouldPop = await goBackQuizDialog(context);
         if (shouldPop == true) {
           if (context.mounted) {
-            context
-                .pop(); // Use this instead of Navigator.pop for consistency with GoRouter
+            context.pop();
           }
         }
       },
@@ -86,7 +76,7 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
           data: (quizes) => quizUiState.questions.isEmpty
               ? const Text("Data quiz masih kosong")
               : QuizTemplate(
-                  title: widget.title,
+                  title: "widget.id",
                   quizState: quizUiState,
                   moveQuizIndex: (int index) =>
                       ref.read(quizProvider.notifier).goToQuestion(index),
@@ -106,9 +96,8 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
                     showSubmitQuizDialog(
                       context: context,
                       onSubmit: () {
-                        context.pop();
                         switch (widget.id) {
-                          case "prior-knowledge":
+                          case DiagnosticTestRoute.priorKnowledge:
                             final score = ref
                                 .read(quizProvider.notifier)
                                 .calculateQuizScorePriorKnowledge();
@@ -124,14 +113,14 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
                             context.replaceNamed(
                                 ProofmasterRoute.priorKnowledgeQuiz,
                                 pathParameters: {
+                                  "id": widget.id,
                                   "type": selectedResult.toString()
                                 });
                             break;
-                          case "learning-modalities":
+                          case DiagnosticTestRoute.learningModalities:
                             final score = ref
                                 .read(quizProvider.notifier)
                                 .getMajorityAnswersOption();
-                            print(score);
                             final selectedResult = switch (score) {
                               0 => LearningModalitiesType.VISUAL,
                               1 => LearningModalitiesType.AUDITORY,
@@ -141,10 +130,11 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
                             context.replaceNamed(
                                 ProofmasterRoute.learningModalitiesQuiz,
                                 pathParameters: {
+                                  "id": widget.id,
                                   "type": selectedResult.toString()
                                 });
                             break;
-                          case "proof-format":
+                          case DiagnosticTestRoute.proofFormat:
                             final score = ref
                                 .read(quizProvider.notifier)
                                 .getMajorityAnswersOption();
@@ -157,6 +147,7 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
                             context.replaceNamed(
                                 ProofmasterRoute.proofFormatQuiz,
                                 pathParameters: {
+                                  "id": widget.id,
                                   "type": selectedResult.toString()
                                 });
                             break;

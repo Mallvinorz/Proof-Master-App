@@ -1,4 +1,6 @@
 import 'package:proofmaster/app/data/responses/student/get_quiz_questions_response/get_quiz_questions_response.dart';
+import 'package:proofmaster/app/data/responses/student/post_result_diagnostic_test_response/post_diagnostic_result_response.dart';
+import 'package:proofmaster/app/domain/entities/diagnostic_quiz_result_dto/diagnosticquizresultdto.dart';
 import 'package:proofmaster/app/domain/entities/quiz_option/quiz_option.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
@@ -6,8 +8,6 @@ import 'package:proofmaster/app/helper/http_client.dart';
 import 'package:proofmaster/constanta.dart';
 
 class QuizRepositoryImpl implements QuizRepository {
-  final _baseUrl = 'oh-my-api-seven.vercel.app';
-
   @override
   Future<List<QuizQuestion>> getDiagnosticQuizQuestionsFrom(String id) async {
     try {
@@ -73,8 +73,20 @@ class QuizRepositoryImpl implements QuizRepository {
   }
 
   @override
-  Future<void> submitQuiz(String quizId) {
-    // TODO: implement submitQuiz
-    throw UnimplementedError();
+  Future<PostDiagnosticResultResponse> postDiagnosticQuizResult(
+      String quizId, DiagnosticQuizResultDto dto) async {
+    try {
+      final url = Uri.http(BASEURL, '/api/quizzes/diagnostics/$quizId');
+      final response = await httpClientWithInterceptor.post(
+        url,
+        headers: <String, String>{
+          'Accept': 'application/json',
+        },
+        body: dto.toJson(),
+      );
+      return PostDiagnosticResultResponse.fromJson(response.body);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

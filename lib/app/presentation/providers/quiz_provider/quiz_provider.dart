@@ -1,3 +1,4 @@
+import 'package:fimber/fimber.dart';
 import 'package:proofmaster/app/data/repositories/quiz_repository_impl.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
@@ -123,6 +124,7 @@ class Quiz extends _$Quiz {
         .where((question) =>
             question.selectedAnsweValue == question.correctAnswerValue)
         .length;
+    Fimber.d("correctAnswer $correctAnswer");
     return correctAnswer;
   }
 

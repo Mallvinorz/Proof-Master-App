@@ -30,6 +30,7 @@ import 'package:proofmaster/app/presentation/views/onboarding/onboarding_view.da
 import 'package:proofmaster/app/presentation/views/signin/signin_view.dart';
 import 'package:proofmaster/app/presentation/views/signup/signup_view.dart';
 import 'package:proofmaster/app/presentation/views/success_reset_pass/success_reset_pass.dart';
+import 'package:proofmaster/constanta.dart';
 
 class ProofmasterRoute {
   static const String home = '/';
@@ -152,30 +153,35 @@ List<RouteBase> getRoutes() {
       },
     ),
     GoRoute(
-      path: '${ProofmasterRoute.learningModalitiesQuiz}/:type',
+      path: '${ProofmasterRoute.learningModalitiesQuiz}/:id/:type',
       name: ProofmasterRoute.learningModalitiesQuiz,
       builder: (BuildContext context, GoRouterState state) {
         return LearningModalititesResultView(
-          type: LearningModalitiesType.values
-              .firstWhere((d) => d.toString() == state.pathParameters['type']),
+          id: state.pathParameters['id']!,
+          type: LearningModalitiesType.values.firstWhere(
+            (d) => d.toString() == state.pathParameters['type'],
+          ),
         );
       },
     ),
     GoRoute(
-      path: '${ProofmasterRoute.proofFormatQuiz}/:type',
+      path: '${ProofmasterRoute.proofFormatQuiz}/:id/:type',
       name: ProofmasterRoute.proofFormatQuiz,
       builder: (BuildContext context, GoRouterState state) {
         return ProofFormatPreferenceResultView(
-          type: ProofFormatPreferenceType.values
-              .firstWhere((d) => d.toString() == state.pathParameters['type']),
+          id: state.pathParameters['id']!,
+          type: ProofFormatPreferenceType.values.firstWhere(
+            (d) => d.toString() == state.pathParameters['type'],
+          ),
         );
       },
     ),
     GoRoute(
-      path: '${ProofmasterRoute.priorKnowledgeQuiz}/:type',
+      path: '${ProofmasterRoute.priorKnowledgeQuiz}/:id/:type',
       name: ProofmasterRoute.priorKnowledgeQuiz,
       builder: (BuildContext context, GoRouterState state) {
         return PriorKnowledgeResultView(
+          id: state.pathParameters['id']!,
           type: PriorKnowledgeType.values
               .firstWhere((d) => d.toString() == state.pathParameters['type']),
         );
@@ -313,6 +319,7 @@ List<RouteBase> getRoutes() {
         return DetailActivityReportView(
           activityId: state.uri.queryParameters['activityId'],
           title: state.uri.queryParameters['title'] ?? "Aktivitas",
+          studentId: state.uri.queryParameters['studentId'],
         );
       },
     ),

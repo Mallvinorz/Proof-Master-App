@@ -13,15 +13,15 @@ class UnderstandngProofReportView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activities = studentId == null
-        ? ref.watch(proofUnderstadingActivitiesProvider)
-        : ref.watch(proofUnderstadingAnsweredActivitiesProvider(studentId!));
-    final isRefreshing = studentId == null
-        ? ref.watch(isRefreshingProvider)
-        : ref.watch(isRefreshingAnsweredProvider);
+    final activities = studentId != null && studentId!.isNotEmpty
+        ? ref.watch(proofUnderstadingAnsweredActivitiesProvider(studentId!))
+        : ref.watch(proofUnderstadingActivitiesProvider);
+    final isRefreshing = studentId != null && studentId!.isNotEmpty
+        ? ref.watch(isRefreshingAnsweredProvider)
+        : ref.watch(isRefreshingProvider);
 
     return ListItemTemplateAsyncvalue<ListItem>(
-      title: "$studentId to Proof Structure Report",
+      title: "Understading Proof Structure Report",
       asyncData: isRefreshing ? const AsyncValue.loading() : activities,
       shimmerLoaderChild: () => ClickableListItemWithIcon(
         onTap: () => {},
@@ -29,17 +29,21 @@ class UnderstandngProofReportView extends ConsumerWidget {
         text: "",
       ),
       onRefresh: () {
-        studentId == null
-            ? ref.read(proofUnderstadingActivitiesProvider.notifier).refresh()
-            : ref
+        studentId != null && studentId!.isNotEmpty
+            ? ref
                 .watch(proofUnderstadingAnsweredActivitiesProvider(studentId!)
                     .notifier)
-                .refresh(studentId!);
+                .refresh(studentId!)
+            : ref.read(proofUnderstadingActivitiesProvider.notifier).refresh();
       },
       child: (ListItem data) => ClickableListItemWithIcon(
         onTap: () => context.pushNamed(
             ProofmasterRoute.understandingProofReportDetail,
-            queryParameters: {"activityId": data.id, "title": data.text}),
+            queryParameters: {
+              "activityId": data.id,
+              "title": data.text,
+              'studentId': studentId
+            }),
         iconUrl: data.iconUrl,
         text: data.text,
       ),

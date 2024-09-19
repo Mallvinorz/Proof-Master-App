@@ -3,55 +3,56 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class Data extends Equatable {
-	final String? id;
-	final String? title;
-	final String? comment;
-	final String? pdfUrl;
+  final String? id;
+  final String? title;
+  final String? comment;
+  final String? pdfUrl;
 
-	const Data({this.id, this.title, this.comment, this.pdfUrl});
+  const Data({this.id, this.title, this.comment, this.pdfUrl});
 
-	factory Data.fromMap(Map<String, dynamic> data) => Data(
-				id: data['id'] as String?,
-				title: data['title'] as String?,
-				comment: data['comment'] as String?,
-				pdfUrl: data['pdf_url'] as String?,
-			);
+  factory Data.fromMap(Map<String, dynamic> data) => Data(
+        id: data['id'] as String?,
+        title: data['title'] as String?,
+        comment: data['comment'] as String?,
+        pdfUrl: data['pdf_url'] as String?,
+      );
 
-	Map<String, dynamic> toMap() => {
-				'id': id,
-				'title': title,
-				'comment': comment,
-				'pdf_url': pdfUrl,
-			};
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'title': title,
+        'comment': comment,
+        'pdf_url': pdfUrl,
+      };
 
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Data].
-	factory Data.fromJson(String data) {
-		return Data.fromMap(json.decode(data) as Map<String, dynamic>);
-	}
+  factory Data.fromJson(String data) {
+    return Data.fromMap(json.decode(data) as Map<String, dynamic>);
+  }
+
   /// `dart:convert`
   ///
   /// Converts [Data] to a JSON string.
-	String toJson() => json.encode(toMap());
+  String toJson() => json.encode(toMap());
 
-	Data copyWith({
-		String? id,
-		String? title,
-		String? comment,
-		String? pdfUrl,
-	}) {
-		return Data(
-			id: id ?? this.id,
-			title: title ?? this.title,
-			comment: comment ?? this.comment,
-			pdfUrl: pdfUrl ?? this.pdfUrl,
-		);
-	}
+  Data copyWith({
+    String? id,
+    String? title,
+    String? comment,
+    String? pdfUrl,
+  }) {
+    return Data(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      comment: comment ?? this.comment,
+      pdfUrl: pdfUrl ?? this.pdfUrl,
+    );
+  }
 
-	@override
-	bool get stringify => true;
+  @override
+  bool get stringify => true;
 
-	@override
-	List<Object?> get props => [id, title, comment, pdfUrl];
+  @override
+  List<Object?> get props => [id, title, comment, pdfUrl];
 }

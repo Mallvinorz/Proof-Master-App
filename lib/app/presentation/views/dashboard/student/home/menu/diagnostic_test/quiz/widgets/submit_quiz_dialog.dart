@@ -27,8 +27,8 @@ Future<bool?> showSubmitQuizDialog(
             ),
             child: const Text('Ya, saya yakin'),
             onPressed: () {
-              onSubmit();
               context.pop();
+              onSubmit();
             },
           ),
         ],

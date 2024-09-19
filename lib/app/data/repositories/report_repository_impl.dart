@@ -1,8 +1,11 @@
+import 'package:fimber/fimber.dart';
+import 'package:proofmaster/app/data/responses/general/get_diagnostic_report/get_diagnostic_report_response/get_diagnostic_report_response.dart';
 import 'package:proofmaster/app/data/responses/general/get_report_progress/get_report_progress.dart';
 import 'package:proofmaster/app/data/responses/student/get_introduction_proof_response/get_introduction_proof_response.dart';
 import 'package:proofmaster/app/domain/entities/report_item/report_item.dart';
 import 'package:proofmaster/app/domain/repositories/report_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
+import 'package:proofmaster/constanta.dart';
 
 class ReportRepositoryImpl implements ReportRepository {
   final _baseUrl = 'oh-my-api-seven.vercel.app';
@@ -70,6 +73,30 @@ class ReportRepositoryImpl implements ReportRepository {
   Future<GetIntroductionProofResponse>
       getIntroductionProofReportProgressStudent(String studentId) {
     // TODO: implement getIntroductionProofReportProgressStudent
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<GetDiagnosticReportResponse> getDiagnosticReport(String quizId) async {
+    try {
+      Fimber.d("TOD");
+      final uri = Uri.http(BASEURL, "api/reports/diagnostics/$quizId");
+      final response = await httpClientWithInterceptor.get(uri, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      });
+      final result = GetDiagnosticReportResponse.fromJson(response.body);
+
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<GetDiagnosticReportResponse> getDiagnosticReportFromStudent(
+      String quizId, String studentId) {
+    // TODO: implement getDiagnosticReportFromStudent
     throw UnimplementedError();
   }
 }

@@ -5,22 +5,28 @@ import 'package:proofmaster/app/domain/entities/diagnostic_itest_tem/diagnostic_
 import 'package:proofmaster/app/presentation/templates/background_pattern.dart';
 import 'package:proofmaster/router.dart';
 
+class DiagnosticTestRoute {
+  static const String learningModalities = "learning-modalities-test";
+  static const String priorKnowledge = "prior-knowledge-test";
+  static const String proofFormat = "proof-format-preference-test";
+}
+
 class DiagnosticTestView extends StatelessWidget {
   DiagnosticTestView({super.key});
 
   final _diagnosticTestMenus = [
     DiagnosticTestItem(
-      endpoint: "learning-modalities-test",
+      endpoint: DiagnosticTestRoute.learningModalities,
       text: "Learning Modalities",
       iconUrl: "assets/icons/learning_ic.png",
     ),
     DiagnosticTestItem(
-      endpoint: "prior-knowledge-test",
+      endpoint: DiagnosticTestRoute.priorKnowledge,
       text: "Prior Knowledge",
       iconUrl: "assets/icons/prior_ic.png",
     ),
     DiagnosticTestItem(
-      endpoint: "proof-format-preference-test",
+      endpoint: DiagnosticTestRoute.proofFormat,
       text: "Proof Format Preference",
       iconUrl: "assets/icons/proof_ic.png",
     ),
