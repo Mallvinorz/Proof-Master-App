@@ -20,6 +20,7 @@ class MenuItem with _$MenuItem {
     String? route,
     String? category,
     LearningMaterial? learningMaterial,
+    String? pdfUrl,
   }) = _MenuItem;
 
   factory MenuItem.fromJson(Map<String, Object?> json) =>

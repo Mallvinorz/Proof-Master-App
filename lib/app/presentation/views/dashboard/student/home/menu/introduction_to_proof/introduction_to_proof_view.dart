@@ -1,69 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
-import 'package:proofmaster/app/presentation/templates/list_item_template.dart';
-import 'package:proofmaster/app/utils/ui_state.dart';
-import 'package:proofmaster/router.dart';
+import 'package:proofmaster/app/presentation/providers/introduction_proof_provider/introduction_proof_provider.dart';
+import 'package:proofmaster/app/presentation/templates/list_item_template_asyncvalue.dart';
 import 'package:proofmaster/app/presentation/widgets/menu_card_item.dart';
+import 'package:proofmaster/router.dart';
 
-class IntroductionToProofView extends StatelessWidget {
+class IntroductionToProofView extends ConsumerWidget {
   const IntroductionToProofView({super.key});
 
-  Future<UIState<List<MenuItem>>> getMenuItems() {
-    const data = [
-      MenuItem(
-        route: 'logic',
-        iconUrl: 'assets/icons/logic_ic.png',
-        isSeparator: false,
-        menuText: "Logika",
-        menuDesc: "Lorem ipsum dolor sit amet consectetur.",
-      ),
-      MenuItem(
-        route: 'theorm',
-        iconUrl: 'assets/icons/teorema_ic.png',
-        isSeparator: false,
-        menuText: "Teorama",
-        menuDesc: "Pernyataan matematis yang dapat dibuktikan",
-      ),
-      MenuItem(
-        route: 'axiom',
-        iconUrl: 'assets/icons/axioma_ic.png',
-        isSeparator: false,
-        menuText: "Aksioma",
-        menuDesc: "Pernyataan matematis yang diakui kebenarannya",
-      ),
-      MenuItem(
-        route: 'definition-of-term',
-        iconUrl: 'assets/icons/terms_ic.png',
-        isSeparator: false,
-        menuText: "Definition of Terms",
-        menuDesc: "Lorem ipsum dolor sit amet consectetur.",
-      ),
-      MenuItem(
-        route: 'geometric-proof',
-        iconUrl: 'assets/icons/geometric_ic.png',
-        isSeparator: false,
-        menuText: "Geometric Proof",
-        menuDesc: "Lorem ipsum dolor sit amet consectetur.",
-      ),
-    ];
-    return Future.value(const UISuccess(data));
-  }
-
   @override
-  Widget build(BuildContext context) {
-    return ListItemTemplate<MenuItem>(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final menus = ref.watch(instuductionProofMaterialsProvider);
+    final isRefreshing = ref.watch(isRefreshingProvider);
+    return ListItemTemplateAsyncvalue<MenuItem>(
       title: "Introduction to Proof",
-      onLoadData: () {
-        //TODO: replace with actual onload data
+      asyncData: isRefreshing ? const AsyncValue.loading() : menus,
+      shimmerLoaderChild: () => const MenuCardItem(
+        menuItem: MenuItem(isSeparator: false, menuText: ""),
+      ),
+      onRefresh: () {
+        ref.read(instuductionProofMaterialsProvider.notifier).refresh();
       },
-      futureData: getMenuItems(),
       child: (data) => GestureDetector(
         onTap: () => context.pushNamed(
             ProofmasterRoute.introductionProofMaterial,
             pathParameters: {
               'id': data.route ?? "-",
-              'title': data.menuText ?? "-"
+              'title': data.menuText ?? "-",
+              'pdfUrl': data.pdfUrl ??
+                  "https://ik.imagekit.io/q1qexvvey/Android%20Studio%20Application%20Development%20(%20PDFDrive%20).pdf?updatedAt=1725256360219"
             }),
         child: MenuCardItem(menuItem: data),
       ),

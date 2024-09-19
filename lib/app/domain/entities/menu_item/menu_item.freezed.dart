@@ -28,6 +28,7 @@ mixin _$MenuItem {
   String? get route => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   LearningMaterial? get learningMaterial => throw _privateConstructorUsedError;
+  String? get pdfUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +49,8 @@ abstract class $MenuItemCopyWith<$Res> {
       String? menuDesc,
       String? route,
       String? category,
-      LearningMaterial? learningMaterial});
+      LearningMaterial? learningMaterial,
+      String? pdfUrl});
 
   $LearningMaterialCopyWith<$Res>? get learningMaterial;
 }
@@ -74,6 +76,7 @@ class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
     Object? route = freezed,
     Object? category = freezed,
     Object? learningMaterial = freezed,
+    Object? pdfUrl = freezed,
   }) {
     return _then(_value.copyWith(
       isSeparator: null == isSeparator
@@ -108,6 +111,10 @@ class _$MenuItemCopyWithImpl<$Res, $Val extends MenuItem>
           ? _value.learningMaterial
           : learningMaterial // ignore: cast_nullable_to_non_nullable
               as LearningMaterial?,
+      pdfUrl: freezed == pdfUrl
+          ? _value.pdfUrl
+          : pdfUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -140,7 +147,8 @@ abstract class _$$MenuItemImplCopyWith<$Res>
       String? menuDesc,
       String? route,
       String? category,
-      LearningMaterial? learningMaterial});
+      LearningMaterial? learningMaterial,
+      String? pdfUrl});
 
   @override
   $LearningMaterialCopyWith<$Res>? get learningMaterial;
@@ -165,6 +173,7 @@ class __$$MenuItemImplCopyWithImpl<$Res>
     Object? route = freezed,
     Object? category = freezed,
     Object? learningMaterial = freezed,
+    Object? pdfUrl = freezed,
   }) {
     return _then(_$MenuItemImpl(
       isSeparator: null == isSeparator
@@ -199,6 +208,10 @@ class __$$MenuItemImplCopyWithImpl<$Res>
           ? _value.learningMaterial
           : learningMaterial // ignore: cast_nullable_to_non_nullable
               as LearningMaterial?,
+      pdfUrl: freezed == pdfUrl
+          ? _value.pdfUrl
+          : pdfUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -214,7 +227,8 @@ class _$MenuItemImpl with DiagnosticableTreeMixin implements _MenuItem {
       this.menuDesc,
       this.route,
       this.category,
-      this.learningMaterial});
+      this.learningMaterial,
+      this.pdfUrl});
 
   factory _$MenuItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$MenuItemImplFromJson(json);
@@ -235,10 +249,12 @@ class _$MenuItemImpl with DiagnosticableTreeMixin implements _MenuItem {
   final String? category;
   @override
   final LearningMaterial? learningMaterial;
+  @override
+  final String? pdfUrl;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MenuItem(isSeparator: $isSeparator, iconUrl: $iconUrl, separatorText: $separatorText, menuText: $menuText, menuDesc: $menuDesc, route: $route, category: $category, learningMaterial: $learningMaterial)';
+    return 'MenuItem(isSeparator: $isSeparator, iconUrl: $iconUrl, separatorText: $separatorText, menuText: $menuText, menuDesc: $menuDesc, route: $route, category: $category, learningMaterial: $learningMaterial, pdfUrl: $pdfUrl)';
   }
 
   @override
@@ -253,7 +269,8 @@ class _$MenuItemImpl with DiagnosticableTreeMixin implements _MenuItem {
       ..add(DiagnosticsProperty('menuDesc', menuDesc))
       ..add(DiagnosticsProperty('route', route))
       ..add(DiagnosticsProperty('category', category))
-      ..add(DiagnosticsProperty('learningMaterial', learningMaterial));
+      ..add(DiagnosticsProperty('learningMaterial', learningMaterial))
+      ..add(DiagnosticsProperty('pdfUrl', pdfUrl));
   }
 
   @override
@@ -274,13 +291,23 @@ class _$MenuItemImpl with DiagnosticableTreeMixin implements _MenuItem {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.learningMaterial, learningMaterial) ||
-                other.learningMaterial == learningMaterial));
+                other.learningMaterial == learningMaterial) &&
+            (identical(other.pdfUrl, pdfUrl) || other.pdfUrl == pdfUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isSeparator, iconUrl,
-      separatorText, menuText, menuDesc, route, category, learningMaterial);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isSeparator,
+      iconUrl,
+      separatorText,
+      menuText,
+      menuDesc,
+      route,
+      category,
+      learningMaterial,
+      pdfUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -305,7 +332,8 @@ abstract class _MenuItem implements MenuItem {
       final String? menuDesc,
       final String? route,
       final String? category,
-      final LearningMaterial? learningMaterial}) = _$MenuItemImpl;
+      final LearningMaterial? learningMaterial,
+      final String? pdfUrl}) = _$MenuItemImpl;
 
   factory _MenuItem.fromJson(Map<String, dynamic> json) =
       _$MenuItemImpl.fromJson;
@@ -326,6 +354,8 @@ abstract class _MenuItem implements MenuItem {
   String? get category;
   @override
   LearningMaterial? get learningMaterial;
+  @override
+  String? get pdfUrl;
   @override
   @JsonKey(ignore: true)
   _$$MenuItemImplCopyWith<_$MenuItemImpl> get copyWith =>

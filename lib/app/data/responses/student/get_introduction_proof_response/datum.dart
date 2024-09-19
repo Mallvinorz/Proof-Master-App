@@ -15,7 +15,7 @@ class Datum extends Equatable {
         id: data['id'] as String?,
         title: data['title'] as String?,
         icUrl: data['ic_url'] as String?,
-        desc: data['desc'] as String?,
+        desc: data['description'] as String?,
         pdfUrl: data['pdf_url'] as String?,
       );
 
@@ -23,7 +23,7 @@ class Datum extends Equatable {
         'id': id,
         'title': title,
         'ic_url': icUrl,
-        'desc': desc,
+        'description': desc,
         'pdf_url': pdfUrl,
       };
 

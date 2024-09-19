@@ -3,19 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:proofmaster/app/presentation/providers/initial_route_provider/initial_route_provider.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
   Fimber.plantTree(DebugTree());
   await FlutterDownloader.initialize(
-      debug:
-          true, // optional: set to false to disable printing logs to console (default: true)
-      ignoreSsl:
-          true // option: set to false to disable working with http links (default: false)
-      );
+    debug: true,
+    ignoreSsl: true,
+  );
   runApp(const ProviderScope(child: MyApp()));
 }
 

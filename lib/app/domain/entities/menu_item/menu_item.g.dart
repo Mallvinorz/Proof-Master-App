@@ -19,6 +19,7 @@ _$MenuItemImpl _$$MenuItemImplFromJson(Map<String, dynamic> json) =>
           ? null
           : LearningMaterial.fromJson(
               json['learningMaterial'] as Map<String, dynamic>),
+      pdfUrl: json['pdfUrl'] as String?,
     );
 
 Map<String, dynamic> _$$MenuItemImplToJson(_$MenuItemImpl instance) =>
@@ -31,4 +32,5 @@ Map<String, dynamic> _$$MenuItemImplToJson(_$MenuItemImpl instance) =>
       'route': instance.route,
       'category': instance.category,
       'learningMaterial': instance.learningMaterial,
+      'pdfUrl': instance.pdfUrl,
     };

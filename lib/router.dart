@@ -210,10 +210,11 @@ List<RouteBase> getRoutes() {
     ),
     GoRoute(
       path:
-          '${ProofmasterRoute.introductionProof}/${ProofmasterRoute.introductionProofMaterial}/:id/:title',
+          '${ProofmasterRoute.introductionProof}/${ProofmasterRoute.introductionProofMaterial}/:id/:title/:pdfUrl',
       name: ProofmasterRoute.introductionProofMaterial,
       builder: (BuildContext context, GoRouterState state) {
         return IntroductionToProofMaterial(
+          pdfUrl: state.pathParameters['pdfUrl'] ?? "",
           id: state.pathParameters['id'] ?? "",
           title: state.pathParameters['title'] ?? "",
         );

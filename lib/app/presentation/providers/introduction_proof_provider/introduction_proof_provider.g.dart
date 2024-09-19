@@ -24,21 +24,37 @@ final introductionProofRepositoryProvider =
 
 typedef IntroductionProofRepositoryRef
     = AutoDisposeProviderRef<IntroductionProofRepository>;
-String _$getMenuItemsHash() => r'7752a6aba320f435971fdcda5e43c439d2a6c7b2';
+String _$isRefreshingHash() => r'7a65fe8564c8d35a307ba08c0cb720c2a3d06e75';
 
-/// See also [getMenuItems].
-@ProviderFor(getMenuItems)
-final getMenuItemsProvider =
-    AutoDisposeFutureProvider<GetIntroductionProofResponse>.internal(
-  getMenuItems,
-  name: r'getMenuItemsProvider',
+/// See also [IsRefreshing].
+@ProviderFor(IsRefreshing)
+final isRefreshingProvider =
+    AutoDisposeNotifierProvider<IsRefreshing, bool>.internal(
+  IsRefreshing.new,
+  name: r'isRefreshingProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$getMenuItemsHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$isRefreshingHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef GetMenuItemsRef
-    = AutoDisposeFutureProviderRef<GetIntroductionProofResponse>;
+typedef _$IsRefreshing = AutoDisposeNotifier<bool>;
+String _$instuductionProofMaterialsHash() =>
+    r'1162ad6329532c28e130008d9334fe4e045bc0b6';
+
+/// See also [InstuductionProofMaterials].
+@ProviderFor(InstuductionProofMaterials)
+final instuductionProofMaterialsProvider = AutoDisposeAsyncNotifierProvider<
+    InstuductionProofMaterials, List<MenuItem>>.internal(
+  InstuductionProofMaterials.new,
+  name: r'instuductionProofMaterialsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$instuductionProofMaterialsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$InstuductionProofMaterials = AutoDisposeAsyncNotifier<List<MenuItem>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

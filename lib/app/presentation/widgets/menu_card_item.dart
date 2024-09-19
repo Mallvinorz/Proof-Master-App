@@ -32,7 +32,7 @@ class MenuCardItem extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: menuItem.iconUrl != null
-                        ? Image.asset(
+                        ? Image.network(
                             menuItem.iconUrl!,
                             width: 48,
                             height: 48,

@@ -1,29 +1,44 @@
 import 'package:proofmaster/app/data/responses/student/finished_reading_introduction_material_response.dart';
 import 'package:proofmaster/app/data/responses/student/get_introduction_proof_response/get_introduction_proof_response.dart';
+import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/domain/repositories/introduction_proof_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
+import 'package:proofmaster/constanta.dart';
 
 class IntroductionProofRepositoryImpl implements IntroductionProofRepository {
-  final _baseUrl = 'oh-my-api-seven.vercel.app';
-
   @override
   void dispose() {
     httpClientWithInterceptor.close();
   }
 
   @override
-  Future<GetIntroductionProofResponse> getMenuItems() async {
+  Future<List<MenuItem>> getMenuItems() async {
     try {
-      final queries = {'id': '3e2ff29f-d31d-414b-8e4e-37a885255b2b'};
-      final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
-      print(uri);
+      final uri = Uri.http(BASEURL, "api/learning-materials");
       final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        // 'Authorization': 'Bearer haha',
       });
+
+      //  MenuItem(
+      //   route: 'geometric-proof',
+      //   iconUrl: 'assets/icons/geometric_ic.png',
+      //   isSeparator: false,
+      //   menuText: "Geometric Proof",
+      //   menuDesc: "Lorem ipsum dolor sit amet consectetur.",
+      // ),
+
       final result = GetIntroductionProofResponse.fromJson(response.body);
-      return result;
+      final menus = result.data
+          ?.map((item) => MenuItem(
+              isSeparator: false,
+              route: item.id ?? "",
+              iconUrl: item.icUrl ?? "",
+              menuText: item.title ?? "",
+              pdfUrl: item.pdfUrl,
+              menuDesc: item.desc ?? ""))
+          .toList();
+      return menus ?? [];
     } catch (e) {
       rethrow;
     }
