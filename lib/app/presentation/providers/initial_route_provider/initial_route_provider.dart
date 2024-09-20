@@ -25,18 +25,18 @@ class InitialRoute extends _$InitialRoute {
     final authRepository = ref.watch(authRepositoryProvider);
     final onboardStatusFinished = await onBoardingRepository.getOnboardStatus();
 
-    final savedUsername = (await pref).getString(SAVED_EMAIL);
-    final savedPassword = (await pref).getString(SAVED_PASSWORD);
-
-    Fimber.d("email $savedUsername password $savedPassword");
-    if ((savedPassword == null && savedUsername == null) ||
-        (savedPassword == "" && savedUsername == "")) {
-      return ProofmasterRoute.auth;
-    }
-
     if (!onboardStatusFinished) {
       return ProofmasterRoute.onBoarding;
     } else {
+      final savedUsername = (await pref).getString(SAVED_EMAIL);
+      final savedPassword = (await pref).getString(SAVED_PASSWORD);
+
+      Fimber.d("email $savedUsername password $savedPassword");
+      if ((savedPassword == null && savedUsername == null) ||
+          (savedPassword == "" && savedUsername == "")) {
+        return ProofmasterRoute.auth;
+      }
+
       final authToken = await authRepository.getAuthToken();
       if (authToken != null) {
         final role = await authRepository.getRole();

@@ -6,10 +6,9 @@ import 'package:proofmaster/app/presentation/providers/quiz_provider/quiz_provid
 import 'package:proofmaster/app/presentation/templates/background_pattern.dart';
 import 'package:proofmaster/app/presentation/templates/quiz_template.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/diagnostic_test_view.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/results/learning_modalitites_result_view.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/results/proof_format_preference_result_view.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/go_back_quiz_dialog.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/submit_quiz_dialog.dart';
+import 'package:proofmaster/app/presentation/widgets/alert_dialog.dart';
 import 'package:proofmaster/app/presentation/widgets/error_handler.dart';
 import 'package:proofmaster/constanta.dart';
 import 'package:proofmaster/router.dart';
@@ -46,6 +45,61 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
   void dispose() {
     quizRepository = null;
     super.dispose();
+  }
+
+  void performSubmitQuiz() {
+    ref.read(quizProvider.notifier).checkAllQuestionsIsAnswered();
+    switch (widget.id) {
+      case DiagnosticTestRoute.priorKnowledge:
+        final score =
+            ref.read(quizProvider.notifier).calculateQuizScorePriorKnowledge();
+        final selectedResult = switch (score) {
+          > 0 && <= 4 => PriorKnowledgeType.ONE,
+          > 4 && <= 8 => PriorKnowledgeType.TWO,
+          > 9 && <= 12 => PriorKnowledgeType.THREE,
+          > 12 && <= 16 => PriorKnowledgeType.FOUR,
+          > 16 && <= 19 => PriorKnowledgeType.FIVE,
+          20 => PriorKnowledgeType.SIX,
+          _ => PriorKnowledgeType.ONE,
+        };
+        context.replaceNamed(ProofmasterRoute.priorKnowledgeQuiz,
+            pathParameters: {
+              "id": widget.id,
+              "type": selectedResult.toString()
+            });
+        break;
+      case DiagnosticTestRoute.learningModalities:
+        final score =
+            ref.read(quizProvider.notifier).getMajorityAnswersOption();
+        final selectedResult = switch (score) {
+          0 => LearningModalitiesType.VISUAL,
+          1 => LearningModalitiesType.AUDITORY,
+          2 => LearningModalitiesType.KINESTETIC,
+          _ => LearningModalitiesType.KINESTETIC,
+        };
+        context.replaceNamed(ProofmasterRoute.learningModalitiesQuiz,
+            pathParameters: {
+              "id": widget.id,
+              "type": selectedResult.toString()
+            });
+        break;
+      case DiagnosticTestRoute.proofFormat:
+        final score =
+            ref.read(quizProvider.notifier).getMajorityAnswersOption();
+        final selectedResult = switch (score) {
+          0 => ProofFormatPreferenceType.PARAGRAPH,
+          1 => ProofFormatPreferenceType.TWO_COLUMN,
+          2 => ProofFormatPreferenceType.FLOW_CHART,
+          _ => ProofFormatPreferenceType.PARAGRAPH,
+        };
+        context.replaceNamed(ProofmasterRoute.proofFormatQuiz, pathParameters: {
+          "id": widget.id,
+          "type": selectedResult.toString()
+        });
+        break;
+      default:
+        throw Exception("Id Quiz tidak valid!");
+    }
   }
 
   @override
@@ -96,63 +150,23 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
                     showSubmitQuizDialog(
                       context: context,
                       onSubmit: () {
-                        switch (widget.id) {
-                          case DiagnosticTestRoute.priorKnowledge:
-                            final score = ref
-                                .read(quizProvider.notifier)
-                                .calculateQuizScorePriorKnowledge();
-                            final selectedResult = switch (score) {
-                              > 0 && <= 4 => PriorKnowledgeType.ONE,
-                              > 4 && <= 8 => PriorKnowledgeType.TWO,
-                              > 9 && <= 12 => PriorKnowledgeType.THREE,
-                              > 12 && <= 16 => PriorKnowledgeType.FOUR,
-                              > 16 && <= 19 => PriorKnowledgeType.FIVE,
-                              20 => PriorKnowledgeType.SIX,
-                              _ => PriorKnowledgeType.ONE,
-                            };
-                            context.replaceNamed(
-                                ProofmasterRoute.priorKnowledgeQuiz,
-                                pathParameters: {
-                                  "id": widget.id,
-                                  "type": selectedResult.toString()
-                                });
-                            break;
-                          case DiagnosticTestRoute.learningModalities:
-                            final score = ref
-                                .read(quizProvider.notifier)
-                                .getMajorityAnswersOption();
-                            final selectedResult = switch (score) {
-                              0 => LearningModalitiesType.VISUAL,
-                              1 => LearningModalitiesType.AUDITORY,
-                              2 => LearningModalitiesType.KINESTETIC,
-                              _ => LearningModalitiesType.KINESTETIC,
-                            };
-                            context.replaceNamed(
-                                ProofmasterRoute.learningModalitiesQuiz,
-                                pathParameters: {
-                                  "id": widget.id,
-                                  "type": selectedResult.toString()
-                                });
-                            break;
-                          case DiagnosticTestRoute.proofFormat:
-                            final score = ref
-                                .read(quizProvider.notifier)
-                                .getMajorityAnswersOption();
-                            final selectedResult = switch (score) {
-                              0 => ProofFormatPreferenceType.PARAGRAPH,
-                              1 => ProofFormatPreferenceType.TWO_COLUMN,
-                              2 => ProofFormatPreferenceType.FLOW_CHART,
-                              _ => ProofFormatPreferenceType.PARAGRAPH,
-                            };
-                            context.replaceNamed(
-                                ProofmasterRoute.proofFormatQuiz,
-                                pathParameters: {
-                                  "id": widget.id,
-                                  "type": selectedResult.toString()
-                                });
-                            break;
-                          default:
-                            break;
+                        try {
+                          performSubmitQuiz();
+                        } catch (e) {
+                          alertDialog(
+                              context: context,
+                              message: "$e",
+                              title:
+                                  e.toString().contains("masih belum dijawab")
+                                      ? "Beberapa soal masih belum dijawab!"
+                                      : "Gagal submit quiz ke server!",
+                              isSuccess: false,
+                              actionWidgets: [
+                                TextButton(
+                                  onPressed: () => context.pop(),
+                                  child: const Text("Tutup"),
+                                )
+                              ]);
                         }
                       },
                     )

@@ -101,6 +101,22 @@ class Quiz extends _$Quiz {
     }
   }
 
+  void checkAllQuestionsIsAnswered() {
+    final totalQUizLen = state.questions.length;
+    final answeredQuizLen = state.questions
+        .where((question) => question.selectedAnsweValue != null)
+        .toList()
+        .length;
+    if (answeredQuizLen < totalQUizLen) {
+      final blankedQuestions = state.questions
+          .where((question) => question.selectedAnsweValue == null)
+          .map((question) => state.questions.indexOf(question) + 1);
+      final strBlankedQuestions = blankedQuestions.join(", ");
+      throw Exception(
+          "Soal nomor $strBlankedQuestions masih belum dijawab! jawab soal tersebut terlebih dahulu.");
+    }
+  }
+
   List<int> getMarkedQuestionIndexes() {
     return state.questions
         .asMap()

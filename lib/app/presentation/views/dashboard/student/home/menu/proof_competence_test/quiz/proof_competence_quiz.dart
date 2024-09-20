@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/go_back_quiz_dialog.dart';
-import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/submit_quiz_dialog.dart';
 import 'package:proofmaster/app/presentation/providers/quiz_provider/quiz_provider.dart';
 import 'package:proofmaster/app/presentation/templates/background_pattern.dart';
 import 'package:proofmaster/app/presentation/templates/quiz_template.dart';
-import 'package:proofmaster/router.dart';
+import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/go_back_quiz_dialog.dart';
+import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/diagnostic_test/quiz/widgets/submit_quiz_dialog.dart';
+import 'package:proofmaster/app/presentation/widgets/alert_dialog.dart';
 import 'package:proofmaster/app/presentation/widgets/error_handler.dart';
+import 'package:proofmaster/router.dart';
 
 class ProofCompetenceQuiz extends ConsumerStatefulWidget {
   final String title;
@@ -56,8 +57,7 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
         final shouldPop = await goBackQuizDialog(context);
         if (shouldPop == true) {
           if (context.mounted) {
-            context
-                .pop(); // Use this instead of Navigator.pop for consistency with GoRouter
+            context.pop();
           }
         }
       },
@@ -91,11 +91,31 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
                     showSubmitQuizDialog(
                       context: context,
                       onSubmit: () {
-                        final score = ref
-                            .read(quizProvider.notifier)
-                            .calculateQuizScore();
-                        context.replaceNamed(ProofmasterRoute.score,
-                            pathParameters: {"score": score.toString()});
+                        try {
+                          ref
+                              .read(quizProvider.notifier)
+                              .checkAllQuestionsIsAnswered();
+                          final score = ref
+                              .read(quizProvider.notifier)
+                              .calculateQuizScore();
+                          context.replaceNamed(ProofmasterRoute.score,
+                              pathParameters: {"score": score.toString()});
+                        } catch (e) {
+                          alertDialog(
+                              context: context,
+                              message: "$e",
+                              title:
+                                  e.toString().contains("masih belum dijawab")
+                                      ? "Beberapa soal masih belum dijawab!"
+                                      : "Gagal submit quiz ke server!",
+                              isSuccess: false,
+                              actionWidgets: [
+                                TextButton(
+                                  onPressed: () => context.pop(),
+                                  child: const Text("Tutup"),
+                                )
+                              ]);
+                        }
                       },
                     )
                   },

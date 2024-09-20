@@ -85,6 +85,7 @@ class ActivityRepositoryImpl implements ActivityRepository {
   @override
   Future<PostReviewResponse> postReviewActivity(ActivityReviewDto dto) async {
     try {
+      throw Exception("Fitur masih dalam tahap development 😢");
       final url = Uri.http(BASEURL, 'api/activities/review/${dto.activityId}');
       final response = await httpClientWithInterceptor.post(
         url,
