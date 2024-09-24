@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fimber/fimber.dart';
 import 'package:http/http.dart' as http;
 import 'package:proofmaster/app/data/responses/general/auth_reponse/auth_reponse.dart';
@@ -23,9 +25,9 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await http.Client().post(
         url,
         headers: <String, String>{
-          'Accept': 'application/json',
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: authDto.toJson(),
+        body: jsonEncode(authDto.toJson()),
       );
       final result = AuthReponse.fromJson(response.body);
 
@@ -51,9 +53,9 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await http.Client().post(
         url,
         headers: <String, String>{
-          'Accept': 'application/json',
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: registerDto.toJson(),
+        body: jsonEncode(registerDto.toJson()),
       );
       if (response.statusCode != 200) throw Exception(response.body);
       final result = RegisterSuccesReponse.fromJson(response.body);
@@ -82,9 +84,9 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await http.Client().post(
         url,
         headers: <String, String>{
-          'Accept': 'application/json',
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: resetPasswordDto.toJson(),
+        body: jsonEncode(resetPasswordDto.toJson()),
       );
 
       if (response.statusCode != 200) throw Exception(response.body);

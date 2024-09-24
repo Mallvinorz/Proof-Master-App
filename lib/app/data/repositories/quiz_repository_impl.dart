@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:proofmaster/app/data/responses/student/get_quiz_questions_response/get_quiz_questions_response.dart';
 import 'package:proofmaster/app/data/responses/student/post_result_diagnostic_test_response/post_diagnostic_result_response.dart';
 import 'package:proofmaster/app/domain/entities/diagnostic_quiz_result_dto/diagnosticquizresultdto.dart';
@@ -80,9 +82,10 @@ class QuizRepositoryImpl implements QuizRepository {
       final response = await httpClientWithInterceptor.post(
         url,
         headers: <String, String>{
-          'Accept': 'application/json',
+          // 'Accept': 'application/json',
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: dto.toJson(),
+        body: jsonEncode(dto.toJson()),
       );
       return PostDiagnosticResultResponse.fromJson(response.body);
     } catch (e) {

@@ -34,7 +34,8 @@ class PriorKnowledgeTestReportView extends ConsumerWidget {
                 data: (data) => _buildContent(data),
                 error: (error, _) => Center(
                   child: ErrorHandler(
-                    errorMessage: "Error: $error",
+                    errorMessage:
+                        "Error: ${error.toString().contains("record not found") ? "Data report masih belum ada" : error.toString()}",
                     action: () => ref
                         .read(diagnosticReportProvider(
                                 quizId: quizId, studentId: studentId)
