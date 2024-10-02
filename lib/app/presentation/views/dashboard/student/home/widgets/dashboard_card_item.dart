@@ -18,56 +18,72 @@ class DashboardCardItem extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Container(
         color: CustomColorTheme.colorBackground2,
-        padding: const EdgeInsets.all(8.0),
         child: Stack(
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
-                  width: 96,
-                  height: 96,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: dashboardItem.iconUrl != null
-                        ? Image.network(
-                            dashboardItem.iconUrl!,
-                            width: 48,
-                            height: 48,
-                          )
-                        : const Icon(FontAwesomeIcons.accusoft),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          learningMaterial.name,
-                          style: CustomTextTheme.proofMasterTextTheme.bodyLarge,
-                        ),
-                        Text(
-                          learningMaterial.desc,
-                          maxLines: 2,
-                        ),
-                      ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                    width: 96,
+                    height: 96,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: dashboardItem.iconUrl != null
+                          ? Image.network(
+                              dashboardItem.iconUrl!,
+                              width: 48,
+                              height: 48,
+                            )
+                          : const Icon(FontAwesomeIcons.accusoft),
                     ),
                   ),
-                ),
-                const SizedBox(height: 8), // Add some space
-              ],
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            learningMaterial.name,
+                            style:
+                                CustomTextTheme.proofMasterTextTheme.bodyLarge,
+                          ),
+                          Text(
+                            learningMaterial.desc,
+                            maxLines: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8), // Add some space
+                ],
+              ),
             ),
-            Positioned(
-                right: 0,
-                bottom: 0,
-                child: Text(
-                    "${learningMaterial.finishedSubLearningMaterial}/${learningMaterial.totalSubLearningMaterial}"))
+            if (learningMaterial.isLocked)
+              Positioned.fill(
+                child: Container(
+                  color:
+                      Colors.black.withOpacity(0.5), // Adjust opacity as needed
+                ),
+              ),
+            if (learningMaterial.isLocked)
+              Positioned(
+                  right: 8,
+                  bottom: 8,
+                  child: learningMaterial.isLocked
+                      ? const Icon(
+                          FontAwesomeIcons.lock,
+                          color: Colors.white,
+                        )
+                      : Text(
+                          "${learningMaterial.finishedSubLearningMaterial}/${learningMaterial.totalSubLearningMaterial}")),
           ],
         ),
       ),

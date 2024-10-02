@@ -4,20 +4,16 @@ import 'package:proofmaster/app/domain/entities/material/learning_material.dart'
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/domain/repositories/dashboard_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
+import 'package:proofmaster/constanta.dart';
 
 class DashboardRepositoryImpl implements DashboardRepository {
-  final _baseUrl = 'oh-my-api-seven.vercel.app';
-
   @override
   Future<List<MenuItem>> getStudentMenus() async {
     try {
-      final queries = {'id': '63a07a01-983e-47cb-aa4f-3d67ca8416e3'};
-      final uri = Uri.https(_baseUrl, "api/end-to-end", queries);
-      print(uri);
+      final uri = Uri.http(BASEURL, "/api/dashboard");
       final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        // 'Authorization': 'Bearer haha',
       });
       final result = GetDashboardMenusResponse.fromJson(response.body);
 
@@ -34,22 +30,6 @@ class DashboardRepositoryImpl implements DashboardRepository {
         }
         groupedData[category]!.add(item);
       }
-
-      // print(convertMapToMenuItems(groupedData));
-
-      // final menus = result.data!
-      //     .map((item) => MenuItem(
-      //         isSeparator: false,
-      //         iconUrl: item.icUrl,
-      //         route: item.endpoint,
-      //         category: item.category,
-      //         learningMaterial: LearningMaterial(
-      //             name: item.title ?? "-",
-      //             desc: item.desc ?? "-",
-      //             totalSubLearningMaterial: item.totalMaterials ?? 0,
-      //             finishedSubLearningMaterial: item.finishedMaterials ?? 0,
-      //             isLocked: item.isLocked ?? true)))
-      //     .toList();
       return convertMapToMenuItems(groupedData);
     } catch (e) {
       rethrow;

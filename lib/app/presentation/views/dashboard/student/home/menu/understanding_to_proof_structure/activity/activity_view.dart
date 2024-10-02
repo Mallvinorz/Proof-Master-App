@@ -45,7 +45,7 @@ class _ActivityViewState extends ConsumerState<ActivityView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Soal ${widget.id}",
+              "Soal",
               style: CustomTextTheme.proofMasterTextTheme.bodyLarge
                   ?.copyWith(color: Colors.grey),
             ),
