@@ -57,11 +57,16 @@ class ListItemTemplateAsyncvalue<T> extends ConsumerWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(12)))
                 : null,
-            child: ListView.builder(
-              padding: const EdgeInsets.only(top: 18),
-              itemCount: items.length,
-              itemBuilder: (ctx, index) => child(items[index]),
-            ),
+            child: items.isEmpty
+                ? const Center(
+                    child: Text(
+                    "Belum ada data",
+                  ))
+                : ListView.builder(
+                    padding: const EdgeInsets.only(top: 18),
+                    itemCount: items.length,
+                    itemBuilder: (ctx, index) => child(items[index]),
+                  ),
           ),
         ),
       ),

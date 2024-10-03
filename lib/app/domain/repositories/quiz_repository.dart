@@ -7,5 +7,7 @@ abstract class QuizRepository {
   Future<List<QuizQuestion>> getProofCompetenceQuizQuestionsFrom(String id);
   Future<PostDiagnosticResultResponse> postDiagnosticQuizResult(
       String quizId, DiagnosticQuizResultDto dto);
+  Future<PostDiagnosticResultResponse> postProofCompetenceResult(
+      String quizId, int score);
   void dispose();
 }

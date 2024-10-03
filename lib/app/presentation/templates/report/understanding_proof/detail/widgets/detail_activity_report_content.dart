@@ -8,14 +8,14 @@ import 'package:proofmaster/app/data/responses/teacher/get_answered_activity_fro
 import 'package:proofmaster/app/domain/entities/activity_review_dto/activityreviewdto.dart';
 import 'package:proofmaster/app/presentation/providers/activity_provider/activity_provider.dart';
 import 'package:proofmaster/app/presentation/widgets/alert_dialog.dart';
+import 'package:proofmaster/app/presentation/widgets/button.dart';
 import 'package:proofmaster/app/presentation/widgets/error_handler.dart';
 import 'package:proofmaster/app/presentation/widgets/shimmer_loader.dart';
+import 'package:proofmaster/app/presentation/widgets/textarea.dart';
 import 'package:proofmaster/app/utils/download_path.dart';
 import 'package:proofmaster/app/utils/permission.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
-import 'package:proofmaster/app/presentation/widgets/button.dart';
-import 'package:proofmaster/app/presentation/widgets/textarea.dart';
 
 class DetailActivityReportContent extends ConsumerStatefulWidget {
   final String? activityId;

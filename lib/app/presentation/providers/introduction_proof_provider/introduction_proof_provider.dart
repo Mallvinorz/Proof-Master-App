@@ -1,5 +1,4 @@
 import 'package:proofmaster/app/data/repositories/introduction_proof_repository_impl.dart';
-import 'package:proofmaster/app/data/responses/student/get_introduction_proof_response/get_introduction_proof_response.dart';
 import 'package:proofmaster/app/domain/entities/menu_item/menu_item.dart';
 import 'package:proofmaster/app/domain/repositories/introduction_proof_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

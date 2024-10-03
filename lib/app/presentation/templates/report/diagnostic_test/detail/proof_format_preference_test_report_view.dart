@@ -20,6 +20,7 @@ class ProofFormatPreferenceTestReportView extends ConsumerWidget {
     final reportResult = ref
         .watch(diagnosticReportProvider(quizId: quizId, studentId: studentId));
     final isRefresh = ref.watch(isRefreshingDiagnosticProvider);
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return BackgroundPattern(
       appBarTitle: "Proof Format Preference Report",
@@ -32,15 +33,19 @@ class ProofFormatPreferenceTestReportView extends ConsumerWidget {
                 )
               : reportResult.when(
                   data: (data) => _buildContent(data),
-                  error: (error, _) => Center(
-                        child: ErrorHandler(
+                  error: (error, _) => Padding(
+                        padding: EdgeInsets.only(top: screenHeight / 2 - 100),
+                        child: Center(
+                          child: ErrorHandler(
                             errorMessage:
                                 "Error: ${error.toString().contains("record not found") ? "Data report masih belum ada" : error.toString()}",
                             action: () => ref
                                 .read(diagnosticReportProvider(
                                         quizId: quizId, studentId: studentId)
                                     .notifier)
-                                .refresh(quizId: quizId, studentId: studentId)),
+                                .refresh(quizId: quizId, studentId: studentId),
+                          ),
+                        ),
                       ),
                   loading: () => const Center(
                         child: CircularProgressIndicator(),

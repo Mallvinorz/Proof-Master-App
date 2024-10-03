@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:proofmaster/app/data/responses/student/get_quiz_questions_response/get_quiz_questions_response.dart';
 import 'package:proofmaster/app/data/responses/student/post_result_diagnostic_test_response/post_diagnostic_result_response.dart';
 import 'package:proofmaster/app/domain/entities/diagnostic_quiz_result_dto/diagnosticquizresultdto.dart';
+import 'package:proofmaster/app/domain/entities/proof_competence_result_dto/proofcompetenceresultdto.dart';
 import 'package:proofmaster/app/domain/entities/quiz_option/quiz_option.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
@@ -86,6 +87,26 @@ class QuizRepositoryImpl implements QuizRepository {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(dto.toJson()),
+      );
+      return PostDiagnosticResultResponse.fromJson(response.body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<PostDiagnosticResultResponse> postProofCompetenceResult(
+      String quizId, int score) async {
+    try {
+      final proofCompetenceResultDto = ProofCompetenceResultDto(score: score);
+      final url = Uri.http(BASEURL, '/api/quizzes/competences/$quizId');
+      final response = await httpClientWithInterceptor.post(
+        url,
+        headers: <String, String>{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(proofCompetenceResultDto.toJson()),
       );
       return PostDiagnosticResultResponse.fromJson(response.body);
     } catch (e) {

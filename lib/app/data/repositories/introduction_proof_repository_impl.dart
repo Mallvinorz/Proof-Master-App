@@ -20,14 +20,6 @@ class IntroductionProofRepositoryImpl implements IntroductionProofRepository {
         'Accept': 'application/json',
       });
 
-      //  MenuItem(
-      //   route: 'geometric-proof',
-      //   iconUrl: 'assets/icons/geometric_ic.png',
-      //   isSeparator: false,
-      //   menuText: "Geometric Proof",
-      //   menuDesc: "Lorem ipsum dolor sit amet consectetur.",
-      // ),
-
       final result = GetIntroductionProofResponse.fromJson(response.body);
       final menus = result.data
           ?.map((item) => MenuItem(
@@ -46,8 +38,20 @@ class IntroductionProofRepositoryImpl implements IntroductionProofRepository {
 
   @override
   Future<FinishedReadingIntroductionMaterialResponse> finishedReadingMaterial(
-      String materialId) {
-    // TODO: implement finishedReadingMaterial
-    throw UnimplementedError();
+      String materialId) async {
+    try {
+      final uri = Uri.http(
+          BASEURL, "api/learning-materials/users/progress/$materialId");
+      final response = await httpClientWithInterceptor.post(uri, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      });
+
+      final result =
+          FinishedReadingIntroductionMaterialResponse.fromJson(response.body);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

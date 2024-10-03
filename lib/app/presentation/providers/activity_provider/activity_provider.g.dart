@@ -73,8 +73,8 @@ final isRefreshingAnsweredProvider =
 );
 
 typedef _$IsRefreshingAnswered = AutoDisposeNotifier<bool>;
-String _$proofUnderstadingAnsweredActivitiesHash() =>
-    r'19212913a98b059be9cdb82e991e01a3fe30dc74';
+String _$proofUnderstadingAnsweredActivitiesFromTeacherHash() =>
+    r'eb6ed5ee0bc28e4df952dca4e87de23b908bdf78';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -97,7 +97,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$ProofUnderstadingAnsweredActivities
+abstract class _$ProofUnderstadingAnsweredActivitiesFromTeacher
     extends BuildlessAutoDisposeAsyncNotifier<List<ListItem>> {
   late final String studentId;
 
@@ -106,29 +106,29 @@ abstract class _$ProofUnderstadingAnsweredActivities
   );
 }
 
-/// See also [ProofUnderstadingAnsweredActivities].
-@ProviderFor(ProofUnderstadingAnsweredActivities)
-const proofUnderstadingAnsweredActivitiesProvider =
-    ProofUnderstadingAnsweredActivitiesFamily();
+/// See also [ProofUnderstadingAnsweredActivitiesFromTeacher].
+@ProviderFor(ProofUnderstadingAnsweredActivitiesFromTeacher)
+const proofUnderstadingAnsweredActivitiesFromTeacherProvider =
+    ProofUnderstadingAnsweredActivitiesFromTeacherFamily();
 
-/// See also [ProofUnderstadingAnsweredActivities].
-class ProofUnderstadingAnsweredActivitiesFamily
+/// See also [ProofUnderstadingAnsweredActivitiesFromTeacher].
+class ProofUnderstadingAnsweredActivitiesFromTeacherFamily
     extends Family<AsyncValue<List<ListItem>>> {
-  /// See also [ProofUnderstadingAnsweredActivities].
-  const ProofUnderstadingAnsweredActivitiesFamily();
+  /// See also [ProofUnderstadingAnsweredActivitiesFromTeacher].
+  const ProofUnderstadingAnsweredActivitiesFromTeacherFamily();
 
-  /// See also [ProofUnderstadingAnsweredActivities].
-  ProofUnderstadingAnsweredActivitiesProvider call(
+  /// See also [ProofUnderstadingAnsweredActivitiesFromTeacher].
+  ProofUnderstadingAnsweredActivitiesFromTeacherProvider call(
     String studentId,
   ) {
-    return ProofUnderstadingAnsweredActivitiesProvider(
+    return ProofUnderstadingAnsweredActivitiesFromTeacherProvider(
       studentId,
     );
   }
 
   @override
-  ProofUnderstadingAnsweredActivitiesProvider getProviderOverride(
-    covariant ProofUnderstadingAnsweredActivitiesProvider provider,
+  ProofUnderstadingAnsweredActivitiesFromTeacherProvider getProviderOverride(
+    covariant ProofUnderstadingAnsweredActivitiesFromTeacherProvider provider,
   ) {
     return call(
       provider.studentId,
@@ -147,31 +147,34 @@ class ProofUnderstadingAnsweredActivitiesFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'proofUnderstadingAnsweredActivitiesProvider';
+  String? get name => r'proofUnderstadingAnsweredActivitiesFromTeacherProvider';
 }
 
-/// See also [ProofUnderstadingAnsweredActivities].
-class ProofUnderstadingAnsweredActivitiesProvider
+/// See also [ProofUnderstadingAnsweredActivitiesFromTeacher].
+class ProofUnderstadingAnsweredActivitiesFromTeacherProvider
     extends AutoDisposeAsyncNotifierProviderImpl<
-        ProofUnderstadingAnsweredActivities, List<ListItem>> {
-  /// See also [ProofUnderstadingAnsweredActivities].
-  ProofUnderstadingAnsweredActivitiesProvider(
+        ProofUnderstadingAnsweredActivitiesFromTeacher, List<ListItem>> {
+  /// See also [ProofUnderstadingAnsweredActivitiesFromTeacher].
+  ProofUnderstadingAnsweredActivitiesFromTeacherProvider(
     String studentId,
   ) : this._internal(
-          () => ProofUnderstadingAnsweredActivities()..studentId = studentId,
-          from: proofUnderstadingAnsweredActivitiesProvider,
-          name: r'proofUnderstadingAnsweredActivitiesProvider',
+          () => ProofUnderstadingAnsweredActivitiesFromTeacher()
+            ..studentId = studentId,
+          from: proofUnderstadingAnsweredActivitiesFromTeacherProvider,
+          name: r'proofUnderstadingAnsweredActivitiesFromTeacherProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$proofUnderstadingAnsweredActivitiesHash,
-          dependencies: ProofUnderstadingAnsweredActivitiesFamily._dependencies,
-          allTransitiveDependencies: ProofUnderstadingAnsweredActivitiesFamily
-              ._allTransitiveDependencies,
+                  : _$proofUnderstadingAnsweredActivitiesFromTeacherHash,
+          dependencies: ProofUnderstadingAnsweredActivitiesFromTeacherFamily
+              ._dependencies,
+          allTransitiveDependencies:
+              ProofUnderstadingAnsweredActivitiesFromTeacherFamily
+                  ._allTransitiveDependencies,
           studentId: studentId,
         );
 
-  ProofUnderstadingAnsweredActivitiesProvider._internal(
+  ProofUnderstadingAnsweredActivitiesFromTeacherProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -185,7 +188,7 @@ class ProofUnderstadingAnsweredActivitiesProvider
 
   @override
   FutureOr<List<ListItem>> runNotifierBuild(
-    covariant ProofUnderstadingAnsweredActivities notifier,
+    covariant ProofUnderstadingAnsweredActivitiesFromTeacher notifier,
   ) {
     return notifier.build(
       studentId,
@@ -193,10 +196,12 @@ class ProofUnderstadingAnsweredActivitiesProvider
   }
 
   @override
-  Override overrideWith(ProofUnderstadingAnsweredActivities Function() create) {
+  Override overrideWith(
+      ProofUnderstadingAnsweredActivitiesFromTeacher Function() create) {
     return ProviderOverride(
       origin: this,
-      override: ProofUnderstadingAnsweredActivitiesProvider._internal(
+      override:
+          ProofUnderstadingAnsweredActivitiesFromTeacherProvider._internal(
         () => create()..studentId = studentId,
         from: from,
         name: null,
@@ -209,14 +214,15 @@ class ProofUnderstadingAnsweredActivitiesProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<ProofUnderstadingAnsweredActivities,
+  AutoDisposeAsyncNotifierProviderElement<
+      ProofUnderstadingAnsweredActivitiesFromTeacher,
       List<ListItem>> createElement() {
-    return _ProofUnderstadingAnsweredActivitiesProviderElement(this);
+    return _ProofUnderstadingAnsweredActivitiesFromTeacherProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ProofUnderstadingAnsweredActivitiesProvider &&
+    return other is ProofUnderstadingAnsweredActivitiesFromTeacherProvider &&
         other.studentId == studentId;
   }
 
@@ -229,23 +235,45 @@ class ProofUnderstadingAnsweredActivitiesProvider
   }
 }
 
-mixin ProofUnderstadingAnsweredActivitiesRef
+mixin ProofUnderstadingAnsweredActivitiesFromTeacherRef
     on AutoDisposeAsyncNotifierProviderRef<List<ListItem>> {
   /// The parameter `studentId` of this provider.
   String get studentId;
 }
 
-class _ProofUnderstadingAnsweredActivitiesProviderElement
+class _ProofUnderstadingAnsweredActivitiesFromTeacherProviderElement
     extends AutoDisposeAsyncNotifierProviderElement<
-        ProofUnderstadingAnsweredActivities,
-        List<ListItem>> with ProofUnderstadingAnsweredActivitiesRef {
-  _ProofUnderstadingAnsweredActivitiesProviderElement(super.provider);
+        ProofUnderstadingAnsweredActivitiesFromTeacher,
+        List<ListItem>> with ProofUnderstadingAnsweredActivitiesFromTeacherRef {
+  _ProofUnderstadingAnsweredActivitiesFromTeacherProviderElement(
+      super.provider);
 
   @override
   String get studentId =>
-      (origin as ProofUnderstadingAnsweredActivitiesProvider).studentId;
+      (origin as ProofUnderstadingAnsweredActivitiesFromTeacherProvider)
+          .studentId;
 }
 
+String _$proofUnderstadingAnsweredActivitiesFromStudentHash() =>
+    r'c8426660f1639a2e4bd95e1bb842c2857579d760';
+
+/// See also [ProofUnderstadingAnsweredActivitiesFromStudent].
+@ProviderFor(ProofUnderstadingAnsweredActivitiesFromStudent)
+final proofUnderstadingAnsweredActivitiesFromStudentProvider =
+    AutoDisposeAsyncNotifierProvider<
+        ProofUnderstadingAnsweredActivitiesFromStudent,
+        List<ListItem>>.internal(
+  ProofUnderstadingAnsweredActivitiesFromStudent.new,
+  name: r'proofUnderstadingAnsweredActivitiesFromStudentProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$proofUnderstadingAnsweredActivitiesFromStudentHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ProofUnderstadingAnsweredActivitiesFromStudent
+    = AutoDisposeAsyncNotifier<List<ListItem>>;
 String _$isRefreshingAnsweredDetailHash() =>
     r'1e09be101f23c5abe74896ba5fbbfd88faa9f87b';
 

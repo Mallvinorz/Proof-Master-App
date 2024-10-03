@@ -44,7 +44,6 @@ class ActivityRepositoryImpl implements ActivityRepository {
       var response = await http.Response.fromStream(streamedResponse);
 
       Fimber.d("response from repository $response");
-      print(response.body);
 
       if (response.statusCode == 200) {
         final result = UploadFileActivityResponse.fromJson(response.body);
@@ -85,7 +84,6 @@ class ActivityRepositoryImpl implements ActivityRepository {
   @override
   Future<PostReviewResponse> postReviewActivity(ActivityReviewDto dto) async {
     try {
-      throw Exception("Fitur masih dalam tahap development 😢");
       final url = Uri.http(BASEURL, 'api/activities/review/${dto.activityId}');
       final response = await httpClientWithInterceptor.post(
         url,
@@ -95,7 +93,6 @@ class ActivityRepositoryImpl implements ActivityRepository {
         },
         body: json.encode(dto.toJson()),
       );
-      print("RESPONSE $dto");
 
       if (response.statusCode != 200) throw Exception(response.body);
       final result = PostReviewResponse.fromJson(response.body);
@@ -136,7 +133,7 @@ class ActivityRepositoryImpl implements ActivityRepository {
 
       final result =
           GetStudentAnsweredActivitiesResponse.fromJson(response.body);
-
+      Fimber.d("student activity report $result");
       return result.data
               ?.map((activty) => ListItem(
                   id: activty.id ?? "-",
@@ -163,8 +160,33 @@ class ActivityRepositoryImpl implements ActivityRepository {
 
       final result =
           GetAnsweredActivityFromStudentResponse.fromJson(response.body);
-
+      Fimber.d("$result");
       return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<ListItem>> getStudentAnsweredActivitiesFromStudent() async {
+    try {
+      final uri = Uri.http(BASEURL, "api/users/activities");
+
+      final response = await httpClientWithInterceptor.get(uri, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      });
+
+      final result =
+          GetStudentAnsweredActivitiesResponse.fromJson(response.body);
+      Fimber.d("student activity report $result");
+      return result.data
+              ?.map((activty) => ListItem(
+                  id: activty.id ?? "-",
+                  text: activty.title ?? "-",
+                  iconUrl: "assets/icons/todo_ic.png"))
+              .toList() ??
+          [];
     } catch (e) {
       rethrow;
     }

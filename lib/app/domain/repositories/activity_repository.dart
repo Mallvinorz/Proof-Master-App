@@ -13,6 +13,7 @@ abstract class ActivityRepository {
   Future<GetUnderstandingProofActivityResponse> getActivity(String activityId);
   Future<PostReviewResponse> postReviewActivity(ActivityReviewDto dto);
   Future<List<ListItem>> getStudentAnsweredActivities(String studentId);
+  Future<List<ListItem>> getStudentAnsweredActivitiesFromStudent();
   Future<GetAnsweredActivityFromStudentResponse> getStudentAnsweredActivity(
       String activityId);
 }

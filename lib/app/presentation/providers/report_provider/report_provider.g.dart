@@ -405,5 +405,177 @@ class _DiagnosticReportProviderElement
   @override
   String? get studentId => (origin as DiagnosticReportProvider).studentId;
 }
+
+String _$proofCompetenceReportHash() =>
+    r'572eaee65195a358662d5de03a7c3fe5f84de8eb';
+
+abstract class _$ProofCompetenceReport
+    extends BuildlessAutoDisposeAsyncNotifier<
+        GetProofCompetenceReportResponse> {
+  late final String quizId;
+  late final String? studentId;
+
+  FutureOr<GetProofCompetenceReportResponse> build({
+    required String quizId,
+    String? studentId,
+  });
+}
+
+/// See also [ProofCompetenceReport].
+@ProviderFor(ProofCompetenceReport)
+const proofCompetenceReportProvider = ProofCompetenceReportFamily();
+
+/// See also [ProofCompetenceReport].
+class ProofCompetenceReportFamily
+    extends Family<AsyncValue<GetProofCompetenceReportResponse>> {
+  /// See also [ProofCompetenceReport].
+  const ProofCompetenceReportFamily();
+
+  /// See also [ProofCompetenceReport].
+  ProofCompetenceReportProvider call({
+    required String quizId,
+    String? studentId,
+  }) {
+    return ProofCompetenceReportProvider(
+      quizId: quizId,
+      studentId: studentId,
+    );
+  }
+
+  @override
+  ProofCompetenceReportProvider getProviderOverride(
+    covariant ProofCompetenceReportProvider provider,
+  ) {
+    return call(
+      quizId: provider.quizId,
+      studentId: provider.studentId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'proofCompetenceReportProvider';
+}
+
+/// See also [ProofCompetenceReport].
+class ProofCompetenceReportProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<ProofCompetenceReport,
+        GetProofCompetenceReportResponse> {
+  /// See also [ProofCompetenceReport].
+  ProofCompetenceReportProvider({
+    required String quizId,
+    String? studentId,
+  }) : this._internal(
+          () => ProofCompetenceReport()
+            ..quizId = quizId
+            ..studentId = studentId,
+          from: proofCompetenceReportProvider,
+          name: r'proofCompetenceReportProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$proofCompetenceReportHash,
+          dependencies: ProofCompetenceReportFamily._dependencies,
+          allTransitiveDependencies:
+              ProofCompetenceReportFamily._allTransitiveDependencies,
+          quizId: quizId,
+          studentId: studentId,
+        );
+
+  ProofCompetenceReportProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.quizId,
+    required this.studentId,
+  }) : super.internal();
+
+  final String quizId;
+  final String? studentId;
+
+  @override
+  FutureOr<GetProofCompetenceReportResponse> runNotifierBuild(
+    covariant ProofCompetenceReport notifier,
+  ) {
+    return notifier.build(
+      quizId: quizId,
+      studentId: studentId,
+    );
+  }
+
+  @override
+  Override overrideWith(ProofCompetenceReport Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: ProofCompetenceReportProvider._internal(
+        () => create()
+          ..quizId = quizId
+          ..studentId = studentId,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        quizId: quizId,
+        studentId: studentId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<ProofCompetenceReport,
+      GetProofCompetenceReportResponse> createElement() {
+    return _ProofCompetenceReportProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ProofCompetenceReportProvider &&
+        other.quizId == quizId &&
+        other.studentId == studentId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, quizId.hashCode);
+    hash = _SystemHash.combine(hash, studentId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ProofCompetenceReportRef
+    on AutoDisposeAsyncNotifierProviderRef<GetProofCompetenceReportResponse> {
+  /// The parameter `quizId` of this provider.
+  String get quizId;
+
+  /// The parameter `studentId` of this provider.
+  String? get studentId;
+}
+
+class _ProofCompetenceReportProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<ProofCompetenceReport,
+        GetProofCompetenceReportResponse> with ProofCompetenceReportRef {
+  _ProofCompetenceReportProviderElement(super.provider);
+
+  @override
+  String get quizId => (origin as ProofCompetenceReportProvider).quizId;
+  @override
+  String? get studentId => (origin as ProofCompetenceReportProvider).studentId;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

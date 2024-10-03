@@ -52,7 +52,7 @@ class ReportView extends ConsumerWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "${data[index].textTitle} ${data[index].progress}",
+                                      data[index].textTitle,
                                       style: CustomTextTheme
                                           .proofMasterTextTheme.displaySmall,
                                       maxLines: 2,

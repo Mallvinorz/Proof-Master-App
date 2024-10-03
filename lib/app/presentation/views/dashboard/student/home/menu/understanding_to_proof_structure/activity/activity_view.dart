@@ -78,7 +78,7 @@ class _ActivityViewState extends ConsumerState<ActivityView> {
                 });
               },
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: Button(

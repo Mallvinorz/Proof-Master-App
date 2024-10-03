@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
+import 'package:proofmaster/app/helper/toast.dart';
 import 'package:proofmaster/app/presentation/providers/quiz_provider/quiz_provider.dart';
 import 'package:proofmaster/app/presentation/templates/background_pattern.dart';
 import 'package:proofmaster/app/presentation/templates/quiz_template.dart';
@@ -42,6 +43,34 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
   void dispose() {
     quizRepository = null;
     super.dispose();
+  }
+
+  Future<void> handleSubmitToServer(double score) async {
+    try {
+      final repository = ref.read(quizRepositoryProvider);
+      await repository.postProofCompetenceResult(widget.id, score.round());
+      await showToast("Berhasil meyimpan progres quiz anda ke server 🎉");
+      context.go(ProofmasterRoute.home);
+    } catch (e) {
+      alertDialog(
+          context: context,
+          message:
+              "Gagal menyimpan progress quiz anda ke server, klik 'Kembali ke dashboard' untuk kembali ke halaman utama, akan tetapi progress anda tidak akan tersimpan. Klik 'Tutup' lalu klik 'Simpan, dan kembali' untuk mencoba menyimpan ulang progres anda ke server.",
+          title: "Gagal menyimpan progress quiz anda!",
+          isSuccess: false,
+          actionWidgets: [
+            TextButton(
+                onPressed: () {
+                  context.go(ProofmasterRoute.home);
+                },
+                child: const Text("Kembali ke dashboard")),
+            TextButton(
+                onPressed: () {
+                  context.pop();
+                },
+                child: const Text("Tutup"))
+          ]);
+    }
   }
 
   @override
@@ -90,7 +119,7 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
                   onSubmitQuiz: () async => {
                     showSubmitQuizDialog(
                       context: context,
-                      onSubmit: () {
+                      onSubmit: () async {
                         try {
                           ref
                               .read(quizProvider.notifier)
@@ -98,6 +127,9 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
                           final score = ref
                               .read(quizProvider.notifier)
                               .calculateQuizScore();
+
+                          await handleSubmitToServer(score);
+
                           context.replaceNamed(ProofmasterRoute.score,
                               pathParameters: {"score": score.toString()});
                         } catch (e) {

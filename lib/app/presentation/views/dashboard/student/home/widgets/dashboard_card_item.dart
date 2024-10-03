@@ -73,17 +73,16 @@ class DashboardCardItem extends StatelessWidget {
                       Colors.black.withOpacity(0.5), // Adjust opacity as needed
                 ),
               ),
-            if (learningMaterial.isLocked)
-              Positioned(
-                  right: 8,
-                  bottom: 8,
-                  child: learningMaterial.isLocked
-                      ? const Icon(
-                          FontAwesomeIcons.lock,
-                          color: Colors.white,
-                        )
-                      : Text(
-                          "${learningMaterial.finishedSubLearningMaterial}/${learningMaterial.totalSubLearningMaterial}")),
+            Positioned(
+                right: 8,
+                bottom: 8,
+                child: learningMaterial.isLocked
+                    ? const Icon(
+                        FontAwesomeIcons.lock,
+                        color: Colors.white,
+                      )
+                    : Text(
+                        "${learningMaterial.finishedSubLearningMaterial}/${learningMaterial.totalSubLearningMaterial}")),
           ],
         ),
       ),

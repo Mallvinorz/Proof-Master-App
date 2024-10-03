@@ -14,11 +14,10 @@ class UnderstandngProofReportView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activities = studentId != null && studentId!.isNotEmpty
-        ? ref.watch(proofUnderstadingAnsweredActivitiesProvider(studentId!))
-        : ref.watch(proofUnderstadingActivitiesProvider);
-    final isRefreshing = studentId != null && studentId!.isNotEmpty
-        ? ref.watch(isRefreshingAnsweredProvider)
-        : ref.watch(isRefreshingProvider);
+        ? ref.watch(
+            proofUnderstadingAnsweredActivitiesFromTeacherProvider(studentId!))
+        : ref.watch(proofUnderstadingAnsweredActivitiesFromStudentProvider);
+    final isRefreshing = ref.watch(isRefreshingProvider);
 
     return ListItemTemplateAsyncvalue<ListItem>(
       title: "Understading Proof Structure Report",
@@ -31,10 +30,14 @@ class UnderstandngProofReportView extends ConsumerWidget {
       onRefresh: () {
         studentId != null && studentId!.isNotEmpty
             ? ref
-                .watch(proofUnderstadingAnsweredActivitiesProvider(studentId!)
+                .watch(proofUnderstadingAnsweredActivitiesFromTeacherProvider(
+                        studentId!)
                     .notifier)
                 .refresh(studentId!)
-            : ref.read(proofUnderstadingActivitiesProvider.notifier).refresh();
+            : ref
+                .read(proofUnderstadingAnsweredActivitiesFromStudentProvider
+                    .notifier)
+                .refresh();
       },
       child: (ListItem data) => ClickableListItemWithIcon(
         onTap: () => context.pushNamed(
