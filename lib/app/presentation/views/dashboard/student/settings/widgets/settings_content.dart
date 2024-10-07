@@ -68,12 +68,6 @@ class SettingsContent extends ConsumerWidget {
               const SizedBox(
                 height: 16.0,
               ),
-              SettingMenuItem(
-                  text: "Unduh semua materi",
-                  onTap: () async {
-                    final result = await performDownloadAllMaterials();
-                    if (!result) _showSettingsDialog(context);
-                  }), ////TODO: add action to download all material
               const SizedBox(
                 height: 16.0,
               ),

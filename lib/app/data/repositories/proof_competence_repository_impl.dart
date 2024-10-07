@@ -25,7 +25,7 @@ class ProofCompetenceRepositoryImpl implements ProofComptenceRepository {
               ?.map(
                 (item) => MenuItem(
                     isSeparator: false,
-                    iconUrl: 'assets/icons/test_ic.png',
+                    iconUrl: "https://ik.imagekit.io/q1qexvvey/test_ic.png",
                     menuText: item.menuText ?? "-",
                     menuDesc: item.menuDesc ?? "-",
                     route: item.id ?? "-"),

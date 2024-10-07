@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proofmaster/app/data/responses/teacher/get_answered_activity_from_student_response/get_answered_activity_from_student_response.dart';
 import 'package:proofmaster/app/domain/entities/activity_review_dto/activityreviewdto.dart';
+import 'package:proofmaster/app/helper/toast.dart';
 import 'package:proofmaster/app/presentation/providers/activity_provider/activity_provider.dart';
 import 'package:proofmaster/app/presentation/widgets/alert_dialog.dart';
 import 'package:proofmaster/app/presentation/widgets/button.dart';
@@ -115,10 +116,14 @@ class _DetailActivityReportContentState
             width: double.infinity,
             child: Button(
               onTap: () async {
-                await performDownloadPdfFile(data.data?.pdfUrl ?? "-");
+                try {
+                  await performDownloadPdfFile(data.data?.pdfUrl ?? "-");
+                } catch (e) {
+                  showToast("Download error: $e");
+                }
               },
               text:
-                  "Unduh file ${widget.activityId == null || widget.activityId == "" ? 'jawabanmu' : 'jawaban siswa'}",
+                  "Unduh file ${widget.studentId == null || widget.studentId == "" ? 'jawabanmu' : 'jawaban siswa'}",
               suffixIcon: const Icon(
                 FontAwesomeIcons.solidFilePdf,
                 color: Colors.white,

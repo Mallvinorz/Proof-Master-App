@@ -1,8 +1,9 @@
 import 'package:fimber/fimber.dart';
 import 'package:proofmaster/app/data/responses/general/get_diagnostic_report/get_diagnostic_report_response/get_diagnostic_report_response.dart';
+import 'package:proofmaster/app/data/responses/general/get_learning_material_progress_report/get_learning_material_progress_report_response/get_learning_material_progress_report_response.dart';
 import 'package:proofmaster/app/data/responses/general/get_proof_competence_report_result/get_proof_competence_report_response/get_proof_competence_report_response.dart';
 import 'package:proofmaster/app/data/responses/general/get_report_progress/get_report_progress.dart';
-import 'package:proofmaster/app/data/responses/student/get_introduction_proof_response/get_introduction_proof_response.dart';
+import 'package:proofmaster/app/domain/entities/intro_proof_report_item/intro_proof_report_item.dart';
 import 'package:proofmaster/app/domain/entities/report_item/report_item.dart';
 import 'package:proofmaster/app/domain/repositories/report_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
@@ -58,16 +59,45 @@ class ReportRepositoryImpl implements ReportRepository {
   }
 
   @override
-  Future<GetIntroductionProofResponse> getIntroductionProofReportProgress() {
-    // TODO: implement getIntroductionProofReportProgress
-    throw UnimplementedError();
+  Future<List<IntroProofReportItem>>
+      getIntroductionProofReportProgress() async {
+    final uri = Uri.http(BASEURL, "api/users/learning-material/progress");
+    final response = await httpClientWithInterceptor.get(uri, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    final result =
+        GetLearningMaterialProgressReportResponse.fromJson(response.body);
+    return result.data?.items
+            ?.map((item) => IntroProofReportItem(
+                  text: item.text ?? "",
+                  finishedCount: item.finishedCount ?? 0,
+                  totalCount: item.totalCount ?? 0,
+                ))
+            .toList() ??
+        [];
   }
 
   @override
-  Future<GetIntroductionProofResponse>
-      getIntroductionProofReportProgressStudent(String studentId) {
-    // TODO: implement getIntroductionProofReportProgressStudent
-    throw UnimplementedError();
+  Future<List<IntroProofReportItem>> getIntroductionProofReportProgressStudent(
+      String studentId) async {
+    final uri = Uri.http(BASEURL, "api/learning-material/progress/$studentId");
+    final response = await httpClientWithInterceptor.get(uri, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    final result =
+        GetLearningMaterialProgressReportResponse.fromJson(response.body);
+    return result.data?.items
+            ?.map((item) => IntroProofReportItem(
+                  text: item.text ?? "",
+                  finishedCount: item.finishedCount ?? 0,
+                  totalCount: item.totalCount ?? 0,
+                ))
+            .toList() ??
+        [];
   }
 
   @override
@@ -122,7 +152,13 @@ class ReportRepositoryImpl implements ReportRepository {
         'Accept': 'application/json',
       });
 
-      Fimber.d("response $response");
+      if (response.statusCode == 500) {
+        throw Exception("from server when get report data");
+      }
+      if (response.statusCode == 404) {
+        throw Exception("no report data");
+      }
+      Fimber.d("response ${response.body} ");
       final result = GetProofCompetenceReportResponse.fromJson(response.body);
 
       return result;

@@ -2,6 +2,7 @@ import 'package:fimber/fimber.dart';
 import 'package:proofmaster/app/data/repositories/report_repository_impl.dart';
 import 'package:proofmaster/app/data/responses/general/get_diagnostic_report/get_diagnostic_report_response/get_diagnostic_report_response.dart';
 import 'package:proofmaster/app/data/responses/general/get_proof_competence_report_result/get_proof_competence_report_response/get_proof_competence_report_response.dart';
+import 'package:proofmaster/app/domain/entities/intro_proof_report_item/intro_proof_report_item.dart';
 import 'package:proofmaster/app/domain/entities/report_item/report_item.dart';
 import 'package:proofmaster/app/domain/repositories/report_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -115,6 +116,29 @@ class ProofCompetenceReport extends _$ProofCompetenceReport {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
         () => _fetchReports(quizId: quizId, studentId: studentId));
+    ref.read(isRefreshingProvider.notifier).setRefreshing(false);
+  }
+}
+
+@riverpod
+class IntroductionProgressReport extends _$IntroductionProgressReport {
+  @override
+  Future<List<IntroProofReportItem>> build({String? studentId}) async {
+    return _fetchReports(studentId: studentId);
+  }
+
+  Future<List<IntroProofReportItem>> _fetchReports({String? studentId}) async {
+    Fimber.d("  REQUEST $studentId");
+    final repository = ref.watch(reportRepositoryProvider);
+    return studentId == null
+        ? repository.getIntroductionProofReportProgress()
+        : repository.getIntroductionProofReportProgressStudent(studentId);
+  }
+
+  Future<void> refresh({String? studentId}) async {
+    ref.read(isRefreshingProvider.notifier).setRefreshing(true);
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() => _fetchReports(studentId: studentId));
     ref.read(isRefreshingProvider.notifier).setRefreshing(false);
   }
 }

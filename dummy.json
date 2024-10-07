@@ -1,31 +1,20 @@
 {
   "data": {
-    "student_id": "asdlasdjasd",
-    "reports": [
+    "items": [
       {
-        "id": "diagnostic-test-report",
-        "title": "Diagnostic Test",
-        "finished_progress": 75
+        "finished_count": 2,
+        "text": "Teorema",
+        "total_count": 1
       },
       {
-        "id": "introduction-proof-report",
-        "title": "Introduction to Proof",
-        "finished_progress": 100
+        "finished_count": 1,
+        "text": "Axioma",
+        "total_count": 1
       },
       {
-        "id": "geometric-proof-report",
-        "title": "Geometry Proof Format",
-        "finished_progress": 25
-      },
-      {
-        "id": "understanding-proof-report",
-        "title": "Understanding of Proof Structure",
-        "finished_progress": 75
-      },
-      {
-        "id": "proof-competence-report",
-        "title": "Proof Competence Test",
-        "finished_progress": 75
+        "finished_count": 1,
+        "text": "Definition of Terms",
+        "total_count": 1
       }
     ]
   }

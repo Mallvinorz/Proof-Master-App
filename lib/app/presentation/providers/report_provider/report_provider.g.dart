@@ -577,5 +577,155 @@ class _ProofCompetenceReportProviderElement
   @override
   String? get studentId => (origin as ProofCompetenceReportProvider).studentId;
 }
+
+String _$introductionProgressReportHash() =>
+    r'3599149a6ace4d7153629812c7178fcade413f6a';
+
+abstract class _$IntroductionProgressReport
+    extends BuildlessAutoDisposeAsyncNotifier<List<IntroProofReportItem>> {
+  late final String? studentId;
+
+  FutureOr<List<IntroProofReportItem>> build({
+    String? studentId,
+  });
+}
+
+/// See also [IntroductionProgressReport].
+@ProviderFor(IntroductionProgressReport)
+const introductionProgressReportProvider = IntroductionProgressReportFamily();
+
+/// See also [IntroductionProgressReport].
+class IntroductionProgressReportFamily
+    extends Family<AsyncValue<List<IntroProofReportItem>>> {
+  /// See also [IntroductionProgressReport].
+  const IntroductionProgressReportFamily();
+
+  /// See also [IntroductionProgressReport].
+  IntroductionProgressReportProvider call({
+    String? studentId,
+  }) {
+    return IntroductionProgressReportProvider(
+      studentId: studentId,
+    );
+  }
+
+  @override
+  IntroductionProgressReportProvider getProviderOverride(
+    covariant IntroductionProgressReportProvider provider,
+  ) {
+    return call(
+      studentId: provider.studentId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'introductionProgressReportProvider';
+}
+
+/// See also [IntroductionProgressReport].
+class IntroductionProgressReportProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<IntroductionProgressReport,
+        List<IntroProofReportItem>> {
+  /// See also [IntroductionProgressReport].
+  IntroductionProgressReportProvider({
+    String? studentId,
+  }) : this._internal(
+          () => IntroductionProgressReport()..studentId = studentId,
+          from: introductionProgressReportProvider,
+          name: r'introductionProgressReportProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$introductionProgressReportHash,
+          dependencies: IntroductionProgressReportFamily._dependencies,
+          allTransitiveDependencies:
+              IntroductionProgressReportFamily._allTransitiveDependencies,
+          studentId: studentId,
+        );
+
+  IntroductionProgressReportProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.studentId,
+  }) : super.internal();
+
+  final String? studentId;
+
+  @override
+  FutureOr<List<IntroProofReportItem>> runNotifierBuild(
+    covariant IntroductionProgressReport notifier,
+  ) {
+    return notifier.build(
+      studentId: studentId,
+    );
+  }
+
+  @override
+  Override overrideWith(IntroductionProgressReport Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: IntroductionProgressReportProvider._internal(
+        () => create()..studentId = studentId,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        studentId: studentId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<IntroductionProgressReport,
+      List<IntroProofReportItem>> createElement() {
+    return _IntroductionProgressReportProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is IntroductionProgressReportProvider &&
+        other.studentId == studentId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, studentId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin IntroductionProgressReportRef
+    on AutoDisposeAsyncNotifierProviderRef<List<IntroProofReportItem>> {
+  /// The parameter `studentId` of this provider.
+  String? get studentId;
+}
+
+class _IntroductionProgressReportProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<IntroductionProgressReport,
+        List<IntroProofReportItem>> with IntroductionProgressReportRef {
+  _IntroductionProgressReportProviderElement(super.provider);
+
+  @override
+  String? get studentId =>
+      (origin as IntroductionProgressReportProvider).studentId;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
