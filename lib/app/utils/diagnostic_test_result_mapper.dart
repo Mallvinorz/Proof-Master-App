@@ -5,18 +5,14 @@ class PriorKnowledgeMapper implements Mapper<String, PriorKnowledgeType> {
   @override
   PriorKnowledgeType to(String input) {
     switch (input) {
-      case "UNSUPPORTED RESPONSE":
+      case "NEEDS IMPROVEMENT":
         return PriorKnowledgeType.ONE;
-      case "SURFACE":
+      case "SUFFICIENT":
         return PriorKnowledgeType.TWO;
-      case "BEYOND SURFACE":
+      case "GOOD":
         return PriorKnowledgeType.THREE;
-      case "SKIPPING RECOGNIZING":
+      case "EXCELLENT":
         return PriorKnowledgeType.FOUR;
-      case "BEYOND RECOGNIZING ELEMENT":
-        return PriorKnowledgeType.FIVE;
-      case "BEYOND CHAINING ELEMENT":
-        return PriorKnowledgeType.SIX;
       default:
         throw Exception("Input is no in range of PriorKnowledge Type");
     }
@@ -26,17 +22,13 @@ class PriorKnowledgeMapper implements Mapper<String, PriorKnowledgeType> {
   String from(output) {
     switch (output) {
       case PriorKnowledgeType.ONE:
-        return "UNSUPPORTED RESPONSE";
+        return "MEEDS IMPROVEMENT";
       case PriorKnowledgeType.TWO:
-        return "SURFACE";
+        return "SUFFICIENT";
       case PriorKnowledgeType.THREE:
-        return "BEYOND SURFACE";
+        return "GOOD";
       case PriorKnowledgeType.FOUR:
-        return "SKIPPING RECOGNIZING";
-      case PriorKnowledgeType.FIVE:
-        return "BEYOND RECOGNIZING ELEMENT";
-      case PriorKnowledgeType.SIX:
-        return "BEYOND CHAINING ELEMENT";
+        return "EXCELENT";
       default:
         throw Exception("Input is no in range of PriorKnowledge Type");
     }
