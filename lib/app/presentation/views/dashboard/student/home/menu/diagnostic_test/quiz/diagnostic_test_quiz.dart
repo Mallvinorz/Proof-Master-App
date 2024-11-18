@@ -54,12 +54,10 @@ class _DiagnosticTestQuizState extends ConsumerState<DiagnosticTestQuiz> {
         final score =
             ref.read(quizProvider.notifier).calculateQuizScorePriorKnowledge();
         final selectedResult = switch (score) {
-          > 0 && <= 4 => PriorKnowledgeType.ONE,
-          > 4 && <= 8 => PriorKnowledgeType.TWO,
-          > 9 && <= 12 => PriorKnowledgeType.THREE,
-          > 12 && <= 16 => PriorKnowledgeType.FOUR,
-          > 16 && <= 19 => PriorKnowledgeType.FIVE,
-          20 => PriorKnowledgeType.SIX,
+          > 0 && <= 5 => PriorKnowledgeType.ONE,
+          > 5 && <= 8 => PriorKnowledgeType.TWO,
+          > 9 && <= 11 => PriorKnowledgeType.THREE,
+          > 11 && <= 14 => PriorKnowledgeType.FOUR,
           _ => PriorKnowledgeType.ONE,
         };
         context.replaceNamed(ProofmasterRoute.priorKnowledgeQuiz,

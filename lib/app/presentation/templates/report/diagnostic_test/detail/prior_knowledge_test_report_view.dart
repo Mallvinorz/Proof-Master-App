@@ -78,18 +78,14 @@ class PriorKnowledgeTestReportView extends ConsumerWidget {
                 PriorKnowledgeType.TWO => 'assets/icons/two_stars_ic.svg',
                 PriorKnowledgeType.THREE => 'assets/icons/three_stars_ic.svg',
                 PriorKnowledgeType.FOUR => 'assets/icons/four_stars_ic.svg',
-                PriorKnowledgeType.FIVE => 'assets/icons/five_stars_ic.svg',
-                PriorKnowledgeType.SIX => 'assets/icons/six_stars_ic.svg',
               }),
               _newMargin(),
               Text(
                 switch (type) {
-                  PriorKnowledgeType.ONE => "Unsupported Response",
-                  PriorKnowledgeType.TWO => "Surface",
-                  PriorKnowledgeType.THREE => "Beyond Surface",
-                  PriorKnowledgeType.FOUR => "Skipping Recognizing",
-                  PriorKnowledgeType.FIVE => "Beyond Recognizing Element",
-                  PriorKnowledgeType.SIX => "Beyond Chaining Element",
+                  PriorKnowledgeType.ONE => "Needs Improvement",
+                  PriorKnowledgeType.TWO => "Sufficient",
+                  PriorKnowledgeType.THREE => "Good",
+                  PriorKnowledgeType.FOUR => "Excelent",
                 },
                 style: CustomTextTheme.proofMasterTextTheme.displayMedium,
               ),
@@ -97,17 +93,13 @@ class PriorKnowledgeTestReportView extends ConsumerWidget {
               Text(
                 switch (type) {
                   PriorKnowledgeType.ONE =>
-                    "Pemahaman Kamu sangat rendah tentang konsep kekongruenan segitiga. Kamu belum mampu menunjukkan pengetahuan dasar atau konsep yang benar.",
+                    "Pemahaman sangat terbatas terhadap bukti, membutuhkan pembelajaran intensif untuk semua dimensi.",
                   PriorKnowledgeType.TWO =>
-                    "Pemahaman Kamu dangkal tentang konsep kekongruenan segitiga. Kamu telah menunjukkan beberapa pengetahuan dasar tetapi belum memiliki pemahaman yang mendalam.",
+                    "Pemahaman terbatas pada beberapa dimensi, memerlukan peningkatan signifikan pada dimensi lainnya.",
                   PriorKnowledgeType.THREE =>
-                    "Pemahaman Kamu lebih baik tentang konsep kekongruenan segitiga. Kamu mampu menunjukkan pengetahuan dasar dengan beberapa pemahaman konsep yang lebih mendalam.",
+                    "Pemahaman baik dengan sedikit area yang memerlukan peningkatan.",
                   PriorKnowledgeType.FOUR =>
-                    "Pemahaman Kamu baik tentang konsep kekongruenan segitiga. Kamu menunjukkan kemampuan untuk mengenali elemen-elemen penting tetapi mungkin melewatkan beberapa langkah penting.",
-                  PriorKnowledgeType.FIVE =>
-                    "Pemahaman Kamu sangat baik tentang konsep kekongruenan segitiga. Kamu mampu mengenali dan memahami sebagian besar elemen penting dengan beberapa pemahaman yang lebih mendalam.",
-                  PriorKnowledgeType.SIX =>
-                    "Pemahaman Kamu mendalam tentang konsep kekongruenan segitiga. Kamu mampu mengenali, memahami, dan menghubungkan semua elemen penting dengan baik.",
+                    "Pemahaman menyeluruh dan mendalam terhadap bukti, mencangkup semua aspek penilaian.",
                 },
                 style: CustomTextTheme.proofMasterTextTheme.bodyMedium,
               )
