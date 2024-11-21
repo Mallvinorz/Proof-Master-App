@@ -22,7 +22,7 @@ class PriorKnowledgeMapper implements Mapper<String, PriorKnowledgeType> {
   String from(output) {
     switch (output) {
       case PriorKnowledgeType.ONE:
-        return "MEEDS IMPROVEMENT";
+        return "NEEDS IMPROVEMENT";
       case PriorKnowledgeType.TWO:
         return "SUFFICIENT";
       case PriorKnowledgeType.THREE:

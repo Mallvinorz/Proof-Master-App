@@ -155,11 +155,13 @@ class _PriorKnowledgeResultViewState
               final result = PriorKnowledgeMapper().from(widget.type);
 
               final dto = DiagnosticQuizResultDto(result: result);
+              print(dto);
               await repository.postDiagnosticQuizResult(widget.id, dto);
               await showToast(
                   "Berhasil meyimpan progres quiz anda ke server 🎉");
               context.go(ProofmasterRoute.home);
             } catch (e) {
+              print(e);
               alertDialog(
                   context: context,
                   message:
