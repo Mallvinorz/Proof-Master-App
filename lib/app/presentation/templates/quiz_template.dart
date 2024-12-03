@@ -11,7 +11,7 @@ import 'package:proofmaster/theme/text_theme.dart';
 import 'package:proofmaster/app/presentation/widgets/button.dart';
 import 'package:proofmaster/app/presentation/widgets/option_item.dart';
 
-class QuizTemplate extends StatelessWidget {
+class QuizTemplate extends StatefulWidget {
   final String title;
   final QuizState quizState;
   final Function(int) moveQuizIndex;
@@ -35,22 +35,29 @@ class QuizTemplate extends StatelessWidget {
   });
 
   @override
+  State<QuizTemplate> createState() => _QuizTemplateState();
+}
+
+class _QuizTemplateState extends State<QuizTemplate> {
+  bool onFinishLoadContent = false;
+  @override
   Widget build(BuildContext context) {
-    print("Rebuilding QuizTemplate: ${quizState.currentQuestionIndex}");
+    print("Rebuilding QuizTemplate: ${widget.quizState.currentQuestionIndex}");
 
     final textStyleNumber =
         CustomTextTheme.proofMasterTextTheme.displayMedium?.copyWith(
       color: CustomColorTheme.colorBackground,
       fontWeight: FontWeight.bold,
     );
-    return quizState.openQuestionsNavigation
+    return widget.quizState.openQuestionsNavigation
         ? _buildQuizNumbersContent(textStyleNumber)
         : _buildQuizContent(textStyleNumber);
   }
 
   Widget _buildQuizContent(TextStyle? textStyleNumber) {
     return QuestionContainer(
-      key: Key("key-${quizState.questions[quizState.currentQuestionIndex].id}"),
+      key: Key(
+          "key-${widget.quizState.questions[widget.quizState.currentQuestionIndex].id}"),
       child: Stack(
         children: [
           Column(
@@ -62,8 +69,8 @@ class QuizTemplate extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 52.0),
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.only(top: 28, bottom: 52),
-                    child: _buildQuizBody(
-                        quizState.questions[quizState.currentQuestionIndex]),
+                    child: _buildQuizBody(widget.quizState
+                        .questions[widget.quizState.currentQuestionIndex]),
                   ),
                 ),
               ),
@@ -85,24 +92,29 @@ class QuizTemplate extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        quizState.currentQuestionIndex > 0
+        widget.quizState.currentQuestionIndex > 0
             ? Button(
-                onTap: () => quizState.currentQuestionIndex > 0
-                    ? goToPrevQuestion()
+                onTap: () => widget.quizState.currentQuestionIndex > 0
+                    ? widget.goToPrevQuestion()
                     : showToast("Sudah mencapai soal paling awal!"),
                 text: "Sebelumnya",
                 isOutlined: true,
               )
             : const SizedBox(),
         Button(
-            onTap: () =>
-                quizState.currentQuestionIndex == quizState.questions.length - 1
-                    ? onSubmitQuiz()
-                    : goToNextQuestion(),
-            text:
-                quizState.currentQuestionIndex == quizState.questions.length - 1
-                    ? "Selesaikan quiz"
-                    : "Selanjutnya"),
+            onTap: () {
+              widget.quizState.currentQuestionIndex ==
+                      widget.quizState.questions.length - 1
+                  ? widget.onSubmitQuiz()
+                  : widget.goToNextQuestion();
+              setState(() {
+                onFinishLoadContent = false;
+              });
+            },
+            text: widget.quizState.currentQuestionIndex ==
+                    widget.quizState.questions.length - 1
+                ? "Selesaikan quiz"
+                : "Selanjutnya"),
       ],
     );
   }
@@ -115,7 +127,7 @@ class QuizTemplate extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                onPressed: () => toggleQuizNavigation(),
+                onPressed: () => widget.toggleQuizNavigation(),
                 icon: const Icon(
                   FontAwesomeIcons.chevronLeft,
                   color: CustomColorTheme.colorPrimary,
@@ -131,19 +143,21 @@ class QuizTemplate extends StatelessWidget {
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.only(top: 24),
-              itemCount: quizState.questions.length,
+              itemCount: widget.quizState.questions.length,
               itemBuilder: (ctx, index) => NumberButton(
                 onTap: () {
-                  moveQuizIndex(index);
-                  toggleQuizNavigation();
+                  widget.moveQuizIndex(index);
+                  widget.toggleQuizNavigation();
                 },
                 content: Text(
                   "${index + 1}",
                   style: textStyleNumber,
                 ),
-                backgroundColor: quizState.questions[index].marked == true
+                backgroundColor: widget.quizState.questions[index].marked ==
+                        true
                     ? CustomColorTheme.colorYellowIndicator
-                    : quizState.questions[index].selectedAnsweValue != null
+                    : widget.quizState.questions[index].selectedAnsweValue !=
+                            null
                         ? CustomColorTheme.colorPrimary
                         : Colors.grey,
               ),
@@ -164,9 +178,9 @@ class QuizTemplate extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         NumberButton(
-          onTap: () => toggleQuizNavigation(),
+          onTap: () => widget.toggleQuizNavigation(),
           content: Text(
-            "${quizState.currentQuestionIndex + 1}",
+            "${widget.quizState.currentQuestionIndex + 1}",
             style: textStyleNumber,
           ),
           backgroundColor: CustomColorTheme.colorPrimary,
@@ -178,20 +192,23 @@ class QuizTemplate extends StatelessWidget {
               child: Text("Tandai soal ini"),
             ),
             NumberButton(
-              onTap: () =>
-                  toggleMarkSelectedQuestion(quizState.currentQuestionIndex),
+              onTap: () => widget.toggleMarkSelectedQuestion(
+                  widget.quizState.currentQuestionIndex),
               useBorder: true,
-              content:
-                  quizState.questions[quizState.currentQuestionIndex].marked ==
-                          true
-                      ? const Icon(FontAwesomeIcons.check)
-                      : const SizedBox() //TODO: change later,
-              ,
-              backgroundColor:
-                  quizState.questions[quizState.currentQuestionIndex].marked ==
-                          true
-                      ? CustomColorTheme.colorYellowIndicator
-                      : Colors.transparent,
+              content: widget
+                          .quizState
+                          .questions[widget.quizState.currentQuestionIndex]
+                          .marked ==
+                      true
+                  ? const Icon(FontAwesomeIcons.check)
+                  : const SizedBox(),
+              backgroundColor: widget
+                          .quizState
+                          .questions[widget.quizState.currentQuestionIndex]
+                          .marked ==
+                      true
+                  ? CustomColorTheme.colorYellowIndicator
+                  : Colors.transparent,
             )
           ],
         )
@@ -201,21 +218,24 @@ class QuizTemplate extends StatelessWidget {
 
   Widget _buildQuizBody(QuizQuestion question) => Column(
         key: Key(
-            "body-${quizState.questions[quizState.currentQuestionIndex].id}"),
+            "body-${widget.quizState.questions[widget.quizState.currentQuestionIndex].id}"),
         children: [
-          if (quizState.questions[quizState.currentQuestionIndex].imgUrl !=
+          if (widget.quizState.questions[widget.quizState.currentQuestionIndex]
+                  .imgUrl !=
               null)
             Container(
               clipBehavior: Clip.hardEdge,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(6)),
               ),
-              child: const Image(
+              child: Image(
                 width: double.infinity,
-                image: AssetImage("assets/images/dumy_avatar.jpeg"),
+                image: NetworkImage(widget.quizState
+                    .questions[widget.quizState.currentQuestionIndex].imgUrl!),
               ),
             ),
-          if (quizState.questions[quizState.currentQuestionIndex].imgUrl !=
+          if (widget.quizState.questions[widget.quizState.currentQuestionIndex]
+                  .imgUrl !=
               null)
             const SizedBox(height: 16),
           _buildQuizQuestion(question),
@@ -225,12 +245,25 @@ class QuizTemplate extends StatelessWidget {
   Widget _buildQuizQuestion(QuizQuestion question) {
     return Column(
       key: Key(
-          "question-${quizState.questions[quizState.currentQuestionIndex].id}"),
+          "question-${widget.quizState.questions[widget.quizState.currentQuestionIndex].id}"),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TeXView(child: TeXViewDocument(question.text)),
+        TeXView(
+            onRenderFinished: (height) {
+              setState(() {
+                onFinishLoadContent = true;
+              });
+            },
+            renderingEngine: const TeXViewRenderingEngine.katex(),
+            child: TeXViewDocument(question.text)),
         const SizedBox(height: 16),
-        ..._buildQuizOptions(question.options),
+        onFinishLoadContent
+            ? Column(
+                children: [
+                  ..._buildQuizOptions(question.options),
+                ],
+              )
+            : const Center(child: CircularProgressIndicator())
       ],
     );
   }
@@ -239,18 +272,21 @@ class QuizTemplate extends StatelessWidget {
     return options
         .mapIndexed((index, item) => Padding(
               key: Key(
-                  "option-container-${quizState.questions[quizState.currentQuestionIndex].id}-${item.value}"),
+                  "option-container-${widget.quizState.questions[widget.quizState.currentQuestionIndex].id}-${item.value}"),
               padding: const EdgeInsets.only(bottom: 16.0),
               child: OptionItem<int>(
                 key: Key(
-                    "option-child-${quizState.questions[quizState.currentQuestionIndex].id}-${item.value}"),
+                    "option-child-${widget.quizState.questions[widget.quizState.currentQuestionIndex].id}-${item.value}"),
                 selected: item.value ==
-                    quizState.questions[quizState.currentQuestionIndex]
+                    widget
+                        .quizState
+                        .questions[widget.quizState.currentQuestionIndex]
                         .selectedAnsweValue,
                 text: item.text,
                 value: item.value,
                 onSelected: (value) {
-                  onSelectQuizAnswer(value, quizState.currentQuestionIndex);
+                  widget.onSelectQuizAnswer(
+                      value, widget.quizState.currentQuestionIndex);
                 },
               ),
             ))

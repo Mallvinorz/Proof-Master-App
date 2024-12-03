@@ -4,6 +4,7 @@ import 'package:proofmaster/app/data/responses/student/get_quiz_questions_respon
 import 'package:proofmaster/app/data/responses/student/post_result_diagnostic_test_response/post_diagnostic_result_response.dart';
 import 'package:proofmaster/app/domain/entities/diagnostic_quiz_result_dto/diagnosticquizresultdto.dart';
 import 'package:proofmaster/app/domain/entities/proof_competence_result_dto/proofcompetenceresultdto.dart';
+import 'package:proofmaster/app/domain/entities/quiz/quiz_dto.dart';
 import 'package:proofmaster/app/domain/entities/quiz_option/quiz_option.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
@@ -12,14 +13,13 @@ import 'package:proofmaster/constanta.dart';
 
 class QuizRepositoryImpl implements QuizRepository {
   @override
-  Future<List<QuizQuestion>> getDiagnosticQuizQuestionsFrom(String id) async {
+  Future<QuizDTO> getDiagnosticQuizQuestionsFrom(String id) async {
     try {
       final uri = Uri.http(BASEURL, "api/quizzes/diagnostics/$id");
       final response = await httpClientWithInterceptor.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       });
-
       final result = GetQuizQuestionsResponse.fromJson(response.body);
       if (result.data == null) throw Exception("Data is null!");
 
@@ -37,15 +37,17 @@ class QuizRepositoryImpl implements QuizRepository {
               .toList() ??
           [];
 
-      return data;
+      return QuizDTO(
+          questions: data,
+          prerequisiteDesc: result.prerequisite?.desc,
+          prerequisiteImg: result.prerequisite?.imageUrl);
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<List<QuizQuestion>> getProofCompetenceQuizQuestionsFrom(
-      String id) async {
+  Future<QuizDTO> getProofCompetenceQuizQuestionsFrom(String id) async {
     try {
       final uri = Uri.http(BASEURL, "api/quizzes/competences/$id");
       final response = await httpClientWithInterceptor.get(uri, headers: {
@@ -55,7 +57,7 @@ class QuizRepositoryImpl implements QuizRepository {
       final result = GetQuizQuestionsResponse.fromJson(response.body);
       if (result.data == null) throw Exception("Data is null!");
 
-      return result.data!
+      final data = result.data!
           .map((element) => QuizQuestion(
                 id: element.id ?? "-",
                 text: element.question ?? "",
@@ -66,6 +68,10 @@ class QuizRepositoryImpl implements QuizRepository {
                     .toList(),
               ))
           .toList();
+      return QuizDTO(
+          questions: data,
+          prerequisiteDesc: result.prerequisite?.desc,
+          prerequisiteImg: result.prerequisite?.imageUrl);
     } catch (e) {
       rethrow;
     }

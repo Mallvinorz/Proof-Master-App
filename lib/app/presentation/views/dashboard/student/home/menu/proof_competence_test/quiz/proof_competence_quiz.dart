@@ -32,8 +32,9 @@ class _ProofCompetenceQuiz extends ConsumerState<ProofCompetenceQuiz> {
       ref
           .read(getDiagnosticQuizQuestionsFromProvider(widget.id).future)
           .then((response) {
-        if (response.isNotEmpty) {
-          ref.read(quizProvider.notifier).initQuiz(response);
+        if (response.questions.isNotEmpty) {
+          ref.read(quizProvider.notifier).initQuiz(response.questions,
+              response.prerequisiteImg, response.prerequisiteDesc);
         }
       });
     });

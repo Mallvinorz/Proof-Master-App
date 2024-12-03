@@ -1,5 +1,6 @@
 import 'package:fimber/fimber.dart';
 import 'package:proofmaster/app/data/repositories/quiz_repository_impl.dart';
+import 'package:proofmaster/app/domain/entities/quiz/quiz_dto.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
 import 'package:proofmaster/app/domain/repositories/quiz_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,13 +13,13 @@ QuizRepository quizRepository(QuizRepositoryRef ref) {
 }
 
 @riverpod
-Future<List<QuizQuestion>> getDiagnosticQuizQuestionsFrom(
+Future<QuizDTO> getDiagnosticQuizQuestionsFrom(
     GetDiagnosticQuizQuestionsFromRef ref, String id) {
   return ref.watch(quizRepositoryProvider).getDiagnosticQuizQuestionsFrom(id);
 }
 
 @riverpod
-Future<List<QuizQuestion>> getProofCompetenceQuizQuestionsFrom(
+Future<QuizDTO> getProofCompetenceQuizQuestionsFrom(
     GetProofCompetenceQuizQuestionsFromRef ref, String id) {
   return ref
       .watch(quizRepositoryProvider)
@@ -29,23 +30,31 @@ class QuizState {
   final List<QuizQuestion> questions;
   final int currentQuestionIndex;
   final bool openQuestionsNavigation;
+  final String? prerequisiteDesc;
+  final String? prerequisiteImg;
 
   QuizState({
     required this.questions,
     this.currentQuestionIndex = 0,
     this.openQuestionsNavigation = false,
+    this.prerequisiteDesc = null,
+    this.prerequisiteImg = null,
   });
 
   QuizState copyWith({
     List<QuizQuestion>? questions,
     int? currentQuestionIndex,
     bool? openQuestionsNavigation,
+    String? prerequisiteDesc,
+    String? prerequisiteImg,
   }) {
     return QuizState(
       questions: questions ?? this.questions,
       currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
       openQuestionsNavigation:
           openQuestionsNavigation ?? this.openQuestionsNavigation,
+      prerequisiteDesc: prerequisiteDesc ?? this.prerequisiteDesc,
+      prerequisiteImg: prerequisiteImg ?? this.prerequisiteImg,
     );
   }
 }
@@ -57,8 +66,23 @@ class Quiz extends _$Quiz {
     return QuizState(questions: []);
   }
 
-  void initQuiz(List<QuizQuestion> questions) {
-    state = QuizState(questions: questions);
+  void initQuiz(List<QuizQuestion> questions, String? prerequisiteImg,
+      String? prerequisiteDesc) {
+    state = QuizState(
+        questions: questions,
+        prerequisiteDesc: prerequisiteDesc,
+        prerequisiteImg: prerequisiteImg);
+    if (prerequisiteImg != null && prerequisiteDesc != null) {
+      final prerequisiteQuestion = QuizQuestion(
+        id: "-",
+        text: prerequisiteDesc,
+        options: [],
+        imgUrl: prerequisiteImg,
+        selectedAnsweValue: 0,
+      );
+      state =
+          state.copyWith(questions: [prerequisiteQuestion, ...state.questions]);
+    }
   }
 
   void updateSelectedAnswer(int selectedValue, int questionIndex) {
@@ -127,7 +151,13 @@ class Quiz extends _$Quiz {
   }
 
   double calculateQuizScore() {
-    final correctAnswer = state.questions
+    List<QuizQuestion> questions = List<QuizQuestion>.from(state.questions);
+
+    if (state.prerequisiteDesc != null && state.prerequisiteImg != null) {
+      questions.removeAt(0);
+    }
+
+    final correctAnswer = questions
         .where((question) =>
             question.selectedAnsweValue == question.correctAnswerValue)
         .length;
@@ -136,7 +166,12 @@ class Quiz extends _$Quiz {
   }
 
   int calculateQuizScorePriorKnowledge() {
-    final correctAnswer = state.questions
+    List<QuizQuestion> questions = List<QuizQuestion>.from(state.questions);
+
+    if (state.prerequisiteDesc != null && state.prerequisiteImg != null) {
+      questions.removeAt(0);
+    }
+    final correctAnswer = questions
         .where((question) =>
             question.selectedAnsweValue == question.correctAnswerValue)
         .length;
@@ -145,8 +180,14 @@ class Quiz extends _$Quiz {
   }
 
   int getMajorityAnswersOption() {
+    List<QuizQuestion> questions = List<QuizQuestion>.from(state.questions);
+
+    if (state.prerequisiteDesc != null && state.prerequisiteImg != null) {
+      questions.removeAt(0);
+    }
+
     Map<int, int> frequency = {};
-    for (var question in state.questions) {
+    for (var question in questions) {
       if (question.selectedAnsweValue != null) {
         if (frequency.containsKey(question.selectedAnsweValue)) {
           frequency[question.selectedAnsweValue ?? -1] =

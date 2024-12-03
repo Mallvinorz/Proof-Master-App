@@ -12,12 +12,13 @@ class GetQuizQuestionsResponse extends Equatable {
   const GetQuizQuestionsResponse({this.data, this.prerequisite});
 
   factory GetQuizQuestionsResponse.fromMap(Map<String, dynamic> data) {
-    print(data);
     return GetQuizQuestionsResponse(
       data: (data['data'] as List<dynamic>?)
           ?.map((e) => Datum.fromMap(e as Map<String, dynamic>))
           .toList(),
-      // prerequisite: Prerequisite.fromMap(data['prerequisite']),
+      prerequisite: data['prerequisite'] == null
+          ? null
+          : Prerequisite.fromMap(data['prerequisite']),
     );
   }
 

@@ -22,7 +22,7 @@ final quizRepositoryProvider = AutoDisposeProvider<QuizRepository>.internal(
 
 typedef QuizRepositoryRef = AutoDisposeProviderRef<QuizRepository>;
 String _$getDiagnosticQuizQuestionsFromHash() =>
-    r'e8c4a0120570c5b9ccc91927ffb05f307bf462b5';
+    r'963df4c9440ec01ad864b6ef2b5d4e75a9911202';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,8 +51,7 @@ const getDiagnosticQuizQuestionsFromProvider =
     GetDiagnosticQuizQuestionsFromFamily();
 
 /// See also [getDiagnosticQuizQuestionsFrom].
-class GetDiagnosticQuizQuestionsFromFamily
-    extends Family<AsyncValue<List<QuizQuestion>>> {
+class GetDiagnosticQuizQuestionsFromFamily extends Family<AsyncValue<QuizDTO>> {
   /// See also [getDiagnosticQuizQuestionsFrom].
   const GetDiagnosticQuizQuestionsFromFamily();
 
@@ -91,7 +90,7 @@ class GetDiagnosticQuizQuestionsFromFamily
 
 /// See also [getDiagnosticQuizQuestionsFrom].
 class GetDiagnosticQuizQuestionsFromProvider
-    extends AutoDisposeFutureProvider<List<QuizQuestion>> {
+    extends AutoDisposeFutureProvider<QuizDTO> {
   /// See also [getDiagnosticQuizQuestionsFrom].
   GetDiagnosticQuizQuestionsFromProvider(
     String id,
@@ -126,8 +125,7 @@ class GetDiagnosticQuizQuestionsFromProvider
 
   @override
   Override overrideWith(
-    FutureOr<List<QuizQuestion>> Function(
-            GetDiagnosticQuizQuestionsFromRef provider)
+    FutureOr<QuizDTO> Function(GetDiagnosticQuizQuestionsFromRef provider)
         create,
   ) {
     return ProviderOverride(
@@ -145,7 +143,7 @@ class GetDiagnosticQuizQuestionsFromProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<QuizQuestion>> createElement() {
+  AutoDisposeFutureProviderElement<QuizDTO> createElement() {
     return _GetDiagnosticQuizQuestionsFromProviderElement(this);
   }
 
@@ -164,13 +162,13 @@ class GetDiagnosticQuizQuestionsFromProvider
 }
 
 mixin GetDiagnosticQuizQuestionsFromRef
-    on AutoDisposeFutureProviderRef<List<QuizQuestion>> {
+    on AutoDisposeFutureProviderRef<QuizDTO> {
   /// The parameter `id` of this provider.
   String get id;
 }
 
 class _GetDiagnosticQuizQuestionsFromProviderElement
-    extends AutoDisposeFutureProviderElement<List<QuizQuestion>>
+    extends AutoDisposeFutureProviderElement<QuizDTO>
     with GetDiagnosticQuizQuestionsFromRef {
   _GetDiagnosticQuizQuestionsFromProviderElement(super.provider);
 
@@ -179,7 +177,7 @@ class _GetDiagnosticQuizQuestionsFromProviderElement
 }
 
 String _$getProofCompetenceQuizQuestionsFromHash() =>
-    r'943a8dd83a1dd44e273a1ac17e57e6094a045bdd';
+    r'5995598bc0d3cec3fc67789d325cf1909ca24608';
 
 /// See also [getProofCompetenceQuizQuestionsFrom].
 @ProviderFor(getProofCompetenceQuizQuestionsFrom)
@@ -188,7 +186,7 @@ const getProofCompetenceQuizQuestionsFromProvider =
 
 /// See also [getProofCompetenceQuizQuestionsFrom].
 class GetProofCompetenceQuizQuestionsFromFamily
-    extends Family<AsyncValue<List<QuizQuestion>>> {
+    extends Family<AsyncValue<QuizDTO>> {
   /// See also [getProofCompetenceQuizQuestionsFrom].
   const GetProofCompetenceQuizQuestionsFromFamily();
 
@@ -227,7 +225,7 @@ class GetProofCompetenceQuizQuestionsFromFamily
 
 /// See also [getProofCompetenceQuizQuestionsFrom].
 class GetProofCompetenceQuizQuestionsFromProvider
-    extends AutoDisposeFutureProvider<List<QuizQuestion>> {
+    extends AutoDisposeFutureProvider<QuizDTO> {
   /// See also [getProofCompetenceQuizQuestionsFrom].
   GetProofCompetenceQuizQuestionsFromProvider(
     String id,
@@ -262,8 +260,7 @@ class GetProofCompetenceQuizQuestionsFromProvider
 
   @override
   Override overrideWith(
-    FutureOr<List<QuizQuestion>> Function(
-            GetProofCompetenceQuizQuestionsFromRef provider)
+    FutureOr<QuizDTO> Function(GetProofCompetenceQuizQuestionsFromRef provider)
         create,
   ) {
     return ProviderOverride(
@@ -281,7 +278,7 @@ class GetProofCompetenceQuizQuestionsFromProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<QuizQuestion>> createElement() {
+  AutoDisposeFutureProviderElement<QuizDTO> createElement() {
     return _GetProofCompetenceQuizQuestionsFromProviderElement(this);
   }
 
@@ -301,13 +298,13 @@ class GetProofCompetenceQuizQuestionsFromProvider
 }
 
 mixin GetProofCompetenceQuizQuestionsFromRef
-    on AutoDisposeFutureProviderRef<List<QuizQuestion>> {
+    on AutoDisposeFutureProviderRef<QuizDTO> {
   /// The parameter `id` of this provider.
   String get id;
 }
 
 class _GetProofCompetenceQuizQuestionsFromProviderElement
-    extends AutoDisposeFutureProviderElement<List<QuizQuestion>>
+    extends AutoDisposeFutureProviderElement<QuizDTO>
     with GetProofCompetenceQuizQuestionsFromRef {
   _GetProofCompetenceQuizQuestionsFromProviderElement(super.provider);
 
@@ -315,7 +312,7 @@ class _GetProofCompetenceQuizQuestionsFromProviderElement
   String get id => (origin as GetProofCompetenceQuizQuestionsFromProvider).id;
 }
 
-String _$quizHash() => r'16741ec5232200e0b2b315c4a0c43a42525d11f1';
+String _$quizHash() => r'b9d304d71d72af3476c306ddce47dafcadc008ce';
 
 /// See also [Quiz].
 @ProviderFor(Quiz)
