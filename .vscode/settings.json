@@ -1,4 +1,5 @@
 {
   "discord.enabled": false,
-  "cmake.sourceDirectory": "D:/codings/flutter/proofmaster/windows"
+  "cmake.sourceDirectory": "D:/codings/flutter/proofmaster/windows",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
