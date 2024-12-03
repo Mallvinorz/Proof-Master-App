@@ -7,11 +7,16 @@ import 'answer_option.dart';
 class Datum extends Equatable {
   final String? id;
   final String? question;
+  final String? imgUrl;
   final int? actualAnswerValue;
   final List<AnswerOption>? answerOptions;
 
   const Datum(
-      {this.id, this.question, this.answerOptions, this.actualAnswerValue});
+      {this.id,
+      this.question,
+      this.imgUrl,
+      this.answerOptions,
+      this.actualAnswerValue});
 
   factory Datum.fromMap(Map<String, dynamic> data) => Datum(
         id: data['id'] as String?,
@@ -26,6 +31,7 @@ class Datum extends Equatable {
         'id': id,
         'question': question,
         'actual_answer_value': actualAnswerValue,
+        'img_url': imgUrl,
         'answer_options': answerOptions?.map((e) => e.toMap()).toList(),
       };
 

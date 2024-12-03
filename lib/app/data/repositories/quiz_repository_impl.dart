@@ -27,6 +27,7 @@ class QuizRepositoryImpl implements QuizRepository {
               ?.map((element) => QuizQuestion(
                     id: element.id ?? "-",
                     text: element.question ?? "",
+                    imgUrl: element.imgUrl,
                     correctAnswerValue: element.actualAnswerValue,
                     options: element.answerOptions!
                         .map((option) => QuizOption(
