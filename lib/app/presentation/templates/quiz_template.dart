@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:proofmaster/app/domain/entities/quiz_option/quiz_option.dart';
 import 'package:proofmaster/app/domain/entities/quiz_question/quiz_question.dart';
@@ -227,7 +228,7 @@ class QuizTemplate extends StatelessWidget {
           "question-${quizState.questions[quizState.currentQuestionIndex].id}"),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(question.text),
+        TeXView(child: TeXViewDocument(question.text)),
         const SizedBox(height: 16),
         ..._buildQuizOptions(question.options),
       ],
