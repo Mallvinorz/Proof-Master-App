@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
@@ -33,11 +34,17 @@ class OptionItem<T> extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
-                  text,
-                  style: selected
-                      ? CustomTextTheme.proofMasterTextTheme.bodyLarge
-                      : CustomTextTheme.proofMasterTextTheme.bodyMedium,
+                child: TeXView(
+                  child: TeXViewDocument(
+                    text,
+                    style: selected
+                        ? const TeXViewStyle.fromCSS('font-weight: bold;')
+                        : const TeXViewStyle.fromCSS('font-weight: normal'),
+                  ),
+                  // text,
+                  // style: selected
+                  //     ? CustomTextTheme.proofMasterTextTheme.bodyLarge
+                  //     : CustomTextTheme.proofMasterTextTheme.bodyMedium,
                 ),
               ),
               Container(
