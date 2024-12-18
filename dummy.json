@@ -1,0 +1,21 @@
+{
+  "data": {
+    "items": [
+      {
+        "finished_count": 2,
+        "text": "Teorema",
+        "total_count": 1
+      },
+      {
+        "finished_count": 1,
+        "text": "Axioma",
+        "total_count": 1
+      },
+      {
+        "finished_count": 1,
+        "text": "Definition of Terms",
+        "total_count": 1
+      }
+    ]
+  }
+}
