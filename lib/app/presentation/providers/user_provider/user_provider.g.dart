@@ -35,7 +35,7 @@ final isRefreshingProvider = NotifierProvider<IsRefreshing, bool>.internal(
 );
 
 typedef _$IsRefreshing = Notifier<bool>;
-String _$userHash() => r'44d34c75f25ff6ebcfdea1a70f2a3c04b0db79d4';
+String _$userHash() => r'3d546d2b4db81975efcc146dde4b213a80b4ac7f';
 
 /// See also [User].
 @ProviderFor(User)

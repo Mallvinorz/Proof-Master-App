@@ -54,6 +54,6 @@
 		<string>All files have been downloaded</string>
 
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>This app use picked image from gallery for change user profile picture</string>
+		<string>This app use picked image from gallery to allow user profile picture from their gallery</string>
 	</dict>
 </plist>

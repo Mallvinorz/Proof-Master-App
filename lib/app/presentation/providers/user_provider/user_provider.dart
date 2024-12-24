@@ -36,6 +36,11 @@ class User extends _$User {
     await repository.updatePfp(changePfpDto);
   }
 
+  Future<void> deleteUserAccount() async {
+    final repository = ref.watch(userRepositoryProvider);
+    await repository.deleteAccount();
+  }
+
   Future<void> refresh() async {
     ref.read(isRefreshingProvider.notifier).setRefreshing(true);
     state = const AsyncValue.loading();

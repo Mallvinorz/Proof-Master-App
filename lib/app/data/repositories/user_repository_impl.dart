@@ -7,6 +7,7 @@ import 'package:proofmaster/app/domain/entities/change_pfp_dto/changepfpdto.dart
 import 'package:proofmaster/app/domain/repositories/user_repository.dart';
 import 'package:proofmaster/app/helper/http_client.dart';
 import 'package:proofmaster/app/helper/interceptor.dart';
+import 'package:proofmaster/app/utils/shared_pref.dart';
 import 'package:proofmaster/constanta.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -66,6 +67,25 @@ class UserRepositoryImpl implements UserRepository {
         throw Exception(
             'Failed to upload file and register. Status code: ${response.statusCode}');
       }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    try {
+      final authToken = (await pref).getString(AUTH_TOKEN);
+
+      final url = Uri.http(BASEURL, 'api/users');
+
+      await httpClientWithInterceptor.delete(
+        url,
+        headers: <String, String>{
+          'Accept': 'application/json',
+          'Authorization': "Bearer $authToken",
+        },
+      );
     } catch (e) {
       rethrow;
     }

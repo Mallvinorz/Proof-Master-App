@@ -5,4 +5,5 @@ import 'package:proofmaster/app/domain/entities/change_pfp_dto/changepfpdto.dart
 abstract class UserRepository {
   Future<GetUserResponse> getUser();
   Future<UpdatePfpResponse> updatePfp(ChangePfpDto changePfpDto);
+  Future<void> deleteAccount();
 }
