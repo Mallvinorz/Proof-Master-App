@@ -4,7 +4,9 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:proofmaster/app/presentation/common/widget/cupertino_alert_custom_content.dart';
 import 'package:proofmaster/app/presentation/providers/auth_provider/auth_provider.dart';
+import 'package:proofmaster/app/presentation/providers/user_provider/user_provider.dart';
 import 'package:proofmaster/app/utils/download_path.dart';
 import 'package:proofmaster/app/utils/permission.dart';
 import 'package:proofmaster/router.dart';
@@ -68,6 +70,19 @@ class SettingsContent extends ConsumerWidget {
               const SizedBox(
                 height: 16.0,
               ),
+              SettingMenuItem(
+                text: "Hapus akun",
+                onTap: () => showCupertinoAlertWithCustomContent(
+                    context: context,
+                    contentText:
+                        "Anda tidak bisa lagi masuk ke akun yang telah dihapus.",
+                    title: "Apakah anda yakin ingin menghapus akun?",
+                    onOk: () async {
+                      await ref.read(userProvider.notifier).deleteUserAccount();
+                      context.pop();
+                      context.replace(ProofmasterRoute.auth);
+                    }),
+              ),
               const SizedBox(
                 height: 16.0,
               ),
@@ -76,7 +91,18 @@ class SettingsContent extends ConsumerWidget {
                 textColor: Colors.red,
                 color: Colors.red,
                 onTap: () async {
-                  await showAlert(context, ref);
+                  showCupertinoAlertWithCustomContent(
+                      context: context,
+                      contentText: 'Apakah anda yakin ingin keluar?',
+                      title:
+                          "Setelah keluar, anda perlu memasukkan email dan password lagi untuk bisa masuk ke akun ini.",
+                      onOk: () async {
+                        await ref.read(authProvider.notifier).signout();
+                        // ignore: use_build_context_synchronously
+                        context.push(ProofmasterRoute.auth);
+                        // ignore: use_build_context_synchronously
+                        context.pop();
+                      });
                 },
               ),
             ],
@@ -107,43 +133,6 @@ class SettingsContent extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Future<bool?> showAlert(BuildContext context, WidgetRef ref) async {
-    return await alertDialog(
-      isSuccess: false,
-      title: 'Apakah anda yakin ingin keluar?',
-      message:
-          "Setelah keluar, anda perlu memasukkan email dan password lagi untuk bisa masuk ke akun ini.",
-      actionWidgets: <Widget>[
-        TextButton(
-          style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
-          ),
-          child: const Text('Tidak'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
-          ),
-          child: const Text(
-            'Ya, saya yakin',
-            style: TextStyle(color: CustomColorTheme.colorRedIndicator),
-          ),
-          onPressed: () async {
-            await ref.read(authProvider.notifier).signout();
-            // ignore: use_build_context_synchronously
-            context.push(ProofmasterRoute.auth);
-            // ignore: use_build_context_synchronously
-            context.pop();
-          },
-        ),
-      ],
-      context: context,
     );
   }
 }
