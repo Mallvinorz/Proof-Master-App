@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:proofmaster/app/helper/toast.dart';
-import 'package:proofmaster/app/presentation/providers/quiz_provider/quiz_provider.dart';
 import 'package:proofmaster/app/presentation/templates/background_pattern_center_child.dart';
-import 'package:proofmaster/app/presentation/widgets/alert_dialog.dart';
 import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 

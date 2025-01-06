@@ -57,6 +57,7 @@ class PriorKnowledgeTestReportView extends ConsumerWidget {
 
   Widget _buildContent(GetDiagnosticReportResponse report) {
     final type = PriorKnowledgeMapper().to(report.data?.type ?? "");
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [

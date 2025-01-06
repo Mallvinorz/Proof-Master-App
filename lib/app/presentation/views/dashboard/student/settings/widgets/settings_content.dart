@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -7,13 +9,11 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:proofmaster/app/presentation/common/widget/cupertino_alert_custom_content.dart';
 import 'package:proofmaster/app/presentation/providers/auth_provider/auth_provider.dart';
 import 'package:proofmaster/app/presentation/providers/user_provider/user_provider.dart';
+import 'package:proofmaster/app/presentation/widgets/setting_menu_item.dart';
 import 'package:proofmaster/app/utils/download_path.dart';
 import 'package:proofmaster/app/utils/permission.dart';
 import 'package:proofmaster/router.dart';
-import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
-import 'package:proofmaster/app/presentation/widgets/alert_dialog.dart';
-import 'package:proofmaster/app/presentation/widgets/setting_menu_item.dart';
 
 class SettingsContent extends ConsumerWidget {
   const SettingsContent({super.key});
@@ -79,7 +79,7 @@ class SettingsContent extends ConsumerWidget {
                     title: "Apakah anda yakin ingin menghapus akun?",
                     onOk: () async {
                       await ref.read(userProvider.notifier).deleteUserAccount();
-                      context.pop();
+                      // ignore: use_build_context_synchronously
                       context.replace(ProofmasterRoute.auth);
                     }),
               ),
@@ -99,9 +99,9 @@ class SettingsContent extends ConsumerWidget {
                       onOk: () async {
                         await ref.read(authProvider.notifier).signout();
                         // ignore: use_build_context_synchronously
-                        context.push(ProofmasterRoute.auth);
-                        // ignore: use_build_context_synchronously
                         context.pop();
+                        // ignore: use_build_context_synchronously
+                        context.push(ProofmasterRoute.auth);
                       });
                 },
               ),

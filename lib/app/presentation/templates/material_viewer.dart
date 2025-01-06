@@ -42,7 +42,7 @@ class _MaterialViewerState extends State<MaterialViewer> {
                   _reachLastPage
                       ? widget.onTapFinish()
                       : await showToast(
-                          "Selesaikan membaca materi sampai halaman terakhir terlebih dahulu!",
+                          "Selesaikan membaca sampai halaman terakhir terlebih dahulu!",
                         );
                 },
                 text: "Selesai",

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -15,14 +17,16 @@ import 'package:proofmaster/app/presentation/widgets/shimmer_loader.dart';
 import 'package:proofmaster/app/presentation/widgets/textarea.dart';
 import 'package:proofmaster/app/utils/download_path.dart';
 import 'package:proofmaster/app/utils/permission.dart';
+import 'package:proofmaster/router.dart';
 import 'package:proofmaster/theme/color_theme.dart';
 import 'package:proofmaster/theme/text_theme.dart';
 
 class DetailActivityReportContent extends ConsumerStatefulWidget {
   final String? activityId;
   final String? studentId;
+  final String title;
   const DetailActivityReportContent(
-      {super.key, this.activityId, this.studentId});
+      {super.key, required this.title, this.activityId, this.studentId});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -117,13 +121,23 @@ class _DetailActivityReportContentState
             child: Button(
               onTap: () async {
                 try {
-                  await performDownloadPdfFile(data.data?.pdfUrl ?? "-");
+                  if (Platform.isIOS) {
+                    context.pushNamed(ProofmasterRoute.studentAnswerPdfViewer,
+                        queryParameters: {
+                          "title": widget.title,
+                          "pdfUrl": data.data?.pdfUrl ?? "",
+                        });
+                  } else if (Platform.isAndroid) {
+                    await performDownloadPdfFile(data.data?.pdfUrl ?? "-");
+                  } else {
+                    throw Exception("Platform is not supported yet!");
+                  }
                 } catch (e) {
                   showToast("Download error: $e");
                 }
               },
               text:
-                  "Unduh file ${widget.studentId == null || widget.studentId == "" ? 'jawabanmu' : 'jawaban siswa'}",
+                  "${Platform.isIOS ? "Lihat file" : "Unduh file"} ${widget.studentId == null || widget.studentId == "" ? 'jawabanmu' : 'jawaban siswa'}",
               suffixIcon: const Icon(
                 FontAwesomeIcons.solidFilePdf,
                 color: Colors.white,

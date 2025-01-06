@@ -21,6 +21,7 @@ class DetailActivityReportView extends ConsumerWidget {
       mainChildren: DetailActivityReportContent(
         activityId: activityId,
         studentId: studentId,
+        title: title,
       ),
       borderRadius: const BorderRadius.only(topRight: Radius.circular(29)),
     );

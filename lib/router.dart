@@ -23,6 +23,7 @@ import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/u
 import 'package:proofmaster/app/presentation/views/dashboard/student/home/menu/understanding_to_proof_structure/understanding_proof_view.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/student/student_dashboard_view.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/teacher/home/lecturer_dashboard_view.dart';
+import 'package:proofmaster/app/presentation/views/dashboard/teacher/reports/answer_viewer/answer_viewer_view.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/teacher/reports/lecturer_report_view.dart';
 import 'package:proofmaster/app/presentation/views/dashboard/teacher/settings/lecturer_settings_view.dart';
 import 'package:proofmaster/app/presentation/views/forget_password/forgot_password_view.dart';
@@ -72,6 +73,7 @@ class ProofmasterRoute {
       '/understanding-proof-report-detail';
 
   static const String changePfp = '/change-pfp';
+  static const String studentAnswerPdfViewer = '/student-asnwer-viewer';
 }
 
 List<RouteBase> getRoutes() {
@@ -326,9 +328,20 @@ List<RouteBase> getRoutes() {
     ),
     // change pfp
     GoRoute(
-        path: ProofmasterRoute.changePfp,
-        builder: (BuildContext context, GoRouterState state) {
-          return const ChangePfpView();
-        })
+      path: ProofmasterRoute.changePfp,
+      builder: (BuildContext context, GoRouterState state) {
+        return const ChangePfpView();
+      },
+    ),
+    GoRoute(
+      path: ProofmasterRoute.studentAnswerPdfViewer,
+      name: ProofmasterRoute.studentAnswerPdfViewer,
+      builder: (BuildContext context, GoRouterState state) {
+        return AnswerViewerView(
+          title: state.uri.queryParameters['title'] ?? "Aktivitas",
+          pdfUrl: state.uri.queryParameters['pdfUrl'] ?? "",
+        );
+      },
+    ),
   ];
 }

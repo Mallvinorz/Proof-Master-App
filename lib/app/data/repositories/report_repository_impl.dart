@@ -109,7 +109,6 @@ class ReportRepositoryImpl implements ReportRepository {
         'Accept': 'application/json',
       });
 
-      Fimber.d("response $response");
       final result = GetDiagnosticReportResponse.fromJson(response.body);
 
       return result;
@@ -129,9 +128,10 @@ class ReportRepositoryImpl implements ReportRepository {
         'Accept': 'application/json',
       });
 
-      Fimber.d("response $response");
+      Fimber.d("response get diagnostic report $response");
       final result = GetDiagnosticReportResponse.fromJson(response.body);
 
+      Fimber.d("response get diagnostic report result $result");
       return result;
     } catch (e) {
       rethrow;
@@ -158,9 +158,7 @@ class ReportRepositoryImpl implements ReportRepository {
       if (response.statusCode == 404) {
         throw Exception("no report data");
       }
-      Fimber.d("response ${response.body} ");
       final result = GetProofCompetenceReportResponse.fromJson(response.body);
-
       return result;
     } catch (e) {
       rethrow;
